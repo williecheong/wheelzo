@@ -87,7 +87,7 @@
       function newRide($id,$to,$from,$when,$price,$capacity){
 
         //opens a connection to the db for doing stuff!
-        $con=mysqli_connect("localhost","uwuser","","uwcarpool");
+        $con=mysqli_connect("localhost","mapikhte","mysql","mapikhte");
         // Check connection
         if (mysqli_connect_errno()) {
           echo "Failed to connect to MySQL: " . mysqli_connect_error();

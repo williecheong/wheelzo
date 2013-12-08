@@ -13,9 +13,6 @@
 </head>
 
 
-
-
-
 <body background="img/bg.png">
 
   <div class="container">
