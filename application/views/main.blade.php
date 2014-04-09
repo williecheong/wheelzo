@@ -65,12 +65,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                        </tr>
+                        @foreach ( $rides as $ride )
+                            <tr>
+                                <td>{{ $ride->origin }}</td>
+                                <td>{{ $ride->destination }}</td>
+                                <td>{{ $ride->start }}</td>
+                                <td>{{ $ride->price }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

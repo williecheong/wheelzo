@@ -1,4 +1,4 @@
-a:3:{s:4:"time";i:1397023574;s:3:"ttl";i:3600;s:4:"data";s:4542:"<!DOCTYPE html>
+a:3:{s:4:"time";i:1397024894;s:3:"ttl";i:3600;s:4:"data";s:4768:"<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -65,12 +65,14 @@ a:3:{s:4:"time";i:1397023574;s:3:"ttl";i:3600;s:4:"data";s:4542:"<!DOCTYPE html>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                            <td>fy-ride</td>
-                        </tr>
+                        <?php foreach ( $rides as $ride ): ?>
+                            <tr>
+                                <td><?php echo  $ride->origin ; ?></td>
+                                <td><?php echo  $ride->destination ; ?></td>
+                                <td><?php echo  $ride->start ; ?></td>
+                                <td><?php echo  $ride->price ; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -9,8 +9,11 @@ class Main extends CI_Controller {
     
 	public function index() {
         // Send the resulting data array into the view
+        $rides = $this->ride->retrieve();
+
         $this->blade->render('main', 
             array(
+                'rides' => $rides
             )
         );
     }

@@ -35,3 +35,16 @@ CREATE TABLE `user_ride` (
    `last_updated` timestamp default current_timestamp on update current_timestamp,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+INSERT INTO `user` (`id`, `email`, `facebook_id`, `cell_number`) VALUES
+('1',    'maksym.p@gmail.com',           'max.pikhteryev',     '5195897412'),
+('2',    'cheongwillie@hotmail.com',     'willie.cheong.10',   '5197211674');
+
+
+INSERT INTO `ride` (`id`, `driver_id`, `origin`, `destination`, `pickup`, `capacity`, `price`, `start`) VALUES
+('1',    '1', 'Waterloo',        'Toronto',        'UW DC',        '2',  '10',    '2014-03-16 00:00:00' ),
+('2',    '1', 'Toronto',         'Waterloo',       'Yorkdale',     '2',  '10',    '2014-03-18 00:00:00' ),
+('3',    '2', 'Waterloo',        'Mississauga',    'UW DC',        '3',  '8',     '2014-04-18 00:00:00' ),
+('4',    '2', 'Mississauga',     'Waterloo',       'Square One',   '4',  '8',     '2014-03-23 00:00:00' );
+
