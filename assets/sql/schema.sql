@@ -1,7 +1,3 @@
-DROP DATABASE wheelzo;
-CREATE DATABASE `wheelzo` DEFAULT CHARSET utf8;
-USE `wheelzo`;
-
 CREATE TABLE `user` (
    `id` int(11) not null auto_increment,
    `email` varchar(255) not null,
