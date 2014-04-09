@@ -29,7 +29,7 @@
                 <div class="row" id="introduction">
                     <div class="col-sm-2 text-center">
                         <a href="/">
-                            <i class="fa fa-road fa-5x"></i>
+                            <img src="/assets/img/logo.png" width="100%">
                         </a>
                     </div>
                     <div class="col-sm-10">
@@ -37,7 +37,7 @@
                             <a id="toggle-getting-started" href="#">Together</a> on the road...
                         </h1>
                         <p>
-                            happy bee buzz buzz
+                            Wheelzo v{{ CURRENT_VERSION }}
                         </p>
                     </div>
                 </div>
@@ -48,10 +48,12 @@
              <div class="table-responsive">
                 <div class="row">
                     <div class="col-md-8">
-                        <a href="#"><i class="fa fa-plus-square fa-2x"> New ride</i></a>
+                        <a href="#" data-toggle="modal" data-target="#create-ride">
+                            <i class="fa fa-plus-square fa-2x"> New ride</i>
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" id="search-box" placeholder="Search words ...">
+                        <input type="text" class="form-control" id="search-box" placeholder="Search">
                     </div>                    
                 </div>
 
@@ -85,6 +87,8 @@
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
+        <?php $this->load->view('modals/main'); ?>
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/basic/jquery.qtip.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
