@@ -1,0 +1,9 @@
+th.sorting_asc:before {
+    content: "\f0d8";
+    font-family: FontAwesome;
+}
+
+th.sorting_desc:before {
+    content: "\f0d7";
+    font-family: FontAwesome;
+}
