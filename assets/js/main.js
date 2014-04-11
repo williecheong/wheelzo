@@ -1,4 +1,20 @@
 /*******************
+    WHEELZO EVENT BINDINGS
+*******************/
+    $('.modal#view-ride').modal({
+        show : false
+    });
+
+    $('tr[data-ride-id]').click(function(){
+        var rideID = $(this).data('ride-id');
+        var driver = users[ rides[rideID].driver_id ];
+        $('.modal#view-ride').find('a#driver-name')
+                             .attr('href', 'https://facebook.com/'+driver['facebook_id'])
+                             .html(driver['email']);
+        $('.modal#view-ride').modal('toggle');
+    });
+
+/*******************
     GENERAL EVENT BINDINGS
 *******************/ 
     //Toggles the view of channels on each product
