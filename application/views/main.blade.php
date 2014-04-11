@@ -89,13 +89,13 @@
                 </span>
                 <span>
                     @if ( $session )
-                        <a class="btn btn-danger btn-xs" href="{{ $session_url }}">
-                            <i class="fa fa-sign-out fa-lg"></i> Logout of {{ $session }}
-                        </a>
+                        <button class="btn btn-danger btn-xs" id="facebook-session" data-url="{{ $session_url }}">
+                            <i class="fa fa-sign-out fa-lg"></i> Logout
+                        </button>
                     @else
-                        <a class="btn btn-primary btn-xs" href="{{ $session_url }}">
+                        <button class="btn btn-primary btn-xs" id="facebook-session" data-url="{{ $session_url }}">
                             <i class="fa fa-facebook fa-lg"></i> Login with Facebook
-                        </a>
+                        </button>
                     @endif
                 </span>
             </footer><!-- /.footer -->

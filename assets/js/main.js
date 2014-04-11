@@ -42,9 +42,9 @@
         dataTable.fnFilter( $(this).val() );
     });
 
-    // Facebook logout
-    $('.btn#user-logout').click(function(){
-        navigator.id.logout()
+    // Facebook session URL handlers
+    $('.btn#facebook-session').click(function(){
+        window.location.href = $(this).data('url');
     });
 
 /*******************

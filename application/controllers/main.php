@@ -12,6 +12,9 @@ class Main extends CI_Controller {
                 "secret" => "4e20bf730703c8086620ba26693de1c2"
             )
         );
+
+        $this->facebook_user = $this->facebook->getUser();
+
     }
     
 	public function index() {
@@ -32,10 +35,11 @@ class Main extends CI_Controller {
         }        
 
         $url = '';
-        if ( $this->session->userdata('email') ) {
+        if ( $this->facebook_user ) {
+            $user_id = $this->user->try_register( $this->facebook_user );
             $url = $this->facebook->getLogouturl(
                 array(
-                    "next" => base_url()."misc/logout"
+                    "next" => base_url()."api/misc/logout"
                 )
             );
         } else {
@@ -45,12 +49,12 @@ class Main extends CI_Controller {
                 )
             );
         }
-        
+
         $this->blade->render('main', 
             array(
                 'rides' => $temp_rides,
                 'users' => $temp_users,
-                'session' => $this->session->userdata('email'),
+                'session' => $this->facebook_user,
                 'session_url' => $url 
             )
         );
