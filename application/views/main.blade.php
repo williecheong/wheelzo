@@ -67,10 +67,10 @@
                     </thead>
                     <tbody>
                         @foreach ( $rides as $ride )
-                            <tr>
+                            <tr data-ride-id="{{ $ride->id }}">
                                 <td>{{ $ride->origin }}</td>
                                 <td>{{ $ride->destination }}</td>
-                                <td>{{ $ride->start }}</td>
+                                <td>{{ date( 'M j, g:ia', strtotime($ride->start) ) }}</td>
                                 <td>{{ $ride->price }}</td>
                             </tr>
                         @endforeach
@@ -93,9 +93,11 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-        <script src="/assets/js/toastr.min.js"></script>
         <script src="/assets/js/main.js"></script>
-        <script src="/assets/js/app.js"></script>
+        <script>
+            var rides = {{ json_encode($rides) }} ;
+            var users = {{ json_encode($users) }}
+        </script>
     </body>
 </html>
 

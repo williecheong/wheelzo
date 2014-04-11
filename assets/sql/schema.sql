@@ -1,5 +1,6 @@
 CREATE TABLE `user` (
    `id` int(11) not null auto_increment,
+   `name` varchar(255) not null,
    `email` varchar(255) not null,
    `facebook_id` varchar(255) not null,
    `cell_number` varchar(255),
