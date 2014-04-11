@@ -5,34 +5,43 @@ class Misc extends REST_Controller {
     
     function __construct() {
         parent::__construct();
-        // Autoloaded Config, Helpers, Models 
+        // Autoloaded Config, Helpers, Models
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => "282192178572651", 
+                "secret" => "4e20bf730703c8086620ba26693de1c2"
+            )
+        );
     }
 
     // Referenced from:
-    //  https://github.com/EllisLab/CodeIgniter/wiki/Persona-Login
-    public function login_post() {
-        if ( isset($_POST['assertion']) ) {
-            $this->authentication->login($_POST['assertion']);
-        }
-
-        if ( $this->session->userdata('email') ) {
-            $admins = $this->administrator->retrieve(array('email' => $this->session->userdata('email')));
-            if ( count($admins) < 1 ) {
-                $this->authentication->logout();
-                echo "Not administrator";
-            } else {
-                echo "OK";
+    //  http://phpguidance.wordpress.com/2013/09/27/facebook-login-with-codeignator/comment-page-1/
+    public function login_get() {
+        $this->user = $this->facebook->getUser();
+        if ( $this->user ) {
+            try{
+                // Retrieves the user's facebook profile
+                $user_profile = $this->facebook->api('/me');
+                echo 'OK';
+    
+            } catch (FacebookApiException $e) {
+                echo 'Failed: facebook authentication error'
+                $user = null;
             }
         } else {
-            echo "No session was created.";            
+            echo 'Failed: facebook session not created';
         }
 
         return;
     }
 
+
     // Referenced from:
-    //  https://github.com/EllisLab/CodeIgniter/wiki/Persona-Login
-    public function logout_post() {
-        $this->authentication->logout();
+    //  http://phpguidance.wordpress.com/2013/09/27/facebook-login-with-codeignator/comment-page-1/
+    public function logout_get() {
+        session_destroy();
+        echo 'OK';
+        return;
     }
 }

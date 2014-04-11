@@ -82,7 +82,16 @@
             <!-- Footer -->
             <footer>
                 <hr>
-                <span><a href="#introduction">&copy; Wheelzo v{{ CURRENT_VERSION }}</a></span>
+                <span>
+                    <a href="#introduction">
+                        &copy; Wheelzo v{{ CURRENT_VERSION }}
+                    </a>
+                </span>
+                <span>
+                    <a class="btn btn-primary" href="{{ $session_url }}">
+                        {{ ($session) ? 'Logout of ' . $session : 'Login' }}
+                    </a>
+                </span>
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
