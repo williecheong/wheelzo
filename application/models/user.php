@@ -10,20 +10,30 @@ class user extends CI_Model{
         );
         
         if ( count($availability) > 0 ) {
-            // user exists, nothing to do
+            // user exists, nothing to do except update last_active
+            $this->user->update(
+                array(
+                    'id' => $availability[0]->id
+                ),
+                array(
+                    'last_updated' => null
+                )
+            );
+
+
             return $availability[0]->id;
 
         } else {
             // user does not exist yet.
             // put this facebook person inside our database
             $facebook_profile = $this->facebook->api('/me');
-            
             $user_id = $this->user->create(
                 array(
                     'name' => $facebook_profile['name'],
                     'email' => $facebook_profile['email'],
                     'facebook_id' => $facebook_id,
-                    'cell_number' => ''
+                    'cell_number' => '',
+                    'rating' => ''
                 )
             );
 

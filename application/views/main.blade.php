@@ -38,6 +38,15 @@
                         </h1>
                         <p>
                             Wheelzo v{{ CURRENT_VERSION }}
+                            @if ( $session )
+                                <a class="btn btn-danger btn-xs" id="facebook-session" href="{{ $session_url }}">
+                                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                                </a>
+                            @else
+                                <a class="btn btn-primary btn-xs" id="facebook-session" href="{{ $session_url }}">
+                                    <i class="fa fa-facebook fa-lg"></i> Login with Facebook
+                                </a>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -86,17 +95,6 @@
                     <a href="#introduction">
                         &copy; Wheelzo v{{ CURRENT_VERSION }}
                     </a>
-                </span>
-                <span>
-                    @if ( $session )
-                        <button class="btn btn-danger btn-xs" id="facebook-session" data-url="{{ $session_url }}">
-                            <i class="fa fa-sign-out fa-lg"></i> Logout
-                        </button>
-                    @else
-                        <button class="btn btn-primary btn-xs" id="facebook-session" data-url="{{ $session_url }}">
-                            <i class="fa fa-facebook fa-lg"></i> Login with Facebook
-                        </button>
-                    @endif
                 </span>
             </footer><!-- /.footer -->
         </div><!-- /container -->
