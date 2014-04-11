@@ -82,7 +82,22 @@
             <!-- Footer -->
             <footer>
                 <hr>
-                <span><a href="#introduction">&copy; Wheelzo v{{ CURRENT_VERSION }}</a></span>
+                <span>
+                    <a href="#introduction">
+                        &copy; Wheelzo v{{ CURRENT_VERSION }}
+                    </a>
+                </span>
+                <span>
+                    @if ( $session )
+                        <a class="btn btn-danger btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-sign-out fa-lg"></i> Logout of {{ $session }}
+                        </a>
+                    @else
+                        <a class="btn btn-primary btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-facebook fa-lg"></i> Login with Facebook
+                        </a>
+                    @endif
+                </span>
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
