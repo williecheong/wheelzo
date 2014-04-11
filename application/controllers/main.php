@@ -47,7 +47,8 @@ class Main extends CI_Controller {
         } else {
             $url = $this->facebook->getLoginUrl(
                 array(
-                    "scope" => "email"
+                    "scope" => "email",
+                    "display" => "page"
                 )
             );
         }
