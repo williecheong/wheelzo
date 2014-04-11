@@ -45,18 +45,17 @@
         </div>
 
         <div class="container">
-             <div class="table-responsive">
-                <div class="row">
-                    <div class="col-md-8">
-                        <a href="#" data-toggle="modal" data-target="#create-ride">
-                            <i class="fa fa-plus-square fa-2x"> New ride</i>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" id="search-box" placeholder="Search">
-                    </div>                    
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="#" data-toggle="modal" data-target="#create-ride">
+                        <i class="fa fa-plus-square fa-2x"> New ride</i>
+                    </a>
                 </div>
-
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="search-box" placeholder="Search">
+                </div>                    
+            </div>
+             <div class="table-responsive">
                 <table class="table table-hover table-condensed">
                     <thead>
                         <tr>
