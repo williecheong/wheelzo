@@ -88,9 +88,15 @@
                     </a>
                 </span>
                 <span>
-                    <a class="btn btn-primary" href="{{ $session_url }}">
-                        {{ ($session) ? 'Logout of ' . $session : 'Login' }}
-                    </a>
+                    @if ( $session )
+                        <a class="btn btn-danger btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-sign-out fa-lg"></i> Logout of {{ $session }}
+                        </a>
+                    @else
+                        <a class="btn btn-primary btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-facebook fa-lg"></i> Login with Facebook
+                        </a>
+                    @endif
                 </span>
             </footer><!-- /.footer -->
         </div><!-- /container -->
