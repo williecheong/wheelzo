@@ -10,12 +10,16 @@ class user extends CI_Model{
         );
         
         if ( count($availability) > 0 ) {
-            // user exists, nothing to do except update last_active
+            // user exists, 
+            // update image and name
+            // update last_active for last login
+            $facebook_profile = $this->facebook->api('/me');
             $this->user->update(
                 array(
                     'id' => $availability[0]->id
                 ),
                 array(
+                    'name' =>$facebook_profile['name'],
                     'last_updated' => null
                 )
             );

@@ -1,4 +1,43 @@
 /*******************
+    WHEELZO POST RIDE
+*******************/
+    $('.btn#post-ride').click(function(){
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        
+        $button.addClass('disabled');
+
+        var validationFailed = validateRide( $modal );
+        if ( validationFailed ) {
+            alert( validationFailed );
+            $button.removeClass('disabled');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/rides',
+            data: extractModalRide( $modal ),
+            type: 'POST',
+            success: function( response ) {
+                
+                console.log(response);
+                setTimeout(function() {
+                    // Simple page refresh for now
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');
+                    //location.reload();
+                }, 1500);
+            }, 
+            error: function(response) {
+                alert('Fail: Bugzilla could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+
+
+    });
+
+/*******************
     WHEELZO EVENT BINDINGS
 *******************/
     $('.modal#view-ride').modal({
@@ -7,11 +46,19 @@
 
     $('tr[data-ride-id]').click(function(){
         var rideID = $(this).data('ride-id');
-        var driver = users[ rides[rideID].driver_id ];
+        var driver = publicUsers[ rides[rideID].driver_id ];
         $('.modal#view-ride').find('a#driver-name')
                              .attr('href', 'https://facebook.com/'+driver['facebook_id'])
                              .html(driver['name']);
         $('.modal#view-ride').modal('toggle');
+    });
+
+    $('.add_suggested_places').typeahead({
+        source: [
+            "Waterloo, UW Davis Center",
+            "Toronto, Union Square",
+            "Toronto, Yorkdale Mall"
+        ]
     });
 
 /*******************
@@ -23,9 +70,44 @@
         $( toToggle ).toggle('slow');
     });
 
+    // Initializing sliders
+    $('.slider#price').slider({
+        value: 10,
+        min: 0,
+        max: 30,
+        step: 1,
+        slide: function( event, ui ) {
+            $('.slider-value#price').text( ui.value );
+        }
+    });
+
+    $('.slider#capacity').slider({
+        value: 2,
+        min: 1,
+        max: 6,
+        step: 1,
+        slide: function( event, ui ) {
+            $('.slider-value#capacity').text( ui.value );
+        }
+    });
+
     // Initializing qtip for better tooltips
     $('[title!=""]').qtip({
         position: { my: 'top right', at: 'bottom right' }
+    });
+
+    // Initializing datepicker
+    $('.datepicker').datepicker({
+        minDate: 0
+    });
+
+    // Initializing timepicker
+    $('.timepicker').timepicker({
+        showButtonPanel: false,
+        timeFormat: 'hh:mm tt',
+        stepMinute: 15,
+        addSliderAccess: true,
+        sliderAccessArgs: { touchonly: false }
     });
 
     // Initializing table sorter
@@ -41,6 +123,40 @@
     $('input#search-box').on('keypress focusout', function(){
         dataTable.fnFilter( $(this).val() );
     });
+
+/*******************
+    WHEELZO HELPER FUNCTIONS
+*******************/ 
+    function validateRide( $modal ) {
+        var ride = extractModalRide( $modal );
+        
+        if ( ride.origin.length == 0 || ride.destination.length == 0 ) {
+            return 'Origin and destination cannot be empty.';
+
+        } else if ( ride.origin == ride.destination ) {
+            return 'Origin and destination cannot be the same.';
+
+        } else if ( ride.departureDate.length == 0 || ride.departureTime == 0 ) {
+            return 'Departure date and time must be specified.';
+        } else if ( ride.capacity > 6 ) {
+            return 'Are you driving a bus?';
+        }
+
+        return false;
+    }
+
+    function extractModalRide( $modal ) {
+        var data = {
+            origin          : $modal.find('input#origin').val(),
+            destination     : $modal.find('input#destination').val(),
+            departureDate   : $modal.find('input#departure-date').val(),
+            departureTime   : $modal.find('input#departure-time').val(),
+            price           : $modal.find('span#price').text(),
+            capacity        : $modal.find('span#capacity').text()
+        };
+
+        return data;
+    }
 
 /*******************
     GENERAL HELPER FUNCTIONS

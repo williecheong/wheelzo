@@ -55,12 +55,17 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <a href="#" data-toggle="modal" data-target="#create-ride">
-                        <i class="fa fa-plus-square fa-2x"> New ride</i>
+                <div class="col-xs-6">
+                    <a class="btn btn-default" @if($session) data-toggle="modal" data-target="#create-ride" @else id="facebook-session" href="{{ $session_url }}" @endif>
+                        <i class="fa fa-plus fa-lg"></i> Create Ride
                     </a>
+                    @if ( !$session )
+                        <small>
+                            (Login required)
+                        </small>
+                    @endif
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-6">
                     <input type="text" class="form-control" id="search-box" placeholder="Search">
                 </div>                    
             </div>
@@ -106,10 +111,13 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
+        <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
+        <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
         <script src="/assets/js/main.js"></script>
         <script>
             var rides = {{ json_encode($rides) }} ;
-            var users = {{ json_encode($users) }}
+            var publicUsers = {{ json_encode($users) }}
         </script>
     </body>
 </html>

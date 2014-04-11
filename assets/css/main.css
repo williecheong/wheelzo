@@ -7,3 +7,12 @@ th.sorting_desc:before {
     content: "\f0d7";
     font-family: FontAwesome;
 }
+
+/* Hides the useless information in timepicker */
+dt.ui_tpicker_time_label {
+    display: none;
+}
+
+dd.ui_tpicker_time {
+    display: none;
+}

@@ -30,7 +30,10 @@ class Main extends CI_Controller {
 
         // Use user ID as the index key
         $temp_users = array();
-        foreach( $users as $user ) { $temp_users[$user->id] = $user; }
+        foreach( $users as $user ) { 
+            $temp_users[$user->id]['name'] = $user->name;
+            $temp_users[$user->id]['facebook_id'] = $user->facebook_id;
+        }
 
         $url = '';
         if ( $this->facebook_user ) {
@@ -52,7 +55,7 @@ class Main extends CI_Controller {
                 )
             );
         }
-        
+
         $this->blade->render('main', 
             array(
                 'rides' => $temp_rides,

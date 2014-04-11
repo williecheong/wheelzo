@@ -14,10 +14,10 @@
                         <label class="control-label" for="origin">Travelling</label>  
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="origin" placeholder="Origin">  
+                                <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="destination" placeholder="Destination">  
+                                <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
                             </div>
                         </div>
                     </div>
@@ -25,33 +25,30 @@
                         <label class="control-label" for="departure-date">Departure Date and Time</label>  
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="departure-date" placeholder="<?= date('m/d/Y'); ?>">  
+                                <input type="text" class="form-control datepicker" id="departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="departure-time" placeholder="<?= date('h:ia'); ?>">
+                                <input type="text" class="form-control timepicker" id="departure-time" placeholder="hh:mm pm" readonly="readonly">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">  
-                            <label class="control-label" for="price">Price</label>      
-                            <input type="text" class="form-control" id="price" placeholder="Price">  
+                            <label class="control-label" for="price">Price: </label>
+                            $ <span class="slider-value lead" id="price">10</span>
+                            <div class="slider" id="price"></div> 
                         </div>
                         <div class="col-sm-6">
-                            <label class="control-label" for="capacity">Capacity</label>  
-                            <select class="form-control" id="capacity">
-                                <option value="1">1</option>
-                                <option value="2" selected>2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
+                            <label class="control-label" for="capacity">Capacity: </label>  
+                            <span class="slider-value lead" id="capacity">2</span> persons 
+                            <div class="slider" id="capacity"></div> 
                         </div>
                     </div>  
                 </form>  
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success">
-                    <i class="fa fa-truck"></i> Post ride
+                <button class="btn btn-success" id="post-ride">
+                    <i class="fa fa-truck"></i> Publish
                 </buttom>
             </div>
         </div>
