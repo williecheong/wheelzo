@@ -60,6 +60,8 @@
         $('.modal#view-ride').find('#ride-departure').html( moment(rides[rideID].start).format('MMMM D, h:mm a') );        
         $('.modal#view-ride').find('#ride-price').html('$'+rides[rideID].price);
         $('.modal#view-ride').find('#ride-passengers').html( passengersTemplate(rideID) );
+        $('.modal#view-ride').find('#ride-origin').html( rides[rideID].origin );
+        $('.modal#view-ride').find('#ride-destination').html( rides[rideID].destination );
 
         $('.modal#view-ride').modal('toggle');
     });

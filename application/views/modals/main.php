@@ -87,13 +87,13 @@
                 <hr>
                 <div class="row text-center">
                     <div class="col-xs-5">
-                        <span class="lead">Waterloo, Davis Center</span>
+                        <span class="lead" id="ride-origin"></span>
                     </div>
                     <div class="col-xs-2">
                         <i class="fa fa-arrow-right fa-lg"></i>
                     </div>
                     <div class="col-xs-5">
-                        <span class="lead">Toronto, Union Square</span>
+                        <span class="lead" id="ride-destination"></span>
                     </div>
                 </div>
             </div>
