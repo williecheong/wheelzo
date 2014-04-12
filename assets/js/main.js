@@ -18,17 +18,18 @@
             url: '/api/rides',
             data: extractModalRide( $modal ),
             type: 'POST',
+            dataType: "JSON",
             success: function( response ) {
-                
                 console.log(response);
+                
                 setTimeout(function() {
                     // Simple page refresh for now
                     $button.html('<i class="fa fa-refresh"></i> Refreshing');
-                    //location.reload();
+                    location.reload();
                 }, 1500);
             }, 
             error: function(response) {
-                alert('Fail: Bugzilla could not be reached.');
+                alert('Fail: API could not be reached.');
                 $button.removeClass('disabled');
                 console.log(response);
             }
@@ -50,6 +51,9 @@
         $('.modal#view-ride').find('a#driver-name')
                              .attr('href', 'https://facebook.com/'+driver['facebook_id'])
                              .html(driver['name']);
+
+        $('.modal#view-ride').find('img#driver-picture')
+                             .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         $('.modal#view-ride').modal('toggle');
     });
 

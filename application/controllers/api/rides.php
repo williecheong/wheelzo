@@ -8,10 +8,53 @@ class Rides extends REST_Controller {
         // Autoloaded Config, Helpers, Models
     }
 
-    // Referenced from:
-    //  http://phpguidance.wordpress.com/2013/09/27/facebook-login-with-codeignator/comment-page-1/
     public function index_post() {
-        echo 'OK';
+        if ( $this->session->userdata('user_id') ) {            
+            $data = $this->post();
+
+            $origin = isset($data['origin']) ? $data['origin'] : '';
+            $destination = isset($data['destination']) ? $data['destination'] : '';
+            $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
+            $departure_time = isset($data['departureTime']) ? $data['departureTime'] : '';
+            $capacity = isset($data['capacity']) ? $data['capacity'] : '1';
+            $price = isset($data['price']) ? $data['price'] : '0';
+
+            $start = strtotime( $departure_date . ' ' . $departure_time );
+            $start = date('Y-m-d H:i:s', $start);
+
+            $ride_id = $this->ride->create(  
+                array(  
+                    'driver_id' => $this->session->userdata('user_id'),
+                    'origin' => $origin,
+                    'destination' => $destination,
+                    'capacity' => $capacity,
+                    'price' => $price,
+                    'start' => $start  
+                )
+            );
+            $ride = $this->ride->retrieve(
+                array(
+                    'id' => $ride_id
+                )
+            );
+            
+            echo json_encode(
+                array(
+                    'status' => 'success',
+                    'message' => 'Ride successfully posted.',
+                    'ride' => $ride[0]
+                )
+            );
+    
+        } else {
+            echo json_encode(
+                array(
+                    'status' => 'fail',
+                    'message' => 'User is not logged in.'
+                )
+            );
+        }
+        
         return;
     }
 }

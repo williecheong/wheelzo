@@ -59,16 +59,48 @@
 <div class="modal fade" id="view-ride" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Driver: <a class="lead" id="driver-name" href="#"></a>
-                </h4>
-            </div>
             <div class="modal-body"> 
                 <div class="row">
+                    <div class="col-sm-4 text-center">
+                        <p>
+                            <img class="img-circle" id="driver-picture" src="">
+                        </p>
+                        <a class="lead" id="driver-name" href="#"></a>
+                    </div>
+                    <div class="row col-sm-8">
+                        <div class="col-lg-12 text-center">
+                            <h1>
+                                <span class="lead"><strong>$12</strong> - February 10, 10:15 am</span>
+                            </h1>
+                        </div>
+                        <div class="row col-lg-12 text-center">
+                            <div class="col-xs-4">
+                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
+                            </div>
+                            <div class="col-xs-4">    
+                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
+                            </div>
+                            <div class="col-xs-4">    
+                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center">
+                    <div class="col-xs-5">
+                        <span class="lead">Waterloo, Davis Center</span>
+                    </div>
+                    <div class="col-xs-2">
+                        <i class="fa fa-arrow-right fa-lg"></i>
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="lead">Toronto, Union Square</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>    
+</div>
+
+

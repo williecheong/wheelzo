@@ -15,7 +15,6 @@ CREATE TABLE `ride` (
    `driver_id` int(11) not null,
    `origin` varchar(255) not null,
    `destination` varchar(255) not null,
-   `pickup` varchar(255) not null,
    `capacity` int(11) not null default 1,
    `price` int(11) not null default 10,
    `start` datetime not null,

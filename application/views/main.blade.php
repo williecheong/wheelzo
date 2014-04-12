@@ -39,8 +39,8 @@
                         <p>
                             Wheelzo v{{ CURRENT_VERSION }}
                             @if ( $session )
-                                <a class="btn btn-danger btn-xs" id="facebook-session" href="{{ $session_url }}">
-                                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                                <a class="btn btn-danger btn-xs" id="facebook-session" href="{{ $session_url }}" title="Logout">
+                                    <i class="fa fa-sign-out fa-lg"></i> {{ $users[$session]['name'] }}
                                 </a>
                             @else
                                 <a class="btn btn-primary btn-xs" id="facebook-session" href="{{ $session_url }}">
@@ -77,6 +77,7 @@
                             <th>Destination</th>  
                             <th>Departure</th> 
                             <th>Price</th>
+                            <th class="ninja-header">Driver</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,6 +87,7 @@
                                 <td>{{ $ride->destination }}</td>
                                 <td>{{ date( 'M j, g:ia', strtotime($ride->start) ) }}</td>
                                 <td>{{ $ride->price }}</td>
+                                <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -1,3 +1,23 @@
+/* Custom formats on Wheelzo */
+th.ninja-header {
+    display: none;
+}
+
+td.ninja-field {
+    display: none;
+}
+
+img#driver-picture {
+    width: 100%;
+    max-width: 150px;
+}
+
+img#passenger-picture {
+    width: 75%;
+    max-width: 75px;
+}
+
+/* Sortable icons beside table headers */
 th.sorting_asc:before {
     content: "\f0d8";
     font-family: FontAwesome;
@@ -15,4 +35,73 @@ dt.ui_tpicker_time_label {
 
 dd.ui_tpicker_time {
     display: none;
+}
+
+/* columns of same height styles */
+.container-xs-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+}
+.row-xs-height {
+    display:table-row;
+}
+
+.col-xs-height {
+    display:table-cell;
+    float:none;
+}
+
+@media (min-width: 768px) {
+    .container-sm-height {
+        display:table;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .row-sm-height {
+        display:table-row;
+    }
+    .col-sm-height {
+        display:table-cell;
+        float:none;
+    }
+}
+@media (min-width: 992px) {
+    .container-md-height {
+        display:table;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .row-md-height {
+        display:table-row;
+    }
+    .col-md-height {
+        display:table-cell;
+        float:none;
+    }
+}
+@media (min-width: 1200px) {
+    .container-lg-height {
+        display:table;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .row-lg-height {
+        display:table-row;
+    }
+    .col-lg-height {
+        display:table-cell;
+        float:none;
+    }
+}
+
+/* vertical alignment styles */
+.col-top {
+    vertical-align:top;
+}
+.col-middle {
+    vertical-align:middle;
+}
+.col-bottom {
+    vertical-align:bottom;
 }
