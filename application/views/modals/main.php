@@ -49,7 +49,7 @@
             <div class="modal-footer">
                 <button class="btn btn-success" id="post-ride">
                     <i class="fa fa-truck"></i> Publish
-                </buttom>
+                </button>
             </div>
         </div>
     </div>

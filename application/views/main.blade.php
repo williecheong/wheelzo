@@ -69,7 +69,7 @@
                     <input type="text" class="form-control" id="search-box" placeholder="Search">
                 </div>                    
             </div>
-             <div class="table-responsive">
+            <div class="table-responsive">
                 <table class="table table-hover table-condensed">
                     <thead>
                         <tr>

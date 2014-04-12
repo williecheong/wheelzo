@@ -253,10 +253,10 @@ class Blade
         if ($compiled = $this->cache->file->get($cache_id))
         {
             // In production, avoid to test if the template was updated
-            if (ENVIRONMENT == 'production')
-            {
-                return $compiled;
-            }
+            // if (ENVIRONMENT == 'production')
+            // {
+            //     return $compiled;
+            // }
                     
             // Return cache version if the template was not updated
             $meta = $this->cache->file->get_metadata($cache_id);
