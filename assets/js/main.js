@@ -54,6 +54,13 @@
 
         $('.modal#view-ride').find('img#driver-picture')
                              .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
+        
+        var t = rides[rideID].start.split(/[- :]/);
+        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+        $('.modal#view-ride').find('#ride-departure').html( moment(rides[rideID].start).format('MMMM D, h:mm a') );        
+        $('.modal#view-ride').find('#ride-price').html('$'+rides[rideID].price);
+        $('.modal#view-ride').find('#ride-passengers').html( passengersTemplate(rideID) );
+
         $('.modal#view-ride').modal('toggle');
     });
 
@@ -157,6 +164,31 @@
         };
 
         return data;
+    }
+
+    function passengersTemplate( rideID ) {
+        var html = '';
+        var capacity = parseInt( rides[rideID].capacity );
+        var colSize = Math.floor( 12 / capacity );
+        var count = 0 ;
+
+        $.each(rides[rideID].passengers, function(key, value){
+            var passenger = publicUsers[value.user_id];
+            html += '<div class="col-xs-'+colSize+'">'+
+                    '    <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/'+passenger.facebook_id+'/picture?width=200&height=200">'+
+                    '</div>';
+            count++;
+        });
+
+        while ( count < capacity ) {
+            console.log(count);
+            html += '<div class="col-xs-'+colSize+'">'+
+                    '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
+                    '</div>';
+            count++;
+        }
+
+        return html;
     }
 
 /*******************

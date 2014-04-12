@@ -21,12 +21,20 @@ class Main extends CI_Controller {
     
 	public function index() {
         // Send the resulting data array into the view
+
         $rides = $this->ride->retrieve();
         $users = $this->user->retrieve();
 
         // Use ride ID as the index key
         $temp_rides = array();
-        foreach( $rides as $ride ) { $temp_rides[$ride->id] = $ride; }
+        foreach( $rides as $ride ) { 
+            $temp_rides[$ride->id] = $ride; 
+            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            ); 
+        }
 
         // Use user ID as the index key
         $temp_users = array();

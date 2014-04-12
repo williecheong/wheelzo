@@ -67,21 +67,19 @@
                         </p>
                         <a class="lead" id="driver-name" href="#"></a>
                     </div>
-                    <div class="row col-sm-8">
-                        <div class="col-lg-12 text-center">
-                            <h1>
-                                <span class="lead"><strong>$12</strong> - February 10, 10:15 am</span>
-                            </h1>
-                        </div>
-                        <div class="row col-lg-12 text-center">
-                            <div class="col-xs-4">
-                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h1>
+                                    <p class="lead">
+                                        <strong id="ride-price"></strong> 
+                                        -
+                                        <span id="ride-departure"></span>
+                                    </p>
+                                </h1>
                             </div>
-                            <div class="col-xs-4">    
-                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
-                            </div>
-                            <div class="col-xs-4">    
-                                <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/max.pikhteryev/picture?width=200&height=200">
+                            <div class="col-lg-12 text-center">
+                                <div class="row" id="ride-passengers"></div>
                             </div>
                         </div>
                     </div>
