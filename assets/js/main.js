@@ -107,11 +107,8 @@
 
     // Initializing timepicker
     $('.timepicker').timepicker({
-        showButtonPanel: false,
         timeFormat: 'hh:mm tt',
-        stepMinute: 15,
-        addSliderAccess: true,
-        sliderAccessArgs: { touchonly: false }
+        stepMinute: 15
     });
 
     // Initializing table sorter
