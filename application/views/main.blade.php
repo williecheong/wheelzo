@@ -29,7 +29,7 @@
                 <div class="row" id="introduction">
                     <div class="col-sm-2 text-center">
                         <a href="/">
-                            <img src="/assets/img/logo.png" width="100%">
+                            <img class="brand-logo" src="/assets/img/logo.png" width="100%">
                         </a>
                     </div>
                     <div class="col-sm-10">
@@ -99,14 +99,22 @@
             <footer>
                 <hr>
                 <span>
-                    <a href="#introduction">
-                        &copy; Wheelzo v{{ CURRENT_VERSION }}
-                    </a>
+                    &copy; Wheelzo v{{ CURRENT_VERSION }}    
                 </span>
+                <small>
+                    Made by nerds from uWaterloo.
+                </small>
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
-        <?php $this->load->view('modals/main'); ?>
+        <?php 
+            $this->load->view('modals/main',
+                array(
+                    'session' => $session,
+                    'users' => $users
+                )
+            ); 
+        ?>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/basic/jquery.qtip.min.js"></script>
@@ -120,7 +128,8 @@
         <script src="/assets/js/main.js"></script>
         <script>
             var rides = {{ json_encode($rides) }} ;
-            var publicUsers = {{ json_encode($users) }}
+            var publicUsers = {{ json_encode($users) }} ;
+            var session_id = {{ $session }};
         </script>
     </body>
 </html>

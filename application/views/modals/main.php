@@ -63,21 +63,19 @@
                 <div class="row">
                     <div class="col-sm-4 text-center">
                         <p>
-                            <img class="img-circle" id="driver-picture" src="">
+                            <a id="driver-picture" href="#">
+                                <img class="img-circle" id="driver-picture" src="">
+                            </a>
                         </p>
                         <a class="lead" id="driver-name" href="#"></a>
                     </div>
                     <div class="col-sm-8">
                         <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h1>
-                                    <p class="lead">
-                                        <strong id="ride-price"></strong> 
-                                        -
-                                        <span id="ride-departure"></span>
-                                    </p>
-                                </h1>
-                            </div>
+                            <h3 class="col-lg-12 text-center">
+                                <strong id="ride-price"></strong> 
+                                -
+                                <span class="lead" id="ride-departure"></span>
+                            </h3>
                             <div class="col-lg-12 text-center">
                                 <div class="row" id="ride-passengers"></div>
                             </div>
@@ -95,6 +93,51 @@
                     <div class="col-xs-5">
                         <span class="lead" id="ride-destination"></span>
                     </div>
+                </div>
+                <div class="row well well-sm">
+                    <div class="col-lg-12 user-comments">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <img class="img-thumbnail" width="100%" src="//graph.facebook.com/willie.cheong.10/picture?type=square">
+                            </div>
+                            <div class="col-xs-10">
+                                <p>
+                                    Hahaha this is a message
+                                </p>
+                                <small>
+                                    Tuesday February 11, 5:00am
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <img class="img-thumbnail" width="100%" src="//graph.facebook.com/willie.cheong.10/picture?type=square">
+                            </div>
+                            <div class="col-xs-10">
+                                <p>
+                                    Hahaha this is a message
+                                </p>
+                                <small>
+                                    Tuesday February 11, 5:00am
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <?php if ( $session ) { ?>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="write-comment" placeholder="Leave a comment here, <?= $users[$session]['name']; ?>">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" id="post-comment" type="button">
+                                            <i class="fa fa-envelope"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

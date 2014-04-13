@@ -17,6 +17,16 @@ img#passenger-picture {
     max-width: 75px;
 }
 
+img.brand-logo {
+    width: 100%;
+    max-width: 150px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
 /* Sortable icons beside table headers */
 th.sorting_asc:before {
     content: "\f0d8";

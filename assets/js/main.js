@@ -34,8 +34,45 @@
                 console.log(response);
             }
         });
+    });
+    
+    $('.btn#post-comment').click(function(){
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        
+        $button.addClass('disabled');
 
+        var rideID = $modal.data('rideID');
+        var comment = $modal.find('input#write-comment').val();
+        if ( comment == "" ) {
+            alert("Write a comment");
+            $button.removeClass('disabled');
+            return false;
+        }
 
+        $.ajax({
+            url: '/api/comments',
+            data: {
+                rideID : rideID,
+                comment : comment
+            },
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response);
+                
+                setTimeout(function() {
+                    // Simple page refresh for now
+                    $button.html('<i class="fa fa-refresh"></i>');
+                    location.reload();
+                }, 1500);
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
     });
 
 /*******************
@@ -52,16 +89,20 @@
                              .attr('href', 'https://facebook.com/'+driver['facebook_id'])
                              .html(driver['name']);
 
+        $('.modal#view-ride').find('a#driver-picture')
+                             .attr('href', 'https://facebook.com/'+driver['facebook_id']);
+
         $('.modal#view-ride').find('img#driver-picture')
                              .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         
         var t = rides[rideID].start.split(/[- :]/);
         var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        $('.modal#view-ride').find('#ride-departure').html( moment(rides[rideID].start).format('MMMM D, h:mm a') );        
+        $('.modal#view-ride').find('#ride-departure').html( moment(rides[rideID].start).format('dddd MMMM D, h:mm a') );        
         $('.modal#view-ride').find('#ride-price').html('$'+rides[rideID].price);
         $('.modal#view-ride').find('#ride-passengers').html( passengersTemplate(rideID) );
         $('.modal#view-ride').find('#ride-origin').html( rides[rideID].origin );
         $('.modal#view-ride').find('#ride-destination').html( rides[rideID].destination );
+        $('.modal#view-ride').data('rideID', rideID);
 
         $('.modal#view-ride').modal('toggle');
     });
@@ -148,6 +189,7 @@
 
         } else if ( ride.departureDate.length == 0 || ride.departureTime == 0 ) {
             return 'Departure date and time must be specified.';
+        
         } else if ( ride.capacity > 6 ) {
             return 'Are you driving a bus?';
         }
@@ -183,7 +225,6 @@
         });
 
         while ( count < capacity ) {
-            console.log(count);
             html += '<div class="col-xs-'+colSize+'">'+
                     '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
                     '</div>';

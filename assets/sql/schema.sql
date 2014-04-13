@@ -32,4 +32,12 @@ CREATE TABLE `user_ride` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+CREATE TABLE `comment` (
+   `id` int(11) not null auto_increment,
+   `user_id` int(11) not null,
+   `ride_id` int(11) not null,
+   `comment` text,
+   `last_updated` timestamp default current_timestamp on update current_timestamp,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 

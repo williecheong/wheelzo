@@ -33,7 +33,12 @@ class Main extends CI_Controller {
                 array(
                     'ride_id' => $ride->id 
                 )
-            ); 
+            );
+            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
         }
 
         // Use user ID as the index key
