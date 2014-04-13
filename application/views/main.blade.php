@@ -70,7 +70,7 @@
                 </div>                    
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-condensed">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Origin</th>  
@@ -85,8 +85,8 @@
                             <tr data-ride-id="{{ $ride->id }}">
                                 <td>{{ $ride->origin }}</td>
                                 <td>{{ $ride->destination }}</td>
-                                <td>{{ date( 'M j, g:ia', strtotime($ride->start) ) }}</td>
-                                <td>{{ $ride->price }}</td>
+                                <td>{{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}</td>
+                                <td>${{ $ride->price }}</td>
                                 <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
                             </tr>
                         @endforeach
