@@ -17,6 +17,10 @@ img#passenger-picture {
     max-width: 75px;
 }
 
+img.image-faded {
+    opacity: 0.4;
+}
+
 img.brand-logo {
     width: 100%;
     max-width: 150px;

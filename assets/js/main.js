@@ -239,7 +239,7 @@
 
         while ( count < capacity ) {
             html += '<div class="col-xs-'+colSize+'">'+
-                    '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
+                    '    <img class="img-circle image-faded" id="passenger-picture" src="/assets/img/empty_user.png">'+
                     '</div>';
             count++;
         }
@@ -252,13 +252,15 @@
         var count = 0;
         $.each(comments, function(key, commentObject){
             html += '<div class="single-comment">'+
-                    '    <img class="img-rounded pull-left single-comment-image" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
+                    '    <a href="https://facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
+                    '        <img class="img-rounded pull-left single-comment-image" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
+                    '    </a>'+
                     '    <div class="single-comment-details">'+
                     '        <div id="single-comment-message">'+
                     '            ' + commentObject.comment +
                     '        </div>'+
                     '        <small class="single-comment-meta">'+
-                    '           by ' + publicUsers[commentObject.user_id].name + ' @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '           by <a href="https://facebook.com/'+publicUsers[commentObject.user_id].facebook_id + '">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
                     '        </small>'+
                     '    </div>'+
                     '</div>';
