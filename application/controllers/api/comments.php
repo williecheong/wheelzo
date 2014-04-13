@@ -33,7 +33,7 @@ class Comments extends REST_Controller {
                 array(
                     'status' => 'success',
                     'message' => 'Comment successfully posted.',
-                    'ride' => $comment[0]
+                    'comment' => $comment[0]
                 )
             );
     

@@ -12,7 +12,7 @@
         <title>Wheelzo</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
@@ -66,7 +66,7 @@
                     @endif
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="search-box" placeholder="Search">
+                    <input type="text" class="form-control" id="search-box" placeholder="Search rides ...">
                 </div>                    
             </div>
             <div class="table-responsive">
@@ -102,7 +102,7 @@
                     &copy; Wheelzo v{{ CURRENT_VERSION }}    
                 </span>
                 <small>
-                    Made by nerds from uWaterloo.
+                    Made by nerds from <a href="//uwaterloo.ca">uWaterloo</a>
                 </small>
             </footer><!-- /.footer -->
         </div><!-- /container -->

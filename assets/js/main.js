@@ -59,13 +59,23 @@
             type: 'POST',
             dataType: "JSON",
             success: function( response ) {
-                console.log(response);
-                
-                setTimeout(function() {
-                    // Simple page refresh for now
-                    $button.html('<i class="fa fa-refresh"></i>');
-                    location.reload();
-                }, 1500);
+                console.log(response.message);
+
+                if ( response.status == 'success' ){
+                    var commentHtml = commentsTemplate( [response.comment] );
+
+                    if ( $modal.find('div.dummy-comment').length > 0 ) {
+                        $modal.find('#ride-comments').html( commentHtml );
+                    } else {
+                        $modal.find('#ride-comments').append( commentHtml );
+                    }
+
+                    $button.removeClass('disabled');                    
+                } else {
+                    alert(response.message);
+                    $button.removeClass('disabled');
+                }
+
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');
@@ -88,11 +98,11 @@
         var $modal = $('.modal#view-ride');
 
         $modal.find('a#driver-name')
-              .attr('href', 'https://facebook.com/'+driver['facebook_id'])
+              .attr('href', '//facebook.com/'+driver['facebook_id'])
               .html(driver['name']);
 
         $modal.find('a#driver-picture')
-              .attr('href', 'https://facebook.com/'+driver['facebook_id']);
+              .attr('href', '//facebook.com/'+driver['facebook_id']);
 
         $modal.find('img#driver-picture')
               .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
@@ -263,7 +273,7 @@
         var count = 0;
         $.each(comments, function(key, commentObject){
             html += '<div class="single-comment">'+
-                    '    <a href="https://facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
+                    '    <a href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
                     '        <img class="img-rounded pull-left single-comment-image" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
                     '    </a>'+
                     '    <div class="single-comment-details">'+
@@ -271,7 +281,7 @@
                     '            ' + commentObject.comment +
                     '        </div>'+
                     '        <small class="single-comment-meta">'+
-                    '           by <a href="https://facebook.com/'+publicUsers[commentObject.user_id].facebook_id + '">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '            <a href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id + '">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
                     '        </small>'+
                     '    </div>'+
                     '</div>';
@@ -279,7 +289,7 @@
         }); 
 
         if ( count == 0 ) {
-            html = '<div class="single-comment text-center">'+
+            html = '<div class="single-comment dummy-comment text-center">'+
                    '    <em>No comments to display ...</em>'+
                    '</div>';
         }
