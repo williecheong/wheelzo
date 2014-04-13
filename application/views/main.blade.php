@@ -129,7 +129,7 @@
         <script>
             var rides = {{ json_encode($rides) }} ;
             var publicUsers = {{ json_encode($users) }} ;
-            var session_id = {{ $session }};
+            var session_id = {{ $session ? $session : 'false' }};
         </script>
     </body>
 </html>

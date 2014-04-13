@@ -85,26 +85,39 @@
     $('tr[data-ride-id]').click(function(){
         var rideID = $(this).data('ride-id');
         var driver = publicUsers[ rides[rideID].driver_id ];
-        $('.modal#view-ride').find('a#driver-name')
-                             .attr('href', 'https://facebook.com/'+driver['facebook_id'])
-                             .html(driver['name']);
+        var $modal = $('.modal#view-ride');
 
-        $('.modal#view-ride').find('a#driver-picture')
-                             .attr('href', 'https://facebook.com/'+driver['facebook_id']);
+        $modal.find('a#driver-name')
+              .attr('href', 'https://facebook.com/'+driver['facebook_id'])
+              .html(driver['name']);
 
-        $('.modal#view-ride').find('img#driver-picture')
-                             .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
+        $modal.find('a#driver-picture')
+              .attr('href', 'https://facebook.com/'+driver['facebook_id']);
+
+        $modal.find('img#driver-picture')
+              .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         
-        var t = rides[rideID].start.split(/[- :]/);
-        var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-        $('.modal#view-ride').find('#ride-departure').html( moment(rides[rideID].start).format('dddd MMMM D, h:mm a') );        
-        $('.modal#view-ride').find('#ride-price').html('$'+rides[rideID].price);
-        $('.modal#view-ride').find('#ride-passengers').html( passengersTemplate(rideID) );
-        $('.modal#view-ride').find('#ride-origin').html( rides[rideID].origin );
-        $('.modal#view-ride').find('#ride-destination').html( rides[rideID].destination );
-        $('.modal#view-ride').data('rideID', rideID);
+        $modal.find('#ride-departure')
+              .html( moment(rides[rideID].start).format('dddd MMMM D, h:mm a') );        
+        
+        $modal.find('#ride-price')
+              .html('$'+rides[rideID].price);
+        
+        $modal.find('#ride-passengers')
+              .html( passengersTemplate(rideID) );
 
-        $('.modal#view-ride').modal('toggle');
+        $modal.find('#ride-origin')
+              .html( rides[rideID].origin );
+        
+        $modal.find('#ride-destination')
+              .html( rides[rideID].destination );
+        
+        $modal.find('#ride-comments')
+              .html( commentsTemplate(rides[rideID].comments) );
+        
+        $modal.data('rideID', rideID);
+
+        $modal.modal('toggle');
     });
 
     $('.add_suggested_places').typeahead({
@@ -229,6 +242,33 @@
                     '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
                     '</div>';
             count++;
+        }
+
+        return html;
+    }
+
+    function commentsTemplate( comments ) {
+        var html = '';
+        var count = 0;
+        $.each(comments, function(key, commentObject){
+            html += '<div class="single-comment">'+
+                    '    <img class="img-rounded pull-left single-comment-image" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
+                    '    <div class="single-comment-details">'+
+                    '        <div id="single-comment-message">'+
+                    '            ' + commentObject.comment +
+                    '        </div>'+
+                    '        <small class="single-comment-meta">'+
+                    '           by ' + publicUsers[commentObject.user_id].name + ' @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '        </small>'+
+                    '    </div>'+
+                    '</div>';
+            count++;
+        }); 
+
+        if ( count == 0 ) {
+            html = '<div class="single-comment text-center">'+
+                   '    <em>No comments to display ...</em>'+
+                   '</div>';
         }
 
         return html;
