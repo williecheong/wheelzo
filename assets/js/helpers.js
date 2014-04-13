@@ -1,4 +1,30 @@
 /*******************
+    REST EXECUTION HELPERS
+*******************/ 
+    function postRide( saveRide, $button ) {
+        $.ajax({
+            url: '/api/rides',
+            data: saveRide,
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                setTimeout(function() {
+                    // Simple page refresh for now
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');
+                    location.reload();
+                }, 1500);
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
+/*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
     function validateRide( $modal ) {

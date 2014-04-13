@@ -125,7 +125,9 @@
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
         <script src="/assets/vendor/moment/moment.min.js"></script>
+        <script src="/assets/js/initializer.js"></script>
         <script src="/assets/js/templates.js"></script>
+        <script src="/assets/js/handlers.js"></script>
         <script src="/assets/js/helpers.js"></script>
         <script src="/assets/js/main.js"></script>
         <script>
