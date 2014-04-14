@@ -124,6 +124,7 @@
         <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
+        <script src="/assets/vendor/backdetect/backfix.min.js"></script>
         <script src="/assets/vendor/moment/moment.min.js"></script>
         <script src="/assets/js/initializer.js"></script>
         <script src="/assets/js/templates.js"></script>

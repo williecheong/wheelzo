@@ -22,6 +22,21 @@
             $( toToggle ).toggle('slow');
         });
 
+        // Uses the back button to close modal when it is up
+        $('.modal').on('show.bs.modal', function(){
+            window.onbeforeunload = function(){
+                return "Leave Wheelzo?";
+            };
+        });       
+
+        bajb_backdetect.OnBack = function(){
+            $('.modal').modal('hide');
+        }
+
+        $('.modal').on('hidden.bs.modal', function(){        
+            window.onbeforeunload = null;   
+        });
+
         // Initializing sliders
         $('.slider#price').slider({
             value: 10,
