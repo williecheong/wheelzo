@@ -52,6 +52,23 @@
         $modal.modal('toggle');
     }
 
+    addDropoff = function( event ) {
+        $button = $(this);
+        $target = $button.closest('div#destination-group');
+        var uid = uniqueid();
+
+        $target.append( dropoffTemplate(uid) );
+        
+        var $newDropoff = $('div.dropoff#' + uid);
+        $newDropoff.find('.dropoff-remover').click(function(){
+            $newDropoff.remove();
+        });
+
+        $newDropoff.find('input.add_suggested_places').typeahead({
+            source: defaultSuggestedPlaces
+        });
+    }
+
     saveRide = function( event ) {
         var $button = $(this);
         var $modal = $button.closest('.modal');

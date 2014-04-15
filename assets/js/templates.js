@@ -53,3 +53,14 @@
 
         return html;
     }
+
+    function dropoffTemplate( id ) {
+        var html = '';
+        html += '<div class="right-inner-addon dropoff" id="'+id+'">'+
+                '    <a class="dropoff-remover" href="#">'+
+                '        <i class="fa fa-times"></i>'+
+                '    </a>'+
+                '    <input type="text" class="form-control add_suggested_places" placeholder="Dropoff location">'+
+                '</div>';
+        return html;
+    }

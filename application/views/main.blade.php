@@ -66,7 +66,10 @@
                     @endif
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" id="search-box" placeholder="Search rides ...">
+                    <div class="right-inner-addon">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control" id="search-box" placeholder="Search rides ...">
+                    </div>
                 </div>                    
             </div>
             <div class="table-responsive">

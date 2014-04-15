@@ -20,21 +20,11 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" title="Add drop off destinations" type="button">
+                                        <button class="btn btn-default" id="add-dropoff" title="Add drop off destinations" type="button">
                                             <i class="fa fa-road fa-lg"></i>
                                         </button>
                                     </span>
                                 </div>
-                                
-                                <div class="input-group">
-                                    <input type="text" class="form-control add_suggested_places dropoff" id="1" placeholder="Drop off" autocomplete="off">  
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default btn-danger" type="button">
-                                            <i class="fa fa-times fa-lg"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
