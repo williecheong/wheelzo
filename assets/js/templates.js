@@ -29,11 +29,11 @@
         var html = '';
         var count = 0;
         $.each(comments, function(key, commentObject){
-            html += '<div class="single-comment">'+
-                    '    <a href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
-                    '        <img class="img-rounded pull-left single-comment-image" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
+            html += '<div class="media">'+
+                    '    <a class="pull-left" href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
+                    '        <img class="img-rounded media-object" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
                     '    </a>'+
-                    '    <div class="single-comment-details">'+
+                    '    <div class="media-body">'+
                     '        <div id="single-comment-message">'+
                     '            ' + commentObject.comment +
                     '        </div>'+
@@ -46,7 +46,7 @@
         }); 
 
         if ( count == 0 ) {
-            html = '<div class="single-comment dummy-comment text-center">'+
+            html = '<div class="media dummy-comment text-center">'+
                    '    <em>No comments to display ...</em>'+
                    '</div>';
         }

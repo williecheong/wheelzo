@@ -18,6 +18,7 @@ CREATE TABLE `ride` (
    `capacity` int(11) not null default 1,
    `price` int(11) not null default 10,
    `start` datetime not null,
+   `drop_offs` varchar(255),
    `last_updated` timestamp default current_timestamp on update current_timestamp,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

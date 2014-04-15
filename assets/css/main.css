@@ -26,20 +26,6 @@ img.brand-logo {
     max-width: 150px;
 }
 
-div.single-comment {
-    min-height: 50px;
-    margin-bottom: 10px;
-}
-
-img.single-comment-image {
-    width: 50px;
-    margin-right: 10px;
-}
-
-div.single-comment-details {
-    display: table-cell;    
-}
-
 textarea {
     resize: vertical;
 }

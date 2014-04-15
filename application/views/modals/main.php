@@ -16,7 +16,7 @@
                             <div class="col-sm-6">
                                 <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="destination-group">
                                 <div class="input-group">
                                     <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
                                     <span class="input-group-btn">
@@ -25,7 +25,16 @@
                                         </button>
                                     </span>
                                 </div>
-                                <input class="form-control">
+                                
+                                <div class="input-group">
+                                    <input type="text" class="form-control add_suggested_places dropoff" id="1" placeholder="Drop off" autocomplete="off">  
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default btn-danger" type="button">
+                                            <i class="fa fa-times fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -106,7 +115,7 @@
                 <div class="row">
                     <div class="col-lg-12" id="ride-comments"></div>
                     <?php if ( $session ) { ?>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 media">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="write-comment" placeholder="">
                                 <span class="input-group-btn">
