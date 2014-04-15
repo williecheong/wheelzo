@@ -59,6 +59,13 @@
         return data;
     }
 
+    function refreshRides() {
+        $.get( "/api/rides", function( response ) {
+            rides = JSON.parse(response);
+            console.log("Object rides has been refreshed.")
+        });
+    }
+
 /*******************
     GENERAL HELPER FUNCTIONS
 *******************/ 

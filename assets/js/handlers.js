@@ -3,6 +3,11 @@
 *******************/ 
     prepareRide = function( event ) {
         var rideID = $(this).data('ride-id');
+        if ( !rides.hasOwnProperty(rideID) ) {
+            alert("Ride is not available");
+            return;
+        }
+        
         var driver = publicUsers[ rides[rideID].driver_id ];
         var $modal = $('.modal#view-ride');
 
@@ -96,6 +101,7 @@
                 }
 
                 $modal.find('input#write-comment').val('');
+                refreshRides();
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');

@@ -8,6 +8,29 @@ class Rides extends REST_Controller {
         // Autoloaded Config, Helpers, Models
     }
 
+    public function index_get() {
+        $temp_rides = array();
+        $rides = $this->ride->retrieve();
+        
+        // Use ride ID as the index key
+        foreach( $rides as $ride ) { 
+            $temp_rides[$ride->id] = $ride; 
+            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+        }
+
+        echo json_encode($temp_rides);
+        return;
+    }
+
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
             $data = $this->post();
