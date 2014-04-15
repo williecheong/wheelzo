@@ -16,6 +16,9 @@
         // Initializes the posting of a comment when Send button is clicked
         $('.btn#post-comment').on('click', saveComment);
 
+        // Initializes the posting of a feedback message submission
+        $('.btn[name="send-feedback"]').on('click', saveFeedback);
+
         // Toggles the view of channels on each product
         $('[data-mytoggler]').click(function(){
             var toToggle = $(this).data('mytoggler');

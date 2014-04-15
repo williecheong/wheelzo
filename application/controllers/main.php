@@ -20,9 +20,10 @@ class Main extends CI_Controller {
         if ( $this->facebook_user ) {
             // Registers the facebook user if not already done.
             // Always returns the local user ID of this person from our database.
-            $user_id = $this->user->try_register( $this->facebook_user );
+            $user = $this->user->try_register( $this->facebook_user );
             
-            $this->session->set_userdata('user_id', $user_id);
+            $this->session->set_userdata('user_id', $user->id);
+            $this->session->set_userdata('email', $user->email);
             
             $this->facebook_url = $this->facebook->getLogouturl(
                 array(

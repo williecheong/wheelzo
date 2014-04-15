@@ -25,7 +25,7 @@ class user extends CI_Model{
             );
 
 
-            return $availability[0]->id;
+            return $availability[0];
 
         } else {
             // user does not exist yet.
@@ -41,7 +41,13 @@ class user extends CI_Model{
                 )
             );
 
-            return $user_id;
+            $user = $this->user->retrieve(
+                array(
+                    'id' => $user_id
+                )
+            );
+
+            return $user[0];
         }
     }
 

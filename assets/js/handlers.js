@@ -119,3 +119,40 @@
         });
     }
 
+    saveFeedback = function( event ) {
+            var $button = $(this);
+            $button.addClass('disabled');
+
+            var email = $('input[name="feedback-email"]').val();
+            var message = $('textarea[name="feedback-message"]').val();
+            
+            if ( message.length == 0 ) {
+                alert("Message should not be empty");
+                $button.removeClass('disabled');
+                return false;
+            }
+
+            $.ajax({
+                url: '/api/feedbacks',
+                type: 'POST',
+                dataType: "JSON",
+                data: {
+                    'email' : email,
+                    'message': message
+                },
+                success: function(response) {
+                    if ( response.status == 'success' ) {
+                        $('input[name="feedback-email"]').attr('disabled', true);
+                        $('textarea[name="feedback-message"]').attr('disabled', true);
+                        $button.html('<i class="fa fa-check"></i> Message sent');
+                    }
+                    console.log(response.message);
+                }, 
+                error: function(response) {
+                    alert('Fail: API could not be reached.');
+                    $button.removeClass('disabled');
+                    console.log(response);
+                }
+            });
+        
+        }

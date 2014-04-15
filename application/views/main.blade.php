@@ -102,7 +102,7 @@
                     &copy; Wheelzo v{{ CURRENT_VERSION }}    
                 </span>
                 <small>
-                    Made by nerds from <a href="//uwaterloo.ca">uWaterloo</a>
+                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca">uWaterloo</a>
                 </small>
             </footer><!-- /.footer -->
         </div><!-- /container -->
