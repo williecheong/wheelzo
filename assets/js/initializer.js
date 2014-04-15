@@ -41,7 +41,7 @@
         $('.slider#price').slider({
             value: 10,
             min: 0,
-            max: 30,
+            max: 35,
             step: 1,
             slide: function( event, ui ) {
                 $('.slider-value#price').text( ui.value );
@@ -51,7 +51,7 @@
         $('.slider#capacity').slider({
             value: 2,
             min: 1,
-            max: 6,
+            max: 7,
             step: 1,
             slide: function( event, ui ) {
                 $('.slider-value#capacity').text( ui.value );

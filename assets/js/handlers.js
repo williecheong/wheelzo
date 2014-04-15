@@ -39,6 +39,14 @@
         $modal.find('#ride-comments')
               .html( commentsTemplate(rides[rideID].comments) );
         
+        if ( session_id ) {
+            if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
+                $modal.find('input#write-comment').attr('placeholder', 'Write more details about your ride or respond to potential passengers');
+            } else {
+                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join this ride or ask questions to the driver');    
+            }
+        }
+
         $modal.data('rideID', rideID);
 
         $modal.modal('toggle');

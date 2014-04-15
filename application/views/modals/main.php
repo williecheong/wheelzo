@@ -100,10 +100,10 @@
                     <?php if ( $session ) { ?>
                         <div class="col-lg-12">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="write-comment" placeholder="Leave a comment here as <?= $users[$session]['name']; ?>">
+                                <input type="text" class="form-control" id="write-comment" placeholder="">
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" id="post-comment" type="button">
-                                        <i class="fa fa-envelope"></i>
+                                        <i class="fa fa-comment fa-lg"></i>
                                     </button>
                                 </span>
                             </div>
