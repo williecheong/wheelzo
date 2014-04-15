@@ -17,7 +17,15 @@
                                 <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
+                                <div class="input-group">
+                                    <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" title="Add drop off destinations" type="button">
+                                            <i class="fa fa-road fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <input class="form-control">
                             </div>
                         </div>
                     </div>
