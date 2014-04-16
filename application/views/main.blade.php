@@ -81,16 +81,21 @@
                             <th>Departure</th> 
                             <th>Price</th>
                             <th class="ninja-header">Driver</th>
+                            <th class="ninja-header">Dropoffs</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ( $rides as $ride )
                             <tr data-ride-id="{{ $ride->id }}">
                                 <td>{{ $ride->origin }}</td>
-                                <td>{{ $ride->destination }}</td>
+                                <td>
+                                    {{ $ride->destination }} 
+                                    {{ (count($ride->drop_offs)>0) ? '<i class="fa fa-plus"></i>' : '' }}
+                                </td>
                                 <td>{{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}</td>
                                 <td>${{ $ride->price }}</td>
                                 <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                                <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -127,7 +132,6 @@
         <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
-        <script src="/assets/vendor/backdetect/backfix.min.js"></script>
         <script src="/assets/vendor/moment/moment.min.js"></script>
         <script src="/assets/js/initializer.js"></script>
         <script src="/assets/js/templates.js"></script>

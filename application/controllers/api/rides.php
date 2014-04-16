@@ -9,25 +9,8 @@ class Rides extends REST_Controller {
     }
 
     public function index_get() {
-        $temp_rides = array();
-        $rides = $this->ride->retrieve();
-        
-        // Use ride ID as the index key
-        foreach( $rides as $ride ) { 
-            $temp_rides[$ride->id] = $ride; 
-            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-        }
-
-        echo json_encode($temp_rides);
+        $rides = $this->ride->retrieve_active();
+        echo json_encode($rides);
         return;
     }
 
@@ -45,6 +28,8 @@ class Rides extends REST_Controller {
             $start = strtotime( $departure_date . ' ' . $departure_time );
             $start = date('Y-m-d H:i:s', $start);
 
+            $drop_offs = isset($data['dropOffs']) ? implode('{?}', $data['dropOffs']) : '';
+
             $ride_id = $this->ride->create(  
                 array(  
                     'driver_id' => $this->session->userdata('user_id'),
@@ -52,7 +37,8 @@ class Rides extends REST_Controller {
                     'destination' => $destination,
                     'capacity' => $capacity,
                     'price' => $price,
-                    'start' => $start  
+                    'start' => $start,
+                    'drop_offs' => $drop_offs   
                 )
             );
             $ride = $this->ride->retrieve(

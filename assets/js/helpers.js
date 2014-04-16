@@ -47,13 +47,23 @@
     }
 
     function extractModalRide( $modal ) {
+        var dropoffs = [];
+        $modal.find('div.dropoff').each(function(){
+            var tempDropoff = $(this).find('input').val();
+            tempDropoff = tempDropoff.trim();
+            if ( tempDropoff !== '' ) {
+                dropoffs.push( tempDropoff );
+            }
+        });
+
         var data = {
             origin          : $modal.find('input#origin').val(),
             destination     : $modal.find('input#destination').val(),
             departureDate   : $modal.find('input#departure-date').val(),
             departureTime   : $modal.find('input#departure-time').val(),
             price           : $modal.find('span#price').text(),
-            capacity        : $modal.find('span#capacity').text()
+            capacity        : $modal.find('span#capacity').text(),
+            dropOffs        : dropoffs
         };
 
         return data;

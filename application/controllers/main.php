@@ -42,38 +42,19 @@ class Main extends CI_Controller {
     }
     
 	public function index() {
-        // Send the resulting data array into the view
-
-        $rides = $this->ride->retrieve();
-        $users = $this->user->retrieve();
-
-        // Use ride ID as the index key
-        $temp_rides = array();
-        foreach( $rides as $ride ) { 
-            $temp_rides[$ride->id] = $ride; 
-            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-        }
-
         // Use user ID as the index key
         $temp_users = array();
-        foreach( $users as $user ) { 
+        $users = $this->user->retrieve();
+        foreach( $users as $user ) {
+            // Only display public user information
             $temp_users[$user->id]['name'] = $user->name;
             $temp_users[$user->id]['facebook_id'] = $user->facebook_id;
         }
 
         $this->blade->render('main', 
             array(
-                'rides' => $temp_rides,
                 'users' => $temp_users,
+                'rides' => $this->ride->retrieve_active(),
                 'session' => $this->session->userdata('user_id'),
                 'session_url' => $this->facebook_url
             )
