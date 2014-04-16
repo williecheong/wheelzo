@@ -42,7 +42,7 @@
                 html        : true,
                 trigger     : 'hover',
                 placement   : 'auto top',
-                title       : 'Drop Off Locations',
+                title       : 'Other Drop-offs :',
                 content     : dropoffContentTemplate( thisRide.drop_offs )
             });
         }
