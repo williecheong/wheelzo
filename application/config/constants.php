@@ -7,9 +7,11 @@
 |--------------------------------------------------------------------------
 */
 
-define('CURRENT_VERSION', '0.7');
-define('FB_APPID',        '282192178572651');
-define('FB_SECRET',       '4e20bf730703c8086620ba26693de1c2');
+define('CURRENT_VERSION',   '0.7');
+define('FB_APPID',          '282192178572651');
+define('FB_SECRET',         '4e20bf730703c8086620ba26693de1c2');
+
+define('WHEELZO_DELIMITER', '{?}');
 
 
 /*

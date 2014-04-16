@@ -30,6 +30,10 @@ textarea {
     resize: vertical;
 }
 
+.popover{
+    min-width: 250px ! important;
+}
+
 /* Input boxes with icons inside */
 .left-inner-addon {
     position: relative;

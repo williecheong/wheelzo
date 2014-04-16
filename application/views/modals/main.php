@@ -95,11 +95,13 @@
                         <span class="lead" id="ride-origin"></span>
                     </div>
                     <div class="col-xs-2">
-                        <i class="fa fa-arrow-right fa-lg"></i>
+                        <i class="fa fa-arrow-right fa-2x"></i>
+                        <div id="ride-dropoffs"></div>
                     </div>
                     <div class="col-xs-5">
                         <span class="lead" id="ride-destination"></span>
                     </div>
+                    
                 </div>
                 <hr>
                 <div class="row">

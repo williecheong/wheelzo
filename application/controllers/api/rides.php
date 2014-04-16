@@ -28,7 +28,7 @@ class Rides extends REST_Controller {
             $start = strtotime( $departure_date . ' ' . $departure_time );
             $start = date('Y-m-d H:i:s', $start);
 
-            $drop_offs = isset($data['dropOffs']) ? implode('{?}', $data['dropOffs']) : '';
+            $drop_offs = isset($data['dropOffs']) ? implode(WHEELZO_DELIMITER, $data['dropOffs']) : '';
 
             $ride_id = $this->ride->create(  
                 array(  

@@ -8,7 +8,7 @@ class ride extends CI_Model{
         $rides = $this->ride->retrieve();
         foreach( $rides as $ride ) { 
             $temp_rides[$ride->id] = $ride; 
-            $temp_rides[$ride->id]->drop_offs = ($ride->drop_offs=='') ? array() : explode('{?}', $ride->drop_offs) ; 
+            $temp_rides[$ride->id]->drop_offs = ($ride->drop_offs=='') ? array() : explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
 
             $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
                 array(

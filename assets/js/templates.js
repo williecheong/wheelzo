@@ -63,7 +63,7 @@
         return html;
     }
 
-    function dropoffTemplate( id ) {
+    function dropoffInputTemplate( id ) {
         var html = '';
         html += '<div class="right-inner-addon dropoff" id="'+id+'">'+
                 '    <a class="dropoff-remover" href="#">'+
@@ -71,5 +71,27 @@
                 '    </a>'+
                 '    <input type="text" class="form-control add_suggested_places" placeholder="Dropoff location">'+
                 '</div>';
+        return html;
+    }
+
+    function dropoffButtonTemplate( dropOffs ) {
+        var html = '';
+        if ( dropOffs.length > 0 ) {
+            html += '<a href="#" id="show-dropoffs">'+
+                    '   <i class="fa fa-info-circle fa-lg"></i>'+
+                    '</a>';
+        }
+    
+        return html;    
+    }
+
+    function dropoffContentTemplate( dropOffs ) {
+        var html = '';
+        html += '<ol>';
+        $.each(dropOffs, function(key, dropOff){
+            html += '<li>' + dropOff + '</li>';
+        });
+        html += '</ol>';
+        
         return html;
     }

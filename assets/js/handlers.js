@@ -8,7 +8,8 @@
             return;
         }
         
-        var driver = publicUsers[ rides[rideID].driver_id ];
+        var thisRide = rides[rideID];
+        var driver = publicUsers[ thisRide.driver_id ];
         var $modal = $('.modal#view-ride');
 
         $modal.find('a#driver-name')
@@ -22,22 +23,35 @@
               .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         
         $modal.find('#ride-departure')
-              .html( moment(rides[rideID].start).format('dddd MMMM D, h:mm a') );        
+              .html( moment(thisRide.start).format('dddd MMMM D, h:mm a') );        
         
         $modal.find('#ride-price')
-              .html('$'+rides[rideID].price);
+              .html('$'+thisRide.price);
         
         $modal.find('#ride-passengers')
               .html( passengersTemplate(rideID) );
 
         $modal.find('#ride-origin')
-              .html( rides[rideID].origin );
+              .html( thisRide.origin );
         
+        $modal.find('#ride-dropoffs')
+              .html( dropoffButtonTemplate(thisRide.drop_offs) );
+            
+        if ( thisRide.drop_offs.length > 0 ) {
+            $modal.find('#show-dropoffs').popover({
+                html        : true,
+                trigger     : 'hover',
+                placement   : 'auto top',
+                title       : 'Drop Off Locations',
+                content     : dropoffContentTemplate( thisRide.drop_offs )
+            });
+        }
+
         $modal.find('#ride-destination')
-              .html( rides[rideID].destination );
+              .html( thisRide.destination );
         
         $modal.find('#ride-comments')
-              .html( commentsTemplate(rides[rideID].comments) );
+              .html( commentsTemplate(thisRide.comments) );
         
         if ( session_id ) {
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
@@ -57,7 +71,7 @@
         $target = $button.closest('div#destination-group');
         var uid = uniqueid();
 
-        $target.append( dropoffTemplate(uid) );
+        $target.append( dropoffInputTemplate(uid) );
         
         var $newDropoff = $('div.dropoff#' + uid);
         $newDropoff.find('.dropoff-remover').click(function(){

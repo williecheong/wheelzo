@@ -39,7 +39,7 @@
         } else if ( ride.departureDate.length == 0 || ride.departureTime == 0 ) {
             return 'Departure date and time must be specified.';
         
-        } else if ( ride.capacity > 6 ) {
+        } else if ( ride.capacity > 7 ) {
             return 'Are you driving a bus?';
         }
 
