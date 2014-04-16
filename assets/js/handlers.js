@@ -34,6 +34,9 @@
         $modal.find('#ride-origin')
               .html( thisRide.origin );
         
+        $modal.find('#ride-destination')
+              .html( thisRide.destination );
+        
         $modal.find('#ride-dropoffs')
               .html( dropoffButtonTemplate(thisRide.drop_offs) );
             
@@ -47,9 +50,6 @@
             });
         }
 
-        $modal.find('#ride-destination')
-              .html( thisRide.destination );
-        
         $modal.find('#ride-comments')
               .html( commentsTemplate(thisRide.comments) );
         
