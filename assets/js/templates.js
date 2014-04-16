@@ -3,6 +3,10 @@
 *******************/ 
     function passengersTemplate( rideID ) {
         var html = '';
+        
+        var isOwner = ( rides[rideID].driver_id == session_id );
+        var ownerClass = isOwner ? ' ride-owner' : '' ;
+
         var capacity = parseInt( rides[rideID].capacity );
         var colSizes = [];
         if      ( capacity == 1 ) { colSizes = [12]; } 
@@ -13,20 +17,19 @@
         else if ( capacity == 6 ) { colSizes = [4,4,4,4,4,4]; } 
         else if ( capacity == 7 ) { colSizes = [3,3,3,3,4,4,4]; }
         else { for(var i=0; i < capacity; i++) colSizes[i] = 2; }
-
         var count = 0 ;
 
         $.each(rides[rideID].passengers, function(key, value){
             var passenger = publicUsers[value.user_id];
             html += '<div class="col-xs-'+colSizes[count]+'">'+
-                    '    <img class="img-circle" id="passenger-picture" src="//graph.facebook.com/'+passenger.facebook_id+'/picture?width=200&height=200">'+
+                    '    <img class="img-circle'+ownerClass+'" id="passenger-picture" data-passenger-id="'+value.user_id+'" src="//graph.facebook.com/'+passenger.facebook_id+'/picture?width=200&height=200">'+
                     '</div>';
             count++;
         });
 
         while ( count < capacity ) {
             html += '<div class="col-xs-'+colSizes[count]+'">'+
-                    '    <img class="img-circle image-faded" id="passenger-picture" src="/assets/img/empty_user.png">'+
+                    '    <img class="img-circle'+ownerClass+'" id="passenger-picture" data-passenger-id="" src="/assets/img/empty_user.png">'+
                     '</div>';
             count++;
         }
@@ -77,8 +80,8 @@
     function dropoffButtonTemplate( dropOffs ) {
         var html = '';
         if ( dropOffs.length > 0 ) {
-            html += '<a href="#" id="show-dropoffs">'+
-                    '   <i class="fa fa-info-circle fa-lg"></i>'+
+            html += '<a href="#" id="show-dropoffs"> '+
+                    '   <i class="fa fa-flag-checkered fa-lg fa-border"></i>'+
                     '</a>';
         }
     
@@ -87,11 +90,11 @@
 
     function dropoffContentTemplate( dropOffs ) {
         var html = '';
-        html += '<ol>';
+        html += '<ul class="fa-ul">';
         $.each(dropOffs, function(key, dropOff){
-            html += '<li>' + dropOff + '</li>';
+            html += '<li><i class="fa-li fa fa-flag"></i>' + dropOff + '</li>';
         });
-        html += '</ol>';
+        html += '</ul>';
         
         return html;
     }

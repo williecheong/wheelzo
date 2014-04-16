@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <title>Wheelzo</title>
-        <meta name="description" content="">
+        <meta name="description" content="Rideshare and Carpooling for the kids in University of Waterloo">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/basic/jquery.qtip.min.css">
         <link rel="stylesheet" href="/assets/css/main.css">
+        <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -90,7 +91,11 @@
                                 <td>{{ $ride->origin }}</td>
                                 <td>
                                     {{ $ride->destination }} 
-                                    {{ (count($ride->drop_offs)>0) ? '<i class="fa fa-plus"></i>' : '' }}
+                                    <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                        <a href="#">
+                                            <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                        </a>
+                                    <?php } ?>
                                 </td>
                                 <td>{{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}</td>
                                 <td>${{ $ride->price }}</td>

@@ -31,6 +31,15 @@
         $modal.find('#ride-passengers')
               .html( passengersTemplate(rideID) );
 
+        $modal.find('.ride-owner#passenger-picture').popover({
+            html        : true,
+            trigger     : 'click',
+            placement   : 'auto',
+            title       : 'Add passenger :',
+            content     : uniqueid() 
+        });
+              
+
         $modal.find('#ride-origin')
               .html( thisRide.origin );
         
@@ -44,8 +53,8 @@
             $modal.find('#show-dropoffs').popover({
                 html        : true,
                 trigger     : 'hover',
-                placement   : 'auto top',
-                title       : 'Other Drop-offs :',
+                placement   : 'auto',
+                title       : 'Drop-off locations :',
                 content     : dropoffContentTemplate( thisRide.drop_offs )
             });
         }
@@ -64,6 +73,26 @@
         $modal.data('rideID', rideID);
 
         $modal.modal('toggle');
+    }
+
+    preparePassengers = function( event ) {
+        $bubble = $(this);
+
+        $bubble
+        
+        $('html').click(function(){
+            $bubble.popover('hide');
+        });
+
+        $bubble.click(function(event){
+            event.stopPropagation();
+        });
+
+        $bubble.on('hidden.bs.popover', function(){
+            $bubble.popover('destroy');
+        });
+
+        $bubble.popover('show');
     }
 
     addDropoff = function( event ) {

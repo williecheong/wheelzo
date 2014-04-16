@@ -15,10 +15,11 @@ img#driver-picture {
 img#passenger-picture {
     width: 75%;
     max-width: 75px;
+    opacity: 0.5;
 }
 
-img.image-faded {
-    opacity: 0.4;
+img.ride-owner:hover {
+    opacity: 1.0 !important;
 }
 
 img.brand-logo {
@@ -31,7 +32,7 @@ textarea {
 }
 
 .popover{
-    min-width: 300px ! important;
+    min-width: 275px ! important;
 }
 
 /* Input boxes with icons inside */
