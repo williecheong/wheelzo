@@ -46,7 +46,7 @@
         $modal.data('rideID', rideID);
 
         initializeRide( rideID )
-        $modal.modal('toggle');
+        $modal.modal('show');
     }
 
     addDropoff = function( event ) {
@@ -108,22 +108,16 @@
                 console.log(response.message);
 
                 if ( response.status == 'success' ){
-                    var commentHtml = commentsTemplate( [response.comment] );
+                    refreshRides(function(){
+                        $button.removeClass('disabled');
+                        $modal.find('input#write-comment').val('');
+                        $('tr[data-ride-id="'+rideID+'"]').trigger('click');
+                    });
 
-                    if ( $modal.find('div.dummy-comment').length > 0 ) {
-                        $modal.find('#ride-comments').html( commentHtml );
-                    } else {
-                        $modal.find('#ride-comments').append( commentHtml );
-                    }
-
-                    $button.removeClass('disabled');                    
                 } else {
                     alert(response.message);
                     $button.removeClass('disabled');
                 }
-
-                $modal.find('input#write-comment').val('');
-                refreshRides();
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');

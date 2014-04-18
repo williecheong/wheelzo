@@ -69,10 +69,11 @@
         return data;
     }
 
-    function refreshRides() {
+    function refreshRides( callback ) {
         $.get( "/api/rides", function( response ) {
             rides = JSON.parse(response);
             console.log("Object rides has been refreshed.")
+            callback();
         });
     }
 

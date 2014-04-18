@@ -68,8 +68,10 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="right-inner-addon">
-                        <i class="fa fa-search"></i>
-                        <input type="text" class="form-control" id="search-box" placeholder="Search rides ...">
+                        <i class="fa fa-search" title="<i class='fa fa-search'></i> Search-able fields include drivers' names and drop-off locations">
+                            Tips
+                        </i>
+                        <input type="text" class="form-control" id="search-box" placeholder="Search rides on Wheelzo...">
                     </div>
                 </div>                    
             </div>
