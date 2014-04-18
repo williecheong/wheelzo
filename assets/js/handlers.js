@@ -30,14 +30,6 @@
         
         $modal.find('#ride-passengers')
               .html( passengersTemplate(rideID) );
-
-        $modal.find('.ride-owner#passenger-picture').popover({
-            html        : true,
-            placement   : 'auto',
-            trigger     : 'click',
-            title       : 'Add passenger :',
-            content     : uniqueid() 
-        });
         
         $modal.find('#ride-origin')
               .html( thisRide.origin );
@@ -47,30 +39,13 @@
         
         $modal.find('#ride-dropoffs')
               .html( dropoffButtonTemplate(thisRide.drop_offs) );
-            
-        if ( thisRide.drop_offs.length > 0 ) {
-            $modal.find('#show-dropoffs').popover({
-                html        : true,
-                placement   : 'auto',
-                trigger     : 'hover',
-                title       : 'Drop-off locations :',
-                content     : dropoffContentTemplate( thisRide.drop_offs )
-            });
-        }
 
         $modal.find('#ride-comments')
               .html( commentsTemplate(thisRide.comments) );
-        
-        if ( session_id ) {
-            if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
-                $modal.find('input#write-comment').attr('placeholder', 'Write more details about your ride or respond to potential passengers');
-            } else {
-                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join this ride or ask questions to the driver');    
-            }
-        }
 
         $modal.data('rideID', rideID);
 
+        initializeRide( rideID )
         $modal.modal('toggle');
     }
 

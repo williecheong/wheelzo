@@ -45,7 +45,7 @@
                                 </a>
                             @else
                                 <a class="btn btn-primary btn-xs" id="facebook-session" href="{{ $session_url }}">
-                                    <i class="fa fa-facebook fa-lg"></i> Login with Facebook
+                                    <i class="fa fa-facebook-square fa-lg"></i> Login with Facebook
                                 </a>
                             @endif
                         </p>

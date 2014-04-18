@@ -12,14 +12,18 @@ img#driver-picture {
     max-width: 150px;
 }
 
+div.passenger-box {
+    min-height: 50px;
+}
+
 img#passenger-picture {
     width: 75%;
     max-width: 75px;
     opacity: 0.5;
 }
 
-img.ride-owner:hover {
-    opacity: 1.0 !important;
+img#passenger-picture.hoverable:hover {
+    opacity: 0.9;
 }
 
 img.brand-logo {

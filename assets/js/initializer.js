@@ -86,3 +86,28 @@
         });
 
     }
+
+    function initializeRide( rideID ) {        
+        var thisRide = rides[rideID];
+        var driver = publicUsers[ thisRide.driver_id ];
+        var $modal = $('.modal#view-ride');
+
+        if ( thisRide.drop_offs.length > 0 ) {
+            $modal.find('#show-dropoffs').popover({
+                html        : true,
+                placement   : 'auto',
+                trigger     : 'hover',
+                title       : 'Drop-off locations :',
+                content     : dropoffContentTemplate( thisRide.drop_offs )
+            });
+        }
+
+        if ( session_id ) {
+            if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
+                $modal.find('input#write-comment').attr('placeholder', 'Write more details about your ride or respond to potential passengers');
+            } else {
+                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join this ride or ask questions to the driver');    
+            }
+        }
+    }
+

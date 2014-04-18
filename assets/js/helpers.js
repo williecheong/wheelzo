@@ -79,6 +79,18 @@
 /*******************
     GENERAL HELPER FUNCTIONS
 *******************/ 
+    function fbProfile( fbID ) {
+        return '//facebook.com/' + fbID ;
+    }
+
+    function fbImage( fbID, type ) {
+        if ( type == 'square' ) {
+            return '//graph.facebook.com/'+fbID+'/picture?type=square';        
+        } else {
+            return '//graph.facebook.com/'+fbID+'/picture?width=200&height=200';
+        }
+    }
+
     /*******************
         Adapted from: 
         http://stackoverflow.com/questions/3231459/create-unique-id-with-javascript

@@ -5,8 +5,7 @@
         var html = '';
         
         var isOwner = ( rides[rideID].driver_id == session_id );
-        var ownerClass = isOwner ? ' ride-owner' : '' ;
-
+        
         var capacity = parseInt( rides[rideID].capacity );
         var colSizes = [];
         if      ( capacity == 1 ) { colSizes = [12]; } 
@@ -19,21 +18,64 @@
         else { for(var i=0; i < capacity; i++) colSizes[i] = 2; }
         var count = 0 ;
 
-        $.each(rides[rideID].passengers, function(key, value){
-            var passenger = publicUsers[value.user_id];
-            html += '<div class="col-xs-'+colSizes[count]+'">'+
-                    '    <img class="img-circle'+ownerClass+'" id="passenger-picture" data-passenger-id="'+value.user_id+'" src="//graph.facebook.com/'+passenger.facebook_id+'/picture?width=200&height=200">'+
-                    '</div>';
-            count++;
-        });
+        if ( isOwner ) {
+            var commentersHTML = listofCommentersTemplate(rides[rideID].comments);
 
-        while ( count < capacity ) {
-            html += '<div class="col-xs-'+colSizes[count]+'">'+
-                    '    <img class="img-circle'+ownerClass+'" id="passenger-picture" data-passenger-id="" src="/assets/img/empty_user.png">'+
-                    '</div>';
-            count++;
+            $.each(rides[rideID].passengers, function(key, value){
+                var passenger = publicUsers[value.user_id];
+                html += '<div class="passenger-box col-xs-'+colSizes[count]+'" data-user_ride-id="'+value.id+'">'+
+                        '    <div class="btn-group">'+                        
+                        '        <a type="button" class="btn btn-default" href="'+fbProfile(passenger.facebook_id)+'">'+
+                        '            <i class="fa fa-facebook-square"></i> ' + passenger.name +
+                        '        </a>'+
+                        '        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'+
+                        '            <span class="caret"></span>'+
+                        '            <span class="sr-only">Toggle Dropdown</span>'+
+                        '        </button>'+
+                        '        <ul class="dropdown-menu text-left" role="menu">'+
+                        '            ' + commentersHTML + 
+                        '        </ul>'+
+                        '    </div>'+
+                        '</div>';
+                count++;
+            });
+
+            while ( count < capacity ) {
+                html += '<div class="passenger-box col-xs-'+colSizes[count]+'" data-user_ride-id="">'+
+                        '    <div class="btn-group">'+                        
+                        '        <button type="button" class="btn btn-default">'+
+                        '            Empty'+
+                        '        </button>'+
+                        '        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'+
+                        '            <span class="caret"></span>'+
+                        '            <span class="sr-only">Toggle Dropdown</span>'+
+                        '        </button>'+
+                        '        <ul class="dropdown-menu text-left" role="menu">'+
+                        '            ' + commentersHTML +
+                        '        </ul>'+
+                        '    </div>'+
+                        '</div>';
+                count++;
+            }
+
+        } else {
+            $.each(rides[rideID].passengers, function(key, value){
+                var passenger = publicUsers[value.user_id];
+                html += '<div class="passenger-box col-xs-'+colSizes[count]+'">'+
+                        '    <a href="'+fbProfile(passenger.facebook_id)+'">'+
+                        '        <img class="img-circle hoverable" id="passenger-picture" src="'+fbImage(passenger.facebook_id)+'">'+
+                        '    </a>'+
+                        '</div>';
+                count++;
+            });
+
+            while ( count < capacity ) {
+                html += '<div class="passenger-box col-xs-'+colSizes[count]+'">'+
+                        '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
+                        '</div>';
+                count++;
+            }
         }
-
         return html;
     }
 
@@ -42,15 +84,15 @@
         var count = 0;
         $.each(comments, function(key, commentObject){
             html += '<div class="media">'+
-                    '    <a class="pull-left" href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'">'+
-                    '        <img class="img-rounded media-object" src="//graph.facebook.com/'+publicUsers[commentObject.user_id].facebook_id+'/picture?type=square">'+
+                    '    <a class="pull-left" href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">'+
+                    '        <img class="img-rounded media-object" src="'+fbImage(publicUsers[commentObject.user_id].facebook_id, 'square')+'">'+
                     '    </a>'+
                     '    <div class="media-body">'+
                     '        <div id="single-comment-message">'+
                     '            ' + commentObject.comment +
                     '        </div>'+
                     '        <small class="single-comment-meta">'+
-                    '            <a href="//facebook.com/'+publicUsers[commentObject.user_id].facebook_id + '">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '            <a href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
                     '        </small>'+
                     '    </div>'+
                     '</div>';
@@ -96,5 +138,35 @@
         });
         html += '</ul>';
         
+        return html;
+    }
+
+    function listofCommentersTemplate( comments ) {
+        var html = '';
+        var commenters = {};
+        var count = 0;
+
+        $.each(comments, function(key, comment){
+            commenter_id = comment.user_id;
+            commenters[commenter_id] = publicUsers[commenter_id];
+            count++;
+        });
+
+        if ( count > 0 ) {
+            $.each(commenters, function(userID, user){
+                html += '<li id="potential-passenger" data-user-id="'+userID+'">'+
+                        '    <a href="#">' + 
+                        '        ' + user.name + 
+                        '    </a>'+
+                        '</li>'; 
+            });
+        } else {
+            html += '<li class="disabled">'+
+                    '    <a href="#">' + 
+                    '        <em>Nobody yet...</em>' + 
+                    '    </a>'+
+                    '</li>';
+        }
+
         return html;
     }
