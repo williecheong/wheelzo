@@ -10,6 +10,7 @@
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <title>Wheelzo</title>
+        <link rel="image_src"  href="/assets/img/logo.png">
         <meta name="description" content="Rideshare and Carpooling for the kids in University of Waterloo">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
@@ -30,7 +31,7 @@
                 <div class="row" id="introduction">
                     <div class="col-sm-2 text-center">
                         <a href="/">
-                            <img class="brand-logo" src="/assets/img/logo.png" width="100%">
+                            <img class="brand-logo" src="/assets/img/logo.png">
                         </a>
                     </div>
                     <div class="col-sm-10">
@@ -68,7 +69,7 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="right-inner-addon">
-                        <i class="fa fa-search" title="<i class='fa fa-search'></i> Search-able fields include drivers' names and drop-off locations">
+                        <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations">
                             Tips
                         </i>
                         <input type="text" class="form-control" id="search-box" placeholder="Search rides on Wheelzo...">
@@ -151,6 +152,19 @@
             var session_id = {{ $session ? $session : 'false' }};
         </script>
         @if ( ENVIRONMENT == 'production' )
+            <!-- AddThis Smart Layers BEGIN -->
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5350e5067c994429"></script>
+            <script type="text/javascript">
+              addthis.layers({
+                'theme' : 'transparent',
+                'share' : {
+                  'position' : 'right',
+                  'services' : 'facebook,twitter,pinterest,reddit'
+                }   
+              });
+            </script>
+
+            <!-- Google Analytics -->
             <script>
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
