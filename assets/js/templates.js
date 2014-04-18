@@ -4,8 +4,6 @@
     function passengersTemplate( rideID ) {
         var html = '';
         
-        var isOwner = ( rides[rideID].driver_id == session_id );
-        
         var capacity = parseInt( rides[rideID].capacity );
         var colSizes = [];
         if      ( capacity == 1 ) { colSizes = [12]; } 
@@ -18,7 +16,7 @@
         else { for(var i=0; i < capacity; i++) colSizes[i] = 2; }
         var count = 0 ;
 
-        if ( isOwner ) {
+        if ( rides[rideID].driver_id == session_id ) { // isOwner
             var commentersHTML = listofCommentersTemplate(rides[rideID].comments);
 
             $.each(rides[rideID].passengers, function(key, value){
