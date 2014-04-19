@@ -96,7 +96,10 @@
             
             $(this).toggleClass('active');
             if ( $('.btn#filter-me').hasClass('active') ) {
+                $('img.brand-logo').addClass('img-circle').attr('src', fbImage(publicUsers[session_id].facebook_id));
                 searchTerm += ' 关于自己';
+            } else {
+                $('img.brand-logo').removeClass('img-circle').attr('src', '/assets/img/logo.png');
             }
 
             dataTable.fnFilter( searchTerm );
