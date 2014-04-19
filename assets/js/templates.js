@@ -21,12 +21,15 @@
 
             $.each(rides[rideID].passengers, function(key, value){
                 var passenger = publicUsers[value.user_id];
+                var shortName = passenger.name.split(' ');
+                shortName = shortenString( shortName[0], 7 );
+
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="'+value.id+'">'+
                         '    <div class="btn-group">'+                        
-                        '        <a type="button" class="btn btn-default" href="'+fbProfile(passenger.facebook_id)+'">'+
-                        '            <i class="fa fa-facebook-square"></i> ' + passenger.name +
+                        '        <a type="button" class="btn btn-default btn-xs" href="'+fbProfile(passenger.facebook_id)+'">'+
+                        '            <i class="fa fa-facebook-square"></i> ' + shortName +
                         '        </a>'+
-                        '        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'+
+                        '        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">'+
                         '            <span class="caret"></span>'+
                         '            <span class="sr-only">Toggle Dropdown</span>'+
                         '        </button>'+
@@ -41,10 +44,10 @@
             while ( count < capacity ) {
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="0">'+
                         '    <div class="btn-group">'+                        
-                        '        <button type="button" class="btn btn-default">'+
+                        '        <button type="button" class="btn btn-default btn-xs">'+
                         '            Empty'+
                         '        </button>'+
-                        '        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'+
+                        '        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">'+
                         '            <span class="caret"></span>'+
                         '            <span class="sr-only">Toggle Dropdown</span>'+
                         '        </button>'+

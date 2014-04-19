@@ -145,6 +145,14 @@
         }
     }
 
+    function shortenString( subject, size ) {
+        if ( subject.length > size ) {
+            return subject.substring(0, size-3) + '...';
+        } else {
+            return subject;
+        }
+    }
+
     /*******************
         Adapted from: 
         http://stackoverflow.com/questions/3231459/create-unique-id-with-javascript
