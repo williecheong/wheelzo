@@ -68,12 +68,28 @@
                     @endif
                 </div>
                 <div class="col-xs-6">
-                    <div class="right-inner-addon">
-                        <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations">
-                            Tips
-                        </i>
-                        <input type="text" class="form-control" id="search-box" placeholder="Search rides on Wheelzo...">
-                    </div>
+                    @if ( $session ) 
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" id="filter-me" title="My Rides" type="button">
+                                    <i class="fa fa-user fa-lg"></i>
+                                </button>
+                            </span>
+                            <div class="right-inner-addon">
+                                <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations">
+                                    Tips
+                                </i>
+                                <input type="text" class="form-control" id="search-box" placeholder="Search rides on Wheelzo...">
+                            </div>
+                        </div><!-- /input-group -->
+                    @else
+                        <div class="right-inner-addon">
+                            <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations">
+                                Tips
+                            </i>
+                            <input type="text" class="form-control" id="search-box" placeholder="Search rides on Wheelzo...">
+                        </div>
+                    @endif
                 </div>                    
             </div>
             <div class="table-responsive">
@@ -86,6 +102,7 @@
                             <th>Price</th>
                             <th class="ninja-header">Driver</th>
                             <th class="ninja-header">Dropoffs</th>
+                            <th class="ninja-header">isPersonal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,10 +117,21 @@
                                         </a>
                                     <?php } ?>
                                 </td>
-                                <td>{{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}</td>
-                                <td>${{ $ride->price }}</td>
+                                <td>
+                                    {{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}
+                                </td>
+                                <td>
+                                    @if ( $ride->driver_id == $session )
+                                        <i class="fa fa-user"></i> Driver
+                                    @elseif ( $ride->is_personal )
+                                        <i class="fa fa-users"></i> Passenger
+                                    @else                               
+                                        ${{ $ride->price }}
+                                    @endif
+                                </td>
                                 <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
                                 <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                                <td class="ninja-field">{{ ($ride->is_personal) ? '关于自己' : '' }}</td>
                             </tr>
                         @endforeach
                     </tbody>

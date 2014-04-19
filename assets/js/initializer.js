@@ -82,9 +82,25 @@
         });
         
         $('input#search-box').on('keyup focusout', function(){
-            dataTable.fnFilter( $(this).val() );
+            var searchTerm = $(this).val();
+            
+            if ( $('.btn#filter-me').hasClass('active') ) {
+                searchTerm += ' 关于自己';
+            }
+
+            dataTable.fnFilter( searchTerm );
         });
 
+        $('.btn#filter-me').on('click', function(){
+            var searchTerm = $('input#search-box').val();
+            
+            $(this).toggleClass('active');
+            if ( $('.btn#filter-me').hasClass('active') ) {
+                searchTerm += ' 关于自己';
+            }
+
+            dataTable.fnFilter( searchTerm );
+        });
     }
 
     function initializeRide( rideID ) {        
@@ -104,10 +120,12 @@
 
         if ( session_id ) {
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
-                $modal.find('input#write-comment').attr('placeholder', 'Write more details about your ride or respond to potential passengers');
+                $modal.find('input#write-comment').attr('placeholder', 'Write about your ride or respond to potential passengers');
             } else {
-                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join this ride or ask questions to the driver');    
+                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join or ask questions to the driver');    
             }
+
+            $('li#potential-passenger').on('click', handlePassenger);
         }
     }
 

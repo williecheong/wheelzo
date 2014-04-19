@@ -12,7 +12,7 @@ img#driver-picture {
     max-width: 150px;
 }
 
-div.passenger-box {
+div#passenger-box {
     min-height: 50px;
 }
 

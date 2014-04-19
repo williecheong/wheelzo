@@ -24,6 +24,59 @@
         });
     }
 
+    function postUser_ride( passengerID, rideID ) {
+        $.ajax({
+            url: '/api/user_rides',
+            data: {
+                "rideID" : rideID,
+                "passengerID" : passengerID
+            },
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                if ( response.status == 'success' ){
+                    refreshRides(function(){
+                        $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
+                    });
+                } else {
+                    alert(response.message);
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                console.log(response);
+            }
+        });
+    }
+
+    function putUser_ride( passengerID, user_rideID ) {
+        $.ajax({
+            url: '/api/user_rides',
+            data: {
+                "user-rideID" : user_rideID,
+                "passengerID" : passengerID
+            },
+            type: 'PUT',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if ( response.status == 'success' ){
+                    refreshRides(function(){
+                        $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
+                    });
+                } else {
+                    alert(response.message);
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                console.log(response);
+            }
+        });
+    }
+
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 

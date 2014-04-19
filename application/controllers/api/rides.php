@@ -9,7 +9,7 @@ class Rides extends REST_Controller {
     }
 
     public function index_get() {
-        $rides = $this->ride->retrieve_active();
+        $rides = $this->ride->retrieve_relevant();
         echo json_encode($rides);
         return;
     }

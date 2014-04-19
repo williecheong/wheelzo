@@ -54,7 +54,7 @@ class Main extends CI_Controller {
         $this->blade->render('main', 
             array(
                 'users' => $temp_users,
-                'rides' => $this->ride->retrieve_active(),
+                'rides' => $this->ride->retrieve_relevant(),
                 'session' => $this->session->userdata('user_id'),
                 'session_url' => $this->facebook_url
             )

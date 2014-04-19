@@ -127,6 +127,20 @@
         });
     }
 
+    handlePassenger = function ( event ) {
+        var $listItem = $(this);
+        var passengerID = $listItem.attr('data-user-id');
+        var user_rideID = $listItem.closest('div#passenger-box').attr('data-user_ride-id');
+
+        if ( user_rideID > 0 ) {
+            putUser_ride(passengerID, user_rideID);
+        } else {
+            var $modal = $listItem.closest('.modal');
+            var rideID = $modal.data('rideID');
+            postUser_ride(passengerID, rideID);
+        }
+    }
+
     saveFeedback = function( event ) {
             var $button = $(this);
             $button.addClass('disabled');

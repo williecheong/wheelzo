@@ -21,7 +21,7 @@
 
             $.each(rides[rideID].passengers, function(key, value){
                 var passenger = publicUsers[value.user_id];
-                html += '<div class="passenger-box col-xs-'+colSizes[count]+'" data-user_ride-id="'+value.id+'">'+
+                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="'+value.id+'">'+
                         '    <div class="btn-group">'+                        
                         '        <a type="button" class="btn btn-default" href="'+fbProfile(passenger.facebook_id)+'">'+
                         '            <i class="fa fa-facebook-square"></i> ' + passenger.name +
@@ -39,7 +39,7 @@
             });
 
             while ( count < capacity ) {
-                html += '<div class="passenger-box col-xs-'+colSizes[count]+'" data-user_ride-id="">'+
+                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="0">'+
                         '    <div class="btn-group">'+                        
                         '        <button type="button" class="btn btn-default">'+
                         '            Empty'+
@@ -56,10 +56,10 @@
                 count++;
             }
 
-        } else {
+        } else { // is not owner
             $.each(rides[rideID].passengers, function(key, value){
                 var passenger = publicUsers[value.user_id];
-                html += '<div class="passenger-box col-xs-'+colSizes[count]+'">'+
+                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
                         '    <a href="'+fbProfile(passenger.facebook_id)+'">'+
                         '        <img class="img-circle hoverable" id="passenger-picture" src="'+fbImage(passenger.facebook_id)+'">'+
                         '    </a>'+
@@ -68,7 +68,7 @@
             });
 
             while ( count < capacity ) {
-                html += '<div class="passenger-box col-xs-'+colSizes[count]+'">'+
+                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
                         '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
                         '</div>';
                 count++;

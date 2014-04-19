@@ -2,6 +2,13 @@
 
 class user_ride extends CI_Model{
     
+    function retrieve_ride_id( $data = array() ) {
+        $this->db->select('ride_id');
+        $this->db->where($data);
+        $query = $this->db->get('user_ride');
+        return $query->result();
+    }
+
     // BEGIN BASIC CRUD FUNCTIONALITY
 
     function create( $data = array() ){
