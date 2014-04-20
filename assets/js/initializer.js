@@ -87,7 +87,7 @@
             "sDom" : ''
         });
         
-        $('input#search-box').on('keyup focusout', function(){
+        $('input#search-box').on('keyup focusout change', function(){
             var searchTerm = $(this).val();
             
             if ( $('.btn#filter-me').hasClass('active') ) {
@@ -110,6 +110,11 @@
 
             dataTable.fnFilter( searchTerm );
         });
+
+        if ( loadSearch ) {
+            $('input#search-box').val( loadSearch );
+            $('input#search-box').trigger('focusout');
+        }
 
         if ( loadPersonal ) {
             $('.btn#filter-me').trigger('click');

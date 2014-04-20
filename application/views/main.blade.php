@@ -185,6 +185,7 @@
             var publicUsers = {{ json_encode($users) }} ;
             var session_id = {{ $session ? $session : 'false' }};
             var loadPersonal = {{ $load_personal ? "true" : "false" }};
+            var loadSearch = {{ $load_search ? $load_search : "false" }};
         </script>
         @if ( ENVIRONMENT == 'production' )
             <!-- AddThis Smart Layers BEGIN -->
