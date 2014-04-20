@@ -41,7 +41,7 @@ class Main extends CI_Controller {
         }
     }
     
-	public function index() {
+	public function index( $load_personal = false ) {
         // Use user ID as the index key
         $temp_users = array();
         $users = $this->user->retrieve();
@@ -56,7 +56,8 @@ class Main extends CI_Controller {
                 'users' => $temp_users,
                 'rides' => $this->ride->retrieve_relevant(),
                 'session' => $this->session->userdata('user_id'),
-                'session_url' => $this->facebook_url
+                'session_url' => $this->facebook_url,
+                'load_personal' => $load_personal
             )
         );
     }

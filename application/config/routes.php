@@ -14,5 +14,7 @@ $route['404_override'] = 'lost';
 | -------------------------------------------------------------------------
 */
 
+$route['me'] = "main/index/true";
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

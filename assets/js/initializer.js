@@ -104,6 +104,10 @@
 
             dataTable.fnFilter( searchTerm );
         });
+
+        if ( loadPersonal ) {
+            $('.btn#filter-me').trigger('click');
+        }
     }
 
     function initializeRide( rideID ) {        

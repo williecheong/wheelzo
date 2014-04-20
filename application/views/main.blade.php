@@ -178,6 +178,7 @@
             var rides = {{ json_encode($rides) }} ;
             var publicUsers = {{ json_encode($users) }} ;
             var session_id = {{ $session ? $session : 'false' }};
+            var loadPersonal = {{ $load_personal ? "true" : "false" }};
         </script>
         @if ( ENVIRONMENT == 'production' )
             <!-- AddThis Smart Layers BEGIN -->
