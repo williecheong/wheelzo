@@ -87,7 +87,7 @@
             "sDom" : ''
         });
         
-        $('input#search-box').on('keyup focusout change', function(){
+        $('input#search-box').on('keyup focusout', function(){
             var searchTerm = $(this).val();
             
             if ( $('.btn#filter-me').hasClass('active') ) {
