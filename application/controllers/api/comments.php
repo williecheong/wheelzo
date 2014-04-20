@@ -86,7 +86,7 @@ class Comments extends REST_Controller {
                         echo json_encode(
                             array(
                                 'status' => 'success',
-                                'message' => 'Comment successfully posted.',
+                                'message' => 'Comment successfully posted1.',
                                 'comment' => $comment
                             )
                         );   
@@ -95,7 +95,7 @@ class Comments extends REST_Controller {
                     echo json_encode(
                         array(
                             'status' => 'success',
-                            'message' => 'Comment successfully posted.',
+                            'message' => 'Comment successfully posted2.',
                             'comment' => $comment
                         )
                     );            
