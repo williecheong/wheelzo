@@ -61,7 +61,7 @@ class Comments extends REST_Controller {
                     );
 
                     $fb_response = false;
-                    try {
+                    // try {
                         $fb_response = $this->facebook->api(
                             '/' . $driver[0]->facebook_id . '/notifications', 
                             'POST', 
@@ -70,9 +70,9 @@ class Comments extends REST_Controller {
                                 'template' => $commenter[0]->name . ' commented on your ride in Wheelzo.'
                             )
                         );
-                    } catch ( Exception $e ) {
-                        log_message('error', $e->getMessage() );
-                    }
+                    // } catch ( Exception $e ) {
+                    //     log_message('error', $e->getMessage() );
+                    // }
                     
                     if ( $fb_response ) {
                         echo json_encode(
