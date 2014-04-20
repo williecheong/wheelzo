@@ -29,16 +29,16 @@
             <div class="row">
                 <div class="row text-center">
                     <div class="col-sm-12">
-                        <a href="/me" target="wheelzo_window">
+                        <a href="{{ $ride_link }}" target="wheelzo_window">
                             <img src="/assets/img/logo.png" style="width:80%; max-width:400px;">
                         </a>
                     </div>
                     <div class="col-sm-12">
                         <h1>
-                            <a href="/me" target="wheelzo_window">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
+                            <a href="{{ $ride_link }}" target="wheelzo_window">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
                         </h1>
                         <h4>
-                            <a href="/me">
+                            <a href="{{ $ride_link }}">
                                 <i class="fa fa-facebook-square"></i> Stay on Facebook
                             </a>                    
                         </h4>

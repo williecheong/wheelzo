@@ -27,6 +27,15 @@ class Fb extends CI_Controller {
     }
     
     public function index() {
-        $this->blade->render('fb_landing');
+        $go_to_ride = '';
+        if ( $this->input->get('goto') ) {
+            $go_to_ride = $this->input->get('goto');
+        }
+
+        $this->blade->render('fb_landing',
+            array(
+                'ride_link' => '/me?search=' . encode_to_chinese($go_to_ride)
+            )
+        );
     }
 }

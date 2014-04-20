@@ -66,7 +66,7 @@ class User_rides extends REST_Controller {
                                     '/' . $passenger[0]->facebook_id . '/notifications', 
                                     'POST', 
                                     array(
-                                        'href' => '/fb', 
+                                        'href' => '/fb?goto='.$ride->id, 
                                         'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                         'access_token' => FB_APPID . '|' . FB_SECRET
                                     )
@@ -190,7 +190,7 @@ class User_rides extends REST_Controller {
                                 '/' . $passenger[0]->facebook_id . '/notifications', 
                                 'POST', 
                                 array(
-                                    'href' => '/fb', 
+                                    'href' => '/fb?goto='.$ride->id, 
                                     'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                     'access_token' => FB_APPID . '|' . FB_SECRET
                                 )
