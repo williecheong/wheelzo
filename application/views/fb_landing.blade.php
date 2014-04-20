@@ -29,14 +29,19 @@
             <div class="row">
                 <div class="row text-center">
                     <div class="col-sm-12">
-                        <a href="/me">
+                        <a href="/me" target="wheelzo_window">
                             <img src="/assets/img/logo.png" style="width:80%; max-width:400px;">
                         </a>
                     </div>
                     <div class="col-sm-12">
                         <h1>
-                            <a href="/me">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
+                            <a href="/me" target="wheelzo_window">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
                         </h1>
+                        <h4>
+                            <a href="/me">
+                                <i class="fa fa-facebook-square"></i> Stay on Facebook
+                            </a>                    
+                        </h4>
                     </div>
                 </div>                   
             </div>
@@ -45,7 +50,7 @@
             <footer>
                 <hr>
                 <p class="text-center">
-                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
+                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo" target="uw_window">uWaterloo</a>
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }}
                 </p>
