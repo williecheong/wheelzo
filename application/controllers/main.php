@@ -34,7 +34,7 @@ class Main extends CI_Controller {
         } else {
             $this->facebook_url = $this->facebook->getLoginUrl(
                 array(
-                    "scope" => "email",
+                    "scope" => "email,manage_notifications",
                     "display" => "page"
                 )
             );
