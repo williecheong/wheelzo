@@ -86,7 +86,7 @@ class User_rides extends REST_Controller {
                                 echo json_encode(
                                     array(
                                         'status' => 'success',
-                                        'message' => 'Passenger successfully posted.',
+                                        'message' => 'Passenger successfully posted. Passenger could not be notified on Facebook.',
                                         'user_ride' => $user_ride
                                     )
                                 );   
