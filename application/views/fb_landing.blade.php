@@ -29,13 +29,13 @@
             <div class="row">
                 <div class="row text-center">
                     <div class="col-sm-12">
-                        <a href="/">
+                        <a href="/me">
                             <img src="/assets/img/logo.png" style="width:80%; max-width:400px;">
                         </a>
                     </div>
                     <div class="col-sm-12">
                         <h1>
-                            <a href="/">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
+                            <a href="/me">Enter</a> Wheelzo v{{ CURRENT_VERSION }}                    
                         </h1>
                     </div>
                 </div>                   
