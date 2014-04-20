@@ -142,12 +142,14 @@
             <!-- Footer -->
             <footer>
                 <hr>
-                <span>
-                    &copy; Wheelzo v{{ CURRENT_VERSION }}    
-                </span>
-                <small>
-                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca">uWaterloo</a>
-                </small>
+                <p>
+                    &copy; Wheelzo v{{ CURRENT_VERSION }} - 
+                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
+                    <br>
+                    <small>
+                        <i class="fa fa-lock"></i> Verified secure by <a href="http://www.startssl.com/" title="SSL Secured By StartCom">StartSSL</a>
+                    </small>
+                </p>
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
