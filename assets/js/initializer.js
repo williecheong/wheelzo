@@ -111,13 +111,19 @@
             dataTable.fnFilter( searchTerm );
         });
 
-        if ( loadSearch ) {
-            $('input#search-box').val( loadSearch );
-            $('input#search-box').trigger('focusout');
-        }
 
-        if ( loadPersonal ) {
-            $('.btn#filter-me').trigger('click');
+        if ( loadRide ) {
+            dataTable.fnFilter( loadRide )
+            $('tr[data-ride-id]').trigger('click');
+        } else {
+            if ( loadSearch ) {
+                $('input#search-box').val( loadSearch );
+                $('input#search-box').trigger('focusout');
+            }
+
+            if ( loadPersonal ) {
+                $('.btn#filter-me').trigger('click');
+            }
         }
     }
 

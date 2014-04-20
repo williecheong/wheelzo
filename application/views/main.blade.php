@@ -188,6 +188,7 @@
             var session_id = {{ $session ? $session : 'false' }};
             var loadPersonal = {{ $load_personal ? "true" : "false" }};
             var loadSearch = {{ $load_search ? '"'.$load_search.'"' : "false" }};
+            var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
         </script>
         @if ( ENVIRONMENT == 'production' )
             <!-- AddThis Smart Layers BEGIN -->

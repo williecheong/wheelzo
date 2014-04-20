@@ -58,7 +58,8 @@ class Main extends CI_Controller {
                 'session' => $this->session->userdata('user_id'),
                 'session_url' => $this->facebook_url,
                 'load_personal' => $load_personal,
-                'load_search' => $this->input->get('search')
+                'load_search' => $this->input->get('search'),
+                'request_ride_id' => $this->input->get('ride')
             )
         );
     }
