@@ -157,20 +157,74 @@ class User_rides extends REST_Controller {
                         )
                     );
 
-                    $user_ride = $this->user_ride->retrieve(
+                    $user_rides = $this->user_ride->retrieve(
                         array(
                             'id' => $user_ride_id
                         )
                     );
-                    
-                    echo json_encode(
+                    $user_ride = $user_rides[0];
+
+                    $rides = $this->ride->retrieve(
                         array(
-                            'status' => 'success',
-                            'message' => 'Passenger successfully updated.',
-                            'user_ride' => $user_ride[0]
+                            'id' => $user_ride->ride_id
                         )
                     );
-                
+                    
+                    $ride = $rides[0];
+                    if ( $ride->driver_id != $user_ride->user_id ) {
+                        $driver = $this->user->retrieve(
+                            array(
+                                'id' => $ride->driver_id
+                            )
+                        );
+
+                        $passenger = $this->user->retrieve(
+                            array(
+                                'id' => $user_ride->user_id
+                            )
+                        );
+
+                        $fb_response = false;
+                        try {
+                            $fb_response = $this->facebook->api(
+                                '/' . $passenger[0]->facebook_id . '/notifications', 
+                                'POST', 
+                                array(
+                                    'href' => base_url('me'), 
+                                    'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride on Wheelzo.',
+                                    'access_token' => FB_APPID . '|' . FB_SECRET
+                                )
+                            );
+                        } catch ( Exception $e ) {
+                            log_message('error', $e->getMessage() );
+                        }
+                        
+                        if ( $fb_response ) {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Passenger successfully updated. Passenger notified on Facebook.',
+                                    'user_ride' => $user_ride
+                                )
+                            );
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Passenger successfully updated. Passenger could not be notified on Facebook.',
+                                    'user_ride' => $user_ride
+                                )
+                            );   
+                        }
+                    } else {
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Passenger successfully updated.',
+                                'user_ride' => $user_ride
+                            )
+                        );
+                    }                
                 } else {
                     echo json_encode(
                         array(
