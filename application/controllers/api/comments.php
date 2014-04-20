@@ -66,7 +66,7 @@ class Comments extends REST_Controller {
                             '/' . $driver[0]->facebook_id . '/notifications', 
                             'POST', 
                             array(
-                                'href' => base_url('me/test'), 
+                                /*'href' => base_url('me/test'),*/
                                 'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride in Wheelzo.',
                                 'access_token' => FB_APPID . '|' . FB_SECRET
                             )
