@@ -67,7 +67,7 @@ class User_rides extends REST_Controller {
                                     'POST', 
                                     array(
                                         'href' => '/fb', 
-                                        'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride on Wheelzo.',
+                                        'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                         'access_token' => FB_APPID . '|' . FB_SECRET
                                     )
                                 );
