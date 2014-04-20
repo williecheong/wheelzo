@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'typography', 'blade');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'date', 'text');
+$autoload['helper'] = array('url', 'date', 'text', 'wheelzo');
 
 
 /*

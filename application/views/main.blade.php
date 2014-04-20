@@ -103,6 +103,7 @@
                             <th class="ninja-header">Driver</th>
                             <th class="ninja-header">Dropoffs</th>
                             <th class="ninja-header">isPersonal</th>
+                            <th class="ninja-header">Encoded ID</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -132,6 +133,7 @@
                                 <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
                                 <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
                                 <td class="ninja-field">{{ ($ride->is_personal) ? '关于自己' : '' }}</td>
+                                <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
