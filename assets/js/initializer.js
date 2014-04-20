@@ -51,7 +51,13 @@
 
         // Initializing qtip for better tooltips
         $('[title!=""]').qtip({
-            position: { my: 'top right', at: 'bottom right' }
+            style: {
+                classes: 'qtip-dark qtip-shadow qtip-rounded nowrap'
+            },
+            position: { 
+                my: 'top right', 
+                at: 'bottom right' 
+            }
         });
 
         // Initializing datepickers

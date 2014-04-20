@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/basic/jquery.qtip.min.css">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css">
         <link rel="stylesheet" href="/assets/css/main.css">
         <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
@@ -150,6 +150,8 @@
                         <i class="fa fa-lock"></i> Verified secure by <a href="http://www.startssl.com/" title="SSL Secured By StartCom">StartSSL</a>
                     </small>
                 </p>
+                <br>
+                <br>
             </footer><!-- /.footer -->
         </div><!-- /container -->
         
@@ -165,10 +167,10 @@
         ?>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/basic/jquery.qtip.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>

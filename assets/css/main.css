@@ -67,6 +67,12 @@ textarea {
     padding: 10px 12px;
 }
 
+/* Single lined qtips that don't wrap */
+.nowrap, .nowrap .qtip-content{
+    white-space: nowrap;
+    max-width: none;
+}
+
 /* Sortable icons beside table headers */
 th.sorting_asc:before {
     content: "\f0d8";
