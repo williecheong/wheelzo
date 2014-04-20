@@ -6,6 +6,13 @@ class Comments extends REST_Controller {
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => FB_APPID, 
+                "secret" => FB_SECRET
+            )
+        );
     }
 
     public function index_post() {
@@ -14,29 +21,93 @@ class Comments extends REST_Controller {
 
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
             $comment = isset($data['comment']) ? $data['comment'] : '';
-            
-            $comment_id = $this->comment->create(  
-                array(  
-                    'user_id' => $this->session->userdata('user_id'),
-                    'ride_id' => $ride_id,
-                    'comment' => $comment
-                )
-            );
 
-            $comment = $this->comment->retrieve(
+            $rides = $this->ride->retrieve(
                 array(
-                    'id' => $comment_id
+                    'id' => $ride_id
                 )
             );
             
-            echo json_encode(
-                array(
-                    'status' => 'success',
-                    'message' => 'Comment successfully posted.',
-                    'comment' => $comment[0]
-                )
-            );
-    
+            if ( count($rides) > 0 ) {
+                $ride = $rides[0];
+
+                $comment_id = $this->comment->create(  
+                    array(  
+                        'user_id' => $this->session->userdata('user_id'),
+                        'ride_id' => $ride_id,
+                        'comment' => $comment
+                    )
+                );
+
+                $comments = $this->comment->retrieve(
+                    array(
+                        'id' => $comment_id
+                    )
+                );
+
+                $comment = $comments[0];
+
+                if ( $ride->driver_id != $comment->user_id ) { // commenter is not driver
+                    $driver = $this->user->retrieve(
+                        array(
+                            'id' => $ride->driver_id
+                        )
+                    );
+
+                    $commenter = $this->user->retrieve(
+                        array(
+                            'id' => $comment->user_id
+                        )
+                    );
+
+                    $fb_response = false;
+                    try {
+                        $fb_response = $this->facebook->api(
+                            '/' . $driver[0]->facebook_id . '/notifications', 
+                            'POST', 
+                            array(
+                                'href' => base_url('me'), 
+                                'template' => $commenter[0]->name . ' commented on your ride in Wheelzo.'
+                            )
+                        );
+                    } catch ( Exception $e ) {
+                        log_message('error', $e->getMessage() );
+                    }
+                    
+                    if ( $fb_response ) {
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Comment successfully posted. Driver notified on Facebook.',
+                                'comment' => $comment
+                            )
+                        );
+                    } else {
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Comment successfully posted.',
+                                'comment' => $comment
+                            )
+                        );   
+                    }
+                } else {
+                    echo json_encode(
+                        array(
+                            'status' => 'success',
+                            'message' => 'Comment successfully posted.',
+                            'comment' => $comment
+                        )
+                    );            
+                }   
+            } else {
+                echo json_encode(
+                    array(
+                        'status' => 'fail',
+                        'message' => 'Ride does not exist.'
+                    )
+                );
+            }
         } else {
             echo json_encode(
                 array(

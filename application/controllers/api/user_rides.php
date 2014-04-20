@@ -6,6 +6,13 @@ class User_rides extends REST_Controller {
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => FB_APPID, 
+                "secret" => FB_SECRET
+            )
+        );
     }
 
     public function index_post() {
@@ -26,19 +33,73 @@ class User_rides extends REST_Controller {
                                 'ride_id' => $ride_id
                             )
                         );
-                        $user_ride = $this->user_ride->retrieve(
+                        $user_rides = $this->user_ride->retrieve(
                             array(
                                 'id' => $user_ride_id
                             )
                         );
-                        
-                        echo json_encode(
+                        $user_ride = $user_rides[0];
+
+                        $rides = $this->ride->retrieve(
                             array(
-                                'status' => 'success',
-                                'message' => 'Passenger successfully posted.',
-                                'user_ride' => $user_ride[0]
+                                'id' => $ride_id
                             )
                         );
+
+                        $ride = $rides[0];
+                        if ( $ride->driver_id != $user_ride->user_id ) {
+                            $driver = $this->user->retrieve(
+                                array(
+                                    'id' => $ride->driver_id
+                                )
+                            );
+
+                            $passenger = $this->user->retrieve(
+                                array(
+                                    'id' => $user_ride->user_id
+                                )
+                            );
+
+                            $fb_response = false;
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $passenger[0]->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => base_url('me'), 
+                                        'template' => $driver[0]->name . ' added you a ride on Wheelzo.'
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+                            
+                            if ( $fb_response ) {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Passenger successfully posted. Passenger notified on Facebook.',
+                                        'user_ride' => $user_ride
+                                    )
+                                );
+                            } else {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Passenger successfully posted.',
+                                        'user_ride' => $user_ride
+                                    )
+                                );   
+                            }
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Passenger successfully posted.',
+                                    'user_ride' => $user_ride
+                                )
+                            );
+                        }
                     } else {
                         echo json_encode(
                             array(
