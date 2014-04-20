@@ -9,17 +9,20 @@ $( document ).ready(function() {
 *******************/
     var defaultSuggestedPlaces = [
         "Waterloo, UW Davis Center",
-        "Mississauga, Square One",
-        "Toronto, North York",
-        "Toronto, Union Square",
+        "Waterloo, University Plaza",
+        "Kitchener, St. Charles Terminal",
+        "Toronto, Sheppard/Yonge subway station",
         "Toronto, Finch/Yonge subway station",
-        "Toronto, Yorkdale Mall",
-        "Toronto, York University",
         "Toronto, Downsview subway station",
+        "Toronto, Don Mills station",
+        "Toronto, York University",
+        "Toronto, Yorkdale Mall",
+        "Toronto, Eaton Center",
+        "Toronto, Union Station",
+        "Toronto, Pearson Airport",
+        "Scarborough, Scarborough Town Center",
+        "Mississauga, Square One",
         "Markham, Pacific Mall",
-        "Markham, Don Mills subway station",
         "Richmond Hill",
-        "Scarborough",
-        "Markham",
         "Vaughan"
     ];
