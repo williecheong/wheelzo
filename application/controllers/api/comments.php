@@ -95,7 +95,7 @@ class Comments extends REST_Controller {
                     echo json_encode(
                         array(
                             'status' => 'success',
-                            'message' => 'Comment successfully posted2.',
+                            'message' => 'Comment successfully posted.',
                             'comment' => $comment
                         )
                     );            
