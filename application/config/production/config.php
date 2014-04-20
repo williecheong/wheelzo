@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] = 'http://wheelzo.com';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
