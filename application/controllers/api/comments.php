@@ -67,7 +67,7 @@ class Comments extends REST_Controller {
                             'POST', 
                             array(
                                 'href' => '/fb?goto='.$ride->id,
-                                'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride that is scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                 'access_token' => FB_APPID . '|' . FB_SECRET
                             )
                         );
