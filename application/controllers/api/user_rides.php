@@ -60,37 +60,55 @@ class User_rides extends REST_Controller {
                                 )
                             );
 
-                            $fb_response = false;
-                            try {
-                                $fb_response = $this->facebook->api(
-                                    '/' . $passenger[0]->facebook_id . '/notifications', 
-                                    'POST', 
-                                    array(
-                                        'href' => '/fb?goto='.$ride->id, 
-                                        'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                        'access_token' => FB_APPID . '|' . FB_SECRET
-                                    )
-                                );
-                            } catch ( Exception $e ) {
-                                log_message('error', $e->getMessage() );
-                            }
-                            
-                            if ( $fb_response ) {
-                                echo json_encode(
-                                    array(
-                                        'status' => 'success',
-                                        'message' => 'Passenger successfully posted. Passenger notified on Facebook.',
-                                        'user_ride' => $user_ride
-                                    )
-                                );
+                            $assignments_since_last_login = $this->user_ride->retrieve( 
+                                array(
+                                    'ride_id' => $ride->id, 
+                                    'user_id' => $passenger[0]->id,
+                                    'last_updated >' => $passenger[0]->last_updated 
+                                )
+                            );
+
+                            if ( count($assignments_since_last_login) == 1 ) {
+                                $fb_response = false;
+                                try {
+                                    $fb_response = $this->facebook->api(
+                                        '/' . $passenger[0]->facebook_id . '/notifications', 
+                                        'POST', 
+                                        array(
+                                            'href' => '/fb?goto='.$ride->id, 
+                                            'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                            'access_token' => FB_APPID . '|' . FB_SECRET
+                                        )
+                                    );
+                                } catch ( Exception $e ) {
+                                    log_message('error', $e->getMessage() );
+                                }
+                                
+                                if ( $fb_response ) {
+                                    echo json_encode(
+                                        array(
+                                            'status' => 'success',
+                                            'message' => 'Passenger successfully posted. Passenger notified on Facebook.',
+                                            'user_ride' => $user_ride
+                                        )
+                                    );
+                                } else {
+                                    echo json_encode(
+                                        array(
+                                            'status' => 'success',
+                                            'message' => 'Passenger successfully posted. Passenger could not be notified on Facebook.',
+                                            'user_ride' => $user_ride
+                                        )
+                                    );   
+                                }
                             } else {
                                 echo json_encode(
                                     array(
                                         'status' => 'success',
-                                        'message' => 'Passenger successfully posted. Passenger could not be notified on Facebook.',
+                                        'message' => 'Passenger successfully updated. Passenger already notified on Facebook.',
                                         'user_ride' => $user_ride
                                     )
-                                );   
+                                );
                             }
                         } else {
                             echo json_encode(
@@ -184,37 +202,55 @@ class User_rides extends REST_Controller {
                             )
                         );
 
-                        $fb_response = false;
-                        try {
-                            $fb_response = $this->facebook->api(
-                                '/' . $passenger[0]->facebook_id . '/notifications', 
-                                'POST', 
-                                array(
-                                    'href' => '/fb?goto='.$ride->id, 
-                                    'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                    'access_token' => FB_APPID . '|' . FB_SECRET
-                                )
-                            );
-                        } catch ( Exception $e ) {
-                            log_message('error', $e->getMessage() );
-                        }
-                        
-                        if ( $fb_response ) {
-                            echo json_encode(
-                                array(
-                                    'status' => 'success',
-                                    'message' => 'Passenger successfully updated. Passenger notified on Facebook.',
-                                    'user_ride' => $user_ride
-                                )
-                            );
+                        $assignments_since_last_login = $this->user_ride->retrieve( 
+                            array(
+                                'ride_id' => $ride->id, 
+                                'user_id' => $passenger[0]->id,
+                                'last_updated >' => $passenger[0]->last_updated 
+                            )
+                        );
+
+                        if ( count($assignments_since_last_login) == 1 ) {
+                            $fb_response = false;
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $passenger[0]->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb?goto='.$ride->id, 
+                                        'template' => '@[' . $driver[0]->facebook_id . '] added you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+                            
+                            if ( $fb_response ) {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Passenger successfully updated. Passenger notified on Facebook.',
+                                        'user_ride' => $user_ride
+                                    )
+                                );
+                            } else {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Passenger successfully updated. Passenger could not be notified on Facebook.',
+                                        'user_ride' => $user_ride
+                                    )
+                                );   
+                            }
                         } else {
                             echo json_encode(
                                 array(
                                     'status' => 'success',
-                                    'message' => 'Passenger successfully updated. Passenger could not be notified on Facebook.',
+                                    'message' => 'Passenger successfully updated. Passenger already notified on Facebook.',
                                     'user_ride' => $user_ride
                                 )
-                            );   
+                            );
                         }
                     } else {
                         echo json_encode(
