@@ -63,10 +63,10 @@ class Comments extends REST_Controller {
                     $comments_since_last_login = $this->comment->retrieve( 
                         array(
                             'ride_id' => $ride->id, 
-                            'last_updated > ' => $driver[0]->last_updated 
+                            'last_updated >' => $driver[0]->last_updated 
                         )
                     );
-
+                    
                     if ( count($comments_since_last_login) == 0 ) {
                         $fb_response = false;
                         try {
