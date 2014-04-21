@@ -214,9 +214,9 @@ class User_rides extends REST_Controller {
                             }
                             
                             if ( $fb_response_to_old ) {
-                                $output['message'] .= $old_passenger[0]->name." successfully removed and notified on Facebook.\n";
+                                $output['message'] .= $old_passenger[0]->name." successfully removed and notified on Facebook.";
                             } else {
-                                $output['message'] .= $old_passenger[0]->name." successfully removed but could not be notified on Facebook.\n";
+                                $output['message'] .= $old_passenger[0]->name." successfully removed but could not be notified on Facebook.";
                             }
                         } else {
                             // This driver just removed himself from his own ride. No need to notify.
@@ -244,6 +244,10 @@ class User_rides extends REST_Controller {
                                 log_message('error', $e->getMessage() );
                             }
                             
+                            if ( $output['message'] != '' ) {
+                                $output['message'] .= "\n";    
+                            }   
+
                             if ( $fb_response_to_new ) {
                                 $output['message'] .= $new_passenger[0]->name." successfully added and notified on Facebook.";
                             } else {
