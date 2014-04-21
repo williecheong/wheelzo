@@ -66,7 +66,10 @@ class Comments extends REST_Controller {
                             'last_updated >' => $driver[0]->last_updated 
                         )
                     );
-                    
+
+                    var_dump($comments_since_last_login);
+                    die();
+
                     if ( count($comments_since_last_login) == 0 ) {
                         $fb_response = false;
                         try {
