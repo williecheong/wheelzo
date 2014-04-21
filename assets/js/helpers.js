@@ -39,8 +39,6 @@
                     refreshRides(function(){
                         $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
                     });
-                } else {
-                    alert(response.message);
                 }
             }, 
             error: function(response) {
@@ -66,8 +64,6 @@
                     refreshRides(function(){
                         $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
                     });
-                } else {
-                    alert(response.message);
                 }
             }, 
             error: function(response) {

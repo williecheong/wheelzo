@@ -115,7 +115,6 @@
                     });
 
                 } else {
-                    alert(response.message);
                     $button.removeClass('disabled');
                 }
             }, 
