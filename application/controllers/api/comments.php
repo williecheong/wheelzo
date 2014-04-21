@@ -60,37 +60,54 @@ class Comments extends REST_Controller {
                         )
                     );
 
-                    $fb_response = false;
-                    try {
-                        $fb_response = $this->facebook->api(
-                            '/' . $driver[0]->facebook_id . '/notifications', 
-                            'POST', 
-                            array(
-                                'href' => '/fb?goto='.$ride->id,
-                                'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                'access_token' => FB_APPID . '|' . FB_SECRET
-                            )
-                        );
-                    } catch ( Exception $e ) {
-                        log_message('error', $e->getMessage() );
-                    }
+                    $comments_since_last_login = $this->comment->retrieve( 
+                        array(
+                            'ride_id' => $ride->id, 
+                            'last_updated >' => $driver->last_updated 
+                        )
+                    );
 
-                    if ( $fb_response ) {
-                        echo json_encode(
-                            array(
-                                'status' => 'success',
-                                'message' => 'Comment successfully posted. Driver notified on Facebook.',
-                                'comment' => $comment
-                            )
-                        );
+                    if ( count($comments_since_last_login) == 0 ) {
+                        $fb_response = false;
+                        try {
+                            $fb_response = $this->facebook->api(
+                                '/' . $driver[0]->facebook_id . '/notifications', 
+                                'POST', 
+                                array(
+                                    'href' => '/fb?goto='.$ride->id,
+                                    'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                    'access_token' => FB_APPID . '|' . FB_SECRET
+                                )
+                            );
+                        } catch ( Exception $e ) {
+                            log_message('error', $e->getMessage() );
+                        }
+
+                        if ( $fb_response ) {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Comment successfully posted. Driver notified on Facebook.',
+                                    'comment' => $comment
+                                )
+                            );
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Comment successfully posted. Driver could not be notified on Facebook.',
+                                    'comment' => $comment
+                                )
+                            );   
+                        }                        
                     } else {
                         echo json_encode(
                             array(
                                 'status' => 'success',
-                                'message' => 'Comment successfully posted. Driver could not be notified on Facebook.',
+                                'message' => 'Comment successfully posted. Driver already notified on Facebook.',
                                 'comment' => $comment
                             )
-                        );   
+                        );
                     }
                 } else {
                     echo json_encode(
