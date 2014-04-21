@@ -63,7 +63,7 @@ class Comments extends REST_Controller {
                     $comments_since_last_login = $this->comment->retrieve( 
                         array(
                             'ride_id' => $ride->id, 
-                            'last_updated >' => $driver->last_updated 
+                            'last_updated > ' => $driver[0]->last_updated 
                         )
                     );
 
