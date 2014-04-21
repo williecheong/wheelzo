@@ -147,15 +147,15 @@ class User_rides extends REST_Controller {
             
             if ( $this->_verify_driver_by_user_ride( $user_ride_id, $driver_id) ) {
                 if ( $this->_verify_passenger_by_user_ride( $user_ride_id, $passenger_id) ) {
-                    $user_rides = $this->user_ride->retrieve(
+                    $old_user_rides = $this->user_ride->retrieve(
                         array(
                             'id' => $user_ride_id
                         )
                     );
 
-                    $user_ride = $user_rides[0];
+                    $old_user_ride = $old_user_rides[0];
 
-                    if ( $user_ride->user_id != $passenger_id ) {
+                    if ( $old_user_ride->user_id != $passenger_id ) {
                         $this->user_ride->update(
                             array(
                                 'id' => $user_ride_id
@@ -177,25 +177,62 @@ class User_rides extends REST_Controller {
                                 'id' => $user_ride->ride_id
                             )
                         );
-                        
                         $ride = $rides[0];
-                        if ( $ride->driver_id != $user_ride->user_id ) {
-                            $driver = $this->user->retrieve(
+
+                        $driver = $this->user->retrieve(
+                            array(
+                                'id' => $ride->driver_id
+                            )
+                        );
+
+                        $output = array(
+                            'status' => 'success',
+                            'message' => '',
+                            'user_ride' => $user_ride
+                        );
+
+                        if ( $ride->driver_id != $old_user_ride->user_id ) {
+                            $old_passenger = $this->user->retrieve(
                                 array(
-                                    'id' => $ride->driver_id
+                                    'id' => $old_user_ride->user_id
                                 )
                             );
 
-                            $passenger = $this->user->retrieve(
+                            $fb_response_to_old = false;
+                            try {
+                                $fb_response_to_old = $this->facebook->api(
+                                    '/' . $old_passenger[0]->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb?goto='.$ride->id, 
+                                        'template' => '@[' . $driver[0]->facebook_id . '] removed you from a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+                            
+                            if ( $fb_response_to_old ) {
+                                $output['message'] .= $old_passenger[0]->name." successfully removed and notified on Facebook.\n";
+                            } else {
+                                $output['message'] .= $old_passenger[0]->name." successfully removed but could not be notified on Facebook.\n";
+                            }
+                        } else {
+                            // This driver just removed himself from his own ride. No need to notify.
+                        }
+
+                        if ( $ride->driver_id != $user_ride->user_id ) {
+                            $new_passenger = $this->user->retrieve(
                                 array(
                                     'id' => $user_ride->user_id
                                 )
                             );
 
-                            $fb_response = false;
+                            $fb_response_to_new = false;
                             try {
-                                $fb_response = $this->facebook->api(
-                                    '/' . $passenger[0]->facebook_id . '/notifications', 
+                                $fb_response_to_new = $this->facebook->api(
+                                    '/' . $new_passenger[0]->facebook_id . '/notifications', 
                                     'POST', 
                                     array(
                                         'href' => '/fb?goto='.$ride->id, 
@@ -207,32 +244,16 @@ class User_rides extends REST_Controller {
                                 log_message('error', $e->getMessage() );
                             }
                             
-                            if ( $fb_response ) {
-                                echo json_encode(
-                                    array(
-                                        'status' => 'success',
-                                        'message' => 'Passenger successfully updated. Passenger notified on Facebook.',
-                                        'user_ride' => $user_ride
-                                    )
-                                );
+                            if ( $fb_response_to_new ) {
+                                $output['message'] .= $new_passenger[0]->name." successfully added and notified on Facebook.";
                             } else {
-                                echo json_encode(
-                                    array(
-                                        'status' => 'success',
-                                        'message' => 'Passenger successfully updated. Passenger could not be notified on Facebook.',
-                                        'user_ride' => $user_ride
-                                    )
-                                );   
+                                $output['message'] .= $new_passenger[0]->name." successfully added but could not be notified on Facebook.";   
                             }
                         } else {
-                            echo json_encode(
-                                array(
-                                    'status' => 'success',
-                                    'message' => 'Passenger successfully updated.',
-                                    'user_ride' => $user_ride
-                                )
-                            );
-                        } 
+                            // This driver just added himself to his own ride. No need to notify.
+                        }
+
+                        echo json_encode($output);
                     } else {
                         echo json_encode(
                             array(
