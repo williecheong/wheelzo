@@ -67,10 +67,7 @@ class Comments extends REST_Controller {
                         )
                     );
 
-                    var_dump($comments_since_last_login);
-                    die();
-
-                    if ( count($comments_since_last_login) == 0 ) {
+                    if ( count($comments_since_last_login) > 1 ) {
                         $fb_response = false;
                         try {
                             $fb_response = $this->facebook->api(
