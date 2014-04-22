@@ -56,7 +56,7 @@
         </div>
 
         <div class="container">
-            <div class="row">
+            <div class="row utility-bar">
                 <div class="col-xs-6">
                     <a class="btn btn-default" @if($session) data-toggle="modal" data-target="#create-ride" @else id="facebook-session" href="{{ $session_url }}" @endif>
                         <i class="fa fa-plus fa-lg"></i> Create Ride

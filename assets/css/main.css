@@ -7,6 +7,10 @@ td.ninja-field {
     display: none;
 }
 
+div.utility-bar {
+    margin-bottom: 10px;
+}
+
 img#driver-picture {
     width: 100%;
     max-width: 150px;
