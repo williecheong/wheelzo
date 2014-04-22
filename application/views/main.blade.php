@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <title>Wheelzo</title>
-        <link rel="image_src"  href="/assets/img/logo.png">
+        <link rel="image_src"  href="/assets/img/logo_gold.png">
         <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
