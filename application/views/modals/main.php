@@ -70,11 +70,11 @@
                 <div class="row">
                     <div class="col-sm-4 text-center">
                         <p>
-                            <a id="driver-picture" href="#">
+                            <a id="driver-picture" target="_blank" href="#">
                                 <img class="img-circle" id="driver-picture" src="">
                             </a>
                         </p>
-                        <a class="lead" id="driver-name" href="#"></a>
+                        <a class="lead" id="driver-name" target="_blank" href="#"></a>
                     </div>
                     <div class="col-sm-8">
                         <div class="row">

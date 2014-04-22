@@ -26,7 +26,7 @@
 
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="'+value.id+'">'+
                         '    <div class="btn-group">'+                        
-                        '        <a type="button" class="btn btn-default btn-xs" href="'+fbProfile(passenger.facebook_id)+'">'+
+                        '        <a type="button" class="btn btn-default btn-xs" target="_blank" href="'+fbProfile(passenger.facebook_id)+'">'+
                         '            <i class="fa fa-facebook-square"></i> ' + shortName +
                         '        </a>'+
                         '        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">'+
@@ -65,7 +65,7 @@
             $.each(rides[rideID].passengers, function(key, value){
                 var passenger = publicUsers[value.user_id];
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
-                        '    <a href="'+fbProfile(passenger.facebook_id)+'">'+
+                        '    <a target="_blank" href="'+fbProfile(passenger.facebook_id)+'">'+
                         '        <img class="img-circle hoverable" id="passenger-picture" src="'+fbImage(passenger.facebook_id)+'">'+
                         '    </a>'+
                         '</div>';
@@ -87,7 +87,7 @@
         var count = 0;
         $.each(comments, function(key, commentObject){
             html += '<div class="media">'+
-                    '    <a class="pull-left" href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">'+
+                    '    <a class="pull-left" target="_blank" href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">'+
                     '        <img class="img-rounded media-object" src="'+fbImage(publicUsers[commentObject.user_id].facebook_id, 'square')+'">'+
                     '    </a>'+
                     '    <div class="media-body">'+
@@ -95,7 +95,7 @@
                     '            ' + commentObject.comment +
                     '        </div>'+
                     '        <small class="single-comment-meta">'+
-                    '            <a href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '            <a target="_blank" href="'+fbProfile(publicUsers[commentObject.user_id].facebook_id)+'">' + publicUsers[commentObject.user_id].name + '</a> @ ' + moment(commentObject.last_updated).format('dddd MMMM D, h:mm a') +
                     '        </small>'+
                     '    </div>'+
                     '</div>';
