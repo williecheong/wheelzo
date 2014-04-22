@@ -34,7 +34,7 @@ class Fb extends CI_Controller {
 
         $this->blade->render('fb_landing',
             array(
-                'ride_link' => '/me?ride=' . $go_to_ride
+                'ride_link' => '/?ride=' . $go_to_ride
             )
         );
     }

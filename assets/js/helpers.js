@@ -13,7 +13,7 @@
                 setTimeout(function() {
                     // Simple page refresh for now
                     $button.html('<i class="fa fa-refresh"></i> Refreshing');
-                    location.reload();
+                    location.href = '/?ride=' + response.ride.id;
                 }, 1500);
             }, 
             error: function(response) {
@@ -71,6 +71,27 @@
                 console.log(response);
             }
         });
+    }
+
+    function deleteUser_ride( user_rideID ) {
+        $.ajax({
+            url: '/api/user_rides/index/' + user_rideID,
+            type: 'DELETE',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if ( response.status == 'success' ){
+                    refreshRides(function(){
+                        $('tr[data-ride-id="'+response.ride_id+'"]').trigger('click');
+                    });
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                console.log(response);
+            }
+        });    
     }
 
 /*******************

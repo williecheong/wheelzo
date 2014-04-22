@@ -131,7 +131,9 @@
         var passengerID = $listItem.attr('data-user-id');
         var user_rideID = $listItem.closest('div#passenger-box').attr('data-user_ride-id');
 
-        if ( user_rideID > 0 ) {
+        if ( passengerID == '0' ) {
+            deleteUser_ride(user_rideID);
+        } else if ( user_rideID > 0 ) {
             putUser_ride(passengerID, user_rideID);
         } else {
             var $modal = $listItem.closest('.modal');

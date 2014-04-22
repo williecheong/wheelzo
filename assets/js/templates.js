@@ -35,6 +35,8 @@
                         '        </button>'+
                         '        <ul class="dropdown-menu text-left" role="menu">'+
                         '            ' + commentersHTML + 
+                        '            <li class="divider"></li>' +  
+                        '            <li id="potential-passenger" data-user-id="0"><a href="#">Empty</a></li>' +  
                         '        </ul>'+
                         '    </div>'+
                         '</div>';
