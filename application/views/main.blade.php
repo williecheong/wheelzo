@@ -28,7 +28,7 @@
         <![endif]-->
         <div class="jumbotron">
             <div class="container">
-                <div class="row" id="introduction">
+                <div class="row" id="introduction" style="background: #121212;">
                     <div class="col-sm-2 text-center">
                         <a href="/">
                             <img class="brand-logo" src="/assets/img/logo_gold.png">
