@@ -2,6 +2,20 @@
 
 class comment extends CI_Model{
     
+    function retrieve_by_id( $id = 0 ) {
+        $objects = $this->comment->retrieve(
+            array(
+                'id' => $id
+            )
+        );
+
+        if ( count($objects) > 0 ) {
+            return $objects[0];
+        } else {
+            return false;
+        }
+    }
+
     // BEGIN BASIC CRUD FUNCTIONALITY
 
     function create( $data = array() ){

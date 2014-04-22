@@ -33,34 +33,13 @@ class User_rides extends REST_Controller {
                                 'ride_id' => $ride_id
                             )
                         );
-                        $user_rides = $this->user_ride->retrieve(
-                            array(
-                                'id' => $user_ride_id
-                            )
-                        );
-                        $user_ride = $user_rides[0];
 
-                        $rides = $this->ride->retrieve(
-                            array(
-                                'id' => $ride_id
-                            )
-                        );
-                        $ride = $rides[0];
+                        $user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
+                        $ride = $this->ride->retrieve_by_id( $ride_id );
                         
                         if ( $ride->driver_id != $user_ride->user_id ) {
-                            $drivers = $this->user->retrieve(
-                                array(
-                                    'id' => $ride->driver_id
-                                )
-                            );
-                            $driver = $drivers[0];
-
-                            $passengers = $this->user->retrieve(
-                                array(
-                                    'id' => $user_ride->user_id
-                                )
-                            );
-                            $passenger = $passengers[0];
+                            $driver = $this->user->retrieve_by_id( $ride->driver_id );
+                            $passenger = $this->user->retrieve_by_id( $user_ride->user_id );
 
                             $fb_response = false;
                             try {
@@ -149,13 +128,8 @@ class User_rides extends REST_Controller {
             
             if ( $this->_verify_driver_by_user_ride( $user_ride_id, $driver_id) ) {
                 if ( $this->_verify_passenger_by_user_ride( $user_ride_id, $passenger_id) ) {
-                    $old_user_rides = $this->user_ride->retrieve(
-                        array(
-                            'id' => $user_ride_id
-                        )
-                    );
-
-                    $old_user_ride = $old_user_rides[0];
+                    
+                    $old_user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
 
                     if ( $old_user_ride->user_id != $passenger_id ) {
                         $this->user_ride->update(
@@ -167,27 +141,10 @@ class User_rides extends REST_Controller {
                             )
                         );
 
-                        $user_rides = $this->user_ride->retrieve(
-                            array(
-                                'id' => $user_ride_id
-                            )
-                        );
-                        $user_ride = $user_rides[0];
-
-                        $rides = $this->ride->retrieve(
-                            array(
-                                'id' => $user_ride->ride_id
-                            )
-                        );
-                        $ride = $rides[0];
-
-                        $drivers = $this->user->retrieve(
-                            array(
-                                'id' => $ride->driver_id
-                            )
-                        );
-                        $driver = $drivers[0];
-
+                        $user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
+                        $ride = $this->ride->retrieve_by_id( $user_ride->ride_id );
+                        $driver = $this->user->retrieve_by_id( $ride->driver_id );
+                        
                         $output = array(
                             'status' => 'success',
                             'message' => '',
@@ -195,13 +152,8 @@ class User_rides extends REST_Controller {
                         );
 
                         if ( $ride->driver_id != $old_user_ride->user_id ) {
-                            $old_passengers = $this->user->retrieve(
-                                array(
-                                    'id' => $old_user_ride->user_id
-                                )
-                            );
-                            $old_passenger = $old_passengers[0];
-
+                            $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
+                            
                             $fb_response_to_old = false;
                             try {
                                 $fb_response_to_old = $this->facebook->api(
@@ -227,13 +179,8 @@ class User_rides extends REST_Controller {
                         }
 
                         if ( $ride->driver_id != $user_ride->user_id ) {
-                            $new_passengers = $this->user->retrieve(
-                                array(
-                                    'id' => $user_ride->user_id
-                                )
-                            );
-                            $new_passenger = $new_passengers[0];
-
+                            $new_passenger = $this->user->retrieve_by_id( $user_ride->user_id );
+                            
                             $fb_response_to_new = false;
                             try {
                                 $fb_response_to_new = $this->facebook->api(
@@ -304,41 +251,20 @@ class User_rides extends REST_Controller {
             $driver_id = $this->session->userdata('user_id');
             
             if ( $this->_verify_driver_by_user_ride( $user_ride_id, $driver_id) ) {
-                $old_user_rides = $this->user_ride->retrieve(
-                    array(
-                        'id' => $user_ride_id
-                    )
-                );
-                $old_user_ride = $old_user_rides[0];
-
+                $old_user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
+                
                 $this->user_ride->delete( 
                     array( 
                         'id' => $user_ride_id
                     )
                 );
 
-                $rides = $this->ride->retrieve(
-                    array(
-                        'id' => $old_user_ride->ride_id
-                    )
-                );
-                $ride = $rides[0];
-
+                $ride = $this->ride->retrieve_by_id( $old_user_ride->ride_id );
+                
                 if ( $old_user_ride->user_id != $driver_id ) {
-                    $drivers = $this->user->retrieve(
-                        array(
-                            'id' => $ride->driver_id
-                        )
-                    );
-                    $driver = $drivers[0];
-
-                    $old_passengers = $this->user->retrieve(
-                        array(
-                            'id' => $old_user_ride->user_id
-                        )
-                    );
-                    $old_passenger = $old_passengers[0];
-
+                    $driver = $this->user->retrieve_by_id( $ride->driver_id );
+                    $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
+                    
                     $fb_response_to_old = false;
                     try {
                         $fb_response_to_old = $this->facebook->api(
@@ -402,14 +328,9 @@ class User_rides extends REST_Controller {
 
 
     private function _verify_driver_by_user_ride( $user_ride_id, $user_id ) {
-        $user_rides = $this->user_ride->retrieve(
-            array(
-                'id' => $user_ride_id
-            )
-        );
+        $user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
 
-        if ( count($user_rides) > 0 ) {
-            $user_ride = $user_rides[0];
+        if ( $user_ride ) {
             return $this->_verify_driver($user_ride->ride_id, $user_id);
         }
 
@@ -417,14 +338,9 @@ class User_rides extends REST_Controller {
     }
 
     private function _verify_passenger_by_user_ride( $user_ride_id, $user_id ) {
-        $user_rides = $this->user_ride->retrieve(
-            array(
-                'id' => $user_ride_id
-            )
-        );
+        $user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
 
-        if ( count($user_rides) > 0 ) {
-            $user_ride = $user_rides[0];
+        if ( $user_ride ) {
             return $this->_verify_passenger($user_ride->ride_id, $user_id);
         }
 
@@ -432,14 +348,9 @@ class User_rides extends REST_Controller {
     }
 
     private function _verify_driver( $ride_id, $user_id ) {
-        $rides = $this->ride->retrieve(
-            array(
-                'id' => $ride_id
-            )
-        );
+        $ride = $this->ride->retrieve_by_id( $ride_id );
 
-        if ( count($rides) > 0 ) {
-            $ride = $rides[0];
+        if ( $ride ) {
             if ( $ride->driver_id == $user_id ) {
                 return true;
             }
@@ -466,14 +377,9 @@ class User_rides extends REST_Controller {
     }
 
     private function _verify_capacity( $ride_id ) {
-        $rides = $this->ride->retrieve(
-            array(
-                'id' => $ride_id
-            )
-        );
+        $ride = $this->ride->retrieve_by_id( $ride_id );
 
-        if ( count($rides) > 0 ) {
-            $ride = $rides[0];
+        if ( $ride ) {
             $user_rides = $this->user_ride->retrieve(
                 array(
                     'ride_id' => $ride_id

@@ -41,17 +41,13 @@ class Rides extends REST_Controller {
                     'drop_offs' => $drop_offs   
                 )
             );
-            $ride = $this->ride->retrieve(
-                array(
-                    'id' => $ride_id
-                )
-            );
+            $ride = $this->ride->retrieve_by_id( $ride_id );
             
             echo json_encode(
                 array(
                     'status' => 'success',
                     'message' => 'Ride successfully posted.',
-                    'ride' => $ride[0]
+                    'ride' => $ride
                 )
             );
     

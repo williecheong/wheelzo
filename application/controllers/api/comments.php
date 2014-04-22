@@ -22,15 +22,9 @@ class Comments extends REST_Controller {
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
             $comment = isset($data['comment']) ? $data['comment'] : '';
 
-            $rides = $this->ride->retrieve(
-                array(
-                    'id' => $ride_id
-                )
-            );
+            $ride = $this->ride->retrieve_by_id( $ride_id );
             
-            if ( count($rides) > 0 ) {
-                $ride = $rides[0];
-
+            if ( $ride ) {
                 $comment_id = $this->comment->create(  
                     array(  
                         'user_id' => $this->session->userdata('user_id'),
@@ -39,31 +33,16 @@ class Comments extends REST_Controller {
                     )
                 );
 
-                $comments = $this->comment->retrieve(
-                    array(
-                        'id' => $comment_id
-                    )
-                );
-
-                $comment = $comments[0];
+                $comment = $this->comment->retrieve_by_id( $comment_id );
 
                 if ( $ride->driver_id != $comment->user_id ) { // commenter is not driver
-                    $driver = $this->user->retrieve(
-                        array(
-                            'id' => $ride->driver_id
-                        )
-                    );
-
-                    $commenter = $this->user->retrieve(
-                        array(
-                            'id' => $comment->user_id
-                        )
-                    );
+                    $driver = $this->user->retrieve_by_id( $ride->driver_id );
+                    $commenter = $this->user->retrieve_by_id( $comment->user_id );
 
                     $comments_since_last_login = $this->comment->retrieve( 
                         array(
                             'ride_id' => $ride->id, 
-                            'last_updated >' => $driver[0]->last_updated 
+                            'last_updated >' => $driver->last_updated 
                         )
                     );
 
@@ -71,11 +50,11 @@ class Comments extends REST_Controller {
                         $fb_response = false;
                         try {
                             $fb_response = $this->facebook->api(
-                                '/' . $driver[0]->facebook_id . '/notifications', 
+                                '/' . $driver->facebook_id . '/notifications', 
                                 'POST', 
                                 array(
                                     'href' => '/fb?goto='.$ride->id,
-                                    'template' => '@[' . $commenter[0]->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                    'template' => '@[' . $commenter->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                     'access_token' => FB_APPID . '|' . FB_SECRET
                                 )
                             );
