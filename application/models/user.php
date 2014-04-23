@@ -2,10 +2,10 @@
 
 class user extends CI_Model{
     
-    function to_notify( $user_id = '', $type = '' ) {
-        $user = $this->user->retrieve_by_id( $user_id ) 
+    function to_notify( $user_id = 0, $type = '' ) {
+        $user = $this->user->retrieve_by_id( $user_id ); 
 
-        if ($user) {
+        if ( $user ) {
             $notifications = explode(WHEELZO_DELIMITER, $user->notifications);
             
             foreach( $notifications as $notification ) {
@@ -55,10 +55,9 @@ class user extends CI_Model{
                 array(
                     'name' =>$facebook_profile['name'],
                     'notifications' => '',
-                    'last_login' => date('Y-m-d H:i:s')
+                    'last_login' => date( 'Y-m-d H:i:s' )
                 )
             );
-
 
             return $availability[0];
 
@@ -73,18 +72,14 @@ class user extends CI_Model{
                     'facebook_id' => $facebook_id,
                     'cell_number' => '',
                     'rating' => '',
-                    'notifications' =>'',
-                    'last_login' => date('Y-m-d H:i:s')
+                    'notifications' => '',
+                    'last_login' => date( 'Y-m-d H:i:s' )
                 )
             );
 
-            $user = $this->user->retrieve(
-                array(
-                    'id' => $user_id
-                )
-            );
+            $user = $this->user->retrieve_by_id( $user_id );
 
-            return $user[0];
+            return $user;
         }
     }
 
