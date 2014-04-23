@@ -55,7 +55,7 @@ class user extends CI_Model{
                 array(
                     'name' =>$facebook_profile['name'],
                     'notifications' => '',
-                    'last_updated' => null
+                    'last_login' => date('Y-m-d H:i:s')
                 )
             );
 
@@ -72,7 +72,9 @@ class user extends CI_Model{
                     'email' => $facebook_profile['email'],
                     'facebook_id' => $facebook_id,
                     'cell_number' => '',
-                    'rating' => ''
+                    'rating' => '',
+                    'notifications' =>'',
+                    'last_login' => date('Y-m-d H:i:s')
                 )
             );
 
