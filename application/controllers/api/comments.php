@@ -39,14 +39,10 @@ class Comments extends REST_Controller {
                     $driver = $this->user->retrieve_by_id( $ride->driver_id );
                     $commenter = $this->user->retrieve_by_id( $comment->user_id );
 
-                    $comments_since_last_login = $this->comment->retrieve( 
-                        array(
-                            'ride_id' => $ride->id, 
-                            'last_updated >' => $driver->last_updated 
-                        )
-                    );
+                    $notification_type = $ride->id . 'C'; 
+                    $to_notify = $this->user->to_notify( $driver->id, $notification_type );
 
-                    if ( count($comments_since_last_login) < 2 ) {
+                    if ( $to_notify ) {
                         $fb_response = false;
                         try {
                             $fb_response = $this->facebook->api(

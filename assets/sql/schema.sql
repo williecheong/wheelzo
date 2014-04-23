@@ -5,6 +5,7 @@ CREATE TABLE `user` (
    `facebook_id` varchar(255) not null,
    `cell_number` varchar(255),
    `rating` varchar(255),
+   `notifications` varchar(255),
    `last_updated` timestamp default current_timestamp on update current_timestamp,
    PRIMARY KEY (`id`),
    UNIQUE KEY (`facebook_id`)

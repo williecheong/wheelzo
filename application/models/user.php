@@ -2,6 +2,40 @@
 
 class user extends CI_Model{
     
+    function to_notify( $user_id = '', $type = '' ) {
+        $user = $this->user->retrieve_by_id( $user_id ) 
+
+        if ($user) {
+            $notifications = explode(WHEELZO_DELIMITER, $user->notifications);
+            
+            foreach( $notifications as $notification ) {
+                if ( $notification == $type ) {
+                    // user has been notified about this before
+                    return false;
+                }
+            }
+
+            // user was not notified about this before
+            if ( $type != '' ) {
+                $notifications[] = $type;
+            }
+
+            $this->user->update(
+                array(
+                    'id' => $user_id
+                ),
+                array(
+                    'notifications' => implode(WHEELZO_DELIMITER, $notifications)
+                )
+            );
+
+            return true;
+        } else {
+            // user does not exist
+            return null;
+        }
+    }
+
     function try_register( $facebook_id = 0 ) {
         $availability = $this->user->retrieve(
             array(
@@ -20,6 +54,7 @@ class user extends CI_Model{
                 ),
                 array(
                     'name' =>$facebook_profile['name'],
+                    'notifications' => '',
                     'last_updated' => null
                 )
             );
