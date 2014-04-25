@@ -39,7 +39,7 @@
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
-                	<div class="navbar-form navbar-center">
+                	<div class="navbar-form navbar-left">
                 		<div class="right-inner-addon">
 	                        <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
 	                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
@@ -52,7 +52,7 @@
 	                                <i class="fa fa-plus-circle fa-lg"></i>
 	                            </button> 
 	                            <a class="btn btn-default" href="/me" title="My Rides">
-	                                <i class="fa fa-user fa-lg"></i>
+	                                <i class="fa fa-user fa-lg"></i> {{ $users[$session]['name'] }}
 	                            </a>
 	                        @else
 	                        	<a class="btn btn-default" title="Start New Ride" href="{{ $session_url }}">
@@ -66,7 +66,7 @@
                         <div class="btn-group">
                             @if ( $session )
                                 <a class="btn btn-danger" id="facebook-session" href="{{ $session_url }}" title="Logout">
-                                    <i class="fa fa-sign-out fa-lg"></i> {{ $users[$session]['name'] }}
+                                    <i class="fa fa-sign-out fa-lg"></i>
                                 </a>
                             @else
                                 <a class="btn btn-primary" id="facebook-session" href="{{ $session_url }}">
