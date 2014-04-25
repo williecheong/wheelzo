@@ -39,7 +39,30 @@
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
+                	<div class="navbar-form navbar-left">
+	                	<div class="right-inner-addon">
+	                        <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations"></i>
+	                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
+	                	</div>
+	                </div>
                     <div class="navbar-form navbar-right">
+                        <div class="btn-group">
+                        	@if ( $session ) 
+	                            <a class="btn btn-default" href="/me" title="My Rides">
+	                                <i class="fa fa-user fa-lg"></i>
+	                            </a>
+	                            <button class="btn btn-default" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
+	                                <i class="fa fa-plus-circle fa-lg"></i>
+	                            </button>  
+	                        @else
+	                        	<a class="btn btn-default" title="My Rides" href="{{ $session_url }}">
+	                                <i class="fa fa-user fa-lg"></i>
+	                            </a>
+	                            <a class="btn btn-default" title="Start New Ride" href="{{ $session_url }}">
+	                                <i class="fa fa-plus-circle fa-lg"></i>
+	                            </a>
+	                        @endif
+                        </div>
                         <div class="btn-group">
                             @if ( $session )
                                 <a class="btn btn-danger" id="facebook-session" href="{{ $session_url }}" title="Logout">
@@ -94,26 +117,6 @@
         </div>
 
         <div class="container">
-            <div class="row utility-bar">
-                <div class="col-xs-6">
-                    @if ( $session )
-                        <div class="btn-group">
-                            <a class="btn btn-default" href="/me" title="My Rides">
-                                <i class="fa fa-user fa-lg"></i>
-                            </a>
-                            <button class="btn btn-default" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
-                                <i class="fa fa-plus-circle fa-lg"></i>
-                            </button>  
-                        </div>
-                    @endif
-                </div>
-                <div class="col-xs-6">                
-                    <div class="right-inner-addon">
-                        <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations"></i>
-                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
-                </div>
-                </div>                    
-            </div>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
