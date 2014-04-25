@@ -19,9 +19,15 @@ class Feedbacks extends REST_Controller {
                 $email = $data['email'];
             } 
 
+            $user_id = 0;
+            if ( $this->session->userdata('user_id') ) {
+                $user_id = $this->session->userdata('user_id');
+            }
+
             $feedback_id = $this->feedback->create(
                 array(
                     'email' => $email,
+                    'user_id' => $user_id,
                     'ip_address' => $_SERVER['REMOTE_ADDR'],
                     'message' => $data['message']
                 )

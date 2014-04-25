@@ -9,10 +9,16 @@ class Rides extends REST_Controller {
     }
 
     public function index_get() {
-        $rides = $this->ride->retrieve_relevant();
+        $rides = $this->ride->retrieve_active();
         echo json_encode($rides);
         return;
     }
+
+    public function me_get() {
+        $rides = $this->ride->retrieve_personal();
+        echo json_encode($rides);
+        return;
+    }    
 
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            

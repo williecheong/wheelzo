@@ -9,42 +9,54 @@ class ride extends CI_Model{
         // Order matters in this function.
         // We want to preserve elements in personal rides.
         $rides = $rides_personal + $rides_active;
-        foreach( $rides as $id => $ride ) { 
-            if ( !isset($ride->is_personal) ) {
-                $rides[$id]->is_personal = false ;
-            }
-
-            if ( $ride->drop_offs == '' ) {
-                $rides[$id]->drop_offs = array() ;
-            } else {
-                $rides[$id]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
-            }
-         
-            $rides[$id]->passengers = $this->user_ride->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-
-            $rides[$ride->id]->comments = $this->comment->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-        }
 
         return $rides;
     }
 
     function retrieve_active() {
+        $user_id = $this->session->userdata('user_id');
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
         $conditions = "`start`>'".$current."'";
         $rides = $this->ride->retrieve( $conditions );
         
+
         // Use ride ID as the index key
         $temp_rides = array();
         foreach( $rides as $ride ) { 
-            $temp_rides[$ride->id] = $ride; 
+            $temp_rides[$ride->id] = $ride;
+
+            if ( $ride->drop_offs == '' ) {
+                $temp_rides[$ride->id]->drop_offs = array() ;
+            } else {
+                $temp_rides[$ride->id]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+            }
+         
+            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+
+            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+
+            if ( $ride->driver_id == $user_id ) {
+                $temp_rides[$ride->id]->is_personal = true;
+            } else {
+                foreach ( $temp_rides[$ride->id]->passengers as $passenger ) {
+                    if ($passenger->user_id == $user_id ) {
+                        $temp_rides[$ride->id]->is_personal = true;
+                        break;
+                    }
+                }
+            }
+
+            if ( !isset($temp_rides[$ride->id]->is_personal) ) {
+                $temp_rides[$ride->id]->is_personal = false;
+            }
         }
 
         return $temp_rides;
@@ -72,6 +84,23 @@ class ride extends CI_Model{
             foreach( $rides as $ride ) { 
                 $temp_rides[$ride->id] = $ride; 
                 $temp_rides[$ride->id]->is_personal = true;
+                if ( $ride->drop_offs == '' ) {
+                    $temp_rides[$ride->id]->drop_offs = array() ;
+                } else {
+                    $temp_rides[$ride->id]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+                }
+             
+                $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+                    array(
+                        'ride_id' => $ride->id 
+                    )
+                );
+
+                $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+                    array(
+                        'ride_id' => $ride->id 
+                    )
+                );
             }
             
             return $temp_rides;        

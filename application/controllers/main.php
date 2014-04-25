@@ -42,7 +42,21 @@ class Main extends CI_Controller {
     }
     
 	public function index( $load_personal = false ) {
+        // Is session available when user is requesting the personal page?
+        if ( $load_personal ) {
+            if ( !$this->session->userdata('user_id') ) {
+                redirect( base_url() );
+            }
+        }
+
         // Use user ID as the index key
+        $rides = array();
+        if ( $load_personal ) {
+            $rides = $this->ride->retrieve_personal();
+        } else {
+            $rides = $this->ride->retrieve_active();
+        }
+
         $temp_users = array();
         $users = $this->user->retrieve();
         foreach( $users as $user ) {
@@ -51,14 +65,17 @@ class Main extends CI_Controller {
             $temp_users[$user->id]['facebook_id'] = $user->facebook_id;
         }
 
-        $this->blade->render('main', 
+        $view = 'main';
+        if ( $load_personal ) {
+            $view = 'me';
+        }
+
+        $this->blade->render($view, 
             array(
                 'users' => $temp_users,
-                'rides' => $this->ride->retrieve_relevant(),
+                'rides' => $rides,
                 'session' => $this->session->userdata('user_id'),
                 'session_url' => $this->facebook_url,
-                'load_personal' => $load_personal,
-                'load_search' => $this->input->get('search'),
                 'request_ride_id' => $this->input->get('ride')
             )
         );

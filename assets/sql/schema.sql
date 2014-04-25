@@ -47,6 +47,7 @@ CREATE TABLE `comment` (
 CREATE TABLE `feedback` (
    `id` int(11) not null auto_increment,
    `email` varchar(255),
+   `user_id` int(11), 
    `ip_address` varchar(255),
    `message` text,
    `last_updated` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,

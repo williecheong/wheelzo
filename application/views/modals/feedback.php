@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body text-center">
                 <p>
-                    <input class="form-control" name="feedback-email" value="<?= $this->session->userdata('email'); ?>" type="text" placeholder="Your email address (optional)">
+                    <input class="form-control" name="feedback-email" type="text" placeholder="Your email address (optional)">
                 </p>
                 <p>
                     <textarea class="form-control" name="feedback-message" rows="8" placeholder="ʕʘ‿ʘʔ What happened?"></textarea>

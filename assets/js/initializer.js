@@ -25,7 +25,7 @@
         // Toggles the view of channels on each product
         $('[data-mytoggler]').click(function(){
             var toToggle = $(this).data('mytoggler');
-            $( toToggle ).toggle('slow');
+            $( toToggle ).toggle('fast');
         });
 
         // Initializing sliders
@@ -89,42 +89,13 @@
         
         $('input#search-box').on('keyup focusout', function(){
             var searchTerm = $(this).val();
-            
-            if ( $('.btn#filter-me').hasClass('active') ) {
-                searchTerm += ' 关于自己';
-            }
-
             dataTable.fnFilter( searchTerm );
         });
-
-        $('.btn#filter-me').on('click', function(){
-            var searchTerm = $('input#search-box').val();
-            
-            $(this).toggleClass('active');
-            if ( $('.btn#filter-me').hasClass('active') ) {
-                $('img.brand-logo').addClass('img-circle').attr('src', fbImage(publicUsers[session_id].facebook_id));
-                searchTerm += ' 关于自己';
-            } else {
-                $('img.brand-logo').removeClass('img-circle').attr('src', '/assets/img/logo.png');
-            }
-
-            dataTable.fnFilter( searchTerm );
-        });
-
 
         if ( loadRide ) {
             dataTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
-        } else {
-            if ( loadSearch ) {
-                $('input#search-box').val( loadSearch );
-                $('input#search-box').trigger('focusout');
-            }
-
-            if ( loadPersonal ) {
-                $('.btn#filter-me').trigger('click');
-            }
-        }
+        } 
     }
 
     function initializeRide( rideID ) {        

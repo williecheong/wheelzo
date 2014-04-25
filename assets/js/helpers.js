@@ -140,7 +140,12 @@
     }
 
     function refreshRides( callback ) {
-        $.get( "/api/rides", function( response ) {
+        var url = "/api/rides";
+        if ( location.pathname == '/me' ) {
+            url = "/api/rides/me";
+        }
+
+        $.get( url, function( response ) {
             rides = JSON.parse(response);
             console.log("Object rides has been refreshed.")
             callback();

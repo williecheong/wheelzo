@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
-        <title>Wheelzo</title>
+        <title>Wheelzo :: {{ $users[$session]['name'] }}</title>
         <link rel="image_src"  href="/assets/img/logo.png">
         <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
         <meta name="viewport" content="width=device-width">
@@ -26,7 +26,7 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        <div class="navbar navbar-default" id="compact-bar">
+        <div class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -37,6 +37,9 @@
                     <a class="navbar-brand" href="/">
                         <img class="brand" src="/assets/img/logo.png">
                     </a>
+                    <a class="navbar-brand" href="//facebook.com/{{$users[$session]['facebook_id']}}" target="_blank">
+                        {{ $users[$session]['name'] }}
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <div class="navbar-form navbar-right">
@@ -46,70 +49,58 @@
                                     <i class="fa fa-sign-out fa-lg"></i> {{ $users[$session]['name'] }}
                                 </a>
                             @else
-                                <a class="btn btn-primary" id="facebook-session" href="{{ $session_url }}">
+                                <a class="btn btn-primary btn-xs" id="facebook-session" href="{{ $session_url }}">
                                     <i class="fa fa-facebook-square fa-lg"></i> Login with Facebook
                                 </a>
-                            @endif  
-                            <button class="btn btn-default" data-mytoggler="div#introduction,div#compact-bar">
-                                <i class="fa fa-caret-down"></i>
-                            </button>
+                            @endif
                         </div>
                     </div>
                 </div><!--/.navbar-collapse -->
             </div>
         </div>
-        
-        <div class="jumbotron" id="introduction">
+
+        {{--
+        <div class="jumbotron">
             <div class="container">
-                <div class="row">
+                <div class="row" id="introduction">
                     <div class="col-sm-2 text-center">
-                        <a href="/">
-                            <img class="brand-logo" src="/assets/img/logo.png">
+                        <a class="brand-logo" href="/">
+                            <img class="brand-logo img-circle" src="//graph.facebook.com/{{$users[$session]['facebook_id']}}/picture?width=200&height=200">
                         </a>
                     </div>
                     <div class="col-sm-10">
                         <h1>
-                            <a id="toggle-getting-started" href="#">Together</a> on the road...
+                            {{ $users[$session]['name'] }}
                         </h1>
                         <p>
                             Wheelzo v{{ CURRENT_VERSION }}
-                            @if ( $session )
-                                <a class="btn btn-danger btn-xs" id="facebook-session" href="{{ $session_url }}" title="Logout">
-                                    <i class="fa fa-sign-out fa-lg"></i> {{ $users[$session]['name'] }}
-                                </a>
-                            @else
-                                <a class="btn btn-primary btn-xs" id="facebook-session" href="{{ $session_url }}">
-                                    <i class="fa fa-facebook-square fa-lg"></i> Login with Facebook
-                                </a>
-                            @endif
-                            <a class="btn btn-link btn-xs pull-right" href="#" data-mytoggler="div#introduction,div#compact-bar">
-                                <i class="fa fa-caret-up fa-lg"></i> Hide
+                            <a class="btn btn-danger btn-xs" id="facebook-session" href="{{ $session_url }}" title="Logout">
+                                <i class="fa fa-sign-out fa-lg"></i> Logout
                             </a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        --}}
 
         <div class="container">
             <div class="row utility-bar">
                 <div class="col-xs-6">
-                    @if ( $session )
-                        <div class="btn-group">
-                            <a class="btn btn-default" href="/me" title="My Rides">
-                                <i class="fa fa-user fa-lg"></i>
-                            </a>
-                            <button class="btn btn-default" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
-                                <i class="fa fa-plus-circle fa-lg"></i>
-                            </button>  
-                        </div>
-                    @endif
+                    <div class="btn-group">
+                        <a class="btn btn-default disabled" href="/me" title="My Rides - Active">
+                            <i class="fa fa-user fa-lg"></i>
+                        </a>
+                        <button class="btn btn-default" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
+                            <i class="fa fa-plus-circle fa-lg"></i>
+                        </button>  
+                    </div> 
                 </div>
-                <div class="col-xs-6">                
+                <div class="col-xs-6">
                     <div class="right-inner-addon">
-                        <i class="fa fa-search" title="Search-able fields include drivers' names and drop-off locations"></i>
-                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
-                </div>
+                        <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
+                        <input type="text" class="form-control" id="search-box" placeholder="Search through your rides on Wheelzo...">
+                    </div>
                 </div>                    
             </div>
             <div class="table-responsive">
@@ -178,8 +169,8 @@
         <?php 
             $this->load->view('modals/main',
                 array(
-                    'session' => $session,
-                    'users' => $users
+                    'users' => $users,
+                    'session' => $session
                 )
             );
 
@@ -207,7 +198,7 @@
             var session_id = {{ $session ? $session : 'false' }};
             var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
         </script>
-        
+
         @if ( ENVIRONMENT == 'production' )
             <!-- AddThis Smart Layers BEGIN -->
             <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5350e5067c994429"></script>
@@ -235,7 +226,5 @@
         @endif
     </body>
 </html>
-
-
 
 
