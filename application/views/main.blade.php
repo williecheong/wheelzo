@@ -82,6 +82,7 @@
             </div>
         </div>
         
+        {{--
         <div class="jumbotron" id="introduction">
             <div class="container">
                 <div class="row">
@@ -114,7 +115,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
+        --}}
 
         <div class="container">
             <div class="table-responsive">
