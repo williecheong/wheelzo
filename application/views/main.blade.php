@@ -39,14 +39,13 @@
                     </a>
                 </div>
                 <div class="navbar-collapse collapse">
-                	<!-- <div class="navbar-form navbar-right"> -->
-	                	
-	                <!-- </div> -->
-                    <div class="navbar-form navbar-right">
-	                    <div class="right-inner-addon">
+                	<div class="navbar-form navbar-center">
+                		<div class="right-inner-addon">
 	                        <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
 	                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
 	                	</div>
+	                </div>
+                    <div class="navbar-form navbar-right">
                         <div class="btn-group">
                         	@if ( $session ) 
 								<button class="btn btn-default" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
