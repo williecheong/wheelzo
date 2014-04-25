@@ -22,6 +22,10 @@ td.ninja-field {
 div#compact-bar {
 }
 
+div#search-box {
+    width: 550px;
+}
+
 div.utility-bar {
     margin-bottom: 10px;
 }
