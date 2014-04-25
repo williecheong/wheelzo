@@ -106,7 +106,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-lg-12" id="ride-comments"></div>
-                    <?php if ( $session ) { ?>
+                    @if ( $session )
                         <div class="col-lg-12 media">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="write-comment" placeholder="">
@@ -117,7 +117,7 @@
                                 </span>
                             </div>
                         </div>
-                    <?php } ?>
+                    @endif
                 </div>
             </div>
         </div>
