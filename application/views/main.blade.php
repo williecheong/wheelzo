@@ -65,7 +65,7 @@
                         </div>
                         <div class="btn-group">
                             @if ( $session )
-                                <a class="btn btn-danger" id="facebook-session" href="{{ $session_url }}" title="Logout">
+                                <a class="btn btn-default" id="facebook-session" href="{{ $session_url }}" title="Logout">
                                     <i class="fa fa-sign-out fa-lg"></i>
                                 </a>
                             @else
