@@ -42,7 +42,7 @@
                 	<div class="navbar-form navbar-left">
                 		<div class="right-inner-addon">
 	                        <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
-	                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo...">
+	                        <input type="text" class="form-control" id="search-box" placeholder="Search through all active rides on Wheelzo..." cols="10">
 	                	</div>
 	                </div>
                     <div class="navbar-form navbar-right">
