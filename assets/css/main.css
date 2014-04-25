@@ -19,8 +19,9 @@ td.ninja-field {
     display: none;
 }
 
-div.utility-bar {
-    margin-bottom: 10px;
+input#search-box {
+    width: 600px;
+    max-width:100%;
 }
 
 img#driver-picture {

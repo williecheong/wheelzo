@@ -42,48 +42,49 @@
                     <div class="navbar-form navbar-left">
                         <div class="right-inner-addon">
                             <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
-                            <input type="text" class="form-control" id="search-box" placeholder=@yield('search_placeholder') size="55">
+                            <input type="text" class="form-control" id="search-box" placeholder=@yield('search_placeholder')>
                         </div>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="pull-right">
-                            <a class="" href="#" data-mytoggler="div#introduction">
-                                <i class="fa fa-chevron-circle-down fa-lg"></i> About
-                            </a>
-                        </li>
                         @if ( $session ) 
                             <li>
-                                <a class="pull-right" href="#" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
-                                    <i class="fa fa-plus-circle fa-lg"></i> Drive
+                                <a class="pull-left" href="#" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
+                                    <i class="fa fa-tachometer fa-lg"></i> Drive
                                 </a>
                             </li>
-                            <li> 
-                                <a class="pull-right @yield('my_rides')" href="/me" title="My Rides">
-                                    <i class="fa fa-user fa-lg"></i> {{ $users[$session]['name'] }}
+                            <li class="@yield('my_rides')"> 
+                                <a class="pull-left" href="/me" title="My Rides">
+                                    <?php $exploded_name = explode(' ', $users[$session]['name'] ); ?>
+                                    <i class="fa fa-user fa-lg"></i> {{ $exploded_name[0] }}
                                 </a>
                             </li>
                             <li>
-                                <a class="pull-right" id="facebook-session" href="{{ $session_url }}" title="Logout">
+                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}" title="Logout">
                                     <i class="fa fa-sign-out fa-lg"></i> Sign out
                                 </a>
                             </li>
                         @else
                             <li>
-                                <a class="pull-right" title="Start New Ride" href="{{ $session_url }}">
+                                <a class="pull-left" title="Start New Ride" href="{{ $session_url }}">
                                     <i class="fa fa-tachometer fa-lg"></i> Drive
                                 </a>
                             </li>
                             <li>
-                                <a class="pull-right" title="My Rides" href="{{ $session_url }}">
+                                <a class="pull-left" title="My Rides" href="{{ $session_url }}">
                                     <i class="fa fa-user fa-lg"></i> My Rides
                                 </a>
                             </li>
                             <li>
-                                <a class="pull-right" id="facebook-session" href="{{ $session_url }}">
+                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}">
                                     <i class="fa fa-facebook-square fa-lg"></i> Sign in
                                 </a>
                             </li>
                         @endif
+                        <li class="pull-left">
+                            <a class="" href="#" data-mytoggler="div#introduction">
+                                <i class="fa fa-chevron-circle-down fa-lg"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>

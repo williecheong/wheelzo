@@ -5,7 +5,7 @@
 @endsection
 
 @section('my_rides')
-    active disabled
+    active
 @endsection
 
 @section('search_placeholder')
