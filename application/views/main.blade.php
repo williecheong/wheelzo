@@ -73,7 +73,7 @@
                                     <i class="fa fa-facebook-square fa-lg"></i> Login with Facebook
                                 </a>
                             @endif  
-                            <button class="btn btn-default" data-mytoggler="div#introduction,div#compact-bar">
+                            <button class="btn btn-default" data-mytoggler="div#introduction">
                                 <i class="fa fa-caret-down"></i>
                             </button>
                         </div>
