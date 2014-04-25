@@ -107,11 +107,11 @@
                                     <i class="fa fa-facebook-square fa-lg"></i> Login with Facebook
                                 </a>
                             @endif
-                            {{--
+                            <!--
                             <a class="btn btn-link btn-xs pull-right" href="#" data-mytoggler="div#introduction,div#compact-bar">
                                 <i class="fa fa-caret-up fa-lg"></i> Hide
                             </a>
-                            --}}
+							-->
                         </p>
                     </div>
                 </div>
