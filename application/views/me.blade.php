@@ -207,7 +207,7 @@
                 'theme' : 'transparent',
                 'share' : {
                   'position' : 'right',
-                  'services' : 'facebook,twitter,pinterest,reddit'
+                  'services' : 'facebook,twitter,reddit'
                 }   
               });
             </script>
