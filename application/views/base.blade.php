@@ -148,10 +148,12 @@
                     'services' : 'facebook,twitter,reddit',
                     'mobile'   :  false
                 },
-                'mobile' : {
-                    'buttonBarTheme' : 'transparent',
-                    'mobile' : false
-                }
+                // 'mobile' : {
+                //     'buttonBarTheme' : 'transparent',
+                //     'mobile' : false
+                // }
+                'mobile' : false
+
             });
         </script>
     @endif
