@@ -145,7 +145,8 @@
             'theme' : 'transparent',
             'share' : {
               'position' : 'right',
-              'services' : 'facebook,twitter,reddit'
+              'services' : 'facebook,twitter,reddit',
+              'mobile'   :  false
             }   
           });
         </script>
