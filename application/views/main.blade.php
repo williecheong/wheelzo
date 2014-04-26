@@ -25,7 +25,7 @@
                         <i class="fa fa-search fa-2x"></i> Search
                     </h3>
                     <div style="text-align:justify;">
-                        Find a relevant ride quickly and easily. Search by location, time, or even driver. Just start typing. 
+                        Find a ride quickly and easily. Search by location, departure time, drop-off spots or even the driver's name. Just start typing.
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -33,8 +33,7 @@
                         <i class="fa fa-user fa-2x"></i> Manage
                     </h3>
                     <div style="text-align:justify;">
-                        Keep track of any rides you've are a part of, all in one place.
-                    </div>
+                        View just the rides you care about in one click. Any rides you drive or a passenger of are on your personal page.
                 </div>
                 <div class="col-sm-4">
                     <h3>
