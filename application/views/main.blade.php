@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-sm-4">
                     <h3>
-                        <i class="fa fa-calendar fa-2x"></i> Manage
+                        <i class="fa fa-user fa-2x"></i> Manage
                     </h3>
                     <div style="text-align:justify;">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
