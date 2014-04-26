@@ -14,7 +14,7 @@
         $('.btn#post-ride').on('click', saveRide);
 
         // Initializes the posting of a comment when Send button is clicked
-        $('.btn#post-comment').on('click', saveComment);
+        $('form#post-comment').on('submit', saveComment);
 
         // Initializes the adding of a new dropoff location
         $('.btn#add-dropoff').on('click', addDropoff);

@@ -91,7 +91,7 @@ class User_rides extends REST_Controller {
                             echo json_encode(
                                 array(
                                     'status' => 'success',
-                                    'message' => 'Passenger successfully posted.',
+                                    'message' => 'You were successfully added to your own ride.',
                                     'user_ride' => $user_ride
                                 )
                             );
@@ -196,8 +196,10 @@ class User_rides extends REST_Controller {
                                 $output['message'] .= $old_passenger->name." successfully removed and already notified on Facebook.";
                             }
                         } else {
-                            // This driver just removed himself from his own ride. No need to notify.
+                            $output['message'] .= "You were successfully removed from your own ride.";
                         }
+
+                        $output['message'] .= "\n";
 
                         if ( $ride->driver_id != $user_ride->user_id ) {
                             $new_passenger = $this->user->retrieve_by_id( $user_ride->user_id );
@@ -221,10 +223,6 @@ class User_rides extends REST_Controller {
                                     log_message('error', $e->getMessage() );
                                 }
                                 
-                                if ( $output['message'] != '' ) {
-                                    $output['message'] .= "\n";    
-                                }   
-
                                 if ( $fb_response_to_new ) {
                                     $output['message'] .= $new_passenger->name." successfully added and notified on Facebook.";
                                 } else {
@@ -234,7 +232,7 @@ class User_rides extends REST_Controller {
                                 $output['message'] .= $new_passenger->name." successfully added and already notified on Facebook.";
                             }
                         } else {
-                            // This driver just added himself to his own ride. No need to notify.
+                            $output['message'] .= "You were successfully added to your own ride.";
                         }
 
                         echo json_encode($output);

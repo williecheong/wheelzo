@@ -36,7 +36,11 @@
                         '        <ul class="dropdown-menu text-left" role="menu">'+
                         '            ' + commentersHTML + 
                         '            <li class="divider"></li>' +  
-                        '            <li id="potential-passenger" data-user-id="0"><a href="#">Empty</a></li>' +  
+                        '            <li id="potential-passenger" data-user-id="0">'+
+                        '                <a href="#">'+
+                        '                    <i class="fa fa-minus-circle"></i> Empty'+
+                        '                </a>'+
+                        '            </li>' +  
                         '        </ul>'+
                         '    </div>'+
                         '</div>';
@@ -159,7 +163,7 @@
             $.each(commenters, function(userID, user){
                 html += '<li id="potential-passenger" data-user-id="'+userID+'">'+
                         '    <a href="#">' + 
-                        '        ' + user.name + 
+                        '        <i class="fa fa-plus-circle"></i> ' + user.name + 
                         '    </a>'+
                         '</li>'; 
             });

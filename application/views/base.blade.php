@@ -61,7 +61,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}" title="Logout">
+                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}" style="color:#B94A48;">
                                     <i class="fa fa-sign-out fa-lg"></i> Sign out
                                 </a>
                             </li>
@@ -77,7 +77,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}">
+                                <a class="pull-left" id="facebook-session" href="{{ $session_url }}" style="color:#3B5999;">
                                     <i class="fa fa-facebook-square fa-lg"></i> Sign in
                                 </a>
                             </li>

@@ -41,7 +41,10 @@
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
                     <div style="text-align:justify;">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        @if ( !$session )
+                            Login with <a href="{{ $session_url }}">Facebook</a> now.
+                        @endif
                     </div>
                 </div>
             </div>
