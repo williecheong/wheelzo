@@ -47,6 +47,7 @@
                         </div>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
+                        @yield('left_navs')
                         @if ( $session ) 
                             <li>
                                 <a class="pull-left" href="#" title="Start New Ride" data-toggle="modal" data-target="#create-ride">
@@ -81,11 +82,7 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="pull-left">
-                            <a class="" href="#" data-mytoggler="div#introduction">
-                                <i class="fa fa-chevron-circle-down fa-lg"></i>
-                            </a>
-                        </li>
+                        @yield('right_navs')
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>

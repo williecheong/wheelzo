@@ -8,6 +8,14 @@
     "Search through all active rides on Wheelzo..."
 @endsection
 
+@section('right_navs')
+    <li class="pull-left">
+        <a class="" href="#" data-mytoggler="div#introduction">
+            <i class="fa fa-chevron-circle-down fa-lg"></i>
+        </a>
+    </li>
+@endsection
+
 @section('jumbotron')
     <div class="jumbotron" id="introduction">
         <div class="container">
@@ -16,25 +24,25 @@
                     <h3>
                         <i class="fa fa-search fa-2x"></i> Search
                     </h3>
-                    <span style="text-align:justify;">
+                    <div style="text-align:justify;">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-                    </span>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <h3>
                         <i class="fa fa-calendar fa-2x"></i> Manage
                     </h3>
-                    <span style="text-align:justify;">
+                    <div style="text-align:justify;">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-                    </span>
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <h3>
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
-                    <span style="text-align:justify;">
+                    <div style="text-align:justify;">
                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>
