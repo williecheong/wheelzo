@@ -25,7 +25,7 @@
                         <i class="fa fa-search fa-2x"></i> Search
                     </h3>
                     <div style="text-align:justify;">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                        Find a relevant ride quickly and easily. Search by location, time, or even driver. Just start typing. 
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -33,7 +33,7 @@
                         <i class="fa fa-user fa-2x"></i> Manage
                     </h3>
                     <div style="text-align:justify;">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
+                        Keep track of any rides you've are a part of, all in one place.
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -41,7 +41,7 @@
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
                     <div style="text-align:justify;">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                        Wheelzo sends you facebook notifications when people are interested in your rides, or when a driver agrees to pick you up.
                         @if ( !$session )
                             Login with <a href="{{ $session_url }}">Facebook</a> now.
                         @endif
