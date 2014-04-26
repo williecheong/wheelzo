@@ -24,8 +24,14 @@
 
         // Toggles the view of channels on each product
         $('[data-mytoggler]').click(function(){
-            var toToggle = $(this).data('mytoggler');
-            $( toToggle ).toggle('fast');
+            var $element = $(this);
+            var toToggle = $element.data('mytoggler');
+            var toggleStyle = $element.data('mytoggler-style');
+            if ( toggleStyle ) {
+                $( toToggle ).toggle(toggleStyle);
+            } else {
+                $( toToggle ).toggle('fast');
+            }
         });
 
         // Initializing sliders
