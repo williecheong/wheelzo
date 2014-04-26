@@ -4,8 +4,12 @@
     prepareRide = function( event ) {
         var rideID = $(this).data('ride-id');
         if ( !rides.hasOwnProperty(rideID) ) {
-            alert("Ride is not available");
-            return;
+            var r = confirm("The ride you are seeking is no longer available.\nWould you like to refresh Wheelzo?");
+            if ( r == true ) {
+                location.reload();
+            } else {
+                return;
+            }
         }
         
         var thisRide = rides[rideID];
