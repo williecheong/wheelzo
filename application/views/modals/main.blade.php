@@ -66,8 +66,10 @@
 <div class="modal fade" id="view-ride" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header visible-xs">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
             <div class="modal-body"> 
-                <button type="button" class="visible-xs pull-right btn" data-dismiss="modal">&times;</button>    
                 <div class="row">
                     <div class="col-sm-4 text-center">
                         <p>
