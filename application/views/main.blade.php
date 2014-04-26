@@ -34,6 +34,7 @@
                     </h3>
                     <div style="text-align:justify;">
                         View just the rides you care about in one click. Any rides you drive or a passenger of are on your personal page.
+                    </div>
                 </div>
                 <div class="col-sm-4">
                     <h3>
