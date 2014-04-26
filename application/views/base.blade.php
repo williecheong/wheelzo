@@ -146,13 +146,12 @@
                 'share' : {
                     'position' : 'right',
                     'services' : 'facebook,twitter,reddit',
-                    'mobile'   :  false
-                },
+                    'responsive' : false
+                }
                 // 'mobile' : {
                 //     'buttonBarTheme' : 'transparent',
                 //     'mobile' : false
                 // }
-                'mobile' : false
 
             });
         </script>
