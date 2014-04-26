@@ -141,14 +141,18 @@
         <!-- AddThis Smart Layers BEGIN -->
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5350e5067c994429"></script>
         <script type="text/javascript">
-          addthis.layers({
-            'theme' : 'transparent',
-            'share' : {
-              'position' : 'right',
-              'services' : 'facebook,twitter,reddit',
-              'mobile'   :  false
-            }   
-          });
+            addthis.layers({
+                'theme' : 'transparent',
+                'share' : {
+                    'position' : 'right',
+                    'services' : 'facebook,twitter,reddit',
+                    'mobile'   :  false
+                },
+                'mobile' : {
+                    'buttonBarTheme' : 'transparent',
+                    'mobile' : false
+                }
+            });
         </script>
     @endif
 
