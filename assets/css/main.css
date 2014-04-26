@@ -20,13 +20,18 @@ td.ninja-field {
 }
 
 input#search-box {
-    width: 600px;
     max-width:100%;
 }
-
+    
 img#driver-picture {
     width: 100%;
     max-width: 150px;
+}
+
+div#introduction {
+    margin-top: -20px;
+    padding-top: 5px;
+    padding-bottom: 20px;
 }
 
 div#passenger-box {
@@ -61,6 +66,35 @@ textarea {
 .popover{
     min-width: 275px ! important;
 }
+
+@media(max-width:767px){
+    div#introduction {
+        display: none;
+    }
+}
+
+@media(min-width:768px){
+    input#search-box {
+        width:270px;
+    }
+}
+
+@media(min-width:992px){
+    input#search-box {
+        width:460px;
+    }
+}
+
+@media(min-width:1200px){
+    input#search-box {
+        width:650px;
+    }
+}
+
+
+/**************************** 
+    EXTERNAL REFERENCES 
+****************************/
 
 /* Input boxes with icons inside */
 .left-inner-addon {

@@ -37,6 +37,7 @@
                     <a class="navbar-brand" href="/">
                         <img class="brand" src="/assets/img/logo.png">
                     </a>
+                    @yield('sub_title')
                 </div>
                 <div class="navbar-collapse collapse">
                     <div class="navbar-form navbar-left">
