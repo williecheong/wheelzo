@@ -67,7 +67,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body"> 
-                <button type="button" class="visible-xs pull-right" data-dismiss="modal">&times;</button>    
+                <button type="button" class="visible-xs pull-right btn" data-dismiss="modal">&times;</button>    
                 <div class="row">
                     <div class="col-sm-4 text-center">
                         <p>
