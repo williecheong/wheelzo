@@ -21,8 +21,6 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css">
         <link rel="stylesheet" href="/assets/css/main.css">
         <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script type="text/javascript" src="https://w.sharethis.com/button/buttons.js"></script>
-        <script type="text/javascript">stLight.options({publisher: "c3f0d9e4-b11f-4054-99d2-e4ebec314190", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -101,11 +99,14 @@
             <footer>
                 <hr>
                 <div>
-                    <div class="pull-right hidden-xs">
-                        <span class='st_fblike_large' displayText='Facebook Like'></span>
-                        <span class='st_twitter_large' displayText='Tweet'></span>
-                        <span class='st_reddit_large' displayText='Reddit'></span>
+                    <!-- AddThis Button BEGIN -->
+                    <div class="addthis_toolbox addthis_default_style pull-right hidden-xs">
+                        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                        <a class="addthis_button_tweet"></a>
+                        <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+                        <a class="addthis_counter addthis_pill_style"></a>
                     </div>
+                    <!-- AddThis Button END -->
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
                     Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
@@ -128,6 +129,7 @@
     <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
     <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
