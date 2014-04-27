@@ -101,9 +101,9 @@
                 <div>
                     <!-- AddThis Button BEGIN -->
                     <div class="addthis_toolbox addthis_default_style pull-right hidden-xs" addthis:url="{{$_SERVER['SERVER_NAME']}}">
-                        <!-- <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> -->
-                        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=282192178572651" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+                        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
 
+                        
                         <a class="addthis_button_tweet" tw:counturl="{{$_SERVER['SERVER_NAME']}}"></a>
                     </div>
                     <!-- AddThis Button END -->
