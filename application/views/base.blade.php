@@ -103,7 +103,6 @@
                 <div>
                     <p class="pull-right hidden-xs">
                         <span class='st_fblike_large' displayText='Facebook Like'></span>
-                        <span class='st_facebook_large' displayText='Facebook'></span>
                         <span class='st_twitter_large' displayText='Tweet'></span>
                         <span class='st_reddit_large' displayText='Reddit'></span>
                     </p>
