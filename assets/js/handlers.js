@@ -87,7 +87,7 @@
     }
 
     saveComment = function( event ) {
-        var $button = $(this);
+        var $button = $(this).find('.btn');
         var $modal = $button.closest('.modal');
         
         $button.addClass('disabled');
