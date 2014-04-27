@@ -99,6 +99,12 @@
             <footer>
                 <hr>
                 <p>
+                    <span class='st__hcount' displayText=''></span>
+                    <span class='st_fblike_hcount' displayText='Facebook Like'></span>
+                    <span class='st_facebook_hcount' displayText='Facebook'></span>
+                    <span class='st_twitter_hcount' displayText='Tweet'></span>
+                    <span class='st_reddit_hcount' displayText='Reddit'></span>
+                    <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
                     Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
                     <br>
@@ -120,6 +126,8 @@
     <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "c3f0d9e4-b11f-4054-99d2-e4ebec314190", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
