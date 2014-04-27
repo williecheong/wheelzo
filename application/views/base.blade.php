@@ -21,6 +21,8 @@
         <link rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css">
         <link rel="stylesheet" href="/assets/css/main.css">
         <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({publisher: "c3f0d9e4-b11f-4054-99d2-e4ebec314190", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -126,8 +128,6 @@
     <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">stLight.options({publisher: "c3f0d9e4-b11f-4054-99d2-e4ebec314190", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
