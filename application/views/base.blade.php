@@ -100,8 +100,8 @@
                 <hr>
                 <div>
                     <!-- AddThis Button BEGIN -->
-                    <div class="addthis_toolbox addthis_default_style pull-right hidden-xs">
-                        <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="{{$_SERVER['SERVER_NAME']}}"></a>
+                    <div class="addthis_toolbox addthis_default_style pull-right hidden-xs" addthis:url="{{$_SERVER['SERVER_NAME']}}">
+                        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
                         <a class="addthis_button_tweet" tw:counturl="{{$_SERVER['SERVER_NAME']}}"></a>
                     </div>
                     <!-- AddThis Button END -->
