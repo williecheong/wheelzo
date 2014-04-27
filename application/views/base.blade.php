@@ -103,8 +103,7 @@
                     <div class="addthis_toolbox addthis_default_style pull-right hidden-xs">
                         <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
                         <a class="addthis_button_tweet"></a>
-                        <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-                        <a class="addthis_counter addthis_pill_style"></a>
+                        <a class="addthis_button_reddit"></a>
                     </div>
                     <!-- AddThis Button END -->
                     <br>
