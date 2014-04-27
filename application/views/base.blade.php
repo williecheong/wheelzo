@@ -101,7 +101,7 @@
                 <div>
                     <!-- AddThis Button BEGIN -->
                     <div class="addthis_toolbox addthis_default_style pull-right hidden-xs">
-                        <a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:counturl="{{base_url()}}"></a>
+                        <a class="addthis_button_facebook_like" fb:like:layout="button_count" addthis:url="{{base_url()}}"></a>
                         <a class="addthis_button_tweet" tw:counturl="{{base_url()}}"></a>
                     </div>
                     <!-- AddThis Button END -->
