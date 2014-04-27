@@ -125,13 +125,16 @@
         }
 
         if ( session_id ) {
+            var message = 'Write a request to join or ask questions to the driver';
+            $('.btn#delete-ride').off('click', removeRide).hide();    
+            
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
-                $modal.find('input#write-comment').attr('placeholder', 'Write about your ride or respond to potential passengers');
-            } else {
-                $modal.find('input#write-comment').attr('placeholder', 'Write a request to join or ask questions to the driver');    
+                message = 'Write about your ride or respond to potential passengers';
+                $('li#potential-passenger').on('click', handlePassenger);
+                $('.btn#delete-ride').on('click', removeRide).show();
             }
 
-            $('li#potential-passenger').on('click', handlePassenger);
-        }
+            $modal.find('input#write-comment').attr('placeholder', message);
+        }    
     }
 

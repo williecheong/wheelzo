@@ -10,11 +10,41 @@
             success: function( response ) {
                 console.log(response.message);
                 
-                setTimeout(function() {
-                    // Simple page refresh for now
+                if (response.status == 'success') {
                     $button.html('<i class="fa fa-refresh"></i> Refreshing');
-                    location.href = '/?ride=' + response.ride.id;
-                }, 1500);
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.href = '/?ride=' + response.ride.id;
+                    }, 1500);                    
+                } else {
+                    $button.removeClass('disabled');
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
+    function deleteRide( rideID, $button ) {
+        $.ajax({
+            url: '/api/rides/index/' + rideID,
+            type: 'DELETE',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');               
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.reload();
+                    }, 1500);
+                } else {
+                    $button.removeClass('disabled');
+                }
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');

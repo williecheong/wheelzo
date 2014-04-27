@@ -99,6 +99,10 @@
                     </div>
                     <div class="col-xs-2">
                         <i class="fa fa-arrow-circle-right fa-2x"></i>
+                        <br>
+                        <button class="btn btn-danger btn-xs" id="delete-ride">
+                            Delete
+                        </button>
                     </div>
                     <div class="col-xs-5">
                         <span class="lead" id="ride-destination"></span> 

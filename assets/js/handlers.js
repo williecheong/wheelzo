@@ -86,6 +86,21 @@
         postRide( extractModalRide($modal), $button );
     }
 
+    removeRide = function( event ) {
+        var r = confirm("Delete this ride permanently?");
+        if ( r == true ) {
+            var $button = $(this);
+            var $modal = $button.closest('.modal');
+            var rideID = $modal.data('rideID');
+            
+            $button.addClass('disabled');
+
+            deleteRide( rideID, $button ); 
+        } else {
+            return;
+        }
+    }
+
     saveComment = function( event ) {
         var $button = $(this);
         var $modal = $button.closest('.modal');
