@@ -100,12 +100,14 @@
             <!-- Footer -->
             <footer>
                 <hr>
-                <p>
-                    <span class='st__hcount' displayText=''></span>
-                    <span class='st_fblike_hcount' displayText='Facebook Like'></span>
-                    <span class='st_facebook_hcount' displayText='Facebook'></span>
-                    <span class='st_twitter_hcount' displayText='Tweet'></span>
-                    <span class='st_reddit_hcount' displayText='Reddit'></span>
+                <div>
+                    <p class="pull-right">
+                        <span class='st_fblike_vcount' displayText='Facebook Like'></span>
+                        <span class='st_facebook_vcount' displayText='Facebook'></span>
+                        <span class='st_twitter_vcount' displayText='Tweet'></span>
+                        <span class='st__vcount' displayText=''></span>
+                        <span class='st_reddit_vcount' displayText='Reddit'></span>
+                    </p>
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
                     Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
@@ -113,7 +115,7 @@
                     <small>
                         <i class="fa fa-lock"></i> Verified secure by <a href="http://www.startssl.com/" title="SSL Secured By StartCom">StartSSL</a>
                     </small>
-                </p>
+                </div>
                 <br>
                 <br>
             </footer><!-- /.footer -->
