@@ -105,7 +105,6 @@
                         <a class="addthis_button_tweet" tw:counturl="{{base_url()}}"></a>
                     </div>
                     <!-- AddThis Button END -->
-                    <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
                     Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
                     <br>
