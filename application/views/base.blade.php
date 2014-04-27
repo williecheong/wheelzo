@@ -145,9 +145,9 @@
                 'theme' : 'transparent',
                 'share' : {
                     'position' : 'right',
-                    'services' : 'facebook,twitter,reddit',
-                    'responsive' : false
-                }
+                    'services' : 'facebook,twitter,reddit'
+                },
+                'responsive' : false            
                 // 'mobile' : {
                 //     'buttonBarTheme' : 'transparent',
                 //     'mobile' : false
