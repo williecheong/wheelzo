@@ -101,12 +101,11 @@
             <footer>
                 <hr>
                 <div>
-                    <p class="pull-right">
-                        <span class='st_fblike_vcount' displayText='Facebook Like'></span>
-                        <span class='st_facebook_vcount' displayText='Facebook'></span>
-                        <span class='st_twitter_vcount' displayText='Tweet'></span>
-                        <span class='st__vcount' displayText=''></span>
-                        <span class='st_reddit_vcount' displayText='Reddit'></span>
+                    <p class="pull-right hidden-xs">
+                        <span class='st_fblike_large' displayText='Facebook Like'></span>
+                        <span class='st_facebook_large' displayText='Facebook'></span>
+                        <span class='st_twitter_large' displayText='Tweet'></span>
+                        <span class='st_reddit_large' displayText='Reddit'></span>
                     </p>
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
