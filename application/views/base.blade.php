@@ -118,7 +118,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
+    <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
     <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
