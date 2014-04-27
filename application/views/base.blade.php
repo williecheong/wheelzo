@@ -101,11 +101,11 @@
             <footer>
                 <hr>
                 <div>
-                    <p class="pull-right hidden-xs">
+                    <div class="pull-right hidden-xs">
                         <span class='st_fblike_large' displayText='Facebook Like'></span>
                         <span class='st_twitter_large' displayText='Tweet'></span>
                         <span class='st_reddit_large' displayText='Reddit'></span>
-                    </p>
+                    </div>
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
                     Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
