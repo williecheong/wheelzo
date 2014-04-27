@@ -14,7 +14,12 @@
         $('.btn#post-ride').on('click', saveRide);
 
         // Initializes the posting of a comment when Send button is clicked
-        $('form#post-comment').on('submit', saveComment);
+        $('.btn#post-comment').on('click', saveComment);
+        $('input#write-comment').on('keyup', function(event) {
+            if ( event.keyCode == 13 ){
+                $('.btn#post-comment').trigger('click');
+            }
+        });
 
         // Initializes the adding of a new dropoff location
         $('.btn#add-dropoff').on('click', addDropoff);

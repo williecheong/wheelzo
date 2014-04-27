@@ -111,16 +111,14 @@
                     <div class="col-lg-12" id="ride-comments"></div>
                     @if ( $session )
                         <div class="col-lg-12 media">
-                            <form role="form" id="post-comment">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="write-comment" placeholder="" autocomplete="off">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <i class="fa fa-comment fa-lg"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </form>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="write-comment" placeholder="" autocomplete="off">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="post-comment">
+                                        <i class="fa fa-comment fa-lg"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                     @endif
                 </div>

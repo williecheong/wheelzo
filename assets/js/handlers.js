@@ -87,16 +87,20 @@
     }
 
     saveComment = function( event ) {
-        var $button = $(this).find('.btn');
+        var $button = $(this);
         var $modal = $button.closest('.modal');
+        var $input = $modal.find('input#write-comment');
         
         $button.addClass('disabled');
-
+        $input.attr('disabled', true);
+        
         var rideID = $modal.data('rideID');
-        var comment = $modal.find('input#write-comment').val();
+        var comment = $input.val();
+
         if ( comment == "" ) {
             alert("Write a comment");
             $button.removeClass('disabled');
+            $input.removeAttr('disabled');
             return false;
         }
 
@@ -114,17 +118,20 @@
                 if ( response.status == 'success' ){
                     refreshRides(function(){
                         $button.removeClass('disabled');
-                        $modal.find('input#write-comment').val('');
+                        $input.removeAttr('disabled');
+                        $input.val('');
                         $('tr[data-ride-id="'+rideID+'"]').trigger('click');
                     });
 
                 } else {
                     $button.removeClass('disabled');
+                    $input.removeAttr('disabled');
                 }
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');
                 $button.removeClass('disabled');
+                $input.removeAttr('disabled');
                 console.log(response);
             }
         });
