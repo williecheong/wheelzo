@@ -126,6 +126,13 @@
                         </div>
                     @endif
                 </div>
+                <div class="row" style="margin-top:15px;">
+                    <div class="col-xs-12 text-right">
+                        <a id="go-to-ride" href="?ride=0">
+                            Go to ride <i class="fa fa-angle-double-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

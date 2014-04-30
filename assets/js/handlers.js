@@ -47,6 +47,9 @@
         $modal.find('#ride-comments')
               .html( commentsTemplate(thisRide.comments) );
 
+        $modal.find('a#go-to-ride')
+              .attr('href', '?ride='+rideID);
+
         $modal.data('rideID', rideID);
 
         initializeRide( rideID )
