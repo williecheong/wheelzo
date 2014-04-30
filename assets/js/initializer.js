@@ -99,14 +99,13 @@
         });
         
         $('input#search-box').on('keyup focusout', function(){
-            var searchTerm = $(this).val();
-            dataTable.fnFilter( searchTerm );
+            doSearch( dataTable );
         });
 
         if ( loadRide ) {
             dataTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
-        } 
+        }
     }
 
     function initializeRide( rideID ) {        

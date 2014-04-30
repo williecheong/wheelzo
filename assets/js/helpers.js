@@ -127,6 +127,11 @@
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
+    function doSearch( dataTable ) {
+        var searchTerm = $('input#search-box').val();
+        dataTable.fnFilter( searchTerm );
+    }
+
     function validateRide( $modal ) {
         var ride = extractModalRide( $modal );
         
