@@ -92,6 +92,21 @@
 
         <div class="container">
             @yield('table')
+            <p class="text-center">
+                <small>
+                    Can't find the ideal ride? <br>
+                    Want notifications when a driver posts it? <br>
+                    @if ( $session )  
+                        <a class="btn btn-default btn-xs" href="#" data-toggle="modal" data-target="#create-request">
+                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        </a>
+                    @else
+                        <a class="btn btn-default btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        </a>
+                    @endif
+                </small>
+            </p>
         </div>
 
         <div class="container">
