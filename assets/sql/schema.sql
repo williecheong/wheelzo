@@ -44,6 +44,16 @@ CREATE TABLE `comment` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+CREATE TABLE `request` (
+   `id` int(11) not null auto_increment,
+   `user_id` int(11) not null,
+   `origin` varchar(255) not null,
+   `destination` varchar(255) not null,
+   `start` datetime not null,
+   `last_updated` timestamp default current_timestamp on update current_timestamp,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 CREATE TABLE `feedback` (
    `id` int(11) not null auto_increment,
    `email` varchar(255),
