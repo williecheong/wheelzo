@@ -20,7 +20,9 @@
  */
 
 if ( $_SERVER['SERVER_ADDR'] == '127.0.0.1' ) {
-    define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'development');
+} else if ( $_SERVER['SERVER_NAME'] == 'staging.wheelzo.com' ) {
+	define('ENVIRONMENT', 'staging');
 } else {
     define('ENVIRONMENT', 'production');
 }
