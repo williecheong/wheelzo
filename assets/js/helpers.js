@@ -124,6 +124,59 @@
         });    
     }
 
+    function postRiderequest( saveRiderequest, $button ) {
+        $.ajax({
+            url: '/api/riderequests',
+            data: saveRiderequest,
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.reload();
+                    }, 1500);                    
+                } else {
+                    $button.removeClass('disabled');
+                }
+            },
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
+    function deleteRiderequest( riderequestID, $button ) {
+        $.ajax({
+            url: '/api/riderequests/index/' + riderequestID,
+            type: 'DELETE',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');               
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.reload();
+                    }, 1500);
+                } else {
+                    $button.removeClass('disabled');
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
@@ -185,6 +238,33 @@
             console.log("Object rides has been refreshed.")
             callback();
         });
+    }
+
+    function validateRiderequest( $modal ) {
+        var riderequest = extractModalRiderequest( $modal );
+        
+        if ( riderequest.origin.length == 0 || riderequest.destination.length == 0 ) {
+            return 'Origin and destination cannot be empty.';
+
+        } else if ( riderequest.origin == riderequest.destination ) {
+            return 'Origin and destination cannot be the same.';
+
+        } else if ( riderequest.departureDate.length == 0 || riderequest.departureTime == 0 ) {
+            return 'Departure date and time must be specified.';
+        }
+
+        return false;
+    }
+
+    function extractModalRiderequest( $modal ) {
+        var data = {
+            origin          : $modal.find('input#request-origin').val(),
+            destination     : $modal.find('input#request-destination').val(),
+            departureDate   : $modal.find('input#request-departure-date').val(),
+            departureTime   : $modal.find('input#request-departure-time').val()
+        };
+
+        return data;
     }
 
 /*******************

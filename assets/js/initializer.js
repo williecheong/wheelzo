@@ -13,6 +13,9 @@
         // Initializes the posting of a ride when Publish button is clicked
         $('.btn#post-ride').on('click', saveRide);
 
+        // Initializes the posting of a request when Submit button is clicked
+        $('.btn#post-request').on('click', saveRiderequest);
+
         // Initializes the posting of a comment when Send button is clicked
         $('.btn#post-comment').on('click', saveComment);
         $('input#write-comment').on('keyup', function(event) {

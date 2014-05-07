@@ -104,6 +104,22 @@
         }
     }
 
+    saveRiderequest = function( event ) {
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        
+        $button.addClass('disabled');
+
+        var validationFailed = validateRiderequest( $modal );
+        if ( validationFailed ) {
+            alert( validationFailed );
+            $button.removeClass('disabled');
+            return;
+        }
+
+        postRiderequest( extractModalRiderequest($modal), $button );
+    }
+
     saveComment = function( event ) {
         var $button = $(this);
         var $modal = $button.closest('.modal');

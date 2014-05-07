@@ -155,10 +155,10 @@
                         <label class="control-label" for="origin">Travelling</label>  
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
+                                <input type="text" class="form-control add_suggested_places" id="request-origin" placeholder="Origin" autocomplete="off">  
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
+                                <input type="text" class="form-control add_suggested_places" id="request-destination" placeholder="Destination" autocomplete="off">  
                             </div>
                         </div>
                     </div>
@@ -166,10 +166,10 @@
                         <label class="control-label" for="departure-date">Departure Date and Time</label>  
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" class="form-control datepicker" id="departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
+                                <input type="text" class="form-control datepicker" id="request-departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control timepicker" id="departure-time" placeholder="hh:mm pm" readonly="readonly">
+                                <input type="text" class="form-control timepicker" id="request-departure-time" placeholder="hh:mm pm" readonly="readonly">
                             </div>
                         </div>
                     </div>

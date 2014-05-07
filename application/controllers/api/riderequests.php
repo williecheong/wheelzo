@@ -1,7 +1,7 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/REST_Controller.php');
 
-class Requests extends REST_Controller {
+class Riderequests extends REST_Controller {
     
     function __construct() {
         parent::__construct();
@@ -15,18 +15,6 @@ class Requests extends REST_Controller {
         );
     }
 
-    public function index_get() {
-        $requests = $this->request->retrieve_active();
-        echo json_encode($requests);
-        return;
-    }
-
-    public function me_get() {
-        $requests = $this->request->retrieve_personal();
-        echo json_encode($requests);
-        return;
-    }    
-
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
             $data = $this->post();
@@ -39,7 +27,7 @@ class Requests extends REST_Controller {
             $start = strtotime( $departure_date . ' ' . $departure_time );
             $start = date('Y-m-d H:i:s', $start);
 
-            $request_id = $this->request->create(  
+            $riderequest_id = $this->riderequest->create(  
                 array(  
                     'user_id' => $this->session->userdata('user_id'),
                     'origin' => $origin,
@@ -47,13 +35,13 @@ class Requests extends REST_Controller {
                     'start' => $start  
                 )
             );
-            $request = $this->request->retrieve_by_id( $request_id );
+            $riderequest = $this->riderequest->retrieve_by_id( $riderequest_id );
             
             echo json_encode(
                 array(
                     'status' => 'success',
                     'message' => 'Request successfully posted.',
-                    'request' => $request
+                    'riderequest' => $riderequest
                 )
             );
     
@@ -69,21 +57,21 @@ class Requests extends REST_Controller {
         return;
     }
 
-    public function index_delete( $request_id = '' ) {
+    public function index_delete( $riderequest_id = '' ) {
         if ( $this->session->userdata('user_id') ) {            
             $user_id = $this->session->userdata('user_id');
             
-            if ( $this->_verify_user( $request_id, $user_id) ) {
-                $this->request->delete(
+            if ( $this->_verify_user( $riderequest_id, $user_id) ) {
+                $this->riderequest->delete(
                     array(
-                        'id' => $request_id
+                        'id' => $riderequest_id
                     )
                 );
 
                 echo json_encode(
                     array(
                         'status' => 'success',
-                        'message' => "Request successfully deleted."
+                        'message' => 'Request successfully deleted.'
                     )
                 );
             } else {
@@ -102,13 +90,15 @@ class Requests extends REST_Controller {
                 )
             );
         }
+
+        return;
     }
 
-    private function _verify_user( $request_id, $user_id ) {
-        $request = $this->request->retrieve_by_id( $request_id );
+    private function _verify_user( $riderequest_id, $user_id ) {
+        $riderequest = $this->riderequest->retrieve_by_id( $riderequest_id );
 
-        if ( $request ) {
-            if ( $request->user_id == $user_id ) {
+        if ( $riderequest ) {
+            if ( $riderequest->user_id == $user_id ) {
                 return true;
             }
         }
