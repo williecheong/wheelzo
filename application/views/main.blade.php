@@ -78,7 +78,7 @@
                         <?php } ?>
                     </td>
                     <td>
-                        {{ date( 'M j, l @ g:ia', strtotime($ride->start) ) }}
+                        {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
                     </td>
                     <td>
                         @if ( $ride->driver_id == $session )
