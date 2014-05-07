@@ -1,7 +1,7 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/REST_Controller.php');
 
-class Riderequests extends REST_Controller {
+class Rrequests extends REST_Controller {
     
     function __construct() {
         parent::__construct();
@@ -27,7 +27,7 @@ class Riderequests extends REST_Controller {
             $start = strtotime( $departure_date . ' ' . $departure_time );
             $start = date('Y-m-d H:i:s', $start);
 
-            $riderequest_id = $this->riderequest->create(  
+            $rrequest_id = $this->rrequest->create(  
                 array(  
                     'user_id' => $this->session->userdata('user_id'),
                     'origin' => $origin,
@@ -35,13 +35,13 @@ class Riderequests extends REST_Controller {
                     'start' => $start  
                 )
             );
-            $riderequest = $this->riderequest->retrieve_by_id( $riderequest_id );
+            $rrequest = $this->rrequest->retrieve_by_id( $rrequest_id );
             
             echo json_encode(
                 array(
                     'status' => 'success',
                     'message' => 'Request successfully posted.',
-                    'riderequest' => $riderequest
+                    'rrequest' => $rrequest
                 )
             );
     
@@ -57,14 +57,14 @@ class Riderequests extends REST_Controller {
         return;
     }
 
-    public function index_delete( $riderequest_id = '' ) {
+    public function index_delete( $rrequest_id = '' ) {
         if ( $this->session->userdata('user_id') ) {            
             $user_id = $this->session->userdata('user_id');
             
-            if ( $this->_verify_user( $riderequest_id, $user_id) ) {
-                $this->riderequest->delete(
+            if ( $this->_verify_user( $rrequest_id, $user_id) ) {
+                $this->rrequest->delete(
                     array(
-                        'id' => $riderequest_id
+                        'id' => $rrequest_id
                     )
                 );
 
@@ -94,11 +94,11 @@ class Riderequests extends REST_Controller {
         return;
     }
 
-    private function _verify_user( $riderequest_id, $user_id ) {
-        $riderequest = $this->riderequest->retrieve_by_id( $riderequest_id );
+    private function _verify_user( $rrequest_id, $user_id ) {
+        $rrequest = $this->rrequest->retrieve_by_id( $rrequest_id );
 
-        if ( $riderequest ) {
-            if ( $riderequest->user_id == $user_id ) {
+        if ( $rrequest ) {
+            if ( $rrequest->user_id == $user_id ) {
                 return true;
             }
         }

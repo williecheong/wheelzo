@@ -124,10 +124,10 @@
         });    
     }
 
-    function postRiderequest( saveRiderequest, $button ) {
+    function postRrequest( saveRrequest, $button ) {
         $.ajax({
-            url: '/api/riderequests',
-            data: saveRiderequest,
+            url: '/api/rrequests',
+            data: saveRrequest,
             type: 'POST',
             dataType: "JSON",
             success: function( response ) {
@@ -151,9 +151,9 @@
         });
     }
 
-    function deleteRiderequest( riderequestID, $button ) {
+    function deleteRrequest( rrequestID, $button ) {
         $.ajax({
-            url: '/api/riderequests/index/' + riderequestID,
+            url: '/api/rrequests/index/' + riderequestID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -240,23 +240,23 @@
         });
     }
 
-    function validateRiderequest( $modal ) {
-        var riderequest = extractModalRiderequest( $modal );
+    function validateRrequest( $modal ) {
+        var rrequest = extractModalRrequest( $modal );
         
-        if ( riderequest.origin.length == 0 || riderequest.destination.length == 0 ) {
+        if ( rrequest.origin.length == 0 || rrequest.destination.length == 0 ) {
             return 'Origin and destination cannot be empty.';
 
-        } else if ( riderequest.origin == riderequest.destination ) {
+        } else if ( rrequest.origin == rrequest.destination ) {
             return 'Origin and destination cannot be the same.';
 
-        } else if ( riderequest.departureDate.length == 0 || riderequest.departureTime == 0 ) {
+        } else if ( rrequest.departureDate.length == 0 || rrequest.departureTime == 0 ) {
             return 'Departure date and time must be specified.';
         }
 
         return false;
     }
 
-    function extractModalRiderequest( $modal ) {
+    function extractModalRrequest( $modal ) {
         var data = {
             origin          : $modal.find('input#request-origin').val(),
             destination     : $modal.find('input#request-destination').val(),

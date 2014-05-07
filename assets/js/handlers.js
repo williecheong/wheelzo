@@ -104,20 +104,20 @@
         }
     }
 
-    saveRiderequest = function( event ) {
+    saveRrequest = function( event ) {
         var $button = $(this);
         var $modal = $button.closest('.modal');
         
         $button.addClass('disabled');
 
-        var validationFailed = validateRiderequest( $modal );
+        var validationFailed = validateRrequest( $modal );
         if ( validationFailed ) {
             alert( validationFailed );
             $button.removeClass('disabled');
             return;
         }
 
-        postRiderequest( extractModalRiderequest($modal), $button );
+        postRrequest( extractModalRrequest($modal), $button );
     }
 
     saveComment = function( event ) {

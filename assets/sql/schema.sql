@@ -44,7 +44,7 @@ CREATE TABLE `comment` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-CREATE TABLE `riderequest` (
+CREATE TABLE `rrequest` (
    `id` int(11) not null auto_increment,
    `user_id` int(11) not null,
    `origin` varchar(255) not null,
