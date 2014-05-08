@@ -17,7 +17,7 @@ class Comments extends REST_Controller {
 
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->post();
+            $data = clean_input( $this->post() );
 
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
             $comment = isset($data['comment']) ? $data['comment'] : '';
@@ -29,7 +29,7 @@ class Comments extends REST_Controller {
                     array(  
                         'user_id' => $this->session->userdata('user_id'),
                         'ride_id' => $ride_id,
-                        'comment' => htmlspecialchars($comment)
+                        'comment' => $comment
                     )
                 );
 

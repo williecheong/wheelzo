@@ -17,7 +17,7 @@ class Rrequests extends REST_Controller {
 
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->post();
+            $data = clean_input( $this->post() );
 
             $origin = isset($data['origin']) ? $data['origin'] : '';
             $destination = isset($data['destination']) ? $data['destination'] : '';

@@ -17,7 +17,7 @@ class User_rides extends REST_Controller {
 
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->post();
+            $data = clean_input( $this->post() );
 
             $driver_id = $this->session->userdata('user_id');
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
@@ -134,7 +134,7 @@ class User_rides extends REST_Controller {
 
     public function index_put() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->put();
+            $data = clean_input( $this->put() );
 
             $driver_id = $this->session->userdata('user_id');
             $user_ride_id = isset($data['user-rideID']) ? $data['user-rideID'] : '';
