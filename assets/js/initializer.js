@@ -11,8 +11,12 @@
         $('tr[data-ride-id]').on('click', prepareRide);
 
         // Initializes the preparation for rrequest view on click of a row
-        $('tr[data-rrequest-id]').on('click', prepareRrequest);
+        $('table.rides-table tbody tr[data-rrequest-id]').on('click', prepareRrequest);
         $('.btn#delete-rrequest').on('click', removeRrequest);
+
+        $('table.rrequests-table tbody tr[data-rrequest-id]').on('click', function(){
+            $(this).toggleClass('success');
+        });
 
         // Initializes the posting of a ride when Publish button is clicked
         $('.btn#post-ride').on('click', saveRide);
@@ -106,13 +110,54 @@
         });
         
         $('input#search-box').on('keyup focusout', function(){
-            doSearch( rideTable );
+            searchRides( rideTable );
         });
 
         if ( loadRide ) {
             rideTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
         }
+
+        var rrequestTable = $('table.rrequests-table').dataTable({
+            "bPaginate": false,
+            "sScrollY": "50px",
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": false,
+            "sDom" : '',
+            "aoColumns": [
+                { "sName": "requester" }, 
+                { "sName": "origin" },
+                { "sName": "destination" },
+                { "sName": "departure" }            
+            ]
+        });
+        
+        $('input#origin, input#destination, input#departure-date').on('keyup focusout change', function(){
+            $('table.rrequests-table tbody tr').removeClass('success');
+
+            var columnName = $(this).attr('id');
+            var rowValue = $(this).val();
+
+            if ( columnName == 'departure-date' ) {
+                columnName = 'departure';
+                rowValue = moment( $(this).val() ).format('MMMM-D');
+            }
+
+            var searchParam = {};
+            searchParam[columnName] = rowValue;
+            rrequestTable.fnMultiFilter( searchParam );
+
+            if ( $('table.rrequests-table tbody tr').length < 6 ) {
+                $('div.non-rrequests-table-container').hide();
+                $('div.rrequests-table-container').show();
+            } else {
+                $('div.rrequests-table-container').hide();
+                $('div.non-rrequests-table-container').show();
+            }
+        });
     }
 
     function initializeRide( rideID ) {        

@@ -97,6 +97,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
+                    {{--
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -111,6 +112,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    --}}
                     <br>
                     <div class="well well-sm">
                         <i class="fa fa-warning"></i> 
