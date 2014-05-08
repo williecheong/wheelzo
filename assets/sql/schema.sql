@@ -50,6 +50,7 @@ CREATE TABLE `rrequest` (
    `origin` varchar(255) not null,
    `destination` varchar(255) not null,
    `start` datetime not null,
+   `invitations` varchar(255),
    `last_updated` timestamp default current_timestamp on update current_timestamp,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
