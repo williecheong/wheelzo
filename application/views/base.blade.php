@@ -134,6 +134,7 @@
     </body>
 
     @include('modals/main')
+    @yield('custom_modals')
     @include('modals/feedback')
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

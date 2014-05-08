@@ -66,8 +66,14 @@ class Main extends CI_Controller {
         }
 
         $view = 'main';
+        $my_rrequests = array();
         if ( $load_personal ) {
             $view = 'me';
+            $my_rrequests = $this->rrequest->retrieve(
+                array(
+                    'user_id' => $this->session->userdata('user_id')
+                )
+            );
         }
 
         $this->blade->render($view, 
@@ -76,6 +82,8 @@ class Main extends CI_Controller {
                 'rides' => $rides,
                 'session' => $this->session->userdata('user_id'),
                 'session_url' => $this->facebook_url,
+                'my_rrequests' => $my_rrequests,
+                'rrequests' => $this->rrequest->retrieve_active(),
                 'request_ride_id' => $this->input->get('ride')
             )
         );

@@ -28,7 +28,7 @@
                 <th class="origin">Origin</th>  
                 <th class="destination">Destination</th>  
                 <th class="departure">Departure</th> 
-                <th class="price">Price</th>
+                <th class="price">Type</th>
                 <th class="ninja-header">Driver</th>
                 <th class="ninja-header">Dropoffs</th>
                 <th class="ninja-header">Encoded ID</th>
@@ -63,6 +63,27 @@
                     <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
                 </tr>
             @endforeach
+                
+            @foreach( $my_rrequests as $my_rrequest )
+                <tr data-request-id="{{ $my_rrequest->id }}">
+                    <td>{{ $my_rrequest->origin }}</td>
+                    <td>
+                        {{ $my_rrequest->destination }}
+                    </td>
+                    <td>
+                        {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                    </td>
+                    <td>
+                        <i class="fa fa-bullhorn"></i> Request
+                    </td>
+                    <td class="ninja-field"></td>
+                    <td class="ninja-field"></td>
+                    <td class="ninja-field"></td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('custom_modals')
 @endsection

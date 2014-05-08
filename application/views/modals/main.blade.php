@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="form-group">  
-                        <label class="control-label" for="departure-date">Departure Date and Time</label>  
+                        <label class="control-label" for="departure-date">Preferred Departure Date and Time</label>  
                         <div class="row">
                             <div class="col-sm-6">
                                 <input type="text" class="form-control datepicker" id="request-departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
