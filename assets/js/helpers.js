@@ -214,6 +214,11 @@
             }
         });
 
+        var invitees = [];
+        $modal.find('tr[data-rrequest-id].success').each(function(){
+            invitees.push( $(this).data('rrequest-id') );
+        });
+
         var data = {
             origin          : $modal.find('input#origin').val(),
             destination     : $modal.find('input#destination').val(),
@@ -221,7 +226,8 @@
             departureTime   : $modal.find('input#departure-time').val(),
             price           : $modal.find('span#price').text(),
             capacity        : $modal.find('span#capacity').text(),
-            dropOffs        : dropoffs
+            dropOffs        : dropoffs,
+            invitees        : invitees
         };
 
         return data;

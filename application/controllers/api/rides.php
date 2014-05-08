@@ -31,6 +31,7 @@ class Rides extends REST_Controller {
         if ( $this->session->userdata('user_id') ) {            
             $data = clean_input( $this->post() );
 
+            $driver_id = $this->session->userdata('user_id');
             $origin = isset($data['origin']) ? $data['origin'] : '';
             $destination = isset($data['destination']) ? $data['destination'] : '';
             $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
@@ -45,7 +46,7 @@ class Rides extends REST_Controller {
 
             $ride_id = $this->ride->create(  
                 array(  
-                    'driver_id' => $this->session->userdata('user_id'),
+                    'driver_id' => $driver_id,
                     'origin' => $origin,
                     'destination' => $destination,
                     'capacity' => $capacity,
@@ -55,11 +56,54 @@ class Rides extends REST_Controller {
                 )
             );
             $ride = $this->ride->retrieve_by_id( $ride_id );
-            
+            $output_message = "Ride successfully posted.";
+
+            $driver = $this->user->retrieve_by_id( $driver_id );
+            $invitees = isset($data['invitees']) ? $data['invitees'] : array();
+            foreach( $invitees as $invitee ) {
+                $rrequest = $this->rrequest->retrieve_by_id( $invitee );
+                if ( $rrequest ) {
+                    $passenger = $this->user->retrieve_by_id( $rrequest->user_id );
+                    if ( $passenger ) {
+                        $notification_type = $ride->id . NOTIFY_INVITED; 
+                        $to_notify = $this->user->to_notify( $driver->id, $notification_type );
+
+                        if ( $to_notify ) {
+                            $fb_response = false;
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $passenger->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb?goto='.$ride->id,
+                                        'template' => '@[' . $driver->facebook_id . '] invited you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+
+                            if ( $fb_response ) {
+                                $output_message .= "\n" . $passenger->name . " successfully notified on Facebook about this invitation.";
+                            } else {
+                                $output_message .= "\n" . $passenger->name . " could not be notified on Facebook about this invitation.";
+                            }
+                        } else {
+                            $output_message .= "\n" . $passenger->name . " was already notified on Facebook about this invitation.";
+                        }
+                    } else {
+                        $output_message .= "\nPassenger of ride request not found. So weird.";
+                    }
+                } else {
+                    $output_message .= "\nRide request not found. Stop hacking.";
+                }
+            }
+
             echo json_encode(
                 array(
                     'status' => 'success',
-                    'message' => 'Ride successfully posted.',
+                    'message' => $output_message,
                     'ride' => $ride
                 )
             );
@@ -114,7 +158,7 @@ class Rides extends REST_Controller {
                         $driver = $this->user->retrieve_by_id( $ride->driver_id );
                         $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
                         
-                        $notification_type = $ride->id . 'D';
+                        $notification_type = $ride->id . NOTIFY_DELETED;
                         $to_notify = $this->user->to_notify( $old_passenger->id, $notification_type );
                         
                         if ( $to_notify ) {        

@@ -39,7 +39,7 @@ class Comments extends REST_Controller {
                     $driver = $this->user->retrieve_by_id( $ride->driver_id );
                     $commenter = $this->user->retrieve_by_id( $comment->user_id );
 
-                    $notification_type = $ride->id . 'C'; 
+                    $notification_type = $ride->id . NOTIFY_COMMENT; 
                     $to_notify = $this->user->to_notify( $driver->id, $notification_type );
 
                     if ( $to_notify ) {

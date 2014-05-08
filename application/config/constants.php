@@ -11,8 +11,12 @@ define('CURRENT_VERSION',   '0.9');
 define('FB_APPID',          '282192178572651');
 define('FB_SECRET',         '4e20bf730703c8086620ba26693de1c2');
 
-define('WHEELZO_DELIMITER', '{?}');
-
+define('WHEELZO_DELIMITER',     '{?}');
+define('NOTIFY_ASSIGNED',       'A');
+define('NOTIFY_COMMENT',        'C');
+define('NOTIFY_REMOVED',        'R');
+define('NOTIFY_DELETED',        'D');
+define('NOTIFY_INVITED',        'I');
 
 /*
 |--------------------------------------------------------------------------
