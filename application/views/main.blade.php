@@ -53,7 +53,7 @@
 @endsection
 
 @section('table')
-    <table class="table table-hover">
+    <table class="table table-hover rides-table">
         <thead>
             <tr>
                 <th class="origin">Origin</th>  

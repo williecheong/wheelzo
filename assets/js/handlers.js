@@ -56,6 +56,14 @@
         $modal.modal('show');
     }
 
+    prepareRrequest = function( event ) {
+        var rrequestID = $(this).data('rrequest-id');
+        var $modal = $('.modal#view-rrequest');
+
+        $modal.data('rrequestID', rrequestID);
+        $modal.modal('show');
+    }
+
     addDropoff = function( event ) {
         $button = $(this);
         $target = $button.closest('div#destination-group');
@@ -118,6 +126,21 @@
         }
 
         postRrequest( extractModalRrequest($modal), $button );
+    }
+
+    removeRrequest = function( event ) {
+        var r = confirm("Delete this ride request permanently?");
+        if ( r == true ) {
+            var $button = $(this);
+            var $modal = $button.closest('.modal');
+            var rrequestID = $modal.data('rrequestID');
+            
+            $button.addClass('disabled');
+
+            deleteRrequest( rrequestID, $button ); 
+        } else {
+            return;
+        }
     }
 
     saveComment = function( event ) {

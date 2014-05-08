@@ -153,7 +153,7 @@
 
     function deleteRrequest( rrequestID, $button ) {
         $.ajax({
-            url: '/api/rrequests/index/' + riderequestID,
+            url: '/api/rrequests/index/' + rrequestID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -180,9 +180,9 @@
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
-    function doSearch( dataTable ) {
+    function doSearch( rideTable ) {
         var searchTerm = $('input#search-box').val();
-        dataTable.fnFilter( searchTerm );
+        rideTable.fnFilter( searchTerm );
     }
 
     function validateRide( $modal ) {

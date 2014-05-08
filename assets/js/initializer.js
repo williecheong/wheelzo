@@ -10,6 +10,10 @@
         // Initializes the preparation for ride view on click of a row
         $('tr[data-ride-id]').on('click', prepareRide);
 
+        // Initializes the preparation for rrequest view on click of a row
+        $('tr[data-rrequest-id]').on('click', prepareRrequest);
+        $('.btn#delete-rrequest').on('click', removeRrequest);
+
         // Initializes the posting of a ride when Publish button is clicked
         $('.btn#post-ride').on('click', saveRide);
 
@@ -91,7 +95,7 @@
         });
 
         // Initializing table sorter
-        var dataTable = $('table').dataTable({
+        var rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
@@ -102,11 +106,11 @@
         });
         
         $('input#search-box').on('keyup focusout', function(){
-            doSearch( dataTable );
+            doSearch( rideTable );
         });
 
         if ( loadRide ) {
-            dataTable.fnFilter( loadRide )
+            rideTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
         }
     }
