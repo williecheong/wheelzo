@@ -76,7 +76,7 @@ class Rides extends REST_Controller {
                                     'POST', 
                                     array(
                                         'href' => '/fb?goto='.$ride->id,
-                                        'template' => '@[' . $driver->facebook_id . '] invited you to a ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                        'template' => '@[' . $driver->facebook_id . '] invited you to a ride going from '.$ride->origin.' to '.$ride->destination.', scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
                                         'access_token' => FB_APPID . '|' . FB_SECRET
                                     )
                                 );
@@ -85,6 +85,7 @@ class Rides extends REST_Controller {
                             }
 
                             if ( $fb_response ) {
+                                $success = $this->rrequest->add_invitation( $invitee, $ride->id );
                                 $output_message .= "\n" . $passenger->name . " successfully notified on Facebook about this invitation.";
                             } else {
                                 $output_message .= "\n" . $passenger->name . " could not be notified on Facebook about this invitation.";

@@ -2,6 +2,40 @@
 
 class rrequest extends CI_Model{
     
+    function add_invitation( $rrequest_id = 0, $ride_id = 0 ) {
+        $rrequest = $this->rrequest->retrieve_by_id( $rrequest_id ); 
+
+        if ( $rrequest ) {
+            $invitations = explode(WHEELZO_DELIMITER, $rrequest->invitations);
+            
+            foreach( $invitations as $invitation ) {
+                if ( $invitation == $ride_id ) {
+                    // request has received invite from this ride before
+                    return false;
+                }
+            }
+
+            // request has not received invite from this ride before
+            if ( $ride_id != 0 ) {
+                $invitations[] = $ride_id;
+            }
+
+            $this->rrequest->update(
+                array(
+                    'id' => $rrequest_id
+                ),
+                array(
+                    'invitations' => implode(WHEELZO_DELIMITER, $invitations)
+                )
+            );
+
+            return true;
+        } else {
+            // rrequest does not exist
+            return false;
+        }
+    }
+
     function retrieve_active() {
         $user_id = $this->session->userdata('user_id');
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
