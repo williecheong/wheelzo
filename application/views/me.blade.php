@@ -109,7 +109,7 @@
                         <tbody></tbody>
                     </table>
                     <p>
-                        Requesting a ride from 
+                        This is your request for a ride from 
                         <strong>
                             <span id="rrequest-origin"></span>
                         </strong>
