@@ -69,11 +69,30 @@ class Main extends CI_Controller {
         $my_rrequests = array();
         if ( $load_personal ) {
             $view = 'me';
+            
             $my_rrequests = $this->rrequest->retrieve(
                 array(
                     'user_id' => $this->session->userdata('user_id')
                 )
             );
+            
+            $temp_my_rrequests = array();
+            
+            foreach( $my_rrequests as $key => $my_rrequest ) {
+                $invitations = explode( WHEELZO_DELIMITER, $my_rrequest->invitations);
+                $temp_invitations = array();
+                foreach( $invitations as $invitation ) {
+                    $temp_ride = $this->ride->retrieve_by_id($invitation);
+                    if ( $temp_ride ) {
+                        $temp_invitations[] = $temp_ride; 
+                    }
+                }
+
+                $my_rrequests[$key]->invitations = $temp_invitations;
+                $temp_my_rrequests[$my_rrequest->id] = $my_rrequests[$key];
+            }
+
+            $my_rrequests = $temp_my_rrequests;
         }
 
         $this->blade->render($view, 

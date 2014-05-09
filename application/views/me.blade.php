@@ -97,8 +97,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    {{--
-                    <table class="table table-hover">
+                    <table class="table table-hover invitations-table">
                         <thead>
                             <tr>
                                 <th class="origin">Origin</th>  
@@ -107,13 +106,22 @@
                                 <th class="price">View</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
-                    --}}
-                    <br>
+                    <p>
+                        Requesting a ride from 
+                        <strong>
+                            <span id="rrequest-origin"></span>
+                        </strong>
+                        to 
+                        <strong>
+                            <span id="rrequest-destination"></span>
+                        </strong>
+                        with preferred departure on
+                        <strong>
+                            <span id="rrequest-departure"></span>
+                        </strong>
+                    </p>
                     <div class="well well-sm">
                         <i class="fa fa-warning"></i> 
                         Deleting this ride request will prevent you from getting any further Facebook notifications regarding this request.

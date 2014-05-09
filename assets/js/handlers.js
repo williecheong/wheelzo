@@ -58,7 +58,21 @@
 
     prepareRrequest = function( event ) {
         var rrequestID = $(this).data('rrequest-id');
+        var thisRrequest = myRrequests[rrequestID];
+        
         var $modal = $('.modal#view-rrequest');
+
+        $modal.find('#rrequest-departure')
+              .html( moment(thisRrequest.start).format('dddd MMMM D, h:mm a') );
+        
+        $modal.find('#rrequest-origin')
+              .html( thisRrequest.origin );
+        
+        $modal.find('#rrequest-destination')
+              .html( thisRrequest.destination );
+
+        $modal.find('table.invitations-table tbody')
+              .html( invitationsTableTemplate(rrequestID) );
 
         $modal.data('rrequestID', rrequestID);
         $modal.modal('show');
