@@ -136,8 +136,6 @@
         });
         
         $('input#origin, input#destination, input#departure-date').on('keyup focusout change', function(){
-            $('table.rrequests-table tbody tr').removeClass('success');
-
             var columnName = $(this).attr('id');
             var rowValue = $(this).val();
 
@@ -150,12 +148,16 @@
             searchParam[columnName] = rowValue;
             rrequestTable.fnMultiFilter( searchParam );
 
-            if ( $('table.rrequests-table tbody tr').length < 6 ) {
+            if ( $('table.rrequests-table tbody tr').length < 6 
+                || ( $('input#origin').val() != '' 
+                     && $('input#destination').val() != '' 
+                     && $('input#departure-date').val() != '' ) ) {
                 $('div.non-rrequests-table-container').hide();
                 $('div.rrequests-table-container').show();
             } else {
                 $('div.rrequests-table-container').hide();
                 $('div.non-rrequests-table-container').show();
+                $('table.rrequests-table tbody tr').removeClass('success');
             }
         });
     }
