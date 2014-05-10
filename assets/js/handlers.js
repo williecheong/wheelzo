@@ -27,7 +27,7 @@
               .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         
         $modal.find('#ride-departure')
-              .html( moment(thisRide.start).format('dddd MMMM D, h:mm a') );        
+              .html( moment(thisRide.start).format('dddd MMM D, h:mma') );        
         
         $modal.find('#ride-price')
               .html('$'+thisRide.price);

@@ -143,7 +143,7 @@
 
             if ( columnName == 'departure-date' ) {
                 columnName = 'departure';
-                rowValue = moment( $(this).val() ).format('MMMM-D');
+                rowValue = moment( $(this).val() ).format('MMM-D');
             }
 
             var searchParam = {};

@@ -125,6 +125,11 @@
                                 <strong id="ride-price"></strong> 
                                 -
                                 <span class="lead" id="ride-departure"></span>
+                                <span class="lead">
+                                    <a id="go-to-ride" href="?ride=0">
+                                        <i class="fa fa-share-square"></i>
+                                    </a>
+                                </span>
                             </h3>
                             <div class="col-lg-12 text-center">
                                 <div class="row" id="ride-passengers"></div>
@@ -149,15 +154,6 @@
                         <span id="ride-dropoffs"></span>
                     </div>
                 </div>
-                {{--
-                <div class="row" style="margin-top:15px;">
-                    <div class="col-xs-12 text-right">
-                        <a id="go-to-ride" href="?ride=0">
-                            Go to ride <i class="fa fa-angle-double-right"></i>
-                        </a>
-                    </div>
-                </div>
-                --}}
                 <hr>
                 <div class="row">
                     <div class="col-lg-12" id="ride-comments"></div>
