@@ -2,9 +2,6 @@
 
 @section('title')
     Wheelzo
-    @if ( ENVIRONMENT != 'production' )
-        :: {{ ucfirst(ENVIRONMENT) }}
-    @endif 
 @endsection
 
 @section('search_placeholder')
