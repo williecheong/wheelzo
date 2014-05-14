@@ -121,7 +121,7 @@
                 '    <a class="dropoff-remover" href="#">'+
                 '        <i class="fa fa-times"></i>'+
                 '    </a>'+
-                '    <input type="text" class="form-control add_suggested_places" placeholder="Dropoff location">'+
+                '    <input type="text" class="form-control add_suggested_places" id="dropoff-field" placeholder="Dropoff location">'+
                 '</div>';
         return html;
     }

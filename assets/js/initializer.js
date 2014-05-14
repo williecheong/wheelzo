@@ -99,7 +99,7 @@
         });
 
         // Initializing table sorter
-        var rideTable = $('table.rides-table').dataTable({
+        rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
@@ -109,16 +109,14 @@
             "sDom" : ''
         });
         
-        $('input#search-box').on('keyup focusout', function(){
-            searchRides( rideTable );
-        });
+        $('input#search-box').on('keyup focusout', searchRides);
 
         if ( loadRide ) {
             rideTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
         }
 
-        var rrequestTable = $('table.rrequests-table').dataTable({
+        rrequestTable = $('table.rrequests-table').dataTable({
             "bPaginate": false,
             "sScrollY": "50px",
             "bLengthChange": false,
@@ -126,40 +124,10 @@
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": false,
-            "sDom" : '',
-            "aoColumns": [
-                { "sName": "requester" }, 
-                { "sName": "origin" },
-                { "sName": "destination" },
-                { "sName": "departure" }            
-            ]
+            "sDom" : ''
         });
         
-        $('input#origin, input#destination, input#departure-date').on('keyup focusout change', function(){
-            var columnName = $(this).attr('id');
-            var rowValue = $(this).val();
-
-            if ( columnName == 'departure-date' ) {
-                columnName = 'departure';
-                rowValue = moment( $(this).val() ).format('MMM-D');
-            }
-
-            var searchParam = {};
-            searchParam[columnName] = rowValue;
-            rrequestTable.fnMultiFilter( searchParam );
-
-            if ( $('table.rrequests-table tbody tr').length < 6 
-                || ( $('input#origin').val() != '' 
-                     && $('input#destination').val() != '' 
-                     && $('input#departure-date').val() != '' ) ) {
-                $('div.non-rrequests-table-container').hide();
-                $('div.rrequests-table-container').show();
-            } else {
-                $('div.rrequests-table-container').hide();
-                $('div.non-rrequests-table-container').show();
-                $('table.rrequests-table tbody tr').removeClass('success');
-            }
-        });
+        $('input#origin, input#destination, input#departure-date').on('keyup focusout change', searchRrequests);
     }
 
     function initializeRide( rideID ) {        

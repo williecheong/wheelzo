@@ -180,11 +180,6 @@
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
-    function searchRides( rideTable ) {
-        var searchTerm = $('input#search-box').val();
-        rideTable.fnFilter( searchTerm );
-    }
-
     function validateRide( $modal ) {
         var ride = extractModalRide( $modal );
         

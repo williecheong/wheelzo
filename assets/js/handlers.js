@@ -87,12 +87,16 @@
         
         var $newDropoff = $('div.dropoff#' + uid);
         $newDropoff.find('.dropoff-remover').click(function(){
+            $newDropoff.find('input').val('');
+            $newDropoff.find('input').trigger('focusout');
             $newDropoff.remove();
         });
 
         $newDropoff.find('input.add_suggested_places').typeahead({
             source: defaultSuggestedPlaces
         });
+
+        $newDropoff.find('input').on('keyup focusout', searchRrequests)
     }
 
     saveRide = function( event ) {
@@ -223,6 +227,67 @@
             postUser_ride(passengerID, rideID);
         }
     }
+
+    searchRides = function ( event ) {
+        var searchTerm = $('input#search-box').val();
+        rideTable.fnFilter( searchTerm );
+    }
+
+    searchRrequests = function ( event ) {
+        var rowValue = '';
+        var columnName = $(this).attr('id');
+
+        if ( columnName == 'origin' ) {
+            columnName = '1';
+            rowValue = $(this).val();
+
+        } else if ( columnName == 'destination' || columnName == 'dropoff-field' ) {
+            columnName = '2';
+            
+            var destinations = [];
+            var destination = $('input#destination').val();
+            destination = destination.trim();
+            if ( destination != '' ) {
+                destinations.push( $('input#destination').val() );
+            }
+
+            $('.modal#create-ride').find('div.dropoff').each(function(){
+                var tempDropoff = $(this).find('input').val();
+                tempDropoff = tempDropoff.trim();
+                if ( tempDropoff !== '' ) {
+                    destinations.push( tempDropoff );
+                }
+            });
+
+            rowValue = destinations.join('|');
+
+        } else if ( columnName == 'departure-date' ) {
+            columnName = '3';
+            rowValue = moment( $(this).val() ).format('MMM-D');
+        }
+
+        // var searchParam = {};
+        // searchParam[columnName] = rowValue;
+        // rrequestTable.fnMultiFilter( searchParam );
+        $('table.rrequests-table').DataTable().column( columnName ).search(
+            rowValue,
+            true,
+            false
+        ).draw();
+
+        if ( $('table.rrequests-table tbody tr').length < 6 
+            || ( $('input#origin').val() != '' 
+                 && $('input#destination').val() != '' 
+                 && $('input#departure-date').val() != '' ) ) {
+            $('div.non-rrequests-table-container').hide();
+            $('div.rrequests-table-container').show();
+        } else {
+            $('div.rrequests-table-container').hide();
+            $('div.non-rrequests-table-container').show();
+            $('table.rrequests-table tbody tr').removeClass('success');
+        }
+    }
+
 
     saveFeedback = function( event ) {
             var $button = $(this);

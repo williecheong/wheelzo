@@ -7,6 +7,8 @@ $( document ).ready(function() {
 /*******************
     WHEELZO GLOBAL VARIABLES
 *******************/
+    var rideTable;
+    var rrequestTable;
     var defaultSuggestedPlaces = [
         "Waterloo, UW Davis Center",
         "Waterloo, University Plaza",
