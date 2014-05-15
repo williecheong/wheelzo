@@ -239,7 +239,7 @@
 
         if ( columnName == 'origin' ) {
             columnName = '1';
-            rowValue = $(this).val();
+            rowValue = filterCity( $(this).val() );
 
         } else if ( columnName == 'destination' || columnName == 'dropoff-field' ) {
             columnName = '2';
@@ -248,14 +248,14 @@
             var destination = $('input#destination').val();
             destination = destination.trim();
             if ( destination != '' ) {
-                destinations.push( $('input#destination').val() );
+                destinations.push( filterCity(destination) );
             }
 
             $('.modal#create-ride').find('div.dropoff').each(function(){
                 var tempDropoff = $(this).find('input').val();
                 tempDropoff = tempDropoff.trim();
                 if ( tempDropoff !== '' ) {
-                    destinations.push( tempDropoff );
+                    destinations.push( filterCity(tempDropoff) );
                 }
             });
 
@@ -263,7 +263,9 @@
 
         } else if ( columnName == 'departure-date' ) {
             columnName = '3';
-            rowValue = moment( $(this).val() ).format('MMM-D');
+            if ( $(this).val() ) {
+                rowValue = moment( $(this).val() ).format('MMM-D');            
+            }
         }
 
         // var searchParam = {};

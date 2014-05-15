@@ -283,6 +283,21 @@
         }
     }
 
+    function filterCity( input ) {
+        var commaExplode = input.split(',');
+        if ( !commaExplode[0] ) {
+            // If it is not found, we have a problem
+            return input;
+        }
+
+        var spaceExplode = commaExplode[0].split(' ');
+        if ( !spaceExplode[0] ) {
+            return commaExplode[0];
+        }
+
+        return spaceExplode[0];
+    }
+
     function shortenString( subject, size ) {
         if ( subject.length > size ) {
             return subject.substring(0, size-3) + '...';
