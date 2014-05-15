@@ -27,7 +27,7 @@
               .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
         
         $modal.find('#ride-departure')
-              .html( moment(thisRide.start).format('dddd MMMM D, h:mm a') );        
+              .html( moment(thisRide.start).format('dddd MMM D, h:mma') );        
         
         $modal.find('#ride-price')
               .html('$'+thisRide.price);
@@ -56,6 +56,28 @@
         $modal.modal('show');
     }
 
+    prepareRrequest = function( event ) {
+        var rrequestID = $(this).data('rrequest-id');
+        var thisRrequest = myRrequests[rrequestID];
+        
+        var $modal = $('.modal#view-rrequest');
+
+        $modal.find('#rrequest-departure')
+              .html( moment(thisRrequest.start).format('dddd MMMM D, h:mm a') );
+        
+        $modal.find('#rrequest-origin')
+              .html( thisRrequest.origin );
+        
+        $modal.find('#rrequest-destination')
+              .html( thisRrequest.destination );
+
+        $modal.find('table.invitations-table tbody')
+              .html( invitationsTableTemplate(rrequestID) );
+
+        $modal.data('rrequestID', rrequestID);
+        $modal.modal('show');
+    }
+
     addDropoff = function( event ) {
         $button = $(this);
         $target = $button.closest('div#destination-group');
@@ -65,12 +87,16 @@
         
         var $newDropoff = $('div.dropoff#' + uid);
         $newDropoff.find('.dropoff-remover').click(function(){
+            $newDropoff.find('input').val('');
+            $newDropoff.find('input').trigger('focusout');
             $newDropoff.remove();
         });
 
         $newDropoff.find('input.add_suggested_places').typeahead({
             source: defaultSuggestedPlaces
         });
+
+        $newDropoff.find('input').on('keyup focusout', searchRrequests)
     }
 
     saveRide = function( event ) {
@@ -99,6 +125,37 @@
             $button.addClass('disabled');
 
             deleteRide( rideID, $button ); 
+        } else {
+            return;
+        }
+    }
+
+    saveRrequest = function( event ) {
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        
+        $button.addClass('disabled');
+
+        var validationFailed = validateRrequest( $modal );
+        if ( validationFailed ) {
+            alert( validationFailed );
+            $button.removeClass('disabled');
+            return;
+        }
+
+        postRrequest( extractModalRrequest($modal), $button );
+    }
+
+    removeRrequest = function( event ) {
+        var r = confirm("Delete this ride request permanently?");
+        if ( r == true ) {
+            var $button = $(this);
+            var $modal = $button.closest('.modal');
+            var rrequestID = $modal.data('rrequestID');
+            
+            $button.addClass('disabled');
+
+            deleteRrequest( rrequestID, $button ); 
         } else {
             return;
         }
@@ -170,6 +227,69 @@
             postUser_ride(passengerID, rideID);
         }
     }
+
+    searchRides = function ( event ) {
+        var searchTerm = $('input#search-box').val();
+        rideTable.fnFilter( searchTerm );
+    }
+
+    searchRrequests = function ( event ) {
+        var rowValue = '';
+        var columnName = $(this).attr('id');
+
+        if ( columnName == 'origin' ) {
+            columnName = '1';
+            rowValue = filterCity( $(this).val() );
+
+        } else if ( columnName == 'destination' || columnName == 'dropoff-field' ) {
+            columnName = '2';
+            
+            var destinations = [];
+            var destination = $('input#destination').val();
+            destination = destination.trim();
+            if ( destination != '' ) {
+                destinations.push( filterCity(destination) );
+            }
+
+            $('.modal#create-ride').find('div.dropoff').each(function(){
+                var tempDropoff = $(this).find('input').val();
+                tempDropoff = tempDropoff.trim();
+                if ( tempDropoff !== '' ) {
+                    destinations.push( filterCity(tempDropoff) );
+                }
+            });
+
+            rowValue = destinations.join('|');
+
+        } else if ( columnName == 'departure-date' ) {
+            columnName = '3';
+            if ( $(this).val() ) {
+                rowValue = moment( $(this).val() ).format('MMM-D');            
+            }
+        }
+
+        // var searchParam = {};
+        // searchParam[columnName] = rowValue;
+        // rrequestTable.fnMultiFilter( searchParam );
+        $('table.rrequests-table').DataTable().column( columnName ).search(
+            rowValue,
+            true,
+            false
+        ).draw();
+
+        if ( $('table.rrequests-table tbody tr').length < 6 
+            || ( $('input#origin').val() != '' 
+                 && $('input#destination').val() != '' 
+                 && $('input#departure-date').val() != '' ) ) {
+            $('div.non-rrequests-table-container').hide();
+            $('div.rrequests-table-container').show();
+        } else {
+            $('div.rrequests-table-container').hide();
+            $('div.non-rrequests-table-container').show();
+            $('table.rrequests-table tbody tr').removeClass('success');
+        }
+    }
+
 
     saveFeedback = function( event ) {
             var $button = $(this);

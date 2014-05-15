@@ -10,8 +10,19 @@
         // Initializes the preparation for ride view on click of a row
         $('tr[data-ride-id]').on('click', prepareRide);
 
+        // Initializes the preparation for rrequest view on click of a row
+        $('table.rides-table tbody tr[data-rrequest-id]').on('click', prepareRrequest);
+        $('.btn#delete-rrequest').on('click', removeRrequest);
+
+        $('table.rrequests-table tbody tr[data-rrequest-id]').on('click', function(){
+            $(this).toggleClass('success');
+        });
+
         // Initializes the posting of a ride when Publish button is clicked
         $('.btn#post-ride').on('click', saveRide);
+
+        // Initializes the posting of a request when Submit button is clicked
+        $('.btn#post-request').on('click', saveRrequest);
 
         // Initializes the posting of a comment when Send button is clicked
         $('.btn#post-comment').on('click', saveComment);
@@ -88,7 +99,7 @@
         });
 
         // Initializing table sorter
-        var dataTable = $('table').dataTable({
+        rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,
             "bLengthChange": false,
             "bFilter": true,
@@ -98,14 +109,25 @@
             "sDom" : ''
         });
         
-        $('input#search-box').on('keyup focusout', function(){
-            doSearch( dataTable );
-        });
+        $('input#search-box').on('keyup focusout', searchRides);
 
         if ( loadRide ) {
-            dataTable.fnFilter( loadRide )
+            rideTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
         }
+
+        rrequestTable = $('table.rrequests-table').dataTable({
+            "bPaginate": false,
+            "sScrollY": "50px",
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": false,
+            "bAutoWidth": false,
+            "sDom" : ''
+        });
+        
+        $('input#origin, input#destination, input#departure-date').on('keyup focusout change', searchRrequests);
     }
 
     function initializeRide( rideID ) {        

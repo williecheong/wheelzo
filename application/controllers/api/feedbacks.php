@@ -11,7 +11,7 @@ class Feedbacks extends REST_Controller {
 
     // Used to create a new group in the DB
     public function index_post() {
-        $data = $this->post();
+        $data = clean_input( $this->post() );
         
         if ( isset($data['message']) ){
             $email = '';

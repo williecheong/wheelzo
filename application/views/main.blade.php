@@ -2,6 +2,9 @@
 
 @section('title')
     Wheelzo
+    @if ( ENVIRONMENT != 'production' )
+        :: {{ ucfirst(ENVIRONMENT) }}
+    @endif 
 @endsection
 
 @section('search_placeholder')
@@ -53,7 +56,7 @@
 @endsection
 
 @section('table')
-    <table class="table table-hover">
+    <table class="table table-hover rides-table">
         <thead>
             <tr>
                 <th class="origin">Origin</th>  

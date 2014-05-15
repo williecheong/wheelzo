@@ -1,6 +1,6 @@
 <!-- Modal for creating a new ride -->
 <div class="modal fade" id="create-ride" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -9,49 +9,89 @@
                 </h4>
             </div>
             <div class="modal-body"> 
-                <form class="" role="form">  
-                    <div class="form-group">  
-                        <label class="control-label" for="origin">Travelling</label>  
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
-                            </div>
-                            <div class="col-sm-6" id="destination-group">
-                                <div class="input-group">
-                                    <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" id="add-dropoff" title="Add drop off destinations" type="button">
-                                            <i class="fa fa-road fa-lg"></i>
-                                        </button>
-                                    </span>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form class="" role="form">  
+                            <div class="form-group">  
+                                <label class="control-label" for="origin">Travelling</label>  
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control add_suggested_places" id="origin" placeholder="Origin" autocomplete="off">  
+                                    </div>
+                                    <div class="col-sm-6" id="destination-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control add_suggested_places" id="destination" placeholder="Destination" autocomplete="off">  
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" id="add-dropoff" title="Add drop off destinations" type="button">
+                                                    <i class="fa fa-road fa-lg"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="form-group">  
+                                <label class="control-label" for="departure-date">Departure Date and Time</label>  
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control datepicker" id="departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control timepicker" id="departure-time" placeholder="hh:mm pm" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6">  
+                                    <label class="control-label" for="price">Price: </label>
+                                    $ <span class="slider-value lead" id="price">10</span>
+                                    <div class="slider" id="price"></div> 
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label" for="capacity">Capacity: </label>  
+                                    <span class="slider-value lead" id="capacity">2</span> persons 
+                                    <div class="slider" id="capacity"></div> 
+                                </div>
+                            </div>  
+                        </form>
+                    </div>
+                    <br>
+                    <div class="col-sm-12">
+                        <div class="well well-sm non-rrequests-table-container">
+                            <span class="lead">Recommended passengers for inviting to your ride</span>
+                            <p>
+                                <i class="fa fa-info-circle"></i> Send a Facebook notification to someone who has requested for a similar ride. This list automatically generates recommendations for people who are most likely to be interested in the ride you are going to publish.
+                            </p>
+                        </div>
+                        <div class="well well-sm rrequests-table-container" style="display:none;">
+                            <span class="lead">Set up an invitation by clicking on the row</span>
+                            <table class="table table-hover table-condensed rrequests-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20%;">Requester</th>
+                                        <th style="width:30%;">Origin</th>
+                                        <th style="width:30%;">Destination</th>
+                                        <th style="width:20%;">Preferred Departure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($rrequests as $rrequest)
+                                        <tr data-rrequest-id="{{ $rrequest->id }}">
+                                            <td>
+                                                <a href="//facebook.com/{{ $users[$rrequest->user_id]['facebook_id'] }}" target="_blank">
+                                                    {{ $users[$rrequest->user_id]['name'] }}
+                                                </a>
+                                            </td>
+                                            <td>{{ $rrequest->origin }}</td>
+                                            <td>{{ $rrequest->destination }}</td>
+                                            <td>{{ date( 'M-d @ g:ia', strtotime($rrequest->start) ) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="form-group">  
-                        <label class="control-label" for="departure-date">Departure Date and Time</label>  
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control datepicker" id="departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control timepicker" id="departure-time" placeholder="hh:mm pm" readonly="readonly">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">  
-                            <label class="control-label" for="price">Price: </label>
-                            $ <span class="slider-value lead" id="price">10</span>
-                            <div class="slider" id="price"></div> 
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="control-label" for="capacity">Capacity: </label>  
-                            <span class="slider-value lead" id="capacity">2</span> persons 
-                            <div class="slider" id="capacity"></div> 
-                        </div>
-                    </div>  
-                </form>  
+                </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" id="post-ride">
@@ -85,6 +125,13 @@
                                 <strong id="ride-price"></strong> 
                                 -
                                 <span class="lead" id="ride-departure"></span>
+                                {{--
+                                <span class="lead">
+                                    <a id="go-to-ride" href="?ride=0">
+                                        <i class="fa fa-share-square"></i>
+                                    </a>
+                                </span>
+                                --}}
                             </h3>
                             <div class="col-lg-12 text-center">
                                 <div class="row" id="ride-passengers"></div>
@@ -109,15 +156,6 @@
                         <span id="ride-dropoffs"></span>
                     </div>
                 </div>
-                {{--
-                <div class="row" style="margin-top:15px;">
-                    <div class="col-xs-12 text-right">
-                        <a id="go-to-ride" href="?ride=0">
-                            Go to ride <i class="fa fa-angle-double-right"></i>
-                        </a>
-                    </div>
-                </div>
-                --}}
                 <hr>
                 <div class="row">
                     <div class="col-lg-12" id="ride-comments"></div>
@@ -139,3 +177,47 @@
     </div>
 </div>
 
+<!-- Modal for creating a new request -->
+<div class="modal fade" id="create-request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Request Ride
+                </h4>
+            </div>
+            <div class="modal-body"> 
+                <form class="" role="form">  
+                    <div class="form-group">  
+                        <label class="control-label" for="origin">Travelling</label>  
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control add_suggested_places" id="request-origin" placeholder="Origin" autocomplete="off">  
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control add_suggested_places" id="request-destination" placeholder="Destination" autocomplete="off">  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">  
+                        <label class="control-label" for="departure-date">Preferred Departure Date and Time</label>  
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control datepicker" id="request-departure-date" placeholder="mm/dd/yyyy" readonly="readonly">  
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control timepicker" id="request-departure-time" placeholder="hh:mm pm" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </form>  
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="post-request">
+                    <i class="fa fa-bullhorn fa-lg"></i> Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

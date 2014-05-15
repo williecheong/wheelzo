@@ -124,14 +124,62 @@
         });    
     }
 
+    function postRrequest( saveRrequest, $button ) {
+        $.ajax({
+            url: '/api/rrequests',
+            data: saveRrequest,
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.reload();
+                    }, 1500);                    
+                } else {
+                    $button.removeClass('disabled');
+                }
+            },
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
+    function deleteRrequest( rrequestID, $button ) {
+        $.ajax({
+            url: '/api/rrequests/index/' + rrequestID,
+            type: 'DELETE',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh"></i> Refreshing');               
+                    setTimeout(function() {
+                        // Simple page refresh for now
+                        location.reload();
+                    }, 1500);
+                } else {
+                    $button.removeClass('disabled');
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
-    function doSearch( dataTable ) {
-        var searchTerm = $('input#search-box').val();
-        dataTable.fnFilter( searchTerm );
-    }
-
     function validateRide( $modal ) {
         var ride = extractModalRide( $modal );
         
@@ -161,6 +209,11 @@
             }
         });
 
+        var invitees = [];
+        $modal.find('tr[data-rrequest-id].success').each(function(){
+            invitees.push( $(this).data('rrequest-id') );
+        });
+
         var data = {
             origin          : $modal.find('input#origin').val(),
             destination     : $modal.find('input#destination').val(),
@@ -168,7 +221,8 @@
             departureTime   : $modal.find('input#departure-time').val(),
             price           : $modal.find('span#price').text(),
             capacity        : $modal.find('span#capacity').text(),
-            dropOffs        : dropoffs
+            dropOffs        : dropoffs,
+            invitees        : invitees
         };
 
         return data;
@@ -187,6 +241,33 @@
         });
     }
 
+    function validateRrequest( $modal ) {
+        var rrequest = extractModalRrequest( $modal );
+        
+        if ( rrequest.origin.length == 0 || rrequest.destination.length == 0 ) {
+            return 'Origin and destination cannot be empty.';
+
+        } else if ( rrequest.origin == rrequest.destination ) {
+            return 'Origin and destination cannot be the same.';
+
+        } else if ( rrequest.departureDate.length == 0 || rrequest.departureTime == 0 ) {
+            return 'Departure date and time must be specified.';
+        }
+
+        return false;
+    }
+
+    function extractModalRrequest( $modal ) {
+        var data = {
+            origin          : $modal.find('input#request-origin').val(),
+            destination     : $modal.find('input#request-destination').val(),
+            departureDate   : $modal.find('input#request-departure-date').val(),
+            departureTime   : $modal.find('input#request-departure-time').val()
+        };
+
+        return data;
+    }
+
 /*******************
     GENERAL HELPER FUNCTIONS
 *******************/ 
@@ -200,6 +281,21 @@
         } else {
             return '//graph.facebook.com/'+fbID+'/picture?width=200&height=200';
         }
+    }
+
+    function filterCity( input ) {
+        var commaExplode = input.split(',');
+        if ( !commaExplode[0] ) {
+            // If it is not found, we have a problem
+            return input;
+        }
+
+        var spaceExplode = commaExplode[0].split(' ');
+        if ( !spaceExplode[0] ) {
+            return commaExplode[0];
+        }
+
+        return spaceExplode[0];
     }
 
     function shortenString( subject, size ) {

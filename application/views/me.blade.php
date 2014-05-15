@@ -22,13 +22,13 @@
 @endsection
 
 @section('table')
-    <table class="table table-hover">
+    <table class="table table-hover rides-table">
         <thead>
             <tr>
                 <th class="origin">Origin</th>  
                 <th class="destination">Destination</th>  
                 <th class="departure">Departure</th> 
-                <th class="price">Price</th>
+                <th class="price">Type</th>
                 <th class="ninja-header">Driver</th>
                 <th class="ninja-header">Dropoffs</th>
                 <th class="ninja-header">Encoded ID</th>
@@ -63,6 +63,74 @@
                     <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
                 </tr>
             @endforeach
+                
+            @foreach( $my_rrequests as $my_rrequest )
+                <tr data-rrequest-id="{{ $my_rrequest->id }}">
+                    <td>{{ $my_rrequest->origin }}</td>
+                    <td>
+                        {{ $my_rrequest->destination }}
+                    </td>
+                    <td>
+                        {{ date( 'M d, l @ g:ia', strtotime($my_rrequest->start) ) }}
+                    </td>
+                    <td>
+                        <i class="fa fa-bullhorn"></i> Request
+                    </td>
+                    <td class="ninja-field"></td>
+                    <td class="ninja-field"></td>
+                    <td class="ninja-field"></td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('custom_modals')
+    <!-- Modal for viewing a rrequest -->
+    <div class="modal fade" id="view-rrequest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Ride Request and Invitations
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover invitations-table">
+                        <thead>
+                            <tr>
+                                <th class="origin">Origin</th>  
+                                <th class="destination">Destination</th>  
+                                <th class="departure">Departure</th> 
+                                <th class="price">View</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    <p>
+                        This is your request for a ride from 
+                        <strong>
+                            <span id="rrequest-origin"></span>
+                        </strong>
+                        to 
+                        <strong>
+                            <span id="rrequest-destination"></span>
+                        </strong>
+                        with preferred departure on
+                        <strong>
+                            <span id="rrequest-departure"></span>
+                        </strong>
+                    </p>
+                    <div class="well well-sm">
+                        <i class="fa fa-warning"></i> 
+                        Deleting this ride request will prevent you from getting any further Facebook notifications regarding this request.
+                        <button class="btn btn-danger btn-xs" id="delete-rrequest">
+                            <i class="fa fa-times"></i> Delete
+                        </button>
+                    </div>     
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

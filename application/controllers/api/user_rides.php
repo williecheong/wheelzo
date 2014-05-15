@@ -17,7 +17,7 @@ class User_rides extends REST_Controller {
 
     public function index_post() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->post();
+            $data = clean_input( $this->post() );
 
             $driver_id = $this->session->userdata('user_id');
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
@@ -41,7 +41,7 @@ class User_rides extends REST_Controller {
                             $driver = $this->user->retrieve_by_id( $ride->driver_id );
                             $passenger = $this->user->retrieve_by_id( $user_ride->user_id );
 
-                            $notification_type = $ride->id . 'A'; 
+                            $notification_type = $ride->id . NOTIFY_ASSIGNED; 
                             $to_notify = $this->user->to_notify( $passenger->id, $notification_type );
             
                             if ( $to_notify ) {
@@ -134,7 +134,7 @@ class User_rides extends REST_Controller {
 
     public function index_put() {
         if ( $this->session->userdata('user_id') ) {            
-            $data = $this->put();
+            $data = clean_input( $this->put() );
 
             $driver_id = $this->session->userdata('user_id');
             $user_ride_id = isset($data['user-rideID']) ? $data['user-rideID'] : '';
@@ -168,7 +168,7 @@ class User_rides extends REST_Controller {
                         if ( $ride->driver_id != $old_user_ride->user_id ) {
                             $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
                             
-                            $notification_type = $ride->id . 'R'; 
+                            $notification_type = $ride->id . NOTIFY_REMOVED; 
                             $to_notify = $this->user->to_notify( $old_passenger->id, $notification_type );
             
                             if ( $to_notify ) {
@@ -204,7 +204,7 @@ class User_rides extends REST_Controller {
                         if ( $ride->driver_id != $user_ride->user_id ) {
                             $new_passenger = $this->user->retrieve_by_id( $user_ride->user_id );
                             
-                            $notification_type = $ride->id . 'A'; 
+                            $notification_type = $ride->id . NOTIFY_ASSIGNED; 
                             $to_notify = $this->user->to_notify( $new_passenger->id, $notification_type );
             
                             if ( $to_notify ) {                            
@@ -291,7 +291,7 @@ class User_rides extends REST_Controller {
                     $driver = $this->user->retrieve_by_id( $ride->driver_id );
                     $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
                     
-                    $notification_type = $ride->id . 'R'; 
+                    $notification_type = $ride->id . NOTIFY_REMOVED; 
                     $to_notify = $this->user->to_notify( $old_passenger->id, $notification_type );
                     
                     if ( $to_notify ) {        

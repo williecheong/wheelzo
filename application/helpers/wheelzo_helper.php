@@ -17,6 +17,22 @@ if ( ! function_exists('rest_curl') ) {
     }
 }
 
+if ( ! function_exists('clean_input') ) {    
+    function clean_input( $data = '' ) {
+        if ( is_array($data) || is_object($data) ) {
+            foreach ($data as $key => $value) {
+                $data[$key] = clean_input( $value );
+            }
+
+        } elseif ( is_string($data) ) {
+            $data = trim($data);
+            $data = htmlspecialchars($data);
+        } 
+
+        return $data;
+    }
+}
+
 if ( ! function_exists('encode_to_chinese') ) {    
     function encode_to_chinese( $integer ) {
         $chinese_int = array(

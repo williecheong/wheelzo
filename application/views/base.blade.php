@@ -92,6 +92,21 @@
 
         <div class="container">
             @yield('table')
+            <p class="text-center">
+                <small>
+                    Can't find the ideal ride? <br>
+                    Want notifications when a driver posts it? <br>
+                    @if ( $session )  
+                        <a class="btn btn-default btn-xs" href="#" data-toggle="modal" data-target="#create-request">
+                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        </a>
+                    @else
+                        <a class="btn btn-default btn-xs" href="{{ $session_url }}">
+                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        </a>
+                    @endif
+                </small>
+            </p>
         </div>
 
         <div class="container">
@@ -119,11 +134,12 @@
     </body>
 
     @include('modals/main')
+    @yield('custom_modals')
     @include('modals/feedback')
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
     <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
@@ -142,6 +158,7 @@
         var publicUsers = {{ json_encode($users) }} ;
         var session_id = {{ $session ? $session : 'false' }};
         var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
+        var myRrequests = {{ json_encode($my_rrequests) }};
     </script>
     
     @if ( ENVIRONMENT == 'production' )

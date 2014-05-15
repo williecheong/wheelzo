@@ -121,7 +121,7 @@
                 '    <a class="dropoff-remover" href="#">'+
                 '        <i class="fa fa-times"></i>'+
                 '    </a>'+
-                '    <input type="text" class="form-control add_suggested_places" placeholder="Dropoff location">'+
+                '    <input type="text" class="form-control add_suggested_places" id="dropoff-field" placeholder="Dropoff location">'+
                 '</div>';
         return html;
     }
@@ -173,6 +173,32 @@
                     '        <em>Nobody yet...</em>' + 
                     '    </a>'+
                     '</li>';
+        }
+
+        return html;
+    }
+
+    function invitationsTableTemplate( rrequestID ) {
+        var html = '';
+        var rrequest = myRrequests[rrequestID];
+        var count = 0;
+        $.each(rrequest.invitations, function(key, ride){
+            // In the order of Origin, Destination, Departure, View(link)
+            html += '<tr>'+
+                    '    <td>'+ ride.origin +'</td>'+
+                    '    <td>'+ ride.destination +'</td>'+
+                    '    <td>'+ moment( ride.start ).format( 'MMMM D, h:mm a' ) +'</td>'+
+                    '    <td>'+
+                    '        <a href="/?ride='+ride.id+'">'+
+                    '            <i class="fa fa-link"></i> Ride'+
+                    '        </a>'+
+                    '    </td>'+
+                    '</tr>';
+            count++;
+        });
+
+        if ( count == 0 ) {
+            html += 'No invitations yet.';
         }
 
         return html;
