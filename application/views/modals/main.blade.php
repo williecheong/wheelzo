@@ -125,11 +125,13 @@
                                 <strong id="ride-price"></strong> 
                                 -
                                 <span class="lead" id="ride-departure"></span>
+                                {{--
                                 <span class="lead">
                                     <a id="go-to-ride" href="?ride=0">
                                         <i class="fa fa-share-square"></i>
                                     </a>
                                 </span>
+                                --}}
                             </h3>
                             <div class="col-lg-12 text-center">
                                 <div class="row" id="ride-passengers"></div>
