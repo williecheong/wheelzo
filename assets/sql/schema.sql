@@ -61,6 +61,7 @@ CREATE TABLE `feedback` (
    `user_id` int(11), 
    `ip_address` varchar(255),
    `message` text,
+   `answered` varchar(255),
    `last_updated` timestamp not null default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
