@@ -29,7 +29,8 @@ class Comments extends REST_Controller {
                     array(  
                         'user_id' => $this->session->userdata('user_id'),
                         'ride_id' => $ride_id,
-                        'comment' => $comment
+                        'comment' => $comment,
+                        'last_updated' => date( 'Y-m-d H:i:s' )
                     )
                 );
 
