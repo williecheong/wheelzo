@@ -68,7 +68,7 @@ class user extends CI_Model{
             $user_id = $this->user->create(
                 array(
                     'name' => $facebook_profile['name'],
-                    'email' => $facebook_profile['email'],
+                    'email' => ( isset($facebook_profile['email']) ) ? $facebook_profile['email'] : '',
                     'facebook_id' => $facebook_id,
                     'cell_number' => '',
                     'rating' => '',
