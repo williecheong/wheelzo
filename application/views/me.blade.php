@@ -71,6 +71,9 @@
                         {{ $my_rrequest->destination }}
                     </td>
                     <td>
+                        <span style="display:none;">
+                            {{ strtotime($ride->start) }}
+                        </span>
                         {{ date( 'M d, l @ g:ia', strtotime($my_rrequest->start) ) }}
                     </td>
                     <td>
