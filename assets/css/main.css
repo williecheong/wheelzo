@@ -38,6 +38,10 @@ div#passenger-box {
     min-height: 50px;
 }
 
+img.greyed-out {
+    opacity: 0.5;
+}
+
 img#passenger-picture {
     width: 75%;
     max-width: 75px;

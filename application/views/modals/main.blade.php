@@ -234,17 +234,50 @@
             </div>
             <div class="modal-body"> 
                 <div class="row">
-                    @if ( $session )
-                        <div class="col-lg-12">
-                            <input type="hidden" class="form-control hide" id="lookup-id">
-                            <input type="text" class="form-control add_suggested_names" id="lookup-name" placeholder="Who are you trying to find?" autocomplete="off">  
-                        </div>
-                    @endif
+                    <div class="col-lg-12">
+                        <input type="hidden" class="form-control hide" id="lookup-id" value="1">
+                        <input type="text" class="form-control add_suggested_names" id="lookup-name" placeholder="Who are you trying to find?" autocomplete="off"><ul class="typeahead dropdown-menu" style="display: none; top: 34px; left: 15px;"><li class="active"><a href="#"><strong>Max Pikhte</strong>ryev</a></li></ul>  
+                    </div>
+                </div>
+                <div class="row">
+                    <br>
+                    <div class="col-xs-8 text-right">
+                        <a id="driver-picture" target="" href="#">
+                            <img class="img-circle greyed-out" id="driver-picture" src="/assets/img/empty_user.png">
+                        </a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        SCORE
+                        <h3>
+                            <span class="label label-success">
+                                0.00
+                            </span>
+                            <br><br>
+                            <a class="btn btn-success disabled" role="button">
+                                <i class="fa fa-thumbs-up"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    <br>
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="about-user text-center">
-                        Max max max
+                    <div class="col-lg-12" id="ride-comments">
+                        <div class="media dummy-review text-center">    
+                            <em>
+                                No Reviews to display...
+                            </em>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 media">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="write-review" placeholder="Write a review for Harris Rasheed" autocomplete="off" disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default disabled" type="button" id="post-review">
+                                    <i class="fa fa-comment fa-lg"></i>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
