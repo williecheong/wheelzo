@@ -128,7 +128,7 @@
                     '            ' + reviewObject.review +
                     '        </div>'+
                     '        <small class="single-review-meta">'+
-                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + publicUsers[reviewObject.giver_id].name + '</a> @ ' + moment(reviewObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + publicUsers[reviewObject.giver_id].name + '</a> @ ' + moment(reviewObject.last_updated).format('MMMM D') +
                     '        </small>'+
                     '    </div>'+
                     '</div>';
