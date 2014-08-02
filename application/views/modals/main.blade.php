@@ -241,22 +241,25 @@
                 </div>
                 <div class="row">
                     <br>
-                    <div class="col-xs-8 text-right">
+                    <div class="col-xs-7 text-right">
                         <a id="lookup-picture" target="" href="#">
                             <img class="img-circle greyed-out" id="lookup-picture" src="/assets/img/empty_user.png">
                         </a>
                     </div>
-                    <div class="col-xs-4 text-center">
-                        SCORE
+                    <div class="col-xs-5 text-center">
+                        <strong>REP</strong>
+                        <a href="#about-scores"> 
+                            <i class="fa fa-info-circle"></i>
+                        </a>
                         <h3>
                             <span class="label label-success" id="lookup-score">
                                 0.00
                             </span>
-                            <br><br>
-                            <a class="btn btn-success disabled" id="give-point" role="button">
-                                <i class="fa fa-thumbs-up"></i>
-                            </a>
                         </h3>
+                        <br>
+                        <a class="btn btn-success btn-sm disabled" id="give-point" role="button">
+                            <i class="fa fa-child fa-lg"></i> Vouch
+                        </a>
                     </div>
                     <br>
                 </div>

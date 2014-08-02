@@ -215,37 +215,41 @@
     savePoint = function( event ) {
         var $button = $(this);
         var $modal = $button.closest('.modal');
-        
-        $button.addClass('disabled');
-        
         var receiverID = $modal.find('input#lookup-id').val();
-        
-        $.ajax({
-            url: '/api/points',
-            data: {
-                receiver_id : receiverID
-            },
-            type: 'POST',
-            dataType: "JSON",
-            success: function( response ) {
-                console.log(response.message);
 
-                if ( response.status == 'success' ){
-                    refreshUsers(function(){
-                        $('input#lookup-id').trigger('change');    
-                    });
+        var r = confirm("Vouches cannot be undone.\nDid you have a positive ride experience with "+ publicUsers[receiverID].name +"?");
+        if ( r == true ) { 
+            $button.addClass('disabled');        
+            
+            $.ajax({
+                url: '/api/points',
+                data: {
+                    receiver_id : receiverID
+                },
+                type: 'POST',
+                dataType: "JSON",
+                success: function( response ) {
+                    console.log(response.message);
 
-                } else {
+                    if ( response.status == 'success' ){
+                        refreshUsers(function(){
+                            $('input#lookup-id').trigger('change');    
+                        });
+
+                    } else {
+                        $button.removeClass('disabled');
+                        alert(response.message);
+                    }
+                }, 
+                error: function(response) {
+                    alert('Fail: API could not be reached.');
                     $button.removeClass('disabled');
-                    alert(response.message);
+                    console.log(response);
                 }
-            }, 
-            error: function(response) {
-                alert('Fail: API could not be reached.');
-                $button.removeClass('disabled');
-                console.log(response);
-            }
-        });
+            });
+        } else {
+            return;
+        }
     }
 
     saveReview = function( event ){

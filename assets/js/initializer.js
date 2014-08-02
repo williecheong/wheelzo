@@ -137,6 +137,15 @@
             }
         });
 
+        $('a[href="#about-scores"]').popover({
+            html        : true,
+            placement   : 'left',
+            trigger     : 'hover',
+            title       : '<strong>Reputation Points?</strong>',
+            content     : 'A higher number means more <em>street cred</em>. Vouch for others only when they deserve it, because you had a positive ride experience with them. Help preserve balance in the world <i class="fa fa-heart"></i>'
+        });
+
+
         // Initializing table sorter
         rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,
