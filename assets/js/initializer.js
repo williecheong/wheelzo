@@ -128,6 +128,15 @@
 
         $('input#lookup-id').on('change', lookupUser);
 
+        $('.btn#give-point').on('click', savePoint);
+        
+        $('.btn#post-review').on('click', saveReview);
+        $('input#write-review').on('keyup', function(event) {
+            if ( event.keyCode == 13 ){
+                $('.btn#post-review').trigger('click');
+            }
+        });
+
         // Initializing table sorter
         rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,

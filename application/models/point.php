@@ -6,7 +6,7 @@ class point extends CI_Model{
         $given_points = $this->point->retrieve(
             array(
                 'giver_id' => $giver_id,
-                'receiver_id' = $receiver_id
+                'receiver_id' => $receiver_id
             )
         );
 

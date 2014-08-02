@@ -18,23 +18,32 @@ class Points extends REST_Controller {
             if ( isset($data['receiver_id']) ){
                 
                 if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
-                
-                    $point_id = $this->point->create(
-                        array(
-                            'giver_id' => $this->session->userdata('user_id'),
-                            'receiver_id' => $data['receiver_id']
-                        )
-                    );
+                    
+                    if ( !$this->given_today($this->session->userdata('user_id'), $data['receiver_id']) ) {
+                        $point_id = $this->point->create(
+                            array(
+                                'giver_id' => $this->session->userdata('user_id'),
+                                'receiver_id' => $data['receiver_id']
+                            )
+                        );
 
-                    $this->user->update_rating( $point_id );
+                        $this->user->update_rating( $point_id );
 
-                    echo json_encode(
-                        array(
-                            'status' => 'success',
-                            'message' => 'Point posted successful',
-                            'point_id' => $point_id
-                        )
-                    );
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Point posted successful',
+                                'point_id' => $point_id
+                            )
+                        );    
+                    } else {
+                        echo json_encode( 
+                            array(
+                                'status'  => 'fail',
+                                'message' => 'You may only upvote each person once a day. Come again tomorrow.'
+                            )
+                        );
+                    }
                 } else {
                     echo json_encode( 
                         array(
@@ -61,5 +70,21 @@ class Points extends REST_Controller {
         }
 
         return;
+    }
+
+    private function given_today( $giver_id = 0, $receiver_id = 0 ){
+        $points = $this->point->retrieve(
+                array(
+                    'giver_id' => $giver_id,
+                    'receiver_id' => $receiver_id,
+                    'last_updated >' => strtotime('today midnight')
+                )
+            );
+
+        if ( count($points) > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

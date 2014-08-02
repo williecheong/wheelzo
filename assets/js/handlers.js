@@ -212,6 +212,89 @@
         });
     }
 
+    savePoint = function( event ) {
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        
+        $button.addClass('disabled');
+        
+        var receiverID = $modal.find('input#lookup-id').val();
+        
+        $.ajax({
+            url: '/api/points',
+            data: {
+                receiver_id : receiverID
+            },
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+
+                if ( response.status == 'success' ){
+                    refreshUsers(function(){
+                        $('input#lookup-id').trigger('change');    
+                    });
+
+                } else {
+                    $button.removeClass('disabled');
+                    alert(response.message);
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    }
+
+    saveReview = function( event ){
+        var $button = $(this);
+        var $modal = $button.closest('.modal');
+        var $input = $modal.find('input#write-review');
+        
+        $button.addClass('disabled');
+        $input.attr('disabled', true);
+        
+        var receiverID = $modal.find('input#lookup-id').val();
+        var review = $input.val();
+
+        if ( review == "" ) {
+            alert("Write a review");
+            $button.removeClass('disabled');
+            $input.removeAttr('disabled');
+            return false;
+        }
+
+        $.ajax({
+            url: '/api/reviews',
+            data: {
+                receiver_id : receiverID,
+                review : review
+            },
+            type: 'POST',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+
+                if ( response.status == 'success' ){
+                    $('input#lookup-id').trigger('change')
+                    $input.val('');
+                    
+                } else {
+                    $button.removeClass('disabled');
+                    $input.removeAttr('disabled');
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                $input.removeAttr('disabled');
+                console.log(response);
+            }
+        });
+    }
+
     handlePassenger = function ( event ) {
         var $listItem = $(this);
         var passengerID = $listItem.attr('data-user-id');
@@ -242,11 +325,11 @@
         if (user_id == session_id ) {
             $modal.find('.btn#give-point').addClass('disabled');
             $modal.find('.btn#post-review').addClass('disabled');
-            $modal.find('input#write-review').prop('disabled', true);
+            $modal.find('input#write-review').attr('disabled', true);
         } else {
             $modal.find('.btn#give-point').removeClass('disabled');
             $modal.find('.btn#post-review').removeClass('disabled');
-            $modal.find('input#write-review').prop('disabled', false);
+            $modal.find('input#write-review').removeAttr('disabled');
         }
 
         getReviews( user_id, $modal.find('div#lookup-reviews') );

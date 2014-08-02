@@ -257,6 +257,16 @@
         });
     }
 
+    function refreshUsers( callback ) {
+        var url = "/api/users";
+
+        $.get( url, function( response ) {
+            publicUsers = JSON.parse(response);
+            console.log("Object publicUsers has been refreshed.")
+            callback();
+        });   
+    }
+
     function validateRrequest( $modal ) {
         var rrequest = extractModalRrequest( $modal );
         
