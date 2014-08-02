@@ -104,8 +104,16 @@
                 users = [];
 
                 $.each(publicUsers, function (user_id, user_info) {
-                    map[user_info.name] = user_id;
-                    users.push(user_info.name);
+                    var i = 1;
+                    var toDisplay = user_info.name;
+                    
+                    while ( map[toDisplay] ) { 
+                        toDisplay += ' (' + i + ')';
+                        i++;
+                    }
+                    
+                    map[toDisplay] = user_id;
+                    users.push(toDisplay);
                 });
 
                 process( users );
@@ -114,7 +122,7 @@
                 user_id = map[item];
                 $('input#lookup-id').val( user_id )
                                     .trigger('change');
-                return item;
+                return publicUsers[user_id].name;
             }
         });
 
