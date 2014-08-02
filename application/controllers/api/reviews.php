@@ -30,21 +30,31 @@ class Reviews extends REST_Controller {
         if ( $this->session->userdata('user_id') ) {
             
             if ( isset($data['receiver_id']) && isset($data['review']) ){
-                $review_id = $this->review->create(
-                    array(
-                        'giver_id' => $this->session->userdata('user_id'),
-                        'receiver_id' => $data['receiver_id'],
-                        'review' => $data['review']
-                    )
-                );
+                
+                if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
+                    $review_id = $this->review->create(
+                        array(
+                            'giver_id' => $this->session->userdata('user_id'),
+                            'receiver_id' => $data['receiver_id'],
+                            'review' => $data['review']
+                        )
+                    );
 
-                echo json_encode(
-                    array(
-                        'status' => 'success',
-                        'message' => 'Review posted successful',
-                        'review_id' => $review_id
-                    )
-                );
+                    echo json_encode(
+                        array(
+                            'status' => 'success',
+                            'message' => 'Review posted successful',
+                            'review_id' => $review_id
+                        )
+                    );
+                } else {
+                    echo json_encode( 
+                        array(
+                            'status'  => 'fail',
+                            'message' => 'Self reviews not allowed'
+                        )
+                    );
+                }
             } else {
                 echo json_encode( 
                     array(

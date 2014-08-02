@@ -63,7 +63,7 @@ class Main extends CI_Controller {
             // Only display public user information
             $temp_users[$user->id]['name'] = $user->name;
             $temp_users[$user->id]['facebook_id'] = $user->facebook_id;
-            $temp_users[$user->id]['score'] = $user->rating;
+            $temp_users[$user->id]['score'] = number_format(round(floatval($user->rating), 2), 2);
         }
 
         $view = 'main';

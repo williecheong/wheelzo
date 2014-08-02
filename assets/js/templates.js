@@ -115,6 +115,35 @@
         return html;
     }
 
+    function reviewsTemplate( reviews ) {
+        var html = '';
+        var count = 0;
+        $.each(reviews, function(key, reviewObject){
+            html += '<div class="media">'+
+                    '    <a class="pull-left" target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">'+
+                    '        <img class="img-rounded media-object" src="'+fbImage(publicUsers[reviewObject.giver_id].facebook_id, 'square')+'">'+
+                    '    </a>'+
+                    '    <div class="media-body">'+
+                    '        <div id="single-review-message">'+
+                    '            ' + reviewObject.review +
+                    '        </div>'+
+                    '        <small class="single-review-meta">'+
+                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + publicUsers[reviewObject.giver_id].name + '</a> @ ' + moment(reviewObject.last_updated).format('dddd MMMM D, h:mm a') +
+                    '        </small>'+
+                    '    </div>'+
+                    '</div>';
+            count++;
+        }); 
+
+        if ( count == 0 ) {
+            html = '<div class="media dummy-review text-center">'+
+                   '    <em>No Reviews to display ...</em>'+
+                   '</div>';
+        }
+
+        return html;
+    }
+
     function dropoffInputTemplate( id ) {
         var html = '';
         html += '<div class="right-inner-addon dropoff" id="'+id+'">'+

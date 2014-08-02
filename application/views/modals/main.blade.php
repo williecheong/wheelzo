@@ -242,18 +242,18 @@
                 <div class="row">
                     <br>
                     <div class="col-xs-8 text-right">
-                        <a id="driver-picture" target="" href="#">
-                            <img class="img-circle greyed-out" id="driver-picture" src="/assets/img/empty_user.png">
+                        <a id="lookup-picture" target="" href="#">
+                            <img class="img-circle greyed-out" id="lookup-picture" src="/assets/img/empty_user.png">
                         </a>
                     </div>
                     <div class="col-xs-4 text-center">
                         SCORE
                         <h3>
-                            <span class="label label-success">
+                            <span class="label label-success" id="lookup-score">
                                 0.00
                             </span>
                             <br><br>
-                            <a class="btn btn-success disabled" role="button">
+                            <a class="btn btn-success disabled" id="give-point" role="button">
                                 <i class="fa fa-thumbs-up"></i>
                             </a>
                         </h3>
@@ -262,7 +262,7 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-lg-12" id="ride-comments">
+                    <div class="col-lg-12" id="lookup-reviews">
                         <div class="media dummy-review text-center">    
                             <em>
                                 No Reviews to display...
@@ -271,7 +271,7 @@
                     </div>
                     <div class="col-lg-12 media">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="write-review" placeholder="Write a review for Harris Rasheed" autocomplete="off" disabled>
+                            <input type="text" class="form-control" id="write-review" placeholder="Write a review for ..." autocomplete="off" disabled>
                             <span class="input-group-btn">
                                 <button class="btn btn-default disabled" type="button" id="post-review">
                                     <i class="fa fa-comment fa-lg"></i>

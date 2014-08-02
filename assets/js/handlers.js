@@ -17,14 +17,14 @@
         var $modal = $('.modal#view-ride');
 
         $modal.find('a#driver-name')
-              .attr('href', '//facebook.com/'+driver['facebook_id'])
+              .attr('href', fbProfile(driver['facebook_id']))
               .html(driver['name']);
 
         $modal.find('a#driver-picture')
-              .attr('href', '//facebook.com/'+driver['facebook_id']);
+              .attr('href', fbProfile(driver['facebook_id']));
 
         $modal.find('img#driver-picture')
-              .attr('src', '//graph.facebook.com/'+driver['facebook_id']+'/picture?width=200&height=200')
+              .attr('src', fbImage(driver['facebook_id']))
         
         $modal.find('#ride-departure')
               .html( moment(thisRide.start).format('dddd MMM D, h:mma') );        
@@ -232,7 +232,24 @@
         var user_id = $('input#lookup-id').val();
         // Populate the lookup modal here...
         var $modal = $(this).closest('.modal');
-        $modal.find('div.about-user').html( publicUsers[user_id].facebook_id );
+        
+        $modal.find('img#lookup-picture').attr('src', fbImage(publicUsers[user_id].facebook_id) )
+                                         .removeClass('greyed-out');
+
+        $modal.find('span#lookup-score').html(publicUsers[user_id].score);
+        $modal.find('input#write-review').attr('placeholder', 'Write a review for ' + publicUsers[user_id].name);
+
+        if (user_id == session_id ) {
+            $modal.find('.btn#give-point').addClass('disabled');
+            $modal.find('.btn#post-review').addClass('disabled');
+            $modal.find('input#write-review').prop('disabled', true);
+        } else {
+            $modal.find('.btn#give-point').removeClass('disabled');
+            $modal.find('.btn#post-review').removeClass('disabled');
+            $modal.find('input#write-review').prop('disabled', false);
+        }
+
+        getReviews( user_id, $modal.find('div#lookup-reviews') );
     }
 
     searchRides = function ( event ) {
@@ -299,39 +316,39 @@
 
 
     saveFeedback = function( event ) {
-            var $button = $(this);
-            $button.addClass('disabled');
+        var $button = $(this);
+        $button.addClass('disabled');
 
-            var email = $('input[name="feedback-email"]').val();
-            var message = $('textarea[name="feedback-message"]').val();
-            
-            if ( message.length == 0 ) {
-                alert("Message should not be empty");
-                $button.removeClass('disabled');
-                return false;
-            }
-
-            $.ajax({
-                url: '/api/feedbacks',
-                type: 'POST',
-                dataType: "JSON",
-                data: {
-                    'email' : email,
-                    'message': message
-                },
-                success: function(response) {
-                    if ( response.status == 'success' ) {
-                        $('input[name="feedback-email"]').attr('disabled', true);
-                        $('textarea[name="feedback-message"]').attr('disabled', true);
-                        $button.html('<i class="fa fa-check"></i> Message sent');
-                    }
-                    console.log(response.message);
-                }, 
-                error: function(response) {
-                    alert('Fail: API could not be reached.');
-                    $button.removeClass('disabled');
-                    console.log(response);
-                }
-            });
+        var email = $('input[name="feedback-email"]').val();
+        var message = $('textarea[name="feedback-message"]').val();
         
+        if ( message.length == 0 ) {
+            alert("Message should not be empty");
+            $button.removeClass('disabled');
+            return false;
         }
+
+        $.ajax({
+            url: '/api/feedbacks',
+            type: 'POST',
+            dataType: "JSON",
+            data: {
+                'email' : email,
+                'message': message
+            },
+            success: function(response) {
+                if ( response.status == 'success' ) {
+                    $('input[name="feedback-email"]').attr('disabled', true);
+                    $('textarea[name="feedback-message"]').attr('disabled', true);
+                    $button.html('<i class="fa fa-check"></i> Message sent');
+                }
+                console.log(response.message);
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                $button.removeClass('disabled');
+                console.log(response);
+            }
+        });
+    
+    }
