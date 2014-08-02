@@ -12,11 +12,6 @@
 @endsection
 
 @section('right_navs')
-    <li class="pull-left">
-        <a class="" href="#" data-mytoggler="div#introduction" data-mytoggler-style="drop">
-            <i class="fa fa-chevron-circle-down fa-lg"></i>
-        </a>
-    </li>
 @endsection
 
 @section('jumbotron')

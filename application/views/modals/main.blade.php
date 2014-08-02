@@ -221,3 +221,33 @@
         </div>
     </div>
 </div>
+
+<!-- Modal for looking up other users -->
+<div class="modal fade" id="lookup-users" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-group"></i> Lookup
+                </h4>
+            </div>
+            <div class="modal-body"> 
+                <div class="row">
+                    @if ( $session )
+                        <div class="col-lg-12">
+                            <input type="hidden" class="form-control hide" id="lookup-id">
+                            <input type="text" class="form-control add_suggested_names" id="lookup-name" placeholder="Who are you trying to find?" autocomplete="off">  
+                        </div>
+                    @endif
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="about-user text-center">
+                        Max max max
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

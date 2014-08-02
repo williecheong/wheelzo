@@ -228,6 +228,13 @@
         }
     }
 
+    lookupUser = function ( event ) {
+        var user_id = $('input#lookup-id').val();
+        // Populate the lookup modal here...
+        var $modal = $(this).closest('.modal');
+        $modal.find('div.about-user').html( publicUsers[user_id].facebook_id );
+    }
+
     searchRides = function ( event ) {
         var searchTerm = $('input#search-box').val();
         rideTable.fnFilter( searchTerm );

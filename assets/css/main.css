@@ -75,19 +75,19 @@ textarea {
 
 @media(min-width:768px){
     input#search-box {
-        width:270px;
+        width:230px;
     }
 }
 
 @media(min-width:992px){
     input#search-box {
-        width:460px;
+        width:420px;
     }
 }
 
 @media(min-width:1200px){
     input#search-box {
-        width:650px;
+        width:600px;
     }
 }
 

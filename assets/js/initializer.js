@@ -98,6 +98,28 @@
             source: defaultSuggestedPlaces
         });
 
+        $('.add_suggested_names').typeahead({
+            source: function(query, process){
+                map = {};
+                users = [];
+
+                $.each(publicUsers, function (user_id, user_info) {
+                    map[user_info.name] = user_id;
+                    users.push(user_info.name);
+                });
+
+                process( users );
+            },
+            updater: function(item){
+                user_id = map[item];
+                $('input#lookup-id').val( user_id )
+                                    .trigger('change');
+                return item;
+            }
+        });
+
+        $('input#lookup-id').on('change', lookupUser);
+
         // Initializing table sorter
         rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,
