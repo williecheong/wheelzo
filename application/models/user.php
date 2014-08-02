@@ -10,7 +10,7 @@ class user extends CI_Model{
             $current_rating = floatval( $receiver->rating );
 
             // Super secret score update algorithm
-            $increment = $this->point->calculate_increment( $point->giver_id );
+            $increment = $this->point->calculate_increment( $point->giver_id, $point->receiver_id );
 
             $this->user->update(
                 array(

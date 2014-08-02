@@ -2,10 +2,11 @@
 
 class point extends CI_Model{
     
-    function calculate_increment( $giver_id = 0 ) {
+    function calculate_increment( $giver_id = 0, $receiver_id = 0 ) {
         $given_points = $this->point->retrieve(
             array(
-                'giver_id' => $giver_id
+                'giver_id' => $giver_id,
+                'receiver_id' = $receiver_id
             )
         );
 
