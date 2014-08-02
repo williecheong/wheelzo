@@ -40,7 +40,7 @@ class Points extends REST_Controller {
                         echo json_encode( 
                             array(
                                 'status'  => 'fail',
-                                'message' => 'You may only upvote each person once a day. Come again tomorrow.'
+                                'message' => "You may upvote each person once a day.\nCome again tomorrow."
                             )
                         );
                     }
