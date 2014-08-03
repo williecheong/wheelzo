@@ -320,7 +320,8 @@
         // Populate the lookup modal here...
         var $modal = $(this).closest('.modal');
         
-        $modal.find('a#lookup-picture').attr('href', fbProfile(publicUsers[user_id].facebook_id) );
+        $modal.find('a#lookup-picture').attr('href', fbProfile(publicUsers[user_id].facebook_id) )
+                                       .attr('target', '_blank' );
         $modal.find('img#lookup-picture').attr('src', fbImage(publicUsers[user_id].facebook_id) )
                                          .removeClass('greyed-out');
 
