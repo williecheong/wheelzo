@@ -23,7 +23,7 @@
                         <i class="fa fa-search fa-2x"></i> Search
                     </h3>
                     <div style="text-align:justify;">
-                        Find a ride quickly and easily. Search by location, departure time, drop-off spots or even the driver's name. Just start typing.
+                        Find a ride quickly. Search by location, departure time, drop-off spots or the driver's name. Just start typing.
                     </div>
                 </div>
                 <div class="col-sm-3"> 
@@ -48,9 +48,9 @@
                     </h3>
                     <div style="text-align:justify;">
                         @if ( !$session )
-                            Wheelzo sends you <a href="{{ $session_url }}">facebook</a> notifications when people are interested in your rides, or when a driver agrees to pick you up.
+                            Receive <a href="{{ $session_url }}">facebook</a> notifications when people are interested in your rides, or when a driver agrees to pick you up.
                         @else
-                            Wheelzo sends you facebook notifications when people are interested in your rides, or when a driver agrees to pick you up.
+                            Receive facebook notifications when people are interested in your rides, or when a driver agrees to pick you up.
                         @endif
                     </div>
                 </div>
