@@ -77,7 +77,7 @@ class Points extends REST_Controller {
                 array(
                     'giver_id' => $giver_id,
                     'receiver_id' => $receiver_id,
-                    'last_updated >' => strtotime('today midnight')
+                    'last_updated >' => date('Y-m-d H:i:s', strtotime('today midnight'))
                 )
             );
 
