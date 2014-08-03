@@ -236,7 +236,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <input type="hidden" class="form-control hide" id="lookup-id" value="1">
-                        <input type="text" class="form-control add_suggested_names" id="lookup-name" placeholder="Who are you trying to find?" autocomplete="off"><ul class="typeahead dropdown-menu" style="display: none; top: 34px; left: 15px;"><li class="active"><a href="#"><strong>Max Pikhte</strong>ryev</a></li></ul>  
+                        <input type="text" class="form-control add_suggested_names" id="lookup-name" placeholder="Who are you looking for? ¯\_(ツ)_/¯" autocomplete="off"> 
                     </div>
                 </div>
                 <div class="row">
