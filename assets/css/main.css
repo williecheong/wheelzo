@@ -25,6 +25,8 @@ input#search-box {
 
 div#lookup-reviews {
     margin-top: 15px;
+    max-height: 210px;
+    overflow-y: scroll; 
 }
  
 img#driver-picture, img#lookup-picture {
