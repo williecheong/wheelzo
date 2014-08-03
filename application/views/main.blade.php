@@ -47,9 +47,10 @@
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
                     <div style="text-align:justify;">
-                        Wheelzo sends you facebook notifications when people are interested in your rides, or when a driver agrees to pick you up.
                         @if ( !$session )
-                            Login with <a href="{{ $session_url }}">Facebook</a> now.
+                            Wheelzo sends you <a href="{{ $session_url }}">facebook</a> notifications when people are interested in your rides, or when a driver agrees to pick you up.
+                        @else
+                            Wheelzo sends you facebook notifications when people are interested in your rides, or when a driver agrees to pick you up.
                         @endif
                     </div>
                 </div>
