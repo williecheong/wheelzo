@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <h3>
+                    <h3 style="white-space:nowrap;">
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
                     <div style="text-align:justify;">
