@@ -22,7 +22,11 @@ td.ninja-field {
 input#search-box {
     max-width:100%;
 }
-    
+
+div#lookup-reviews {
+    margin-top: 15px;
+}
+ 
 img#driver-picture, img#lookup-picture {
     width: 100%;
     max-width: 150px;

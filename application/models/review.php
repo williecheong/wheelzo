@@ -25,7 +25,7 @@ class review extends CI_Model{
 
     function retrieve( $data = array() ){
         $this->db->where($data);
-        $this->db->order_by('last_updated', 'asc');
+        $this->db->order_by('last_updated', 'desc');
         $query = $this->db->get('review');
         return $query->result();
     }

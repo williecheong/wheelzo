@@ -265,13 +265,6 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-lg-12" id="lookup-reviews">
-                        <div class="media dummy-review text-center">    
-                            <em>
-                                No Reviews to display...
-                            </em>
-                        </div>
-                    </div>
                     <div class="col-lg-12 media">
                         <div class="input-group">
                             <input type="text" class="form-control" id="write-review" placeholder="Write a review for ..." autocomplete="off" disabled>
@@ -280,6 +273,13 @@
                                     <i class="fa fa-comment fa-lg"></i>
                                 </button>
                             </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" id="lookup-reviews">
+                        <div class="media dummy-review text-center">    
+                            <em>
+                                No Reviews to display...
+                            </em>
                         </div>
                     </div>
                 </div>
