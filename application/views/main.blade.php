@@ -18,7 +18,7 @@
     <div class="jumbotron" id="introduction">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>
                         <i class="fa fa-search fa-2x"></i> Search
                     </h3>
@@ -26,15 +26,23 @@
                         Find a ride quickly and easily. Search by location, departure time, drop-off spots or even the driver's name. Just start typing.
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3"> 
+                    <h3> 
+                        <i class="fa fa-group fa-2x"></i> Lookup
+                    </h3> 
+                    <div style="text-align:justify;">
+                        Be confident that your drivers and passengers are trustworthy: everyone is held accountable by the community.
+                    </div>
+                </div>
+                <div class="col-sm-3">
                     <h3>
-                        <i class="fa fa-user fa-2x"></i> Manage
+                        <i class="fa fa-home fa-2x"></i> Manage
                     </h3>
                     <div style="text-align:justify;">
                         View only the rides you care about in one click. Any rides you drive or a passenger of are on your personal page.
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <h3>
                         <i class="fa fa-facebook-square fa-2x"></i> Stay Informed
                     </h3>
