@@ -22,8 +22,14 @@ td.ninja-field {
 input#search-box {
     max-width:100%;
 }
-    
-img#driver-picture {
+
+div#lookup-reviews {
+    margin-top: 15px;
+    max-height: 210px;
+    overflow-y: scroll; 
+}
+ 
+img#driver-picture, img#lookup-picture {
     width: 100%;
     max-width: 150px;
 }
@@ -36,6 +42,10 @@ div#introduction {
 
 div#passenger-box {
     min-height: 50px;
+}
+
+img.greyed-out {
+    opacity: 0.5;
 }
 
 img#passenger-picture {
@@ -75,19 +85,19 @@ textarea {
 
 @media(min-width:768px){
     input#search-box {
-        width:270px;
+        width:230px;
     }
 }
 
 @media(min-width:992px){
     input#search-box {
-        width:460px;
+        width:420px;
     }
 }
 
 @media(min-width:1200px){
     input#search-box {
-        width:650px;
+        width:600px;
     }
 }
 

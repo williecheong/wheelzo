@@ -2,6 +2,32 @@
 
 class user extends CI_Model{
     
+    function update_rating( $point_id = 0 ) {
+        $point = $this->point->retrieve_by_id( $point_id );
+
+        if ( $point ) {
+            $receiver = $this->user->retrieve_by_id( $point->receiver_id );
+            $current_rating = floatval( $receiver->rating );
+
+            // Super secret score update algorithm
+            $increment = $this->point->calculate_increment( $point->giver_id, $point->receiver_id );
+
+            $this->user->update(
+                array(
+                    'id' => $receiver->id
+                ),
+                array(
+                    'rating' => strval( round( $current_rating + $increment, 4 ) )
+                )
+            );
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+    
     function to_notify( $user_id = 0, $type = '' ) {
         $user = $this->user->retrieve_by_id( $user_id ); 
 

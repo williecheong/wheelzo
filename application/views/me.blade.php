@@ -47,6 +47,9 @@
                         <?php } ?>
                     </td>
                     <td>
+                        <span style="display:none;">
+                            {{ strtotime($ride->start) }}
+                        </span>
                         {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
                     </td>
                     <td>
@@ -131,7 +134,7 @@
                         <button class="btn btn-danger btn-xs" id="delete-rrequest">
                             <i class="fa fa-times"></i> Delete
                         </button>
-                    </div>     
+                    </div>
                 </div>
             </div>
         </div>

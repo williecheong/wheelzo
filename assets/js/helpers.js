@@ -177,6 +177,22 @@
         });
     }
 
+    function getReviews( user_id, $reviewBox ) {
+        $reviewBox.html('<i class="fa fa-cog fa-spin fa-2x"></i>').addClass('text-center');
+        $.ajax({
+            url: '/api/reviews?receiver_id=' + user_id,
+            type: 'GET',
+            dataType: "JSON",
+            success: function( reviews ) {
+                $reviewBox.removeClass('text-center').html( reviewsTemplate(reviews) );
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.');
+                console.log(response);
+            }
+        });
+    }
+
 /*******************
     WHEELZO HELPER FUNCTIONS
 *******************/ 
@@ -239,6 +255,16 @@
             console.log("Object rides has been refreshed.")
             callback();
         });
+    }
+
+    function refreshUsers( callback ) {
+        var url = "/api/users";
+
+        $.get( url, function( response ) {
+            publicUsers = JSON.parse(response);
+            console.log("Object publicUsers has been refreshed.")
+            callback();
+        });   
     }
 
     function validateRrequest( $modal ) {

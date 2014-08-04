@@ -98,6 +98,54 @@
             source: defaultSuggestedPlaces
         });
 
+        $('.add_suggested_names').typeahead({
+            source: function(query, process){
+                map = {};
+                users = [];
+
+                $.each(publicUsers, function (user_id, user_info) {
+                    var i = 1;
+                    var toDisplay = user_info.name;
+                    
+                    while ( map[toDisplay] ) { 
+                        toDisplay += ' (' + i + ')';
+                        i++;
+                    }
+                    
+                    map[toDisplay] = user_id;
+                    users.push(toDisplay);
+                });
+
+                process( users );
+            },
+            updater: function(item){
+                user_id = map[item];
+                $('input#lookup-id').val( user_id )
+                                    .trigger('change');
+                return publicUsers[user_id].name;
+            }
+        });
+
+        $('input#lookup-id').on('change', lookupUser);
+
+        $('.btn#give-point').on('click', savePoint);
+        
+        $('.btn#post-review').on('click', saveReview);
+        $('input#write-review').on('keyup', function(event) {
+            if ( event.keyCode == 13 ){
+                $('.btn#post-review').trigger('click');
+            }
+        });
+
+        $('a[href="#about-scores"]').popover({
+            html        : true,
+            placement   : 'left',
+            trigger     : 'hover',
+            title       : '<strong>Reputation Points?</strong>',
+            content     : 'A higher number means more <em>street cred</em>. Vouch for others only when they deserve it, because you had a positive ride experience with them. Help preserve balance in the world <i class="fa fa-heart"></i>'
+        });
+
+
         // Initializing table sorter
         rideTable = $('table.rides-table').dataTable({
             "bPaginate": false,

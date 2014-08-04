@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css">
@@ -54,10 +54,15 @@
                                     <i class="fa fa-tachometer fa-lg"></i> Drive
                                 </a>
                             </li>
+                            <li>
+                                <a class="pull-left" href="#" title="User Lookup" data-toggle="modal" data-target="#lookup-users">
+                                    <i class="fa fa-group fa-lg"></i> Lookup
+                                </a>
+                            </li>
                             <li class="@yield('my_rides')"> 
                                 <a class="pull-left" href="/me" title="My Rides">
                                     <?php $exploded_name = explode(' ', $users[$session]['name'] ); ?>
-                                    <i class="fa fa-user fa-lg"></i> {{ $exploded_name[0] }}
+                                    <i class="fa fa-home fa-lg"></i> {{ $exploded_name[0] }}
                                 </a>
                             </li>
                             <li>
@@ -72,8 +77,13 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="pull-left" title="User Lookup" href="{{ $session_url }}">
+                                    <i class="fa fa-group fa-lg"></i> Lookup
+                                </a>
+                            </li>
+                            <li>
                                 <a class="pull-left" title="My Rides" href="{{ $session_url }}">
-                                    <i class="fa fa-user fa-lg"></i> My Rides
+                                    <i class="fa fa-home fa-lg"></i> My Rides
                                 </a>
                             </li>
                             <li>
