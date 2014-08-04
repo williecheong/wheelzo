@@ -23,7 +23,8 @@ class Points extends REST_Controller {
                         $point_id = $this->point->create(
                             array(
                                 'giver_id' => $this->session->userdata('user_id'),
-                                'receiver_id' => $data['receiver_id']
+                                'receiver_id' => $data['receiver_id'],
+                                'last_updated' => date( 'Y-m-d H:i:s' )
                             )
                         );
 
