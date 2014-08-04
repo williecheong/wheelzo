@@ -30,13 +30,55 @@ class Points extends REST_Controller {
 
                         $this->user->update_rating( $point_id );
 
-                        echo json_encode(
-                            array(
-                                'status' => 'success',
-                                'message' => 'Point posted successful',
-                                'point_id' => $point_id
-                            )
-                        );    
+                        // Facebook notify for point received
+                        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+                        $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+
+                        $notification_type = $giver->id . NOTIFY_VOUCHED; 
+                        $to_notify = $this->user->to_notify( $receiver_id->id, $notification_type );
+
+                        if ( $to_notify ) {
+                            $fb_response = false;
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $receiver->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb',
+                                        'template' => '@[' . $giver->facebook_id . '] has vouched for you on Wheelzo.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+
+                            if ( $fb_response ) {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Point successfully posted. Receiver notified on Facebook.',
+                                        'point_id' => $point_id
+                                    )
+                                );
+                            } else {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Point successfully posted. Receiver could not be notified on Facebook.',
+                                        'point_id' => $point_id
+                                    )
+                                );   
+                            }                        
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Point successfully posted. Receiver already notified on Facebook.',
+                                    'point_id' => $point_id
+                                )
+                            );
+                        }
                     } else {
                         echo json_encode( 
                             array(

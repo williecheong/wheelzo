@@ -40,13 +40,55 @@ class Reviews extends REST_Controller {
                         )
                     );
 
-                    echo json_encode(
-                        array(
-                            'status' => 'success',
-                            'message' => 'Review posted successful',
-                            'review_id' => $review_id
-                        )
-                    );
+                    // Facebook notify for review received
+                    $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+                    $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+
+                    $notification_type = $giver->id . NOTIFY_REVIEWED; 
+                    $to_notify = $this->user->to_notify( $receiver_id->id, $notification_type );
+
+                    if ( $to_notify ) {
+                        $fb_response = false;
+                        try {
+                            $fb_response = $this->facebook->api(
+                                '/' . $receiver->facebook_id . '/notifications', 
+                                'POST', 
+                                array(
+                                    'href' => '/fb',
+                                    'template' => '@[' . $giver->facebook_id . '] has written a review for you on Wheelzo.',
+                                    'access_token' => FB_APPID . '|' . FB_SECRET
+                                )
+                            );
+                        } catch ( Exception $e ) {
+                            log_message('error', $e->getMessage() );
+                        }
+
+                        if ( $fb_response ) {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Review successfully posted. Receiver notified on Facebook.',
+                                    'review_id' => $review_id
+                                )
+                            );
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Review successfully posted. Receiver could not be notified on Facebook.',
+                                    'review_id' => $review_id
+                                )
+                            );   
+                        }                        
+                    } else {
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Review successfully posted. Receiver already notified on Facebook.',
+                                'review_id' => $review_id
+                            )
+                        );
+                    }
                 } else {
                     echo json_encode( 
                         array(
