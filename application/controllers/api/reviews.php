@@ -62,7 +62,7 @@ class Reviews extends REST_Controller {
                                 'POST', 
                                 array(
                                     'href' => '/fb',
-                                    'template' => '@[' . $giver->facebook_id . '] has written a review for you on Wheelzo.',
+                                    'template' => '@[' . $giver->facebook_id . '] has written a review for you.',
                                     'access_token' => FB_APPID . '|' . FB_SECRET
                                 )
                             );
