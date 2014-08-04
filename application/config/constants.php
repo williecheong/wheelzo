@@ -17,6 +17,8 @@ define('NOTIFY_COMMENT',        'C');
 define('NOTIFY_REMOVED',        'R');
 define('NOTIFY_DELETED',        'D');
 define('NOTIFY_INVITED',        'I');
+define('NOTIFY_VOUCHED',        'V');
+define('NOTIFY_REVIEWED',       'W');
 
 /*
 |--------------------------------------------------------------------------
