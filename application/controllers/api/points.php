@@ -35,7 +35,7 @@ class Points extends REST_Controller {
                         $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
 
                         $notification_type = $giver->id . NOTIFY_VOUCHED; 
-                        $to_notify = $this->user->to_notify( $receiver_id->id, $notification_type );
+                        $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
 
                         if ( $to_notify ) {
                             $fb_response = false;
