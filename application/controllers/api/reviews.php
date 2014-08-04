@@ -7,6 +7,13 @@ class Reviews extends REST_Controller {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('review');
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => FB_APPID, 
+                "secret" => FB_SECRET
+            )
+        );
     }
 
     public function index_get() {
@@ -40,13 +47,55 @@ class Reviews extends REST_Controller {
                         )
                     );
 
-                    echo json_encode(
-                        array(
-                            'status' => 'success',
-                            'message' => 'Review posted successful',
-                            'review_id' => $review_id
-                        )
-                    );
+                    // Facebook notify for review received
+                    $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+                    $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+
+                    $notification_type = $giver->id . NOTIFY_REVIEWED; 
+                    $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
+
+                    if ( $to_notify ) {
+                        $fb_response = false;
+                        try {
+                            $fb_response = $this->facebook->api(
+                                '/' . $receiver->facebook_id . '/notifications', 
+                                'POST', 
+                                array(
+                                    'href' => '/fb',
+                                    'template' => '@[' . $giver->facebook_id . '] has written a review for you.',
+                                    'access_token' => FB_APPID . '|' . FB_SECRET
+                                )
+                            );
+                        } catch ( Exception $e ) {
+                            log_message('error', $e->getMessage() );
+                        }
+
+                        if ( $fb_response ) {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Review successfully posted. Receiver notified on Facebook.',
+                                    'review_id' => $review_id
+                                )
+                            );
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Review successfully posted. Receiver could not be notified on Facebook.',
+                                    'review_id' => $review_id
+                                )
+                            );   
+                        }                        
+                    } else {
+                        echo json_encode(
+                            array(
+                                'status' => 'success',
+                                'message' => 'Review successfully posted. Receiver already notified on Facebook.',
+                                'review_id' => $review_id
+                            )
+                        );
+                    }
                 } else {
                     echo json_encode( 
                         array(

@@ -7,6 +7,13 @@ class Points extends REST_Controller {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('point');
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => FB_APPID, 
+                "secret" => FB_SECRET
+            )
+        );
     }
 
     // Used to create a new group in the DB
@@ -30,13 +37,55 @@ class Points extends REST_Controller {
 
                         $this->user->update_rating( $point_id );
 
-                        echo json_encode(
-                            array(
-                                'status' => 'success',
-                                'message' => 'Point posted successful',
-                                'point_id' => $point_id
-                            )
-                        );    
+                        // Facebook notify for point received
+                        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+                        $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+
+                        $notification_type = $giver->id . NOTIFY_VOUCHED; 
+                        $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
+
+                        if ( $to_notify ) {
+                            $fb_response = false;
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $receiver->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb',
+                                        'template' => '@[' . $giver->facebook_id . '] has vouched for you.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }
+
+                            if ( $fb_response ) {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Point successfully posted. Receiver notified on Facebook.',
+                                        'point_id' => $point_id
+                                    )
+                                );
+                            } else {
+                                echo json_encode(
+                                    array(
+                                        'status' => 'success',
+                                        'message' => 'Point successfully posted. Receiver could not be notified on Facebook.',
+                                        'point_id' => $point_id
+                                    )
+                                );   
+                            }                        
+                        } else {
+                            echo json_encode(
+                                array(
+                                    'status' => 'success',
+                                    'message' => 'Point successfully posted. Receiver already notified on Facebook.',
+                                    'point_id' => $point_id
+                                )
+                            );
+                        }
                     } else {
                         echo json_encode( 
                             array(
