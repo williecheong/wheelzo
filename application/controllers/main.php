@@ -104,7 +104,8 @@ class Main extends CI_Controller {
                 'session_url' => $this->facebook_url,
                 'my_rrequests' => $my_rrequests,
                 'rrequests' => $this->rrequest->retrieve_active(),
-                'request_ride_id' => $this->input->get('ride')
+                'request_ride_id' => $this->input->get('ride'),
+                'request_user_id' => $this->input->get('user')
             )
         );
     }

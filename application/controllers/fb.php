@@ -27,14 +27,18 @@ class Fb extends CI_Controller {
     }
     
     public function index() {
-        $go_to_ride = '';
+        $redirect_param = '/';
+        
         if ( $this->input->get('goto') ) {
-            $go_to_ride = $this->input->get('goto');
+            $redirect_param = '/?ride=' . $this->input->get('goto');
+        
+        } else if ( $this->input->get('lookup') ) {
+            $redirect_param = '/?user=' . $this->input->get('lookup');
         }
 
         $this->blade->render('fb_landing',
             array(
-                'ride_link' => '/?ride=' . $go_to_ride
+                'link' => $redirect_param
             )
         );
     }

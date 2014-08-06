@@ -168,6 +168,7 @@
         var publicUsers = {{ json_encode($users) }} ;
         var session_id = {{ $session ? $session : 'false' }};
         var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
+        var loadUser = {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }};
         var myRrequests = {{ json_encode($my_rrequests) }};
     </script>
     
