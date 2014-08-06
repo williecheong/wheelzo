@@ -162,6 +162,10 @@
         if ( loadRide ) {
             rideTable.fnFilter( loadRide )
             $('tr[data-ride-id]').trigger('click');
+        } else if ( loadUser ) {
+            $('.modal#lookup-users').modal('show');
+            $('input#lookup-name').val( publicUsers[loadUser].name );
+            $('input#lookup-id').val(loadUser).trigger('change');
         }
 
         rrequestTable = $('table.rrequests-table').dataTable({

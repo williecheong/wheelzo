@@ -51,7 +51,7 @@ class Points extends REST_Controller {
                                     '/' . $receiver->facebook_id . '/notifications', 
                                     'POST', 
                                     array(
-                                        'href' => '/fb',
+                                        'href' => '/fb?lookup='.$receiver->id,
                                         'template' => '@[' . $giver->facebook_id . '] has vouched for you.',
                                         'access_token' => FB_APPID . '|' . FB_SECRET
                                     )
