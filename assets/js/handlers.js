@@ -294,6 +294,14 @@
         });
     }
 
+    removeReview = function( event ) {
+        var $button = $(this);        
+        var reviewID = $button.attr('id');
+        $button.off('click', removeReview);
+
+        deleteReview( reviewID, $button ); 
+    }
+
     handlePassenger = function ( event ) {
         var $listItem = $(this);
         var passengerID = $listItem.attr('data-user-id');

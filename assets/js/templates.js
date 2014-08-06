@@ -119,6 +119,10 @@
         var html = '';
         var count = 0;
         $.each(reviews, function(key, reviewObject){
+            var printName = publicUsers[reviewObject.giver_id].name;
+            printName = printName.split(' ');
+            printName = shortenString( printName[0], 7 );
+
             html += '<div class="media">'+
                     '    <a class="pull-left" target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">'+
                     '        <img class="img-rounded media-object" src="'+fbImage(publicUsers[reviewObject.giver_id].facebook_id, 'square')+'">'+
@@ -128,8 +132,13 @@
                     '            ' + reviewObject.review +
                     '        </div>'+
                     '        <small class="single-review-meta">'+
-                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + publicUsers[reviewObject.giver_id].name + '</a> @ ' + moment(reviewObject.last_updated).format('MMMM D') +
-                    '        </small>'+
+                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + printName + '</a> @ ' + moment(reviewObject.last_updated).format('MMM D, YYYY');
+            
+            if ( reviewObject.giver_id == session_id ) {
+                html += '        <a href="#delete-review" id="'+reviewObject.id+'"><i class="fa fa-trash-o fa-border"></i></a>';
+            }
+
+            html += '        </small>'+
                     '    </div>'+
                     '</div>';
             count++;

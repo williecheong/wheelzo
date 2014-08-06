@@ -185,9 +185,36 @@
             dataType: "JSON",
             success: function( reviews ) {
                 $reviewBox.removeClass('text-center').html( reviewsTemplate(reviews) );
+                $('a[href="#delete-review"]').on('click', removeReview);
             }, 
             error: function(response) {
                 alert('Fail: API could not be reached.');
+                console.log(response);
+            }
+        });
+    }
+
+    function deleteReview( reviewID, $button ) {
+        $.ajax({
+            url: '/api/reviews/index/' + reviewID,
+            type: 'DELETE',
+            dataType: "JSON",
+            success: function( response ) {
+                console.log(response.message);
+                
+                if (response.status == 'success') {
+                    $button.html('<i class="fa fa-refresh fa-spin"></i>');
+                    setTimeout(function() {
+                        $('input#lookup-id').trigger('change')
+                    }, 1500);
+                } else {
+                    alert(response.message);
+                    $button.on('click', removeReview);
+                }
+            }, 
+            error: function(response) {
+                alert('Fail: API could not be reached.'); 
+                $button.on('click', removeReview);
                 console.log(response);
             }
         });

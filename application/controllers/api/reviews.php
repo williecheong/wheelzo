@@ -123,4 +123,51 @@ class Reviews extends REST_Controller {
 
         return;
     }
+
+    public function index_delete( $review_id = '' ) {
+        if ( $this->session->userdata('user_id') ) {            
+            $reviewer_id = $this->session->userdata('user_id');
+            
+            if ( $this->_verify_reviewer( $review_id, $reviewer_id) ) {
+                $this->review->delete(
+                    array(
+                        'id' => $review_id
+                    )
+                );
+
+                echo json_encode(
+                    array(
+                        'status' => 'success',
+                        'message' => "Review successfully deleted."
+                    )
+                );
+            } else {
+                echo json_encode(
+                    array(
+                        'status' => 'fail',
+                        'message' => 'You are not the reviewer. Stop hacking.'
+                    )
+                );
+            }
+        } else {
+            echo json_encode(
+                array(
+                    'status' => 'fail',
+                    'message' => 'User is not logged in.'
+                )
+            );
+        }
+    }
+
+    private function _verify_reviewer( $review_id, $user_id ) {
+        $review = $this->review->retrieve_by_id( $review_id );
+
+        if ( $review ) {
+            if ( $review->giver_id == $user_id ) {
+                return true;
+            }
+        }
+
+        return false;    
+    }
 }
