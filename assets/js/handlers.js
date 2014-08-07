@@ -331,7 +331,7 @@
         $modal.find('span#lookup-score').html(publicUsers[user_id].score);
         $modal.find('input#write-review').attr('placeholder', 'Write a review for ' + publicUsers[user_id].name);
 
-        if (session_id == false && user_id == session_id ) {
+        if ( session_id == false || session_id == user_id ) {
             $modal.find('.btn#give-point').addClass('disabled');
             $modal.find('.btn#post-review').addClass('disabled');
             $modal.find('input#write-review').attr('disabled', true);
