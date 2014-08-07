@@ -380,7 +380,7 @@
         } else if ( columnName == 'departure-date' ) {
             columnName = '3';
             if ( $(this).val() ) {
-                rowValue = moment( $(this).val() ).format('MMM-D');            
+                rowValue = moment( $(this).val() ).format('MMM-DD');            
             }
         }
 
