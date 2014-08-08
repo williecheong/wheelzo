@@ -114,7 +114,7 @@
                 Today
             </a>
         </span>
-        <table class="table table-hover rides-table" id="today">
+        <table class="table table-hover rides-table rides-table-sectioned" id="today">
             <thead>
                 <tr>
                     <th class="origin">Origin</th>  
@@ -170,7 +170,7 @@
                 Tomorrow
             </a>
         </span>
-        <table class="table table-hover rides-table" id="tomorrow">
+        <table class="table table-hover rides-table rides-table-sectioned" id="tomorrow">
             <thead>
                 <tr>
                     <th class="origin">Origin</th>  
@@ -226,7 +226,7 @@
                 In Future
             </a>
         </span>
-        <table class="table table-hover rides-table" id="future">
+        <table class="table table-hover rides-table rides-table-sectioned" id="future">
             <thead>
                 <tr>
                     <th class="origin">Origin</th>  
