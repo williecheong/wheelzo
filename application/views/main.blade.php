@@ -108,11 +108,12 @@
             </tbody>
         </table>
     @else
-        <a href="#today">
-            <span class="lead" data-mytoggler="table.rides-table#today" data-mytoggler-style="fold">
-                <i class="fa fa-calendar"></i> Today
-            </span>
-        </a>
+        <span class="lead" data-mytoggler="table.rides-table#today" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i>
+            <a href="#today">
+                Today
+            </a>
+        </span>
         <table class="table table-hover rides-table" id="today">
             <thead>
                 <tr>
@@ -163,11 +164,12 @@
         </table>
         <hr>
 
-        <a href="#tomorrow">
-            <span class="lead" data-mytoggler="table.rides-table#tomorrow" data-mytoggler-style="fold">
-                <i class="fa fa-calendar"></i> Tomorrow
-            </span>
-        </a>
+        <span class="lead" data-mytoggler="table.rides-table#tomorrow" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i>
+            <a href="#tomorrow">
+                Tomorrow
+            </a>
+        </span>
         <table class="table table-hover rides-table" id="tomorrow">
             <thead>
                 <tr>
@@ -218,11 +220,12 @@
         </table>
         <hr>
 
-        <a href="#future">
-            <span class="lead" data-mytoggler="table.rides-table#future" data-mytoggler-style="fold">
-                <i class="fa fa-calendar"></i> In Future
-            </span>
-        </a>
+        <span class="lead" data-mytoggler="table.rides-table#future" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i>
+            <a href="#future">
+                In Future
+            </a>
+        </span>
         <table class="table table-hover rides-table" id="future">
             <thead>
                 <tr>
