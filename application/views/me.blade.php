@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         <span style="display:none;">
-                            {{ strtotime($ride->start) }}
+                            {{ strtotime($my_rrequest->start) }}
                         </span>
                         {{ date( 'M-d, l @ g:ia', strtotime($my_rrequest->start) ) }}
                     </td>
