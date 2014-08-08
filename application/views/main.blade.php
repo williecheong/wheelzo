@@ -60,50 +60,211 @@
 @endsection
 
 @section('table')
-    <table class="table table-hover rides-table">
-        <thead>
-            <tr>
-                <th class="origin">Origin</th>  
-                <th class="destination">Destination</th>  
-                <th class="departure">Departure</th> 
-                <th class="price">Price</th>
-                <th class="ninja-header">Driver</th>
-                <th class="ninja-header">Dropoffs</th>
-                <th class="ninja-header">Encoded ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ( $rides as $ride )
-                <tr data-ride-id="{{ $ride->id }}">
-                    <td>{{ $ride->origin }}</td>
-                    <td>
-                        {{ $ride->destination }} 
-                        <?php if ( count($ride->drop_offs) > 0 ) { ?> 
-                            <a href="#">
-                                <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
-                            </a>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <span style="display:none;">
-                            {{ strtotime($ride->start) }}
-                        </span>
-                        {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
-                    </td>
-                    <td>
-                        @if ( $ride->driver_id == $session )
-                            <i class="fa fa-user"></i> Driver
-                        @elseif ( $ride->is_personal )
-                            <i class="fa fa-users"></i> Passenger
-                        @else                               
-                            ${{ $ride->price }}
-                        @endif
-                    </td>
-                    <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
-                    <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
-                    <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+    @if ( count($rides) < 10 )
+        <table class="table table-hover rides-table">
+            <thead>
+                <tr>
+                    <th class="origin">Origin</th>  
+                    <th class="destination">Destination</th>  
+                    <th class="departure">Departure</th> 
+                    <th class="price">Price</th>
+                    <th class="ninja-header">Driver</th>
+                    <th class="ninja-header">Dropoffs</th>
+                    <th class="ninja-header">Encoded ID</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ( $rides as $ride )
+                    <tr data-ride-id="{{ $ride->id }}">
+                        <td>{{ $ride->origin }}</td>
+                        <td>
+                            {{ $ride->destination }} 
+                            <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                <a href="#">
+                                    <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                </a>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <span style="display:none;">
+                                {{ strtotime($ride->start) }}
+                            </span>
+                            {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                        </td>
+                        <td>
+                            @if ( $ride->driver_id == $session )
+                                <i class="fa fa-user"></i> Driver
+                            @elseif ( $ride->is_personal )
+                                <i class="fa fa-users"></i> Passenger
+                            @else                               
+                                ${{ $ride->price }}
+                            @endif
+                        </td>
+                        <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                        <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                        <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @else
+        <span class="lead" data-mytoggler="table.rides-table#today" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i> Today
+        </span>
+        <table class="table table-hover rides-table" id="today">
+            <thead>
+                <tr>
+                    <th class="origin">Origin</th>  
+                    <th class="destination">Destination</th>  
+                    <th class="departure">Departure</th> 
+                    <th class="price">Price</th>
+                    <th class="ninja-header">Driver</th>
+                    <th class="ninja-header">Dropoffs</th>
+                    <th class="ninja-header">Encoded ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( $rides as $ride )
+                    @if ( date('Y-m-d', strtotime('today')) == date('Y-m-d', strtotime($ride->start)) ) 
+                        <tr data-ride-id="{{ $ride->id }}">
+                            <td>{{ $ride->origin }}</td>
+                            <td>
+                                {{ $ride->destination }} 
+                                <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                    <a href="#">
+                                        <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <span style="display:none;">
+                                    {{ strtotime($ride->start) }}
+                                </span>
+                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                            </td>
+                            <td>
+                                @if ( $ride->driver_id == $session )
+                                    <i class="fa fa-user"></i> Driver
+                                @elseif ( $ride->is_personal )
+                                    <i class="fa fa-users"></i> Passenger
+                                @else                               
+                                    ${{ $ride->price }}
+                                @endif
+                            </td>
+                            <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                            <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                            <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+        <hr>
+
+        <span class="lead" data-mytoggler="table.rides-table#tomorrow" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i> Tomorrow
+        </span>
+        <table class="table table-hover rides-table" id="tomorrow">
+            <thead>
+                <tr>
+                    <th class="origin">Origin</th>  
+                    <th class="destination">Destination</th>  
+                    <th class="departure">Departure</th> 
+                    <th class="price">Price</th>
+                    <th class="ninja-header">Driver</th>
+                    <th class="ninja-header">Dropoffs</th>
+                    <th class="ninja-header">Encoded ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( $rides as $ride )
+                    @if ( date('Y-m-d', strtotime('tomorrow')) == date('Y-m-d', strtotime($ride->start)) ) 
+                        <tr data-ride-id="{{ $ride->id }}">
+                            <td>{{ $ride->origin }}</td>
+                            <td>
+                                {{ $ride->destination }} 
+                                <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                    <a href="#">
+                                        <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <span style="display:none;">
+                                    {{ strtotime($ride->start) }}
+                                </span>
+                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                            </td>
+                            <td>
+                                @if ( $ride->driver_id == $session )
+                                    <i class="fa fa-user"></i> Driver
+                                @elseif ( $ride->is_personal )
+                                    <i class="fa fa-users"></i> Passenger
+                                @else                               
+                                    ${{ $ride->price }}
+                                @endif
+                            </td>
+                            <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                            <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                            <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+        <hr>
+
+        <span class="lead" data-mytoggler="table.rides-table#future" data-mytoggler-style="fold">
+            <i class="fa fa-calendar"></i> In Future
+        </span>
+        <table class="table table-hover rides-table" id="future">
+            <thead>
+                <tr>
+                    <th class="origin">Origin</th>  
+                    <th class="destination">Destination</th>  
+                    <th class="departure">Departure</th> 
+                    <th class="price">Price</th>
+                    <th class="ninja-header">Driver</th>
+                    <th class="ninja-header">Dropoffs</th>
+                    <th class="ninja-header">Encoded ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ( $rides as $ride )
+                    @if ( strtotime('tomorrow + 1 day') < strtotime($ride->start) ) 
+                        <tr data-ride-id="{{ $ride->id }}">
+                            <td>{{ $ride->origin }}</td>
+                            <td>
+                                {{ $ride->destination }} 
+                                <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                    <a href="#">
+                                        <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <span style="display:none;">
+                                    {{ strtotime($ride->start) }}
+                                </span>
+                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                            </td>
+                            <td>
+                                @if ( $ride->driver_id == $session )
+                                    <i class="fa fa-user"></i> Driver
+                                @elseif ( $ride->is_personal )
+                                    <i class="fa fa-users"></i> Passenger
+                                @else                               
+                                    ${{ $ride->price }}
+                                @endif
+                            </td>
+                            <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                            <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                            <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+                        </tr>
+                    @endif
+                @endforeach
+            </tbody>
+        </table>
+        <hr>
+    @endif
 @endsection
