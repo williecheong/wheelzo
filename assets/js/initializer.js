@@ -160,14 +160,13 @@
         $('input#search-box').on('keyup focusout', searchRides);
 
         // Preparing the initial view using JS
-        $('table.rides-table-sectioned').hide();
         if ( loadRide != false ) {
             rideTable.fnFilterAll( loadRide );
             $('tr[data-ride-id]').trigger('click');
+
+            $('table.rides-table-sectioned').hide();
             $('tr[data-ride-id]').closest('table.rides-table-sectioned').show();
         } else {
-            $('table.rides-table-sectioned#today').show();
-        
             if ( loadUser != false && publicUsers[loadUser] ) {
                 $('.modal#lookup-users').modal('show');
                 $('input#lookup-name').val( publicUsers[loadUser].name );
