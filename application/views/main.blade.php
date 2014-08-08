@@ -89,7 +89,7 @@
                             <span style="display:none;">
                                 {{ strtotime($ride->start) }}
                             </span>
-                            {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                            {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
                         </td>
                         <td>
                             @if ( $ride->driver_id == $session )
@@ -143,7 +143,7 @@
                                 <span style="display:none;">
                                     {{ strtotime($ride->start) }}
                                 </span>
-                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                                {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
                             </td>
                             <td>
                                 @if ( $ride->driver_id == $session )
@@ -199,7 +199,7 @@
                                 <span style="display:none;">
                                     {{ strtotime($ride->start) }}
                                 </span>
-                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                                {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
                             </td>
                             <td>
                                 @if ( $ride->driver_id == $session )
@@ -255,7 +255,7 @@
                                 <span style="display:none;">
                                     {{ strtotime($ride->start) }}
                                 </span>
-                                {{ date( 'M d, l @ g:ia', strtotime($ride->start) ) }}
+                                {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
                             </td>
                             <td>
                                 @if ( $ride->driver_id == $session )
