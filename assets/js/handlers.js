@@ -346,7 +346,7 @@
 
     searchRides = function ( event ) {
         var searchTerm = $('input#search-box').val();
-        rideTable.fnFilter( searchTerm );
+        rideTable.fnFilterAll( searchTerm );
     }
 
     searchRrequests = function ( event ) {
@@ -442,5 +442,4 @@
                 console.log(response);
             }
         });
-    
     }

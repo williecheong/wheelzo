@@ -159,10 +159,10 @@
         
         $('input#search-box').on('keyup focusout', searchRides);
 
-        if ( loadRide ) {
-            rideTable.fnFilter( loadRide )
+        if ( loadRide != false ) {
+            rideTable.fnFilterAll( loadRide );
             $('tr[data-ride-id]').trigger('click');
-        } else if ( loadUser && publicUsers[loadUser] ) {
+        } else if ( loadUser != false && publicUsers[loadUser] ) {
             $('.modal#lookup-users').modal('show');
             $('input#lookup-name').val( publicUsers[loadUser].name );
             $('input#lookup-id').val(loadUser).trigger('change');
