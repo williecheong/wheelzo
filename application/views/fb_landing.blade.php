@@ -13,7 +13,6 @@
         <link rel="image_src"  href="/assets/img/logo.png">
         <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -64,8 +63,7 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="/assets/vendor/moment/moment.min.js"></script>
-        @if ( ENVIRONMENT == 'production' )
-            <!-- Google Analytics -->
+        @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
             <script>
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -77,7 +75,3 @@
         @endif
     </body>
 </html>
-
-
-
-

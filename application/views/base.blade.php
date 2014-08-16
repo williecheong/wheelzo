@@ -13,7 +13,6 @@
         <link rel="image_src"  href="/assets/img/logo.png">
         <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
         <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans&subset=latin,latin-ext,cyrillic,cyrillic-ext">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
@@ -141,53 +140,46 @@
                 <br>
             </footer><!-- /.footer -->
         </div><!-- /container -->
-    </body>
 
-    @include('modals/main')
-    @yield('custom_modals')
-    @include('modals/feedback')
+        @include('modals/main')
+        @yield('custom_modals')
+        @include('modals/feedback')
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
-    <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
-    <script src="/assets/vendor/datatables/plugins/fnFilterAll.js"></script>
-    <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
-    <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
-    <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
-    <script src="/assets/vendor/moment/moment.min.js"></script>
-    <script src="/assets/js/initializer.js"></script>
-    <script src="/assets/js/templates.js"></script>
-    <script src="/assets/js/handlers.js"></script>
-    <script src="/assets/js/helpers.js"></script>
-    <script src="/assets/js/main.js"></script>
-    
-    <script>
-        var rides = {{ json_encode($rides) }} ;
-        var publicUsers = {{ json_encode($users) }} ;
-        var session_id = {{ $session ? $session : 'false' }};
-        var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
-        var loadUser = {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }};
-        var myRrequests = {{ json_encode($my_rrequests) }};
-    </script>
-    
-    @if ( ENVIRONMENT == 'production' )
-        <!-- Google Analytics -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+        <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
+        <script src="/assets/vendor/datatables/plugins/fnFilterAll.js"></script>
+        <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
+        <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
+        <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
+        <script src="/assets/vendor/moment/moment.min.js"></script>
+        <script src="/assets/js/initializer.js"></script>
+        <script src="/assets/js/templates.js"></script>
+        <script src="/assets/js/handlers.js"></script>
+        <script src="/assets/js/helpers.js"></script>
+        <script src="/assets/js/main.js"></script>
         <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-50068607-1', 'wheelzo.com');
-            ga('require', 'displayfeatures');
-            ga('send', 'pageview');
+            var rides = {{ json_encode($rides) }} ;
+            var publicUsers = {{ json_encode($users) }} ;
+            var session_id = {{ $session ? $session : 'false' }};
+            var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
+            var loadUser = {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }};
+            var myRrequests = {{ json_encode($my_rrequests) }};
         </script>
-    @endif
-
+        
+        @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-50068607-1', 'wheelzo.com');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        @endif
+    </body>
 </html>
-
-
-
-
