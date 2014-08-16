@@ -154,6 +154,7 @@
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": false,
+            "order": [[ 2, "asc" ]],
             "sDom" : ''
         });
         
