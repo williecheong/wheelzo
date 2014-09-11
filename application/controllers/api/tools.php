@@ -41,7 +41,11 @@ class Tools extends REST_Controller {
             }
         }
 
-        header('Content-Type: application/json');
-        echo indent( json_encode( $user_messages) );
+        if ( empty($user_messages) ) {
+            echo $fb_group_html;
+        } else {
+            header('Content-Type: application/json');
+            echo indent( json_encode($user_messages) );
+        }
     }
 }
