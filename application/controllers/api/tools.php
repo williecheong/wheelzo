@@ -40,6 +40,6 @@ class Tools extends REST_Controller {
             }
         }
 
-        echo json_encode( $user_messages, JSON_PRETTY_PRINT );
+        echo indent( json_encode( $user_messages) );
     }
 }
