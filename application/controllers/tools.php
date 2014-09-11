@@ -7,7 +7,7 @@ class Tools extends CI_Controller {
     }
 
     public function fbscrape() {
-        $this->blade->render('fbscrape');
+        $this->blade->render('/tools/fbscrape');
 
     }
 }
