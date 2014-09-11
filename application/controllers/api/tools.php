@@ -22,7 +22,7 @@ class Tools extends REST_Controller {
 
         foreach( $postings as $posting ) {
             $posting_data = json_decode($posting->getAttr('data-ft'), true);
-            //var_dump($posting_data);
+            var_dump($posting_data);
             //echo "\n\n\n";
             if ( isset($posting_data['author']) ) {
                 $author_fb_id = $posting_data['author'];
@@ -42,7 +42,7 @@ class Tools extends REST_Controller {
         }
 
         if ( empty($user_messages) ) {
-            echo $fb_group_html;
+            var_dump( $fb_group_html );
         } else {
             header('Content-Type: application/json');
             echo indent( json_encode($user_messages) );
