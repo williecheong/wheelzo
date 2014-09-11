@@ -26,7 +26,7 @@ class Tools extends REST_Controller {
             //echo "\n\n\n";
             if ( isset($posting_data['author']) ) {
                 $author_fb_id = $posting_data['author'];
-                $message = $posting->find('div.userContent div.userContent', 0);
+                $message = $posting->find('div.userContentWrapper div.userContent', 0);
                 try {
                     $message_content = strip_tags( $message->innertext );
                     $message_content = htmlspecialchars_decode( $message_content );
