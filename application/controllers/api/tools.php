@@ -22,8 +22,6 @@ class Tools extends REST_Controller {
 
         foreach( $postings as $posting ) {
             $posting_data = $posting->getAttr('data-ft');
-            var_dump($posting_data);
-            //echo "\n\n\n";
             if ( isset($posting_data['author']) ) {
                 $author_fb_id = $posting_data['author'];
                 $message = $posting->find('div.userContentWrapper div.userContent', 0);
