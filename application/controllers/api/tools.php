@@ -21,23 +21,21 @@ class Tools extends REST_Controller {
         $postings = $this->html_dom->find('div.mbm');
 
         foreach( $postings as $posting ) {
-            if ( isset($posting_data['author']) ) {
-                $author_fb_id = $this->grabID( 
-                    $posting->find('div a[data-hovercard]')->getAttr('data-hovercard') 
-                );
-                    echo $author_fb_id;
-                $message = $posting->find('div.userContentWrapper div.userContent', 0);
-                try {
-                    $message_content = strip_tags( $message->innertext );
-                    $message_content = htmlspecialchars_decode( $message_content );
+            $author_fb_id = $this->grabID( 
+                $posting->find('div a[data-hovercard]')->getAttr('data-hovercard') 
+            );
+            
+            $message = $posting->find('div.userContentWrapper div.userContent', 0);
+            try {
+                $message_content = strip_tags( $message->innertext );
+                $message_content = htmlspecialchars_decode( $message_content );
 
-                    $user_messages[] = array(
-                        "facebook_id" => $author_fb_id,
-                        "raw_message" => $message_content
-                    );
-                } catch ( Exception $e ) {
-                    // skip and do nothing
-                }
+                $user_messages[] = array(
+                    "facebook_id" => $author_fb_id,
+                    "raw_message" => $message_content
+                );
+            } catch ( Exception $e ) {
+                // skip and do nothing
             }
         }
 
