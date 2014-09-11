@@ -21,7 +21,7 @@ class Tools extends REST_Controller {
         $postings = $this->html_dom->find('div.mbm');
 
         foreach( $postings as $posting ) {
-            $posting_data = json_decode($posting->getAttr('data-ft'), true);
+            $posting_data = $posting->getAttr('data-ft');
             var_dump($posting_data);
             //echo "\n\n\n";
             if ( isset($posting_data['author']) ) {
