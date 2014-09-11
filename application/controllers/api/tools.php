@@ -21,9 +21,11 @@ class Tools extends REST_Controller {
         $postings = $this->html_dom->find('div.mbm');
 
         foreach( $postings as $posting ) {
-            $posting_data = $posting->getAttr('data-ft');
             if ( isset($posting_data['author']) ) {
-                $author_fb_id = $posting_data['author'];
+                $author_fb_id = $this->grabID( 
+                    $posting->find('div a[data-hovercard]')->getAttr('data-hovercard') 
+                );
+
                 $message = $posting->find('div.userContentWrapper div.userContent', 0);
                 try {
                     $message_content = strip_tags( $message->innertext );
@@ -45,5 +47,13 @@ class Tools extends REST_Controller {
             header('Content-Type: application/json');
             echo indent( json_encode($user_messages) );
         }
+    }
+
+    private function grabID( $url ) {
+        $exploded_url = explode("id=", $url);
+        $url = $exploded_url[1];
+
+        $exploded_url = explode("&", $url);
+        return $exploded_url[0];
     }
 }
