@@ -16,6 +16,3 @@
 <IfModule !mod_rewrite.c>
     ErrorDocument 404 /index.php
 </IfModule>  
-
-#set max post size
-php_value post_max_size 2M
