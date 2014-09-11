@@ -3,7 +3,7 @@
 class Tools extends CI_Controller {
 
     public function index() {
-        return date("Y-m-d H:i:s");
+        echo date("Y-m-d H:i:s");
     }
 
     public function fbscrape() {
