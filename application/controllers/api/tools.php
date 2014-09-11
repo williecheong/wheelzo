@@ -10,7 +10,7 @@ class Tools extends REST_Controller {
                             ? $data['fb_group_html'] 
                             : '' ;
         
-        if ( $fb_group_html == '' ) {
+        if ( trim($fb_group_html) == '' ) {
             $fb_group_html = $this->load->file("sample.txt", true);
         }
 
@@ -41,6 +41,6 @@ class Tools extends REST_Controller {
             }
         }
 
-        echo indent( json_encode( $user_messages) );
+        echo "<script>" . indent( json_encode( $user_messages) ) . "</script>";
     }
 }
