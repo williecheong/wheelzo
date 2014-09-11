@@ -41,6 +41,7 @@ class Tools extends REST_Controller {
             }
         }
 
-        echo "<script>" . indent( json_encode( $user_messages) ) . "</script>";
+        header('Content-Type: application/json');
+        echo indent( json_encode( $user_messages) );
     }
 }
