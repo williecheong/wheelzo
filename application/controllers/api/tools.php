@@ -18,14 +18,14 @@ class Tools extends REST_Controller {
         $this->load->library('html_dom');
         $this->html_dom->loadHTML( $fb_group_html );
         
-        $postings = $this->html_dom->find('div.mbm');
+        $postings = $this->html_dom->find('div.userContentWrapper');
 
         foreach( $postings as $posting ) {
             $author_fb_id = $this->grabID( 
-                $posting->find('div a[data-hovercard]', 0)->getAttr('data-hovercard') 
+                $posting->find('div.clearfix a', 0)->getAttr('data-hovercard') 
             );
 
-            $message = $posting->find('div.userContentWrapper div.userContent', 0);
+            $message = $posting->find('div.userContent', 0);
             try {
                 $message_content = strip_tags( $message->innertext );
                 $message_content = htmlspecialchars_decode( $message_content );
