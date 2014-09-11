@@ -22,9 +22,9 @@ class Tools extends REST_Controller {
 
         foreach( $postings as $posting ) {
             $author_fb_id = $this->grabID( 
-                $posting->find('div a[data-hovercard]')->getAttr('data-hovercard') 
+                $posting->find('div a[data-hovercard]', 0)->getAttr('data-hovercard') 
             );
-            
+
             $message = $posting->find('div.userContentWrapper div.userContent', 0);
             try {
                 $message_content = strip_tags( $message->innertext );
