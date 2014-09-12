@@ -1,7 +1,7 @@
 <title>Facebook Scraper</title>
 
-<form method="post" action="/api/tools/scrape">
-    <textarea name="fb_group_html" rows="20" cols="150"></textarea>
-    <br>
+<h2>Upload a Facebook HTML page to be scraped...</h2>
+<form method="post" action="/api/tools/scrape" enctype="multipart/form-data">
+    <input type="file" name="fb_group_html"><br>
     <button type="submit">Scrape HTML</button>
 </form>
