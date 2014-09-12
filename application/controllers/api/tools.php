@@ -4,19 +4,16 @@ require(APPPATH.'/libraries/REST_Controller.php');
 class Tools extends REST_Controller {
     
     public function scrape_post() {
-        $config['upload_path'] = 'assets/uploads/'.time().'.html';
-        $config['allowed_types'] = 'html|txt';
-        $config['overwrite'] = true;
-        $this->load->library('upload', $config);
+        $data = $this->post();
 
-        $this->upload->do_upload('fb_group_html');
-
-        $data = $this->upload->data();
-var_dump($data);
-        $fb_group_html = isset($data['full_path']) 
-                            ? $this->load->file($data['full_path'], true) 
-                            : $this->load->file("sample.txt", true) ;
+        $fb_group_html = isset($data['fb_group_html']) 
+                            ? $data['fb_group_html'] 
+                            : '' ;
         
+        if ( trim($fb_group_html) == '' ) {
+            $fb_group_html = $this->load->file("assets/uploads/sample.txt", true);
+        }
+
         $user_messages = array(); 
         $this->load->library('html_dom');
         $this->html_dom->loadHTML( $fb_group_html );
