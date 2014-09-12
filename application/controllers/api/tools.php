@@ -4,8 +4,7 @@ require(APPPATH.'/libraries/REST_Controller.php');
 class Tools extends REST_Controller {
     
     public function scrape_post() {
-        $data = $this->post();
-
+        $data = $this->getRealPOST();
         $fb_group_html = isset($data['fb_group_html']) 
                             ? $data['fb_group_html'] 
                             : '' ;
@@ -25,6 +24,7 @@ class Tools extends REST_Controller {
                 $posting->find('div.clearfix a', 0)->getAttr('data-hovercard') 
             );
 
+            $fb_post_url = $posting->find('div.clearfix div div div div div span span a', 0)->getAttr('href');
             $message = $posting->find('div.userContent', 0);
             try {
                 $message_content = strip_tags( $message->innertext );
@@ -32,6 +32,7 @@ class Tools extends REST_Controller {
 
                 $user_messages[] = array(
                     "facebook_id" => $author_fb_id,
+                    "postings_id" => $fb_post_url,
                     "raw_message" => $message_content
                 );
             } catch ( Exception $e ) {
@@ -53,5 +54,17 @@ class Tools extends REST_Controller {
 
         $exploded_url = explode("&", $url);
         return $exploded_url[0];
+    }
+
+    private function getRealPOST() {
+        $pairs = explode("&", file_get_contents("php://input"));
+        $vars = array();
+        foreach ($pairs as $pair) {
+            $nv = explode("=", $pair);
+            $name = urldecode($nv[0]);
+            $value = urldecode($nv[1]);
+            $vars[$name] = $value;
+        }
+        return $vars;
     }
 }
