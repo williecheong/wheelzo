@@ -4,9 +4,8 @@ require(APPPATH.'/libraries/REST_Controller.php');
 class Tools extends REST_Controller {
     
     public function scrape_post() {
-        $data = $this->getRealPOST();
-        $fb_group_html = isset($data['fb_group_html']) 
-                            ? $data['fb_group_html'] 
+        $fb_group_html = isset($_FILE['fb_group_html']['tmp_name']) 
+                            ? file_get_contents($_FILE['fb_group_html']['tmp_name']) 
                             : '' ;
         
         if ( trim($fb_group_html) == '' ) {
