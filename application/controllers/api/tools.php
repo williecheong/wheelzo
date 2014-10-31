@@ -23,10 +23,8 @@ class Tools extends REST_Controller {
                         foreach ($response->data as $key => $posting) {
                             if ( isset($posting->from->id) ) {
                                 // Check to see if this is a wheelzo user
-                                var_dump($posting->from->id);
                                 if ( $this->user->retrieve_by_fb($posting->from->id) ) {
                                     // Check to see if this posting has been made before
-                                    var_dump($posting->id);
                                     if ( isset($posting->id) ) {
                                         $this->load->model('facebook_ride');
                                         if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
