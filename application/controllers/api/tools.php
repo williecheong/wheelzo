@@ -3,68 +3,70 @@ require(APPPATH.'/libraries/REST_Controller.php');
 
 class Tools extends REST_Controller {
     
-    public function scrape_post() {
-        $fb_group_html = isset($_FILES['fb_group_html']['tmp_name']) 
-                            ? file_get_contents($_FILES['fb_group_html']['tmp_name']) 
-                            : '' ;
-        
-        if ( trim($fb_group_html) == '' ) {
-            $fb_group_html = $this->load->file("assets/uploads/sample.txt", true);
+    function __construct() {
+        parent::__construct();
+        if ( !in_array($this->session->userdata('facebook_id'), unserialize(WHEELZO_ADMINS)) ) {
+            redirect( base_url() );
         }
+    }
 
-        $user_messages = array(); 
-        $this->load->library('html_dom');
-        $this->html_dom->loadHTML( $fb_group_html );
-        
-        $postings = $this->html_dom->find('div.userContentWrapper');
-
-        foreach( $postings as $posting ) {
-            $author_fb_id = $this->grabID( 
-                $posting->find('div.clearfix a', 0)->getAttr('data-hovercard') 
-            );
-
-            $fb_post_url = $posting->find('div.clearfix div div div div div span span a', 0)->getAttr('href');
-            $message = $posting->find('div.userContent', 0);
+    public function fetch_messages_get() {
+        $token = $this->get('token');
+        if ( $token ) {
             try {
-                $message_content = strip_tags( $message->innertext );
-                $message_content = htmlspecialchars_decode( $message_content );
+                $url = "https://graph.facebook.com/372772186164295/feed?limit=100&access_token=" . $token;
+                $response = json_decode( rest_curl($url) );
+                if ( !isset($response->error->message) ) {
+                   if ( isset($response->data) ) {
+                        $postings = array();                        
+                        
+                        foreach ($response->data as $key => $posting) {
+                            if ( isset($posting->from->id) ) {
+                                // Check to see if this is a wheelzo user
+                                var_dump($posting->from->id);
+                                if ( $this->user->retrieve_by_fb($posting->from->id) ) {
+                                    // Check to see if this posting has been made before
+                                    var_dump($posting->id);
+                                    if ( isset($posting->id) ) {
+                                        $this->load->model('facebook_ride');
+                                        if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
+                                            $postings[] = $posting;
+                                        }                                        
+                                    }
+                                }
+                            }
+                        }
 
-                $user_messages[] = array(
-                    "facebook_id" => $author_fb_id,
-                    "postings_id" => $fb_post_url,
-                    "raw_message" => $message_content
-                );
-            } catch ( Exception $e ) {
-                // skip and do nothing
+                        http_response_code("200");
+                        header('Content-Type: application/json');
+                        echo json_encode($postings);   
+                    } else {
+                        http_response_code("400");
+                        header('Content-Type: application/json');
+                        echo $this->_message("Facebook did not return data");     
+                    }
+                } else {
+                    http_response_code("400");
+                    header('Content-Type: application/json');
+                    echo $this->_message($response->error->message);         
+                }
+            } catch (Exception $e) {
+                http_response_code("400");
+                header('Content-Type: application/json');
+                echo $this->_message("Could not reach Facebook API");     
             }
-        }
-
-        if ( empty($user_messages) ) {
-            header('Content-Type: application/json');
-            echo indent( json_encode( array() ) );
         } else {
+            http_response_code("400");
             header('Content-Type: application/json');
-            echo indent( json_encode($user_messages) );
+            echo $this->_message("Invalid access token specified");  
         }
     }
 
-    private function grabID( $url ) {
-        $exploded_url = explode("id=", $url);
-        $url = $exploded_url[1];
-
-        $exploded_url = explode("&", $url);
-        return $exploded_url[0];
-    }
-
-    private function getRealPOST() {
-        $pairs = explode("&", file_get_contents("php://input"));
-        $vars = array();
-        foreach ($pairs as $pair) {
-            $nv = explode("=", $pair);
-            $name = urldecode($nv[0]);
-            $value = urldecode($nv[1]);
-            $vars[$name] = $value;
-        }
-        return $vars;
+    private function _message( $message = "" ) {
+        return json_encode(
+            array(
+                "message" => $message
+            )
+        );
     }
 }
