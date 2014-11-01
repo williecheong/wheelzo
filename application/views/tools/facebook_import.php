@@ -42,12 +42,12 @@
                     <div class="col-md-5">
                         <div class="well">
                             <div class="media">
-                                <a class="pull-left" target="_blank" href="{{  posting.id | facebookPostLink }}">
-                                    <img class="img-rounded" src="{{ posting.from.id | facebookImage}}">
+                                <a class="pull-left" target="_blank" href="{{ posting.id | facebookPostLink }}">
+                                    <img class="img-rounded" ng-src="{{ posting.from.id | facebookImage}}">
                                 </a>
                                 <div class="media-body">
                                     <div>
-                                        <a target="_blank" href="{{  posting.id | facebookPostLink }}">
+                                        <a target="_blank" href="{{ posting.id | facebookPostLink }}">
                                             <strong ng-bind="posting.from.name"></strong>
                                         </a>
                                     </div>
