@@ -13,50 +13,57 @@ class Tools extends REST_Controller {
     public function fetch_messages_get() {
         $token = $this->get('token');
         if ( $token ) {
-            try {
-                $url = "https://graph.facebook.com/372772186164295/feed?limit=100&access_token=" . $token;
-                $response = json_decode( rest_curl($url) );
-                if ( !isset($response->error->message) ) {
-                   if ( isset($response->data) ) {
-                        $postings = array();                        
-                        
-                        foreach ($response->data as $key => $posting) {
-                            if ( isset($posting->from->id) ) {
-                                // Check to see if this is a wheelzo user
-                                if ( $this->user->retrieve_by_fb($posting->from->id) ) {
-                                    // Check to see if this posting has been made before
-                                    if ( isset($posting->id) ) {
-                                        $this->load->model('facebook_ride');
-                                        if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
-                                            $postings[] = $posting;
-                                        }                                        
+            $facebook_groups = array(
+                '372772186164295',  // University of Waterloo Carpool
+                '231943393631223'   // Rideshare Wilfred Laurier               
+            );
+
+            $postings = array();                        
+
+            foreach ( $facebook_groups as $facebook_group ) {
+                try {
+                    $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=100&access_token=" . $token;
+                    $response = json_decode( rest_curl($url) );
+                    if ( !isset($response->error->message) ) {
+                       if ( isset($response->data) ) {
+                            foreach ($response->data as $key => $posting) {
+                                if ( isset($posting->from->id) ) {
+                                    // Check to see if this is a wheelzo user
+                                    if ( $this->user->retrieve_by_fb($posting->from->id) ) {
+                                        // Check to see if this posting has been made before
+                                        if ( isset($posting->id) ) {
+                                            $this->load->model('facebook_ride');
+                                            if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
+                                                $postings[] = $posting;
+                                            }                                        
+                                        }
                                     }
                                 }
-                            }
+                            }  
+                        } else {
+                            // No error was found, but data is missing from response     
                         }
-
-                        http_response_code("200");
-                        header('Content-Type: application/json');
-                        echo json_encode($postings);   
                     } else {
-                        http_response_code("400");
-                        header('Content-Type: application/json');
-                        echo $this->_message("Facebook did not return data");     
+                        // Token was not valid for accessing this group
                     }
-                } else {
+                } catch (Exception $e) {
                     http_response_code("400");
                     header('Content-Type: application/json');
-                    echo $this->_message($response->error->message);         
+                    echo $this->_message("Could not reach Facebook API");
+                    return;
                 }
-            } catch (Exception $e) {
-                http_response_code("400");
-                header('Content-Type: application/json');
-                echo $this->_message("Could not reach Facebook API");     
             }
+            
+            http_response_code("200");
+            header('Content-Type: application/json');
+            echo json_encode($postings);
+            return;
+
         } else {
             http_response_code("400");
             header('Content-Type: application/json');
             echo $this->_message("Invalid access token specified");  
+            return;
         }
     }
 

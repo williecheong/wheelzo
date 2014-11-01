@@ -16,5 +16,32 @@ app.controller('myController', function( $scope, $sce, $http, $filter ) {
             console.log(data);
             $scope.loading = false;
         });
-    }
+    };
+
+    $scope.forgetRide = function() {
+        var r = confirm("This facebook posting will never show again, ok?");
+        if ( r == true ) {
+            alert("Not ready yet, dummy...");
+        } else {
+            return;
+        }
+    };
+
+    $scope.importRide = function() {
+        var r = confirm("Import this ride according to the details above?");
+        if ( r == true ) {
+            alert("Not ready yet, dummy...");
+        } else {
+            return;
+        }
+    };
+
+}).filter('facebookImage', function() {
+    return function(facebookId) {
+        return '//graph.facebook.com/' + facebookId + '/picture?width=40&height=40';
+    };
+}).filter('facebookPostLink', function() {
+    return function(facebookPostId) {
+        return '//facebook.com/' + facebookPostId;
+    };
 });
