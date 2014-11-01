@@ -11,6 +11,7 @@
         <link rel="shortcut icon" href="/assets/img/<?=ENVIRONMENT?>.ico" type="image/x-icon">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/assets/vendor/ng-quick-date/ng-quick-date.css">
     </head>
     <body>
         <div class="container">
@@ -68,29 +69,21 @@
                                 <span class="input-group-addon" tooltip="FROM">
                                     <i class="fa fa-sign-out"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Place of origin">
+                                <input type="text" class="form-control" placeholder="Place of origin" ng-model="posting.processedRide.origin">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon" tooltip="TO">
                                     <i class="fa fa-sign-in"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Destination place">
+                                <input type="text" class="form-control" placeholder="Destination place" ng-model="posting.processedRide.destination">
                             </div>
                             <div class="row">
-                                <div class="col-xs-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon" tooltip="DEPARTURE">
-                                            <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="Departure">
-                                    </div>
-                                </div>
                                 <div class="col-xs-3">
                                     <div class="input-group">
                                         <span class="input-group-addon" tooltip="PRICE">
                                             <i class="fa fa-usd"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Price">
+                                        <input type="text" class="form-control" placeholder="Price" ng-model="posting.processedRide.price" valid-number>
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
@@ -98,7 +91,12 @@
                                         <span class="input-group-addon" tooltip="CAPACITY">
                                             <i class="fa fa-users"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Capacity">
+                                        <input type="text" class="form-control" placeholder="Capacity" ng-model="posting.processedRide.capacity" valid-number>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-control-static">
+                                        <quick-datepicker ng-model="posting.processedRide.departureTime"></quick-datepicker>
                                     </div>
                                 </div>
                             </div>
@@ -123,6 +121,7 @@
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-        <script src="/assets/js/angular/facebook_import.js"></script>
+        <script src="/assets/vendor/ng-quick-date/ng-quick-date.min.js"></script>
+        <script src="/assets/js/angular/facebook-import.js"></script>
     </body>
 </html>

@@ -1,6 +1,14 @@
-var app = angular.module('myApp', ['ui.bootstrap']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ngQuickDate']);
 
-app.controller('myController', function( $scope, $sce, $http, $filter ) {
+app.config(function(ngQuickDateDefaultsProvider) {
+    // Configure with icons from font-awesome
+    return ngQuickDateDefaultsProvider.set({
+        closeButtonHtml: " <i class='fa fa-times'></i> ",
+        buttonIconHtml: " <i class='fa fa-calendar'></i> ",
+        nextLinkHtml: " <i class='fa fa-chevron-right'></i> ",
+        prevLinkHtml: " <i class='fa fa-chevron-left'></i> ",
+    });
+}).controller('myController', function( $scope, $sce, $http, $filter ) {
     $scope.retrievePosts = function( accessToken ) {
         $scope.loading = true;
         $http({
@@ -43,5 +51,29 @@ app.controller('myController', function( $scope, $sce, $http, $filter ) {
 }).filter('facebookPostLink', function() {
     return function(facebookPostId) {
         return '//facebook.com/' + facebookPostId;
+    };
+}).directive('validNumber', function() {
+    return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+            if(!ngModelCtrl) {
+                return; 
+            }
+
+            ngModelCtrl.$parsers.push(function(val) {
+                var clean = val.replace( /[^0-9]+/g, '');
+                if (val !== clean) {
+                    ngModelCtrl.$setViewValue(clean);
+                    ngModelCtrl.$render();
+                }
+                return clean;
+            });
+
+            element.bind('keypress', function(event) {
+                if(event.keyCode === 32) {
+                    event.preventDefault();
+                }
+            });
+        }
     };
 });
