@@ -7,6 +7,8 @@ class Tools extends REST_Controller {
         parent::__construct();
         if ( !in_array($this->session->userdata('facebook_id'), unserialize(WHEELZO_ADMINS)) ) {
             redirect( base_url() );
+        } else {
+            $this->load->model('facebook_ride');
         }
     }
 
@@ -32,7 +34,6 @@ class Tools extends REST_Controller {
                                     if ( $this->user->retrieve_by_fb($posting->from->id) ) {
                                         // Check to see if this posting has been made before
                                         if ( isset($posting->id) ) {
-                                            $this->load->model('facebook_ride');
                                             if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
                                                 $postings[] = $posting;
                                             }                                        
@@ -69,6 +70,34 @@ class Tools extends REST_Controller {
             http_response_code("400");
             header('Content-Type: application/json');
             echo $this->_message("Invalid access token specified");  
+            return;
+        }
+    }
+
+    public function forget_ride_post() {
+        $posting = array_to_object( $this->post('posting') );
+        if ( isset($posting->id) ) {
+            $mapping_id = $this->facebook_ride->create(
+                array(
+                    'ride_id' => 0,
+                    'facebook_post_id' => $posting->id
+                ) 
+            );
+            if ( $mapping_id ) {
+                http_response_code("200");
+                header('Content-Type: application/json');
+                echo $this->_message("Ride posting has been forgotten");  
+                return;
+            } else {
+                http_response_code("400");
+                header('Content-Type: application/json');
+                echo $this->_message("Ride posting could not be forgotten");  
+                return;
+            }
+        } else {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->_message("Invalid posting specified");  
             return;
         }
     }

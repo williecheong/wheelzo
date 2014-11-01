@@ -56,6 +56,23 @@ if ( ! function_exists('encode_to_chinese') ) {
     }
 }
 
+if ( ! function_exists('array_to_object') ) {   
+    function array_to_object($d) {
+        if (is_array($d)) {
+            /*
+            * Return array converted to object
+            * Using __FUNCTION__ (Magic constant)
+            * for recursive call
+            */
+            return (object) array_map(__FUNCTION__, $d);
+        }
+        else {
+            // Return object
+            return $d;
+        }
+    }
+}
+
 if ( ! function_exists('indent') ) {
     /**
     * Indents a flat JSON string to make it more human-readable.

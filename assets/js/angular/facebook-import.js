@@ -26,10 +26,26 @@ app.config(function(ngQuickDateDefaultsProvider) {
         });
     };
 
-    $scope.forgetRide = function() {
+    $scope.forgetRide = function(posting, key) {
         var r = confirm("This facebook posting will never show again, ok?");
         if ( r == true ) {
-            alert("Not ready yet, dummy...");
+            $scope.loading = true;
+            $http({
+                'method': 'POST',
+                'url': '/api/tools/forget_ride',
+                'data': {
+                    'posting': posting
+                }
+            }).success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.postings.splice(key, 1);
+                $scope.loading = false;
+
+            }).error(function(data, status, headers, config) {
+                alert(data.message);
+                console.log(data);
+                $scope.loading = false;
+            });
         } else {
             return;
         }

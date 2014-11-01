@@ -38,7 +38,7 @@
                     </a>
                 </form>
             </div>
-            <div class="well well-sm" ng-repeat="posting in postings">
+            <div class="well well-sm" ng-repeat="(key, posting) in postings">
                 <div class="row">
                     <div class="col-md-5">
                         <div class="well">
@@ -69,13 +69,13 @@
                                 <span class="input-group-addon" tooltip="FROM">
                                     <i class="fa fa-sign-out"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Place of origin" ng-model="posting.processedRide.origin">
+                                <input type="text" class="form-control" placeholder="Place of origin" ng-model="posting.processedRide.origin" ng-disabled="loading">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon" tooltip="TO">
                                     <i class="fa fa-sign-in"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Destination place" ng-model="posting.processedRide.destination">
+                                <input type="text" class="form-control" placeholder="Destination place" ng-model="posting.processedRide.destination" ng-disabled="loading">
                             </div>
                             <div class="row">
                                 <div class="col-xs-3">
@@ -83,7 +83,7 @@
                                         <span class="input-group-addon" tooltip="PRICE">
                                             <i class="fa fa-usd"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Price" ng-model="posting.processedRide.price" valid-number>
+                                        <input type="text" class="form-control" placeholder="Price" ng-model="posting.processedRide.price" ng-disabled="loading" valid-number>
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
@@ -91,7 +91,7 @@
                                         <span class="input-group-addon" tooltip="CAPACITY">
                                             <i class="fa fa-users"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Capacity" ng-model="posting.processedRide.capacity" valid-number>
+                                        <input type="text" class="form-control" placeholder="Capacity" ng-model="posting.processedRide.capacity" ng-disabled="loading" valid-number>
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <button class="btn btn-danger btn-block" ng-click="forgetRide()">
+                        <button class="btn btn-danger btn-block" ng-click="forgetRide(posting, key)">
                             <i class="fa fa-times"></i>
                             NOT A RIDE
                         </button>
