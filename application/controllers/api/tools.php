@@ -54,11 +54,17 @@ class Tools extends REST_Controller {
                 }
             }
             
-            http_response_code("200");
-            header('Content-Type: application/json');
-            echo json_encode($postings);
-            return;
-
+            if ( count($postings) == 0 ) {
+                http_response_code("404");
+                header('Content-Type: application/json');
+                echo $this->_message("No postings found. Check facebook token.");
+                return;
+            } else {
+                http_response_code("200");
+                header('Content-Type: application/json');
+                echo json_encode($postings);
+                return;
+            }
         } else {
             http_response_code("400");
             header('Content-Type: application/json');
