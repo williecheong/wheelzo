@@ -138,10 +138,43 @@ class Tools extends REST_Controller {
                                 )
                             );
 
-                            http_response_code("200");
-                            header('Content-Type: application/json');
-                            echo $this->_message("Ride posting has been imported");  
-                            return;
+                            $notification_type = $ride_id . NOTIFY_IMPORT; 
+                            $to_notify = $this->user->to_notify( $driver->id, $notification_type );
+                            if ( $to_notify ) {
+                                $fb_response = false;
+                                if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                                    try {
+                                        $fb_response = $this->facebook->api(
+                                            '/' . $driver->facebook_id . '/notifications', 
+                                            'POST', 
+                                            array(
+                                                'href' => '/fb?goto='.$ride_id,
+                                                'template' => 'Your Facebook ride has been imported into Wheelzo.',
+                                                'access_token' => FB_APPID . '|' . FB_SECRET
+                                            )
+                                        );
+                                    } catch ( Exception $e ) {
+                                        log_message('error', $e->getMessage() );
+                                    }                            
+                                }
+
+                                if ( $fb_response ) {
+                                    http_response_code("200");
+                                    header('Content-Type: application/json');
+                                    echo $this->_message("Ride posting has been imported. Driver has been notified.");  
+                                    return;
+                                } else {
+                                    http_response_code("200");
+                                    header('Content-Type: application/json');
+                                    echo $this->_message("Ride posting has been imported, but driver could not be notified.");  
+                                    return;
+                                }                        
+                            } else {
+                                http_response_code("200");
+                                header('Content-Type: application/json');
+                                echo $this->_message("Ride posting has been imported, but driver has been notified before.");  
+                                return;
+                            }
                         } else {
                             http_response_code("400");
                             header('Content-Type: application/json');

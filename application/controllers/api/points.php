@@ -61,6 +61,7 @@ class Points extends REST_Controller {
                                     log_message('error', $e->getMessage() );
                                 }
                             }
+                            
                             if ( $fb_response ) {
                                 echo json_encode(
                                     array(
