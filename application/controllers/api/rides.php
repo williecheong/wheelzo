@@ -70,18 +70,20 @@ class Rides extends REST_Controller {
 
                         if ( $to_notify ) {
                             $fb_response = false;
-                            try {
-                                $fb_response = $this->facebook->api(
-                                    '/' . $passenger->facebook_id . '/notifications', 
-                                    'POST', 
-                                    array(
-                                        'href' => '/fb?goto='.$ride->id,
-                                        'template' => '@[' . $driver->facebook_id . '] invited you to a ride going from '.$ride->origin.' to '.$ride->destination.', scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                        'access_token' => FB_APPID . '|' . FB_SECRET
-                                    )
-                                );
-                            } catch ( Exception $e ) {
-                                log_message('error', $e->getMessage() );
+                            if ( ENVIRONMENT == 'production' || in_array($passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                                try {
+                                    $fb_response = $this->facebook->api(
+                                        '/' . $passenger->facebook_id . '/notifications', 
+                                        'POST', 
+                                        array(
+                                            'href' => '/fb?goto='.$ride->id,
+                                            'template' => '@[' . $driver->facebook_id . '] invited you to a ride going from '.$ride->origin.' to '.$ride->destination.', scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                            'access_token' => FB_APPID . '|' . FB_SECRET
+                                        )
+                                    );
+                                } catch ( Exception $e ) {
+                                    log_message('error', $e->getMessage() );
+                                }
                             }
 
                             if ( $fb_response ) {
@@ -164,20 +166,22 @@ class Rides extends REST_Controller {
                         
                         if ( $to_notify ) {        
                             $fb_response_to_old = false;
-                            try {
-                                $fb_response_to_old = $this->facebook->api(
-                                    '/' . $old_passenger->facebook_id . '/notifications', 
-                                    'POST', 
-                                    array(
-                                        'href' => '/fb?goto='.$ride->id, 
-                                        'template' => '@[' . $driver->facebook_id . '] cancelled a ride you were in that was scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                        'access_token' => FB_APPID . '|' . FB_SECRET
-                                    )
-                                );
-                            } catch ( Exception $e ) {
-                                log_message('error', $e->getMessage() );
+                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                                try {
+                                    $fb_response_to_old = $this->facebook->api(
+                                        '/' . $old_passenger->facebook_id . '/notifications', 
+                                        'POST', 
+                                        array(
+                                            'href' => '/fb?goto='.$ride->id, 
+                                            'template' => '@[' . $driver->facebook_id . '] cancelled a ride you were in that was scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                            'access_token' => FB_APPID . '|' . FB_SECRET
+                                        )
+                                    );
+                                } catch ( Exception $e ) {
+                                    log_message('error', $e->getMessage() );
+                                }
                             }
-                            
+
                             if ( $fb_response_to_old ) {
                                 $output_message .= $old_passenger->name." successfully removed and notified on Facebook.\n";
                             } else {

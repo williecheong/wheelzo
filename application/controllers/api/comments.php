@@ -45,18 +45,20 @@ class Comments extends REST_Controller {
 
                     if ( $to_notify ) {
                         $fb_response = false;
-                        try {
-                            $fb_response = $this->facebook->api(
-                                '/' . $driver->facebook_id . '/notifications', 
-                                'POST', 
-                                array(
-                                    'href' => '/fb?goto='.$ride->id,
-                                    'template' => '@[' . $commenter->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                    'access_token' => FB_APPID . '|' . FB_SECRET
-                                )
-                            );
-                        } catch ( Exception $e ) {
-                            log_message('error', $e->getMessage() );
+                        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            try {
+                                $fb_response = $this->facebook->api(
+                                    '/' . $driver->facebook_id . '/notifications', 
+                                    'POST', 
+                                    array(
+                                        'href' => '/fb?goto='.$ride->id,
+                                        'template' => '@[' . $commenter->facebook_id . '] commented on your ride scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                                        'access_token' => FB_APPID . '|' . FB_SECRET
+                                    )
+                                );
+                            } catch ( Exception $e ) {
+                                log_message('error', $e->getMessage() );
+                            }                            
                         }
 
                         if ( $fb_response ) {
