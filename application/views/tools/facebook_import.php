@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-control-static">
-                                        <quick-datepicker ng-model="posting.processedRide.departure" disable-clear-button="true"></quick-datepicker>
+                                        <quick-datepicker ng-model="posting.processedRide.departure" label-format="MMM-d, EEEE @ h:mma" date-filter="onlyDatesInFutureDateFilter" disable-clear-button="true"></quick-datepicker>
                                     </div>
                                 </div>
                             </div>

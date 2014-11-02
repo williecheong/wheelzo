@@ -74,6 +74,11 @@ app.config(function(ngQuickDateDefaultsProvider) {
         }
     };
 
+    $scope.onlyDatesInFutureDateFilter = function (date) {
+        var currentDate = new Date();
+        return date >= currentDate;
+    };
+
     $scope.Date = function(arg) {
         if ( arg ) {
             return new Date( arg );
