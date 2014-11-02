@@ -75,13 +75,13 @@
                                 <span class="input-group-addon" tooltip="FROM">
                                     <i class="fa fa-sign-out"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Place of origin" ng-model="posting.processedRide.origin" ng-disabled="loading">
+                                <input type="text" class="form-control" placeholder="Place of origin" ng-model="posting.processedRide.origin" typeahead="place for place in defaultSuggestedPlaces | filter:$viewValue | limitTo:8" ng-disabled="loading">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon" tooltip="TO">
                                     <i class="fa fa-sign-in"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Destination place" ng-model="posting.processedRide.destination" ng-disabled="loading">
+                                <input type="text" class="form-control" placeholder="Destination place" ng-model="posting.processedRide.destination" typeahead="place for place in defaultSuggestedPlaces | filter:$viewValue | limitTo:8" ng-disabled="loading">
                             </div>
                             <div class="row">
                                 <div class="col-xs-3">
