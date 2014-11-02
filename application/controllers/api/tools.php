@@ -149,7 +149,7 @@ class Tools extends REST_Controller {
                                             'POST', 
                                             array(
                                                 'href' => '/fb?goto='.$ride_id,
-                                                'template' => 'Your Facebook ride has been imported into Wheelzo.',
+                                                'template' => 'Your ride has been imported from @[' . $this->_extract_group($posting->id) . '].',
                                                 'access_token' => FB_APPID . '|' . FB_SECRET
                                             )
                                         );
@@ -206,6 +206,11 @@ class Tools extends REST_Controller {
             return;
         }
     }
+
+    private function _extract_group( $posting_id = "" ) {
+        $exploded = explode('_', $posting_id);
+        return $exploded[0];
+    } 
 
     private function _validate_posting( $posting = array() ) {
         if ( isset($posting->id) ) {
