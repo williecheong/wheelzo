@@ -76,7 +76,7 @@ class Tools extends REST_Controller {
 
     public function forget_ride_post() {
         $posting = array_to_object( $this->post('posting') );
-        if ( isset($posting->id) ) {
+        if ( $this->_validate_posting($posting) ) {
             $mapping_id = $this->facebook_ride->create(
                 array(
                     'ride_id' => 0,
@@ -100,6 +100,110 @@ class Tools extends REST_Controller {
             echo $this->_message("Invalid posting specified");  
             return;
         }
+    }
+
+    public function import_ride_post() {
+        $posting = array_to_object( $this->post('posting') );
+        if ( $this->_validate_posting($posting) ) {
+            if ( $this->_validate_processedRide($posting->processedRide) ) {   
+                if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
+                    $driver = $this->user->retrieve_by_fb( $posting->from->id );
+                    if ( $driver ) {
+                        $ride_id = $this->ride->create(  
+                            array(  
+                                'driver_id'     => $driver->id,
+                                'origin'        => $posting->processedRide->origin,
+                                'destination'   => $posting->processedRide->destination,
+                                'capacity'      => $posting->processedRide->capacity,
+                                'price'         => $posting->processedRide->price,
+                                'start'         => date('Y-m-d H:i:s', strtotime($posting->processedRide->departure)),
+                                'drop_offs'     => ''   
+                            )
+                        );
+
+                        if ( $ride_id ) {
+                            $mapping_id = $this->facebook_ride->create(
+                                array(
+                                    'ride_id' => $ride_id,
+                                    'facebook_post_id' => $posting->id
+                                )
+                            );
+
+                            $comment_id = $this->comment->create(  
+                                array(  
+                                    'user_id' => $this->session->userdata('user_id'),
+                                    'ride_id' => $ride_id,
+                                    'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">facebook</a></em>',
+                                    'last_updated' => date( 'Y-m-d H:i:s' )
+                                )
+                            );
+
+                            http_response_code("200");
+                            header('Content-Type: application/json');
+                            echo $this->_message("Ride posting has been imported");  
+                            return;
+                        } else {
+                            http_response_code("400");
+                            header('Content-Type: application/json');
+                            echo $this->_message("Ride could not be created");
+                            return;
+                        }
+                    } else {
+                        http_response_code("400");
+                        header('Content-Type: application/json');
+                        echo $this->_message("Driver is not a registered user");
+                        return;
+                    }
+                } else {
+                    http_response_code("400");
+                    header('Content-Type: application/json');
+                    echo $this->_message("Ride posting has been imported/forgotten before");  
+                    return;
+                }
+            } else {
+                http_response_code("400");
+                header('Content-Type: application/json');
+                echo $this->_message("Invalid parameters specified in posting");  
+                return;
+            }
+        } else {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->_message("Invalid posting specified");  
+            return;
+        }
+    }
+
+    private function _validate_posting( $posting = array() ) {
+        if ( isset($posting->id) ) {
+            if ( isset($posting->from->id) ) {
+                if ( isset($posting->processedRide) ) {
+                    if ( isset($posting->processedRide->origin) && isset($posting->processedRide->destination) && isset($posting->processedRide->departure) && isset($posting->processedRide->capacity) && isset($posting->processedRide->price) ) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private function _validate_processedRide( $ride = array() ) {
+        if ( $ride->origin && $ride->destination ) {
+            if ( is_numeric($ride->capacity) && is_numeric($ride->price) ) {
+                if ( $ride->capacity <= 7 && $ride->price <= 35 ) {
+                    $stamp = strtotime( $ride->departure );
+                    $month = date( 'm', $stamp );
+                    $day   = date( 'd', $stamp );
+                    $year  = date( 'Y', $stamp );
+                    if ( checkdate($month, $day, $year) ) {
+                        return true;
+                    } else {
+                        return false; 
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private function _message( $message = "" ) {

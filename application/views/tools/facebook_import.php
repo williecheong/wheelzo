@@ -12,8 +12,10 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/assets/vendor/ng-quick-date/ng-quick-date.css">
+        <link rel="stylesheet" href="/assets/vendor/ng-toaster/toaster.css">
     </head>
     <body>
+        <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
         <div class="container">
             <h2>
                 Import Facebook Rides
@@ -38,7 +40,11 @@
                     </a>
                 </form>
             </div>
-            <div class="well well-sm" ng-repeat="(key, posting) in postings">
+            <div class="well well-sm" ng-repeat="(key, posting) in postings" ng-init="  posting.processedRide.origin        =   (posting.processedRide.origin)          ?   posting.processedRide.origin            :   ''      ;
+                                                                                        posting.processedRide.destination   =   (posting.processedRide.destination)     ?   posting.processedRide.destination       :   ''      ;
+                                                                                        posting.processedRide.price         =   (posting.processedRide.price)           ?   posting.processedRide.price             :   '10'    ;
+                                                                                        posting.processedRide.capacity      =   (posting.processedRide.capacity)        ?   posting.processedRide.capacity          :   '2'     ;
+                                                                                        posting.processedRide.departure     =   (posting.processedRide.departure)       ?   Date(posting.processedRide.departure)   :   Date()  ;" >
                 <div class="row">
                     <div class="col-md-5">
                         <div class="well">
@@ -96,7 +102,7 @@
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="form-control-static">
-                                        <quick-datepicker ng-model="posting.processedRide.departureTime"></quick-datepicker>
+                                        <quick-datepicker ng-model="posting.processedRide.departure" disable-clear-button="true"></quick-datepicker>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +117,7 @@
                         </button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn btn-success btn-block" ng-click="importRide()">
+                        <button class="btn btn-success btn-block" ng-click="importRide(posting, key)">
                             <i class="fa fa-check"></i>
                             IMPORT RIDE
                         </button>
@@ -121,7 +127,9 @@
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
         <script src="/assets/vendor/ng-quick-date/ng-quick-date.min.js"></script>
+        <script src="/assets/vendor/ng-toaster/toaster.js"></script>
         <script src="/assets/js/angular/facebook-import.js"></script>
     </body>
 </html>
