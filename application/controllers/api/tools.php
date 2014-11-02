@@ -77,6 +77,7 @@ class Tools extends REST_Controller {
     public function forget_ride_post() {
         $posting = array_to_object( $this->post('posting') );
         if ( $this->_validate_posting($posting) ) {
+            $posting->to->data = (array)$posting->to->data;
             $mapping_id = $this->facebook_ride->create(
                 array(
                     'ride_id' => 0,
@@ -105,6 +106,7 @@ class Tools extends REST_Controller {
     public function import_ride_post() {
         $posting = array_to_object( $this->post('posting') );
         if ( $this->_validate_posting($posting) ) {
+            $posting->to->data = (array)$posting->to->data;
             if ( $this->_validate_processedRide($posting->processedRide) ) {   
                 if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
                     $driver = $this->user->retrieve_by_fb( $posting->from->id );
@@ -133,7 +135,7 @@ class Tools extends REST_Controller {
                                 array(  
                                     'user_id' => $this->session->userdata('user_id'),
                                     'ride_id' => $ride_id,
-                                    'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">facebook</a></em>',
+                                    'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a></em>',
                                     'last_updated' => date( 'Y-m-d H:i:s' )
                                 )
                             );
@@ -149,7 +151,7 @@ class Tools extends REST_Controller {
                                             'POST', 
                                             array(
                                                 'href' => '/fb?goto='.$ride_id,
-                                                'template' => 'Your ride has been imported from @[' . $this->_extract_group($posting->id) . '].',
+                                                'template' => 'Your ride has been imported from @[' . $posting->to->data[0]->id . '].',
                                                 'access_token' => FB_APPID . '|' . FB_SECRET
                                             )
                                         );
@@ -215,10 +217,15 @@ class Tools extends REST_Controller {
     private function _validate_posting( $posting = array() ) {
         if ( isset($posting->id) ) {
             if ( isset($posting->from->id) ) {
-                if ( isset($posting->processedRide) ) {
-                    if ( isset($posting->processedRide->origin) && isset($posting->processedRide->destination) && isset($posting->processedRide->departure) && isset($posting->processedRide->capacity) && isset($posting->processedRide->price) ) {
-                        return true;
-                    }
+                $posting->to->data = (array)$posting->to->data;
+                if ( count($posting->to->data) > 0 ) {
+                    if ( isset($posting->to->data[0]->id) && isset($posting->to->data[0]->name) ) {
+                        if ( isset($posting->processedRide) ) {
+                            if ( isset($posting->processedRide->origin) && isset($posting->processedRide->destination) && isset($posting->processedRide->departure) && isset($posting->processedRide->capacity) && isset($posting->processedRide->price) ) {
+                                return true;
+                            }
+                        }
+                    }    
                 }
             }
         }
