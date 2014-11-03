@@ -42,7 +42,7 @@ class Tools extends REST_Controller {
                                         // Check to see if this posting has been made before
                                         if ( isset($posting->id) ) {
                                             if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
-                                                $url = "";
+                                                $url = "http://nlp-wheelzo.rhcloud.com/";
                                                 $type = "POST";
                                                 $params = (object) array(
                                                     "message"   => $posting->message,
@@ -59,7 +59,8 @@ class Tools extends REST_Controller {
                                                         $postings[] = $posting;
                                                     }
                                                 } else {
-                                                    // Not too sure what happened
+                                                    // NLP did not return a valid ride
+                                                    // Not too sure what happened there
                                                     // Send posting to front for judging
                                                     $postings[] = $posting; 
                                                 }                                                
