@@ -16,6 +16,11 @@ if ( ! function_exists('rest_curl') ) {
             $postData = json_encode($params);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); 
+            curl_setopt($ch, CURLOPT_HTTPHEADER, 
+                array(
+                    'Content-Type: application/json'
+                )
+            );
         }
 
         $file_contents = curl_exec($ch);

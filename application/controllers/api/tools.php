@@ -42,7 +42,7 @@ class Tools extends REST_Controller {
                                         // Check to see if this posting has been made before
                                         if ( isset($posting->id) ) {
                                             if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
-                                                $url = "http://nlp-wheelzo.rhcloud.com/";
+                                                $url = "http://nlp-wheelzo.rhcloud.com/nlpApi";
                                                 $type = "POST";
                                                 $params = (object) array(
                                                     "message"   => $posting->message,
