@@ -8,7 +8,14 @@ class Tools extends REST_Controller {
         if ( !in_array($this->session->userdata('facebook_id'), unserialize(WHEELZO_ADMINS)) ) {
             redirect( base_url() );
         } else {
+            parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
             $this->load->model('facebook_ride');
+            $this->load->library('Facebook', 
+                array(
+                    "appId" => FB_APPID, 
+                    "secret" => FB_SECRET
+                )
+            );
         }
     }
 
@@ -151,7 +158,7 @@ class Tools extends REST_Controller {
                                             'POST', 
                                             array(
                                                 'href' => '/fb?goto='.$ride_id,
-                                                'template' => 'Your ride has been imported from @[' . $posting->to->data[0]->id . '].',
+                                                'template' => 'Your ride on ' . $posting->to->data[0]->name . ' has been imported into Wheelzo.',
                                                 'access_token' => FB_APPID . '|' . FB_SECRET
                                             )
                                         );
