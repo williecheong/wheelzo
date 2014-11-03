@@ -42,7 +42,27 @@ class Tools extends REST_Controller {
                                         // Check to see if this posting has been made before
                                         if ( isset($posting->id) ) {
                                             if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
-                                                $postings[] = $posting;
+                                                $url = "";
+                                                $type = "POST";
+                                                $params = (object) array(
+                                                    "message"   => $posting->message,
+                                                    "timestamp" => $posting->updated_time
+                                                );
+                                                $processed_ride = json_decode( rest_curl($url, $type, $params) );
+                                                if ( $this->_validate_processedRide_exists($processed_ride) ) {
+                                                    if ( $processed_ride->origin 
+                                                      && $processed_ride->destination
+                                                      && $processed_ride->departure
+                                                      && $processed_ride->capacity
+                                                      && $processed_ride->price ) {
+                                                        $posting->processedRide = $processed_ride;
+                                                        $postings[] = $posting;
+                                                    }
+                                                } else {
+                                                    // Not too sure what happened
+                                                    // Send posting to front for judging
+                                                    $postings[] = $posting; 
+                                                }                                                
                                             }                                        
                                         }
                                     }
@@ -228,13 +248,22 @@ class Tools extends REST_Controller {
                 if ( count($posting->to->data) > 0 ) {
                     if ( isset($posting->to->data[0]->id) && isset($posting->to->data[0]->name) ) {
                         if ( isset($posting->processedRide) ) {
-                            if ( isset($posting->processedRide->origin) && isset($posting->processedRide->destination) && isset($posting->processedRide->departure) && isset($posting->processedRide->capacity) && isset($posting->processedRide->price) ) {
-                                return true;
-                            }
+                            return $this->_validate_processedRide_exists( $posting->processedRide );
                         }
                     }    
                 }
             }
+        }
+        return false;
+    }
+
+    private function _validate_processedRide_exists( $ride = array() ) {
+        if ( isset($ride->origin) 
+          && isset($ride->destination) 
+          && isset($ride->departure) 
+          && isset($ride->capacity) 
+          && isset($ride->price) ) {
+            return true;
         }
         return false;
     }

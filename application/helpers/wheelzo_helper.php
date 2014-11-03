@@ -4,13 +4,20 @@
 // For compatibility with hosting services
 // E.g. Dreamhost. Stackato?
 if ( ! function_exists('rest_curl') ) {    
-    function rest_curl( $url, $type = "GET" ) {
+    function rest_curl( $url, $type = "GET", $params = array() ) {
         $ch = curl_init();
         $timeout = 10; // set to zero for no timeout
-        curl_setopt ($ch, CURLOPT_URL, $url);
-        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
-        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+
+        if ( $type == "POST" ) {
+            $postData = json_encode($params);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); 
+        }
+
         $file_contents = curl_exec($ch);
         curl_close($ch);
         return $file_contents;
