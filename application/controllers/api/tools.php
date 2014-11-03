@@ -49,21 +49,26 @@ class Tools extends REST_Controller {
                                                     "timestamp" => $posting->updated_time
                                                 );
                                                 $processed_ride = json_decode( rest_curl($url, $type, $params) );
-                                                if ( $this->_validate_processedRide_exists($processed_ride) ) {
-                                                    if ( $processed_ride->origin 
-                                                      && $processed_ride->destination
-                                                      && $processed_ride->departure
-                                                      && $processed_ride->capacity
-                                                      && $processed_ride->price ) {
-                                                        $posting->processedRide = $processed_ride;
-                                                        $postings[] = $posting;
-                                                    }
+                                                if ( isset($processed_ride) ) {
+                                                    if ( $this->_validate_processedRide_exists($processed_ride) ) {
+                                                        if ( $processed_ride->origin 
+                                                          || $processed_ride->destination
+                                                          || $processed_ride->departure
+                                                          || $processed_ride->capacity
+                                                          || $processed_ride->price ) {
+                                                            $posting->processedRide = $processed_ride;
+                                                            $postings[] = $posting;
+                                                        }
+                                                    } else {
+                                                        // NLP did not return a valid ride
+                                                        // Not too sure what happened there
+                                                        // Send posting to front for judging
+                                                        $postings[] = $posting; 
+                                                    }                           
                                                 } else {
-                                                    // NLP did not return a valid ride
-                                                    // Not too sure what happened there
-                                                    // Send posting to front for judging
+                                                    // Terry why does your endpoint return null sometimes?
                                                     $postings[] = $posting; 
-                                                }                                                
+                                                }
                                             }                                        
                                         }
                                     }
@@ -237,11 +242,6 @@ class Tools extends REST_Controller {
         }
     }
 
-    private function _extract_group( $posting_id = "" ) {
-        $exploded = explode('_', $posting_id);
-        return $exploded[0];
-    } 
-
     private function _validate_posting( $posting = array() ) {
         if ( isset($posting->id) ) {
             if ( isset($posting->from->id) ) {
@@ -259,11 +259,11 @@ class Tools extends REST_Controller {
     }
 
     private function _validate_processedRide_exists( $ride = array() ) {
-        if ( isset($ride->origin) 
-          && isset($ride->destination) 
-          && isset($ride->departure) 
-          && isset($ride->capacity) 
-          && isset($ride->price) ) {
+        if ( property_exists($ride, "origin") 
+          && property_exists($ride, "destination") 
+          && property_exists($ride, "departure") 
+          && property_exists($ride, "capacity") 
+          && property_exists($ride, "price") ) {
             return true;
         }
         return false;
