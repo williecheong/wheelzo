@@ -40,9 +40,21 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <div class="navbar-form navbar-left">
-                        <div class="right-inner-addon">
-                            <i class="fa fa-search" title="Search fields include drivers' names and drop-off locations"></i>
-                            <input type="text" class="form-control" id="search-box" placeholder=@yield('search_placeholder')>
+                        <div id="search-box">
+                            <div class="row">
+                                <div class="col-md-6" id="search-origin-box">
+                                    <div class="right-inner-addon">
+                                        <i class="fa fa-search visible-sm"></i>
+                                        <input type="text" class="form-control" id="search-origin" placeholder="Leaving from ...">
+                                    </div>
+                                </div>
+                                <div class="col-md-6  hidden-sm" id="search-destination-box">
+                                    <div class="right-inner-addon">
+                                        <i class="fa fa-search"></i>
+                                        <input type="text" class="form-control" id="search-destination" placeholder="Going to ...">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <ul class="nav navbar-nav navbar-right">

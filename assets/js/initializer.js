@@ -158,7 +158,8 @@
             "sDom" : ''
         });
         
-        $('input#search-box').on('keyup focusout', searchRides);
+        $('input#search-origin').on('keyup focusout', searchRidesByOrigin);
+        $('input#search-destination').on('keyup focusout', searchRidesByDestination);
 
         // Preparing the initial view using JS
         if ( loadRide != false ) {

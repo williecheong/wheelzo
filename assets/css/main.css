@@ -19,10 +19,6 @@ td.ninja-field {
     display: none;
 }
 
-input#search-box {
-    max-width:100%;
-}
-
 div#lookup-reviews {
     margin-top: 15px;
     max-height: 210px;
@@ -69,6 +65,10 @@ img.brand {
     max-width: 50px;
 }
 
+input#search-origin, input#search-destination {
+    width: 100%;
+}
+
 textarea {
     resize: vertical;
 }
@@ -84,20 +84,36 @@ textarea {
 }
 
 @media(min-width:768px){
-    input#search-box {
+    div#search-box {
         width:230px;
     }
 }
 
 @media(min-width:992px){
-    input#search-box {
+    div#search-box {
         width:420px;
+    }
+
+    div#search-box div.row div.col-md-6#search-origin-box {
+        padding-right: 2.5px;
+    }
+
+    div#search-box div.row div.col-md-6#search-destination-box {
+        padding-left: 2.5px;
     }
 }
 
 @media(min-width:1200px){
-    input#search-box {
+    div#search-box {
         width:600px;
+    }
+
+    div#search-box div.row div.col-md-6#search-origin-box {
+        padding-right: 2.5px;
+    }
+
+    div#search-box div.row div.col-md-6#search-destination-box {
+        padding-left: 2.5px;
     }
 }
 

@@ -344,9 +344,14 @@
         getReviews( user_id, $modal.find('div#lookup-reviews') );
     }
 
-    searchRides = function ( event ) {
-        var searchTerm = $('input#search-box').val();
-        rideTable.fnFilterAll( searchTerm );
+    searchRidesByOrigin = function ( event ) {
+        var searchTerm = $('input#search-origin').val();
+        rideTable.fnFilter(searchTerm, 0);
+    }
+
+    searchRidesByDestination = function ( event ) {
+        var searchTerm = $('input#search-destination').val();
+        rideTable.fnFilter(searchTerm, 1);
     }
 
     searchRrequests = function ( event ) {
