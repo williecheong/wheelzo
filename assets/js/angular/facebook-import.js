@@ -15,8 +15,12 @@ app.config(function(ngQuickDateDefaultsProvider) {
             'method': 'GET',
             'url': '/api/tools/fetch_messages?token=' + accessToken
         }).success(function(data, status, headers, config) {
-            toaster.pop('success', 'Success: ' + status, "Retrieved posts. Sort away!");
-            $scope.postings = data;
+            if ( data.message ) {
+                toaster.pop('success', 'Success: ' + status, data.message);
+            } else {
+                toaster.pop('success', 'Success: ' + status, "Retrieved posts. Sort away!");
+                $scope.postings = data;
+            }
             $scope.loading = false;
 
         }).error(function(data, status, headers, config) {
@@ -26,52 +30,42 @@ app.config(function(ngQuickDateDefaultsProvider) {
     };
 
     $scope.forgetRide = function(posting, key) {
-        var r = confirm("This facebook posting will never show again, ok?");
-        if ( r == true ) {
-            $scope.loading = true;
-            $http({
-                'method': 'POST',
-                'url': '/api/tools/forget_ride',
-                'data': {
-                    'posting': posting
-                }
-            }).success(function(data, status, headers, config) {
-                toaster.pop('success', 'Success: ' + status, data.message);
-                $scope.postings.splice(key, 1);
-                $scope.loading = false;
+        $scope.loading = true;
+        $http({
+            'method': 'POST',
+            'url': '/api/tools/forget_ride',
+            'data': {
+                'posting': posting
+            }
+        }).success(function(data, status, headers, config) {
+            toaster.pop('success', 'Success: ' + status, data.message);
+            $scope.postings.splice(key, 1);
+            $scope.loading = false;
 
-            }).error(function(data, status, headers, config) {
-                toaster.pop('error', 'Error: ' + status, data.message);
-                $scope.loading = false;
-            });
-        } else {
-            return;
-        }
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loading = false;
+        });
     };
 
     $scope.importRide = function(posting, key) {
-        var r = confirm("Import this ride according to input details?");
-        if ( r == true ) {
-            $scope.loading = true;
-            $http({
-                'method': 'POST',
-                'url': '/api/tools/import_ride',
-                'data': {
-                    'posting': posting
-                }
-            }).success(function(data, status, headers, config) {
-                toaster.pop('success', 'Success: ' + status, data.message);
-                console.log(data);
-                $scope.postings.splice(key, 1);
-                $scope.loading = false;
+        $scope.loading = true;
+        $http({
+            'method': 'POST',
+            'url': '/api/tools/import_ride',
+            'data': {
+                'posting': posting
+            }
+        }).success(function(data, status, headers, config) {
+            toaster.pop('success', 'Success: ' + status, data.message);
+            console.log(data);
+            $scope.postings.splice(key, 1);
+            $scope.loading = false;
 
-            }).error(function(data, status, headers, config) {
-                toaster.pop('error', 'Error: ' + status, data.message);
-                $scope.loading = false;
-            });
-        } else {
-            return;
-        }
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loading = false;
+        });
     };
 
     $scope.defaultSuggestedPlaces = [

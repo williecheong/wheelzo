@@ -28,13 +28,14 @@ class Tools extends REST_Controller {
             );
 
             $postings = array();                        
-
+            $response_data = array();
             foreach ( $facebook_groups as $facebook_group ) {
                 try {
                     $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=100&access_token=" . $token;
                     $response = json_decode( rest_curl($url) );
                     if ( !isset($response->error->message) ) {
                        if ( isset($response->data) ) {
+                            $response_data = $response->data;
                             foreach ($response->data as $key => $posting) {
                                 if ( isset($posting->from->id) ) {
                                     // Check to see if this is a wheelzo user
@@ -56,8 +57,21 @@ class Tools extends REST_Controller {
                                                           || $processed_ride->departure
                                                           || $processed_ride->capacity
                                                           || $processed_ride->price ) {
+                                                    
                                                             $posting->processedRide = $processed_ride;
                                                             $postings[] = $posting;
+                                                            
+                                                            /* Not confident enough about NLP guesses on date
+                                                            if ( isset($processed_ride->departure) ) {
+                                                                if ( strtotime($processed_ride->departure) > time() ) {
+                                                                    $posting->processedRide = $processed_ride;
+                                                                    $postings[] = $posting;
+                                                                }
+                                                            } else {
+                                                                $posting->processedRide = $processed_ride;
+                                                                $postings[] = $posting;
+                                                            }
+                                                            */
                                                         }
                                                     } else {
                                                         // NLP did not return a valid ride
@@ -87,13 +101,27 @@ class Tools extends REST_Controller {
                     return;
                 }
             }
-            
             if ( count($postings) == 0 ) {
-                http_response_code("404");
-                header('Content-Type: application/json');
-                echo $this->_message("No postings found. Check facebook token.");
-                return;
+                if ( count($response_data) == 0 ) {
+                    http_response_code("404");
+                    header('Content-Type: application/json');
+                    echo $this->_message("Check facebook token");
+                    return;
+                } else {
+                    // There were postings returned from facebook, but nothing to process
+                    // Because good administrator work deserves a little extra processing power
+                    $admin = $this->user->retrieve_by_id( $this->session->userdata('user_id') );
+                    $good_work_message = "Nothing to import for now. Good job!";
+                    if ( isset($admin->name) ) {
+                        $good_work_message = "Nothing to import for now. Good job, " . $admin->name . "!";
+                    }
+                    http_response_code("200");
+                    header('Content-Type: application/json');
+                    echo $this->_message($good_work_message);
+                    return;
+                }
             } else {
+                // We have work to do
                 http_response_code("200");
                 header('Content-Type: application/json');
                 echo json_encode($postings);

@@ -110,16 +110,28 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn btn-danger btn-block" ng-click="forgetRide(posting, key)">
+                    <div class="col-md-6" ng-hide="showForget">
+                        <button class="btn btn-danger btn-block" ng-click="showForget=true">
                             <i class="fa fa-times"></i>
-                            NOT A RIDE
+                            FORGET POSTING
                         </button>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn btn-success btn-block" ng-click="importRide(posting, key)">
+                    <div class="col-md-6" ng-hide="!showForget">
+                        <button class="btn btn-danger btn-block" ng-click="forgetRide(posting, key)">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            Really forget posting?
+                        </button>
+                    </div>
+                    <div class="col-md-6" ng-hide="showImport">
+                        <button class="btn btn-success btn-block" ng-click="showImport=true">
                             <i class="fa fa-check"></i>
                             IMPORT RIDE
+                        </button>
+                    </div>
+                    <div class="col-md-6" ng-hide="!showImport">
+                        <button class="btn btn-success btn-block" ng-click="importRide(posting, key)">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            Really import ride?
                         </button>
                     </div>
                 </div>
