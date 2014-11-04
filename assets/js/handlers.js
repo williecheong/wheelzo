@@ -346,12 +346,12 @@
 
     searchRidesByOrigin = function ( event ) {
         var searchTerm = $('input#search-origin').val();
-        rideTable.fnFilter(searchTerm, 0);
+        rideTable.fnFilterAll(searchTerm, 0);
     }
 
     searchRidesByDestination = function ( event ) {
         var searchTerm = $('input#search-destination').val();
-        rideTable.fnFilter(searchTerm, 1);
+        rideTable.fnFilterAll(searchTerm, 1);
     }
 
     searchRrequests = function ( event ) {
