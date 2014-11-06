@@ -110,6 +110,21 @@ class ride extends CI_Model{
         }
     }
 
+    function retrieve_active_by_user( $user_id = 0 ) {
+        $objects = $this->ride->retrieve(
+            array(
+                'driver_id' => $user_id,
+                'start >' => date( 'Y-m-d H:i:s', strtotime('today midnight') )
+            )
+        );
+
+        if ( count($objects) > 0 ) {
+            return $objects;
+        } else {
+            return false;
+        }
+    }
+
     function retrieve_by_id( $id = 0 ) {
         $objects = $this->ride->retrieve(
             array(
@@ -146,7 +161,6 @@ class ride extends CI_Model{
         $this->db->where($data);
         $this->db->delete('ride');
     }
-
 }
 
 ?>

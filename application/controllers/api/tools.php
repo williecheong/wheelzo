@@ -39,7 +39,8 @@ class Tools extends REST_Controller {
                             foreach ($response->data as $key => $posting) {
                                 if ( isset($posting->from->id) ) {
                                     // Check to see if this is a wheelzo user
-                                    if ( $this->user->retrieve_by_fb($posting->from->id) ) {
+                                    $driver = $this->user->retrieve_by_fb($posting->from->id);
+                                    if ( $driver ) {
                                         // Check to see if this posting has been made before
                                         if ( isset($posting->id) ) {
                                             if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
@@ -59,6 +60,12 @@ class Tools extends REST_Controller {
                                                           || $processed_ride->price ) {
                                                     
                                                             $posting->processedRide = $processed_ride;
+                                                            $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
+                                                            if ( $posting->activeRides ) {
+                                                                foreach ($posting->activeRides as $key => $active_ride) { // for javascript
+                                                                    $posting->activeRides[$key]->start = strtotime($active_ride->start); 
+                                                                }
+                                                            }
                                                             $postings[] = $posting;
                                                             
                                                             /* Not confident enough about NLP guesses on date
@@ -77,10 +84,22 @@ class Tools extends REST_Controller {
                                                         // NLP did not return a valid ride
                                                         // Not too sure what happened there
                                                         // Send posting to front for judging
+                                                        $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
+                                                        if ( $posting->activeRides ) {
+                                                            foreach ($posting->activeRides as $key => $active_ride) { // for javascript
+                                                                $posting->activeRides[$key]->start = strtotime($active_ride->start); 
+                                                            }
+                                                        }
                                                         $postings[] = $posting; 
                                                     }                           
                                                 } else {
                                                     // Terry why does your endpoint return null sometimes?
+                                                    $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
+                                                    if ( $posting->activeRides ) {
+                                                        foreach ($posting->activeRides as $key => $active_ride) { // for javascript
+                                                            $posting->activeRides[$key]->start = strtotime($active_ride->start); 
+                                                        }
+                                                    }   
                                                     $postings[] = $posting; 
                                                 }
                                             }                                        

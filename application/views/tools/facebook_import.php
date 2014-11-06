@@ -40,7 +40,8 @@
                     </a>
                 </form>
             </div>
-            <div class="well well-sm" ng-repeat="(key, posting) in postings" ng-init="  posting.processedRide.origin        =   (posting.processedRide.origin)          ?   posting.processedRide.origin            :   ''      ;
+            <div class="well well-sm" ng-repeat="(key, posting) in postings" ng-init="  showActiveRides[key]                =   false;
+                                                                                        posting.processedRide.origin        =   (posting.processedRide.origin)          ?   posting.processedRide.origin            :   ''      ;
                                                                                         posting.processedRide.destination   =   (posting.processedRide.destination)     ?   posting.processedRide.destination       :   ''      ;
                                                                                         posting.processedRide.price         =   (posting.processedRide.price)           ?   posting.processedRide.price             :   '10'    ;
                                                                                         posting.processedRide.capacity      =   (posting.processedRide.capacity)        ?   posting.processedRide.capacity          :   '2'     ;
@@ -56,6 +57,9 @@
                                     <div>
                                         <a target="_blank" href="{{ posting.id | facebookPostLink }}">
                                             <strong ng-bind="posting.from.name"></strong>
+                                        </a>
+                                        <a href="" class="label label-warning" tooltip-html-unsafe="<i class='fa fa-exclamation-triangle'></i> Potential Duplicate" ng-click="showActiveRides[key]=!showActiveRides[key]" ng-if="posting.activeRides">
+                                            {{ posting.activeRides.length }} active ride found
                                         </a>
                                     </div>
                                     <div class="text-muted">
@@ -108,6 +112,28 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div ng-if="posting.activeRides">
+                    <table class="table table-bordered table-condensed" ng-hide="!showActiveRides[key]">
+                        <thead>
+                            <tr>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Departure</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ride in posting.activeRides">
+                                <td ng-bind="ride.origin"></td>
+                                <td ng-bind="ride.destination"></td>
+                                <td ng-bind="ride.start*1000 | date:'MMM-dd, EEEE @ h:mma'"></td>
+                                <td>
+                                    ${{ ride.price }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="row">
                     <div class="col-md-6" ng-hide="showForget">

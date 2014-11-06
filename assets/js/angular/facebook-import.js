@@ -19,6 +19,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
                 toaster.pop('success', 'Success: ' + status, data.message);
             } else {
                 toaster.pop('success', 'Success: ' + status, "Retrieved posts. Sort away!");
+                console.log(data);
                 $scope.postings = data;
             }
             $scope.loading = false;
@@ -101,6 +102,15 @@ app.config(function(ngQuickDateDefaultsProvider) {
         }
     };
 
+}).filter('dateToISO', function() {
+  return function(input) {
+    return new Date(input).toISOString();
+  };
+}).filter('badDateToISO', function() {
+  return function(badTime) {
+    var goodTime = badTime.replace(/(.+) (.+)/, "$1T$2Z");
+    return goodTime;
+  };
 }).filter('facebookImage', function() {
     return function(facebookId) {
         return '//graph.facebook.com/' + facebookId + '/picture?width=40&height=40';
