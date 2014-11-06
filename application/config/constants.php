@@ -19,8 +19,10 @@ define('NOTIFY_DELETED',        'D');
 define('NOTIFY_INVITED',        'I');
 define('NOTIFY_VOUCHED',        'V');
 define('NOTIFY_REVIEWED',       'W');
+define('NOTIFY_IMPORT',         'P');
 
-define('WHEELZO_ADMINS',        serialize(array('616512487', '100001375166320', '592441839')));
+// Admins include Willie, Max, Dennis, Terry
+define('WHEELZO_ADMINS',        serialize(array('616512487', '100001375166320', '592441839', '1612834909')));
 
 /*
 |--------------------------------------------------------------------------

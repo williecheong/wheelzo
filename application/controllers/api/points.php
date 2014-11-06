@@ -46,20 +46,22 @@ class Points extends REST_Controller {
 
                         if ( $to_notify ) {
                             $fb_response = false;
-                            try {
-                                $fb_response = $this->facebook->api(
-                                    '/' . $receiver->facebook_id . '/notifications', 
-                                    'POST', 
-                                    array(
-                                        'href' => '/fb?lookup='.$receiver->id,
-                                        'template' => '@[' . $giver->facebook_id . '] has vouched for you.',
-                                        'access_token' => FB_APPID . '|' . FB_SECRET
-                                    )
-                                );
-                            } catch ( Exception $e ) {
-                                log_message('error', $e->getMessage() );
+                            if ( ENVIRONMENT == 'production' || in_array($receiver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                                try {
+                                    $fb_response = $this->facebook->api(
+                                        '/' . $receiver->facebook_id . '/notifications', 
+                                        'POST', 
+                                        array(
+                                            'href' => '/fb?lookup='.$receiver->id,
+                                            'template' => '@[' . $giver->facebook_id . '] has vouched for you.',
+                                            'access_token' => FB_APPID . '|' . FB_SECRET
+                                        )
+                                    );
+                                } catch ( Exception $e ) {
+                                    log_message('error', $e->getMessage() );
+                                }
                             }
-
+                            
                             if ( $fb_response ) {
                                 echo json_encode(
                                     array(

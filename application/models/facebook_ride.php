@@ -2,6 +2,20 @@
 
 class facebook_ride extends CI_Model{
     
+    function retrieve_by_ride( $ride_id = 0 ) {
+        $objects = $this->facebook_ride->retrieve(
+            array(
+                'ride_id' => $ride_id
+            )
+        );
+
+        if ( count($objects) > 0 ) {
+            return $objects[0];
+        } else {
+            return false;
+        }
+    }
+
     function retrieve_by_fb( $facebook_post_id = 0 ) {
         $objects = $this->facebook_ride->retrieve(
             array(
