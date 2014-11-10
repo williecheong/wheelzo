@@ -1,11 +1,11 @@
 wheelzo
 ========
 - Carpooling for the kids of uWaterloo
-- Production: [wheelzo.com](wheelzo.com)
-- Staging: [staging.wheelzo.com](staging.wheelzo.com)
+- Production: [wheelzo.com](//wheelzo.com)
+- Staging: [staging.wheelzo.com](//staging.wheelzo.com)
 
 ## API - Version 2 
-#### `/api/v2`
+#### Endpoint prefix: `/api/v2`
 
 - GET /users
     - Returns a list of all users mapped by user id
