@@ -7,13 +7,6 @@ class Reviews extends API_Controller {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('review');
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_get() {
