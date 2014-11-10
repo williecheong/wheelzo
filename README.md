@@ -1,8 +1,8 @@
 wheelzo
 ========
 - Carpooling for the kids of uWaterloo
-- Production: [wheelzo.com](//wheelzo.com)
-- Staging: [staging.wheelzo.com](//staging.wheelzo.com)
+- Production: [wheelzo.com](https://wheelzo.com)
+- Staging: [staging.wheelzo.com](http://staging.wheelzo.com)
 
 ## API - Version 2 
 #### Endpoint prefix: `/api/v2`
