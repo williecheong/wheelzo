@@ -1,7 +1,7 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/REST_Controller.php');
 
-class Misc extends REST_Controller {
+class Logout extends REST_Controller {
     
     function __construct() {
         parent::__construct();
@@ -17,7 +17,7 @@ class Misc extends REST_Controller {
 
     // Referenced from:
     //  http://phpguidance.wordpress.com/2013/09/27/facebook-login-with-codeignator/comment-page-1/
-    public function logout_get() {
+    public function index_get() {
         session_destroy();
         $this->session->sess_destroy();
         redirect( base_url() );

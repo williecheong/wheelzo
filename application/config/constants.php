@@ -7,9 +7,8 @@
 |--------------------------------------------------------------------------
 */
 
-define('CURRENT_VERSION',   '0.9001');
-define('FB_APPID',          '282192178572651');
-define('FB_SECRET',         '4e20bf730703c8086620ba26693de1c2');
+require(APPPATH.'/config/facebook.php');
+define('CURRENT_VERSION',       '9.001');
 
 define('WHEELZO_DELIMITER',     '{?}');
 define('NOTIFY_ASSIGNED',       'A');

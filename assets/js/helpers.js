@@ -3,7 +3,7 @@
 *******************/ 
     function postRide( saveRide, $button ) {
         $.ajax({
-            url: '/api/rides',
+            url: '/api/v1/rides',
             data: saveRide,
             type: 'POST',
             dataType: "JSON",
@@ -30,7 +30,7 @@
 
     function deleteRide( rideID, $button ) {
         $.ajax({
-            url: '/api/rides/index/' + rideID,
+            url: '/api/v1/rides/index/' + rideID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -56,7 +56,7 @@
 
     function postUser_ride( passengerID, rideID ) {
         $.ajax({
-            url: '/api/user_rides',
+            url: '/api/v1/user_rides',
             data: {
                 "rideID" : rideID,
                 "passengerID" : passengerID
@@ -80,7 +80,7 @@
 
     function putUser_ride( passengerID, user_rideID ) {
         $.ajax({
-            url: '/api/user_rides',
+            url: '/api/v1/user_rides',
             data: {
                 "user-rideID" : user_rideID,
                 "passengerID" : passengerID
@@ -105,7 +105,7 @@
 
     function deleteUser_ride( user_rideID ) {
         $.ajax({
-            url: '/api/user_rides/index/' + user_rideID,
+            url: '/api/v1/user_rides/index/' + user_rideID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -126,7 +126,7 @@
 
     function postRrequest( saveRrequest, $button ) {
         $.ajax({
-            url: '/api/rrequests',
+            url: '/api/v1/rrequests',
             data: saveRrequest,
             type: 'POST',
             dataType: "JSON",
@@ -153,7 +153,7 @@
 
     function deleteRrequest( rrequestID, $button ) {
         $.ajax({
-            url: '/api/rrequests/index/' + rrequestID,
+            url: '/api/v1/rrequests/index/' + rrequestID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -180,7 +180,7 @@
     function getReviews( user_id, $reviewBox ) {
         $reviewBox.html('<i class="fa fa-cog fa-spin fa-2x"></i>').addClass('text-center');
         $.ajax({
-            url: '/api/reviews?receiver_id=' + user_id,
+            url: '/api/v1/reviews?receiver_id=' + user_id,
             type: 'GET',
             dataType: "JSON",
             success: function( reviews ) {
@@ -196,7 +196,7 @@
 
     function deleteReview( reviewID, $button ) {
         $.ajax({
-            url: '/api/reviews/index/' + reviewID,
+            url: '/api/v1/reviews/index/' + reviewID,
             type: 'DELETE',
             dataType: "JSON",
             success: function( response ) {
@@ -272,9 +272,9 @@
     }
 
     function refreshRides( callback ) {
-        var url = "/api/rides";
+        var url = "/api/v1/rides";
         if ( location.pathname == '/me' ) {
-            url = "/api/rides/me";
+            url = "/api/v1/rides/me";
         }
 
         $.get( url, function( response ) {
@@ -285,7 +285,7 @@
     }
 
     function refreshUsers( callback ) {
-        var url = "/api/users";
+        var url = "/api/v1/users";
 
         $.get( url, function( response ) {
             publicUsers = JSON.parse(response);

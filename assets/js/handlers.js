@@ -180,7 +180,7 @@
         }
 
         $.ajax({
-            url: '/api/comments',
+            url: '/api/v1/comments',
             data: {
                 rideID : rideID,
                 comment : comment
@@ -220,7 +220,7 @@
         $button.addClass('disabled');        
         
         $.ajax({
-            url: '/api/points',
+            url: '/api/v1/points',
             data: {
                 receiver_id : receiverID
             },
@@ -266,7 +266,7 @@
         }
 
         $.ajax({
-            url: '/api/reviews',
+            url: '/api/v1/reviews',
             data: {
                 receiver_id : receiverID,
                 review : review
@@ -426,7 +426,7 @@
         }
 
         $.ajax({
-            url: '/api/feedbacks',
+            url: '/api/v1/feedbacks',
             type: 'POST',
             dataType: "JSON",
             data: {

@@ -28,7 +28,7 @@ class Main extends CI_Controller {
             
             $this->facebook_url = $this->facebook->getLogouturl(
                 array(
-                    "next" => base_url() . 'api/misc/logout'
+                    "next" => base_url() . 'api/logout'
                 )
             );
         
