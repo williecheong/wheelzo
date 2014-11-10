@@ -3,6 +3,8 @@ wheelzo
 - Carpooling for the kids of uWaterloo
 - Production: [wheelzo.com](https://wheelzo.com)
 - Staging: [staging.wheelzo.com](http://staging.wheelzo.com)
+    - FB notifications do not send out on staging
+    - Do whatever you please on this dummy site
 
 ## API - Version 2 
 #### Endpoint prefix: `/api/v2`
