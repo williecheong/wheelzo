@@ -22,7 +22,6 @@ class Fb extends CI_Controller {
             // Always returns the local user ID of this person from our database.
             $user = $this->user->try_register( $this->facebook_user );
             $this->session->set_userdata('user_id', $user->id);
-            $this->session->set_userdata('email', $user->email);
         }
     }
     

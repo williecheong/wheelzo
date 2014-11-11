@@ -23,7 +23,6 @@ class Main extends CI_Controller {
             $user = $this->user->try_register( $this->facebook_user );
             
             $this->session->set_userdata('user_id', $user->id);
-            $this->session->set_userdata('email', $user->email);
             $this->session->set_userdata('facebook_id', $user->facebook_id);
             
             $this->facebook_url = $this->facebook->getLogouturl(
