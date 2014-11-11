@@ -10,12 +10,14 @@ class Users extends API_Controller {
 
     public function index_get() {
         $users = $this->user->retrieve();
-        
-        foreach( $users as $user ) {
+        $temp_users = array();
+        foreach( $users as $key => $user ) {
             // Only display public user information
-            $temp_users[$user->id]['name'] = $user->name;
-            $temp_users[$user->id]['facebook_id'] = $user->facebook_id;
-            $temp_users[$user->id]['score'] = number_format(round(floatval($user->rating), 2), 2);
+            $temp_user['id'] = $user->id;
+            $temp_user['name'] = $user->name;
+            $temp_user['facebook_id'] = $user->facebook_id;
+            $temp_user['score'] = number_format(round(floatval($user->rating), 2), 2);
+            $temp_users[] = $temp_user;
         }
 
         http_response_code("200");

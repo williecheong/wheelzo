@@ -9,7 +9,8 @@ class Rides extends API_Controller {
     }
 
     public function index_get() {
-        $rides = $this->ride->retrieve_active();
+        // set to false for no ID mapped objects
+        $rides = $this->ride->retrieve_active(false);
         
         http_response_code("200");
         header('Content-Type: application/json');
@@ -18,7 +19,8 @@ class Rides extends API_Controller {
     }
 
     public function me_get() {
-        $rides = $this->ride->retrieve_personal();
+        // set to false for no ID mapped objects
+        $rides = $this->ride->retrieve_personal(false);
 
         http_response_code("200");
         header('Content-Type: application/json');

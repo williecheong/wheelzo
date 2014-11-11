@@ -10,17 +10,17 @@ wheelzo
 #### Endpoint prefix: `/api/v2`
 
 - GET /users
-    - Returns a list of all users mapped by user id
+    - Returns an array of all users
     - Each user contains `name`, `facebook_id`, `score`
     - DONE
 
 - GET /rides
-    - Returns a list of active rides mapped by ride id
+    - Returns an array of active rides
     - Each ride contains ride details, `comments`, `passengers`
     - DONE
 
 - GET /rides/me
-    - Returns a list of personal rides mapped by ride id
+    - Returns an array of personal rides
     - Each ride contains ride details, `comments`, `passengers`
     - DONE
 
