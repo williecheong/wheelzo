@@ -13,16 +13,16 @@ class Points extends API_Controller {
     public function index_post() {
         $data = clean_input( $this->post() );
         
-        if ( $this->session->userdata('user_id') ) {
+        if ( $this->wheelzo_user_id ) {
             
             if ( isset($data['receiver_id']) ){
                 
-                if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
+                if ( $this->wheelzo_user_id != $data['receiver_id'] ) {
                     
-                    if ( !$this->given_today($this->session->userdata('user_id'), $data['receiver_id']) ) {
+                    if ( !$this->given_today($this->wheelzo_user_id, $data['receiver_id']) ) {
                         $point_id = $this->point->create(
                             array(
-                                'giver_id' => $this->session->userdata('user_id'),
+                                'giver_id' => $this->wheelzo_user_id,
                                 'receiver_id' => $data['receiver_id'],
                                 'last_updated' => date( 'Y-m-d H:i:s' )
                             )
@@ -32,7 +32,7 @@ class Points extends API_Controller {
 
                         // Facebook notify for point received
                         $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
-                        $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+                        $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
                         $notification_type = $giver->id . NOTIFY_VOUCHED; 
                         $to_notify = $this->user->to_notify( $receiver->id, $notification_type );

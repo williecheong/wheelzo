@@ -4,7 +4,7 @@ class Tools extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        if ( !in_array($this->session->userdata('facebook_id'), unserialize(WHEELZO_ADMINS)) ) {
+        if ( !in_array($this->wheelzo_facebook_id, unserialize(WHEELZO_ADMINS)) ) {
             redirect( base_url() );
         }
     }

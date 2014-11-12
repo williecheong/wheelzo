@@ -9,10 +9,10 @@ class User_rides extends API_Controller {
     }
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
-            $driver_id = $this->session->userdata('user_id');
+            $driver_id = $this->wheelzo_user_id;
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
             $passenger_id = isset($data['passengerID']) ? $data['passengerID'] : '';
 
@@ -99,10 +99,10 @@ class User_rides extends API_Controller {
     }
 
     public function index_put() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->put() );
 
-            $driver_id = $this->session->userdata('user_id');
+            $driver_id = $this->wheelzo_user_id;
             $user_ride_id = isset($data['user-rideID']) ? $data['user-rideID'] : '';
             $passenger_id = isset($data['passengerID']) ? $data['passengerID'] : '';
             
@@ -228,8 +228,8 @@ class User_rides extends API_Controller {
     }
 
     public function index_delete( $user_ride_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $driver_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $driver_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_driver_by_user_ride( $user_ride_id, $driver_id) ) {
                 $old_user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );

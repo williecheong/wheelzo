@@ -20,8 +20,8 @@ class Feedbacks extends API_Controller {
             } 
 
             $user_id = 0;
-            if ( $this->session->userdata('user_id') ) {
-                $user_id = $this->session->userdata('user_id');
+            if ( $this->wheelzo_user_id ) {
+                $user_id = $this->wheelzo_user_id;
             }
 
             $feedback_id = $this->feedback->create(

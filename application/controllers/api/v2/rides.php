@@ -29,10 +29,10 @@ class Rides extends API_Controller {
     }    
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
-            $driver_id = $this->session->userdata('user_id');
+            $driver_id = $this->wheelzo_user_id;
             $origin = isset($data['origin']) ? $data['origin'] : '';
             $destination = isset($data['destination']) ? $data['destination'] : '';
             $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
@@ -116,8 +116,8 @@ class Rides extends API_Controller {
     }
 
     public function index_delete( $ride_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $driver_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $driver_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_driver( $ride_id, $driver_id) ) {
                 // Handle the deleting of all comments

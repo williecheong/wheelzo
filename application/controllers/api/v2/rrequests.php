@@ -9,7 +9,7 @@ class Rrequests extends API_Controller {
     }
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
             $origin = isset($data['origin']) ? $data['origin'] : '';
@@ -22,7 +22,7 @@ class Rrequests extends API_Controller {
 
             $rrequest_id = $this->rrequest->create(  
                 array(  
-                    'user_id' => $this->session->userdata('user_id'),
+                    'user_id' => $this->wheelzo_user_id,
                     'origin' => $origin,
                     'destination' => $destination,
                     'start' => $start  
@@ -43,8 +43,8 @@ class Rrequests extends API_Controller {
     }
 
     public function index_delete( $rrequest_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $user_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $user_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_user( $rrequest_id, $user_id) ) {
                 $this->rrequest->delete(

@@ -9,7 +9,7 @@ class Comments extends API_Controller {
     }
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
@@ -20,7 +20,7 @@ class Comments extends API_Controller {
             if ( $ride ) {
                 $comment_id = $this->comment->create(  
                     array(  
-                        'user_id' => $this->session->userdata('user_id'),
+                        'user_id' => $this->wheelzo_user_id,
                         'ride_id' => $ride_id,
                         'comment' => $comment,
                         'last_updated' => date( 'Y-m-d H:i:s' )

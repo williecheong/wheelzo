@@ -1,21 +1,14 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/REST_Controller.php');
 
-class Tools extends REST_Controller {
+class Tools extends API_Controller {
     
     function __construct() {
         parent::__construct();
-        if ( !in_array($this->session->userdata('facebook_id'), unserialize(WHEELZO_ADMINS)) ) {
+        if ( !in_array($this->wheelzo_facebook_id, unserialize(WHEELZO_ADMINS)) ) {
             redirect( base_url() );
         } else {
-            parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
             $this->load->model('facebook_ride');
-            $this->load->library('Facebook', 
-                array(
-                    "appId" => FB_APPID, 
-                    "secret" => FB_SECRET
-                )
-            );
         }
     }
 
@@ -129,7 +122,7 @@ class Tools extends REST_Controller {
                 } else {
                     // There were postings returned from facebook, but nothing to process
                     // Because good administrator work deserves a little extra processing power
-                    $admin = $this->user->retrieve_by_id( $this->session->userdata('user_id') );
+                    $admin = $this->user->retrieve_by_id( $this->wheelzo_user_id );
                     $good_work_message = "Nothing to import for now. Good job!";
                     if ( isset($admin->name) ) {
                         $good_work_message = "Nothing to import for now. Good job, " . $admin->name . "!";
@@ -213,7 +206,7 @@ class Tools extends REST_Controller {
 
                             $comment_id = $this->comment->create(  
                                 array(  
-                                    'user_id' => $this->session->userdata('user_id'),
+                                    'user_id' => $this->wheelzo_user_id,
                                     'ride_id' => $ride_id,
                                     'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a></em>',
                                     'last_updated' => date( 'Y-m-d H:i:s' )

@@ -14,14 +14,22 @@ class Fb extends CI_Controller {
             )
         );
         
-        $this->facebook_url = '';    
-        $this->facebook_user = $this->facebook->getUser();
-        
-        if ( $this->facebook_user ) {
+        try {
+            // This will verify that the token is not broken
+            $this->facebook->getUser(); 
+            $this->facebook->api('/me');
+            
             // Registers the facebook user if not already done.
             // Always returns the local user ID of this person from our database.
-            $user = $this->user->try_register( $this->facebook_user );
-            $this->session->set_userdata('user_id', $user->id);
+            $user = $this->user->try_register( 
+                $this->facebook->getUser() 
+            );
+
+            $this->wheelzo_facebook_id = $user->facebook_id;
+            $this->wheelzo_user_id = $user->id;
+        } catch ( Exception $e ) {
+            $this->wheelzo_facebook_id = false;
+            $this->wheelzo_user_id = false;
         }
     }
     

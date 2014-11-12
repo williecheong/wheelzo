@@ -28,14 +28,14 @@ class Reviews extends API_Controller {
     public function index_post() {
         $data = clean_input( $this->post() );
         
-        if ( $this->session->userdata('user_id') ) {
+        if ( $this->wheelzo_user_id ) {
             
             if ( isset($data['receiver_id']) && isset($data['review']) ){
                 
-                if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
+                if ( $this->wheelzo_user_id != $data['receiver_id'] ) {
                     $review_id = $this->review->create(
                         array(
-                            'giver_id' => $this->session->userdata('user_id'),
+                            'giver_id' => $this->wheelzo_user_id,
                             'receiver_id' => $data['receiver_id'],
                             'review' => $data['review']
                         )
@@ -43,7 +43,7 @@ class Reviews extends API_Controller {
 
                     // Facebook notify for review received
                     $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
-                    $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+                    $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
                     $notification_type = $giver->id . NOTIFY_REVIEWED; 
                     $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
@@ -100,8 +100,8 @@ class Reviews extends API_Controller {
     }
 
     public function index_delete( $review_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $reviewer_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $reviewer_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_reviewer( $review_id, $reviewer_id) ) {
                 $this->review->delete(
