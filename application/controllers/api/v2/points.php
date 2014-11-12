@@ -7,13 +7,6 @@ class Points extends API_Controller {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('point');
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     // Used to create a new group in the DB
@@ -79,7 +72,7 @@ class Points extends API_Controller {
                     } else {
                         http_response_code("400");
                         header('Content-Type: application/json');
-                        echo $this->message("You may upvote each person once a day.\nCome again tomorrow.");
+                        echo $this->message("You may upvote each person once a day. Come again tomorrow.");
                     }
                 } else {
                     http_response_code("400");

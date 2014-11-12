@@ -13,7 +13,7 @@ class ride extends CI_Model{
         return $rides;
     }
 
-    function retrieve_active() {
+    function retrieve_active( $build_id_mapping = true ) {
         $user_id = $this->session->userdata('user_id');
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
         $conditions = "`start`>'".$current."'";
@@ -23,46 +23,52 @@ class ride extends CI_Model{
         // Use ride ID as the index key
         $temp_rides = array();
         foreach( $rides as $ride ) { 
-            $temp_rides[$ride->id] = $ride;
+            $temp_ride = $ride;
 
             if ( $ride->drop_offs == '' ) {
-                $temp_rides[$ride->id]->drop_offs = array() ;
+                $temp_ride->drop_offs = array() ;
             } else {
-                $temp_rides[$ride->id]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+                $temp_ride->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
             }
          
-            $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+            $temp_ride->passengers = $this->user_ride->retrieve(
                 array(
                     'ride_id' => $ride->id 
                 )
             );
 
-            $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+            $temp_ride->comments = $this->comment->retrieve(
                 array(
                     'ride_id' => $ride->id 
                 )
             );
 
             if ( $ride->driver_id == $user_id ) {
-                $temp_rides[$ride->id]->is_personal = true;
+                $temp_ride->is_personal = true;
             } else {
-                foreach ( $temp_rides[$ride->id]->passengers as $passenger ) {
+                foreach ( $temp_ride->passengers as $passenger ) {
                     if ($passenger->user_id == $user_id ) {
-                        $temp_rides[$ride->id]->is_personal = true;
+                        $temp_ride->is_personal = true;
                         break;
                     }
                 }
             }
 
             if ( !isset($temp_rides[$ride->id]->is_personal) ) {
-                $temp_rides[$ride->id]->is_personal = false;
+                $temp_ride->is_personal = false;
+            }
+
+            if ( $build_id_mapping ) {
+                $temp_rides[$ride->id] = $ride;
+            } else {
+                $temp_rides[] = $ride;
             }
         }
 
         return $temp_rides;
     }
 
-    function retrieve_personal() {
+    function retrieve_personal( $build_id_mapping = true ) {
         $user_id = $this->session->userdata('user_id');
         if ( $user_id ) {
             $conditions = '`driver_id` = '.$user_id;
@@ -82,25 +88,31 @@ class ride extends CI_Model{
             // Use ride ID as the index key
             $temp_rides = array();
             foreach( $rides as $ride ) { 
-                $temp_rides[$ride->id] = $ride; 
-                $temp_rides[$ride->id]->is_personal = true;
+                $temp_ride = $ride; 
+                $temp_ride->is_personal = true;
                 if ( $ride->drop_offs == '' ) {
-                    $temp_rides[$ride->id]->drop_offs = array() ;
+                    $temp_ride->drop_offs = array() ;
                 } else {
-                    $temp_rides[$ride->id]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+                    $temp_ride->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
                 }
              
-                $temp_rides[$ride->id]->passengers = $this->user_ride->retrieve(
+                $temp_ride->passengers = $this->user_ride->retrieve(
                     array(
                         'ride_id' => $ride->id 
                     )
                 );
 
-                $temp_rides[$ride->id]->comments = $this->comment->retrieve(
+                $temp_ride->comments = $this->comment->retrieve(
                     array(
                         'ride_id' => $ride->id 
                     )
                 );
+
+                if ( $build_id_mapping ) {
+                    $temp_rides[$ride->id] = $ride;
+                } else {
+                    $temp_rides[] = $ride;
+                }
             }
             
             return $temp_rides;        

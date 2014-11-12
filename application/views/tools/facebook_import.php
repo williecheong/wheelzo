@@ -45,7 +45,7 @@
                                                                                         posting.processedRide.destination   =   (posting.processedRide.destination)     ?   posting.processedRide.destination       :   ''      ;
                                                                                         posting.processedRide.price         =   (posting.processedRide.price)           ?   posting.processedRide.price             :   '10'    ;
                                                                                         posting.processedRide.capacity      =   (posting.processedRide.capacity)        ?   posting.processedRide.capacity          :   '2'     ;
-                                                                                        posting.processedRide.departure     =   (posting.processedRide.departure)       ?   Date(posting.processedRide.departure)   :   Date()  ;" >
+                                                                                        posting.processedRide.departure     =   (posting.processedRide.departure)       ?   Date(posting.processedRide.departure)   :   ''      ;" >
                 <div class="row">
                     <div class="col-md-5">
                         <div class="well">

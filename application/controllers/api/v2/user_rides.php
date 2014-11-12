@@ -6,13 +6,6 @@ class User_rides extends API_Controller {
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_post() {
@@ -208,12 +201,11 @@ class User_rides extends API_Controller {
                             $output .= "You were successfully added to your own ride.";
                         }
 
-
                         http_response_code("200");
                         header('Content-Type: application/json');
                         echo $this->message($output);
                     } else {
-                        http_response_code("400");
+                        http_response_code("200");
                         header('Content-Type: application/json');
                         echo $this->message("This person is already assigned to this seat.");
                     }        
@@ -232,7 +224,6 @@ class User_rides extends API_Controller {
             header('Content-Type: application/json');
             echo $this->message("User is not logged in");
         }
-        
         return;
     }
 
@@ -291,17 +282,9 @@ class User_rides extends API_Controller {
                         echo $this->message($old_passenger->name." successfully removed and already notified on Facebook.");
                     }
                 } else {
-
-                    http_response_code("400");
+                    http_response_code("200");
                     header('Content-Type: application/json');
-                    echo $this->message("You are not the driver. Stop hacking.");
-                    echo json_encode(
-                        array(
-                            'status' => 'success',
-                            'message' => 'You were successfully removed from your own ride.',
-                            'ride_id' => $ride->id
-                        )
-                    );
+                    echo $this->message("You were successfully removed from your own ride.");
                 }
             } else {
                 http_response_code("400");
