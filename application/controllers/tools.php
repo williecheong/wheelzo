@@ -13,11 +13,6 @@ class Tools extends CI_Controller {
                 "secret" => FB_SECRET
             )
         );
-
-        $headers = apache_request_headers();
-        if ( isset($headers["FB_WHEELZO_TOKEN"]) ) {
-            $this->facebook->setAccessToken($headers["FB_WHEELZO_TOKEN"]);
-        } 
         
         try {
             // This will verify that the token is not broken
