@@ -31,10 +31,6 @@ class Tools extends CI_Controller {
             $this->wheelzo_facebook_id = false;
             $this->wheelzo_user_id = false;
         }
-
-        if ( !in_array($this->wheelzo_facebook_id, unserialize(WHEELZO_ADMINS)) ) {
-            redirect( base_url() );
-        }
     }
 
     public function index() {
@@ -42,7 +38,11 @@ class Tools extends CI_Controller {
     }
 
     public function facebook_import() {
-        $this->load->view('/tools/facebook_import');
+        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
+            $this->load->view('/tools/facebook_import');
+        } else {
+            redirect( base_url() );
+        }
     }
 
 }

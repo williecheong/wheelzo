@@ -38,7 +38,7 @@ class Comments extends API_Controller {
 
                     if ( $to_notify ) {
                         $fb_response = false;
-                        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                             try {
                                 $fb_response = $this->facebook->api(
                                     '/' . $driver->facebook_id . '/notifications', 

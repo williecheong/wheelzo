@@ -5,11 +5,18 @@ class Facebook_import extends API_Controller {
     
     function __construct() {
         parent::__construct();
-        if ( !in_array($this->wheelzo_facebook_id, unserialize(WHEELZO_ADMINS)) ) {
-            redirect( base_url() );
-        } else {
+        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
             $this->load->model('facebook_ride');
+        } else {
+            redirect( base_url() );            
         }
+    }
+    
+    public function ping_get() {
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo $this->message("OK");
+        return;
     }
 
     public function fetch_messages_get() {
@@ -17,7 +24,7 @@ class Facebook_import extends API_Controller {
         if ( !$token ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Invalid access token specified");  
+            echo $this->message("Invalid access token specified");  
             return;
         }
 
@@ -26,102 +33,81 @@ class Facebook_import extends API_Controller {
             '231943393631223'   // Rideshare Wilfred Laurier               
         );
 
-        $postings = array();                        
+        $postings = array();                     
         $response_data = array();
         foreach ( $facebook_groups as $facebook_group ) {
             try {
                 $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=100&access_token=" . $token;
                 $response = json_decode( rest_curl($url) );
-                if ( !isset($response->error->message) ) {
-                   if ( isset($response->data) ) {
-                        $response_data = $response->data;
-                        foreach ($response->data as $key => $posting) {
-                            if ( isset($posting->from->id) ) {
-                                // Check to see if this is a wheelzo user
-                                $driver = $this->user->retrieve_by_fb($posting->from->id);
-                                if ( $driver ) {
-                                    // Check to see if this posting has been made before
-                                    if ( isset($posting->id) ) {
-                                        if ( !$this->facebook_ride->retrieve_by_fb($posting->id) ) {
-                                            $url = "http://nlp-wheelzo.rhcloud.com/nlpApi";
-                                            $type = "POST";
-                                            $params = (object) array(
-                                                "message"   => $posting->message,
-                                                "timestamp" => $posting->updated_time
-                                            );
-                                            $processed_ride = json_decode( rest_curl($url, $type, $params) );
-                                            if ( isset($processed_ride) ) {
-                                                if ( $this->_validate_processedRide_exists($processed_ride) ) {
-                                                    if ( $processed_ride->origin 
-                                                      || $processed_ride->destination
-                                                      || $processed_ride->departure
-                                                      || $processed_ride->capacity
-                                                      || $processed_ride->price ) {
-                                                
-                                                        $posting->processedRide = $processed_ride;
-                                                        $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
-                                                        if ( $posting->activeRides ) {
-                                                            foreach ($posting->activeRides as $key => $active_ride) { // for javascript
-                                                                $posting->activeRides[$key]->start = strtotime($active_ride->start); 
-                                                            }
-                                                        }
-                                                        $postings[] = $posting;
-                                                        
-                                                        /* Not confident enough about NLP guesses on date
-                                                        if ( isset($processed_ride->departure) ) {
-                                                            if ( strtotime($processed_ride->departure) > time() ) {
-                                                                $posting->processedRide = $processed_ride;
-                                                                $postings[] = $posting;
-                                                            }
-                                                        } else {
-                                                            $posting->processedRide = $processed_ride;
-                                                            $postings[] = $posting;
-                                                        }
-                                                        */
-                                                    }
-                                                } else {
-                                                    // NLP did not return a valid ride
-                                                    // Not too sure what happened there
-                                                    // Send posting to front for judging
-                                                    $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
-                                                    if ( $posting->activeRides ) {
-                                                        foreach ($posting->activeRides as $key => $active_ride) { // for javascript
-                                                            $posting->activeRides[$key]->start = strtotime($active_ride->start); 
-                                                        }
-                                                    }
-                                                    $postings[] = $posting; 
-                                                }                           
-                                            } else {
-                                                // Terry why does your endpoint return null sometimes?
-                                                $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
-                                                if ( $posting->activeRides ) {
-                                                    foreach ($posting->activeRides as $key => $active_ride) { // for javascript
-                                                        $posting->activeRides[$key]->start = strtotime($active_ride->start); 
-                                                    }
-                                                }   
-                                                $postings[] = $posting; 
-                                            }
-                                        }                                        
-                                    }
-                                }
-                            }
-                        }  
-                    } else {
-                        // No error was found, but data is missing from response     
+                
+                if ( isset($response->error->message) ) { // Token was not valid for accessing this group
+                    continue;
+                }
+
+                if ( !isset($response->data) ) { // No error was found, but data is missing from response     
+                    continue;
+                }
+
+                $response_data = $response_data + $response->data;
+                foreach ($response->data as $key => $posting) {
+                    if ( !isset($posting->from->id) ) {
+                        continue;
                     }
-                } else {
-                    // Token was not valid for accessing this group
+
+                    $driver = $this->user->retrieve_by_fb( $posting->from->id );
+                    
+                    if ( !$driver ) { // Check to see if this is a wheelzo user
+                        continue;
+                    }
+
+                    if ( !isset($posting->id) ) {
+                        continue;
+                    }
+
+                    if ( $this->facebook_ride->retrieve_by_fb($posting->id) ) { // Check to see if this posting has been made before
+                        continue;
+                    }
+
+                    $url = "http://ec2-54-148-33-40.us-west-2.compute.amazonaws.com:3000/nlpApi";
+                    $type = "POST";
+                    $params = (object) array(
+                        "message"   => $posting->message,
+                        "timestamp" => $posting->updated_time
+                    );
+
+                    $processed_ride = json_decode( rest_curl($url, $type, $params) );
+                    
+                    $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
+                    if ( $posting->activeRides ) {
+                        foreach ($posting->activeRides as $key => $active_ride) { // for javascript
+                            $posting->activeRides[$key]->start = strtotime($active_ride->start); 
+                        }
+                    }
+                
+                    if ( !isset($processed_ride) ) { // NLP did not return a valid ride. Not too sure what happened there. Send posting to front for judging
+                        $postings[] = $posting; 
+                        continue;
+                    }
+
+                    if ( !$this->_validate_processedRide_exists($processed_ride) ) { // This must be a passenger posting
+                        continue;
+                    }
+                    
+                    if ( $processed_ride->origin || $processed_ride->destination || $processed_ride->departure || $processed_ride->capacity || $processed_ride->price ) {
+                        $posting->processedRide = $processed_ride;
+                        $postings[] = $posting;
+                        continue;
+                    }
                 }
             } catch (Exception $e) {
                 http_response_code("400");
                 header('Content-Type: application/json');
-                echo $this->_message("Could not reach Facebook API");
+                echo $this->message("Could not reach Facebook API");
                 return;
             }
         }
         
-        if ( count($postings) != 0 ) {
-            // We have work to do
+        if ( count($postings) != 0 ) { // We have work to do
             http_response_code("200");
             header('Content-Type: application/json');
             echo json_encode($postings);
@@ -131,7 +117,7 @@ class Facebook_import extends API_Controller {
         if ( count($response_data) == 0 ) {
             http_response_code("404");
             header('Content-Type: application/json');
-            echo $this->_message("Check facebook token");
+            echo $this->message("Check facebook token");
             return;
         }
 
@@ -145,7 +131,7 @@ class Facebook_import extends API_Controller {
         }
         http_response_code("200");
         header('Content-Type: application/json');
-        echo $this->_message($good_work_message);
+        echo $this->message($good_work_message);
         return;    
     }
 
@@ -154,7 +140,7 @@ class Facebook_import extends API_Controller {
         if ( !$this->_validate_posting($posting) ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Invalid posting specified");  
+            echo $this->message("Invalid posting specified");  
             return;
         }
 
@@ -166,17 +152,17 @@ class Facebook_import extends API_Controller {
             ) 
         );
 
-        if ( $mapping_id ) {
-            http_response_code("200");
-            header('Content-Type: application/json');
-            echo $this->_message("Ride posting has been forgotten");  
-            return;
-        } else {
+        if ( !$mapping_id ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Ride posting could not be forgotten");  
+            echo $this->message("Ride posting could not be forgotten");  
             return;
-        }
+        }    
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo $this->message("Ride posting has been forgotten");  
+        return;    
     }
 
     public function import_ride_post() {
@@ -184,7 +170,7 @@ class Facebook_import extends API_Controller {
         if ( !$this->_validate_posting($posting) ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Invalid posting specified");  
+            echo $this->message("Invalid posting specified");  
             return;
         }   
 
@@ -192,14 +178,14 @@ class Facebook_import extends API_Controller {
         if ( !$this->_validate_processedRide($posting->processedRide) ) {   
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Invalid parameters specified in posting");  
+            echo $this->message("Invalid parameters specified in posting");  
             return;
         }    
 
         if ( $this->facebook_ride->retrieve_by_fb($posting->id) ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Ride posting has been imported/forgotten before");  
+            echo $this->message("Ride posting has been imported/forgotten before");  
             return;
         }
 
@@ -207,7 +193,7 @@ class Facebook_import extends API_Controller {
         if ( !$driver ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Driver is not a registered user");
+            echo $this->message("Driver is not a registered user");
             return;
         }
 
@@ -226,7 +212,7 @@ class Facebook_import extends API_Controller {
         if ( !$ride_id ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->_message("Ride could not be created");
+            echo $this->message("Ride could not be created");
             return;
         }
 
@@ -251,12 +237,12 @@ class Facebook_import extends API_Controller {
         if ( !$to_notify ) {
             http_response_code("200");
             header('Content-Type: application/json');
-            echo $this->_message("Ride posting has been imported, but driver has been notified before.");  
+            echo $this->message("Ride posting has been imported, but driver has been notified before.");  
             return;
         }
 
         $fb_response = false;
-        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
             try {
                 $fb_response = $this->facebook->api(
                     '/' . $driver->facebook_id . '/notifications', 
@@ -275,13 +261,13 @@ class Facebook_import extends API_Controller {
         if ( !$fb_response ) {
             http_response_code("200");
             header('Content-Type: application/json');
-            echo $this->_message("Ride posting has been imported, but driver could not be notified.");  
+            echo $this->message("Ride posting has been imported, but driver could not be notified.");  
             return;
         }  
 
         http_response_code("200");
         header('Content-Type: application/json');
-        echo $this->_message("Ride posting has been imported. Driver has been notified.");  
+        echo $this->message("Ride posting has been imported. Driver has been notified.");  
         return;
     }
 
@@ -329,13 +315,5 @@ class Facebook_import extends API_Controller {
             }
         }
         return false;
-    }
-
-    private function _message( $message = "" ) {
-        return json_encode(
-            array(
-                "message" => $message
-            )
-        );
     }
 }

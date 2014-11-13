@@ -64,7 +64,7 @@ class Rides extends API_Controller {
 
                         if ( $to_notify ) {
                             $fb_response = false;
-                            if ( ENVIRONMENT == 'production' || in_array($passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            if ( ENVIRONMENT == 'production' || in_array($passenger->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                                 try {
                                     $fb_response = $this->facebook->api(
                                         '/' . $passenger->facebook_id . '/notifications', 
@@ -160,7 +160,7 @@ class Rides extends API_Controller {
                         
                         if ( $to_notify ) {        
                             $fb_response_to_old = false;
-                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                                 try {
                                     $fb_response_to_old = $this->facebook->api(
                                         '/' . $old_passenger->facebook_id . '/notifications', 
