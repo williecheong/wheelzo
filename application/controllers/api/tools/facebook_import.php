@@ -1,7 +1,7 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/API_Controller.php');
 
-class Tools extends API_Controller {
+class Facebook_import extends API_Controller {
     
     function __construct() {
         parent::__construct();

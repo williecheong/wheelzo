@@ -4,6 +4,39 @@ class Tools extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        // Facebook login referenced from:
+        //  http://phpguidance.wordpress.com/2013/09/27/facebook-login-with-codeignator/comment-page-1/
+        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
+        $this->load->library('Facebook', 
+            array(
+                "appId" => FB_APPID, 
+                "secret" => FB_SECRET
+            )
+        );
+
+        $headers = apache_request_headers();
+        if ( isset($headers["FB_WHEELZO_TOKEN"]) ) {
+            $this->facebook->setAccessToken($headers["FB_WHEELZO_TOKEN"]);
+        } 
+        
+        try {
+            // This will verify that the token is not broken
+            $this->facebook->getUser(); 
+            $this->facebook->api('/me');
+            
+            // Registers the facebook user if not already done.
+            // Always returns the local user ID of this person from our database.
+            $user = $this->user->try_register( 
+                $this->facebook->getUser() 
+            );
+
+            $this->wheelzo_facebook_id = $user->facebook_id;
+            $this->wheelzo_user_id = $user->id;
+        } catch ( Exception $e ) {
+            $this->wheelzo_facebook_id = false;
+            $this->wheelzo_user_id = false;
+        }
+
         if ( !in_array($this->wheelzo_facebook_id, unserialize(WHEELZO_ADMINS)) ) {
             redirect( base_url() );
         }
