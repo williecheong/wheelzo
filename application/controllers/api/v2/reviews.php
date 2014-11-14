@@ -56,6 +56,14 @@ class Reviews extends API_Controller {
             return;
         }
 
+        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+        if ( !$receiver ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Invalid receiver ID");
+            return;
+        }
+
         $review_id = $this->review->create(
             array(
                 'giver_id' => $this->wheelzo_user_id,
@@ -65,7 +73,6 @@ class Reviews extends API_Controller {
         );
 
         // Facebook notify for review received
-        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
         $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
         $notification_type = $giver->id . NOTIFY_REVIEWED; 

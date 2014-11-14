@@ -48,6 +48,14 @@ class Points extends API_Controller {
             return;
         }
 
+        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
+        if ( !$receiver ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Invalid receiver ID");
+            return;
+        }        
+        
         $point_id = $this->point->create(
             array(
                 'giver_id' => $this->wheelzo_user_id,
@@ -59,7 +67,6 @@ class Points extends API_Controller {
         $this->user->update_rating( $point_id );
 
         // Facebook notify for point received
-        $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
         $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
         $notification_type = $giver->id . NOTIFY_VOUCHED; 
