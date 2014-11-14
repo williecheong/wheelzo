@@ -16,10 +16,8 @@ class API_Controller extends REST_Controller {
         );
 
         $headers = apache_request_headers();
-        var_dump($headers);
-        die();
-        if ( isset($headers["FB_WHEELZO_TOKEN"]) ) {
-            $this->facebook->setAccessToken($headers["FB_WHEELZO_TOKEN"]);
+        if ( isset($headers["Fb-Wheelzo-Token"]) ) {
+            $this->facebook->setAccessToken($headers["Fb-Wheelzo-Token"]);
         } 
         
         try {
