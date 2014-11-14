@@ -56,8 +56,9 @@ class Rides extends API_Controller {
             return;
         }
 
-        $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
-        $departure_time = isset($data['departureTime']) ? $data['departureTime'] : '';
+        // if unspecified, break with invalid string
+        $departure_date = isset($data['departureDate']) ? $data['departureDate'] : 'null';
+        $departure_time = isset($data['departureTime']) ? $data['departureTime'] : 'null';
         $start = strtotime( $departure_date . ' ' . $departure_time );
 
         if ( $start ) {
