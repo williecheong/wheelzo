@@ -14,7 +14,7 @@ class ride extends CI_Model{
     }
 
     function retrieve_active( $build_id_mapping = true ) {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->wheelzo_user_id;
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
         $conditions = "`start`>'".$current."'";
         $rides = $this->ride->retrieve( $conditions );
@@ -69,7 +69,7 @@ class ride extends CI_Model{
     }
 
     function retrieve_personal( $build_id_mapping = true ) {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->wheelzo_user_id;
         if ( $user_id ) {
             $conditions = '`driver_id` = '.$user_id;
 

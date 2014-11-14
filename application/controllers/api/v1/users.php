@@ -1,18 +1,11 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Users extends REST_Controller {
+class Users extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_get() {

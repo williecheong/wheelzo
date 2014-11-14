@@ -7,6 +7,13 @@ class Users extends API_Controller {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
     }
+    
+    public function ping_get() {
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo $this->message("OK");
+        return;
+    }
 
     public function index_get() {
         $users = $this->user->retrieve();

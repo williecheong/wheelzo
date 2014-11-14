@@ -14,24 +14,30 @@ class Main extends CI_Controller {
             )
         );
         
-        $this->facebook_url = '';    
-        $this->facebook_user = $this->facebook->getUser();
-        
-        if ( $this->facebook_user ) {
+        try {
+            // This will verify that the token is not broken
+            $this->facebook->getUser(); 
+            $this->facebook->api('/me');
+            
             // Registers the facebook user if not already done.
             // Always returns the local user ID of this person from our database.
-            $user = $this->user->try_register( $this->facebook_user );
-            
-            $this->session->set_userdata('user_id', $user->id);
-            $this->session->set_userdata('facebook_id', $user->facebook_id);
+            $user = $this->user->try_register( 
+                $this->facebook->getUser() 
+            );
+
+            $this->wheelzo_facebook_id = $user->facebook_id;
+            $this->wheelzo_user_id = $user->id;
             
             $this->facebook_url = $this->facebook->getLogouturl(
                 array(
-                    "next" => base_url() . 'api/logout'
+                    "next" => base_url() . 'logout'
                 )
             );
         
-        } else {
+        } catch ( Exception $e ) {
+            $this->wheelzo_facebook_id = false;
+            $this->wheelzo_user_id = false;
+
             $this->facebook_url = $this->facebook->getLoginUrl(
                 array(
                     "scope" => "email,manage_notifications",
@@ -42,9 +48,9 @@ class Main extends CI_Controller {
     }
     
 	public function index( $load_personal = false ) {
-        // Is session available when user is requesting the personal page?
+        // Is active user id available when user is requesting the personal page?
         if ( $load_personal ) {
-            if ( !$this->session->userdata('user_id') ) {
+            if ( !$this->wheelzo_user_id ) {
                 redirect( base_url() );
             }
         }
@@ -73,7 +79,7 @@ class Main extends CI_Controller {
             
             $my_rrequests = $this->rrequest->retrieve(
                 array(
-                    'user_id' => $this->session->userdata('user_id')
+                    'user_id' => $this->wheelzo_user_id
                 )
             );
             
@@ -100,7 +106,7 @@ class Main extends CI_Controller {
             array(
                 'users' => $temp_users,
                 'rides' => $rides,
-                'session' => $this->session->userdata('user_id'),
+                'session' => $this->wheelzo_user_id,
                 'session_url' => $this->facebook_url,
                 'my_rrequests' => $my_rrequests,
                 'rrequests' => $this->rrequest->retrieve_active(),

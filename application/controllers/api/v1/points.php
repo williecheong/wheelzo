@@ -1,35 +1,28 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Points extends REST_Controller {
+class Points extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('point');
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     // Used to create a new group in the DB
     public function index_post() {
         $data = clean_input( $this->post() );
         
-        if ( $this->session->userdata('user_id') ) {
+        if ( $this->wheelzo_user_id ) {
             
             if ( isset($data['receiver_id']) ){
                 
-                if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
+                if ( $this->wheelzo_user_id != $data['receiver_id'] ) {
                     
-                    if ( !$this->given_today($this->session->userdata('user_id'), $data['receiver_id']) ) {
+                    if ( !$this->given_today($this->wheelzo_user_id, $data['receiver_id']) ) {
                         $point_id = $this->point->create(
                             array(
-                                'giver_id' => $this->session->userdata('user_id'),
+                                'giver_id' => $this->wheelzo_user_id,
                                 'receiver_id' => $data['receiver_id'],
                                 'last_updated' => date( 'Y-m-d H:i:s' )
                             )
@@ -39,14 +32,14 @@ class Points extends REST_Controller {
 
                         // Facebook notify for point received
                         $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
-                        $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+                        $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
                         $notification_type = $giver->id . NOTIFY_VOUCHED; 
                         $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
 
                         if ( $to_notify ) {
                             $fb_response = false;
-                            if ( ENVIRONMENT == 'production' || in_array($receiver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            if ( ENVIRONMENT == 'production' || in_array($receiver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                                 try {
                                     $fb_response = $this->facebook->api(
                                         '/' . $receiver->facebook_id . '/notifications', 

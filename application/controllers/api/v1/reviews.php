@@ -1,19 +1,12 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Reviews extends REST_Controller {
+class Reviews extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
         $this->load->model('review');
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_get() {
@@ -34,14 +27,14 @@ class Reviews extends REST_Controller {
     public function index_post() {
         $data = clean_input( $this->post() );
         
-        if ( $this->session->userdata('user_id') ) {
+        if ( $this->wheelzo_user_id ) {
             
             if ( isset($data['receiver_id']) && isset($data['review']) ){
                 
-                if ( $this->session->userdata('user_id') != $data['receiver_id'] ) {
+                if ( $this->wheelzo_user_id != $data['receiver_id'] ) {
                     $review_id = $this->review->create(
                         array(
-                            'giver_id' => $this->session->userdata('user_id'),
+                            'giver_id' => $this->wheelzo_user_id,
                             'receiver_id' => $data['receiver_id'],
                             'review' => $data['review']
                         )
@@ -49,14 +42,14 @@ class Reviews extends REST_Controller {
 
                     // Facebook notify for review received
                     $receiver = $this->user->retrieve_by_id( $data['receiver_id'] );
-                    $giver = $this->user->retrieve_by_id( $this->session->userdata['user_id'] );
+                    $giver = $this->user->retrieve_by_id( $this->wheelzo_user_id );
 
                     $notification_type = $giver->id . NOTIFY_REVIEWED; 
                     $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
 
                     if ( $to_notify ) {
                         $fb_response = false;
-                        if ( ENVIRONMENT == 'production' || in_array($receiver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                        if ( ENVIRONMENT == 'production' || in_array($receiver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                             try {
                                 $fb_response = $this->facebook->api(
                                     '/' . $receiver->facebook_id . '/notifications', 
@@ -127,8 +120,8 @@ class Reviews extends REST_Controller {
     }
 
     public function index_delete( $review_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $reviewer_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $reviewer_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_reviewer( $review_id, $reviewer_id) ) {
                 $this->review->delete(

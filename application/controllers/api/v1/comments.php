@@ -1,22 +1,15 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Comments extends REST_Controller {
+class Comments extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
             $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
@@ -27,7 +20,7 @@ class Comments extends REST_Controller {
             if ( $ride ) {
                 $comment_id = $this->comment->create(  
                     array(  
-                        'user_id' => $this->session->userdata('user_id'),
+                        'user_id' => $this->wheelzo_user_id,
                         'ride_id' => $ride_id,
                         'comment' => $comment,
                         'last_updated' => date( 'Y-m-d H:i:s' )
@@ -45,7 +38,7 @@ class Comments extends REST_Controller {
 
                     if ( $to_notify ) {
                         $fb_response = false;
-                        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                        if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                             try {
                                 $fb_response = $this->facebook->api(
                                     '/' . $driver->facebook_id . '/notifications', 

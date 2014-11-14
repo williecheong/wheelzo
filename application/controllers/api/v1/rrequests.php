@@ -1,22 +1,15 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Rrequests extends REST_Controller {
+class Rrequests extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
             $origin = isset($data['origin']) ? $data['origin'] : '';
@@ -29,7 +22,7 @@ class Rrequests extends REST_Controller {
 
             $rrequest_id = $this->rrequest->create(  
                 array(  
-                    'user_id' => $this->session->userdata('user_id'),
+                    'user_id' => $this->wheelzo_user_id,
                     'origin' => $origin,
                     'destination' => $destination,
                     'start' => $start  
@@ -58,8 +51,8 @@ class Rrequests extends REST_Controller {
     }
 
     public function index_delete( $rrequest_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $user_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $user_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_user( $rrequest_id, $user_id) ) {
                 $this->rrequest->delete(

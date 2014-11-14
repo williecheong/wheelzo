@@ -20,8 +20,20 @@ define('NOTIFY_VOUCHED',        'V');
 define('NOTIFY_REVIEWED',       'W');
 define('NOTIFY_IMPORT',         'P');
 
-// Admins include Willie, Max, Dennis, Terry
-define('WHEELZO_ADMINS',        serialize(array('616512487', '100001375166320', '592441839', '1612834909')));
+// ROOT: Willie, Max, Dennis
+$GLOBALS['WHEELZO_ROOT'] = array('616512487', '100001375166320', '592441839');
+
+// TECH: ROOT, Terry, Jathusan
+$GLOBALS['WHEELZO_TECH'] = array_merge( 
+                                $GLOBALS['WHEELZO_ROOT'],  
+                                array('1612834909', '1288730489')
+                            );
+
+// BDEV: ROOT
+$GLOBALS['WHEELZO_BDEV'] = array_merge(
+                                $GLOBALS['WHEELZO_ROOT'],
+                                array()
+                            );
 
 /*
 |--------------------------------------------------------------------------

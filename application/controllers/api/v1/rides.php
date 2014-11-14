@@ -1,19 +1,13 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require(APPPATH.'/libraries/REST_Controller.php');
+require(APPPATH.'/libraries/API_Controller.php');
 
-class Rides extends REST_Controller {
+class Rides extends API_Controller {
     
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        parse_str($_SERVER['QUERY_STRING'],$_REQUEST);
-        $this->load->library('Facebook', 
-            array(
-                "appId" => FB_APPID, 
-                "secret" => FB_SECRET
-            )
-        );
     }
+
 
     public function index_get() {
         $rides = $this->ride->retrieve_active();
@@ -28,10 +22,10 @@ class Rides extends REST_Controller {
     }    
 
     public function index_post() {
-        if ( $this->session->userdata('user_id') ) {            
+        if ( $this->wheelzo_user_id ) {            
             $data = clean_input( $this->post() );
 
-            $driver_id = $this->session->userdata('user_id');
+            $driver_id = $this->wheelzo_user_id;
             $origin = isset($data['origin']) ? $data['origin'] : '';
             $destination = isset($data['destination']) ? $data['destination'] : '';
             $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
@@ -70,7 +64,7 @@ class Rides extends REST_Controller {
 
                         if ( $to_notify ) {
                             $fb_response = false;
-                            if ( ENVIRONMENT == 'production' || in_array($passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            if ( ENVIRONMENT == 'production' || in_array($passenger->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                                 try {
                                     $fb_response = $this->facebook->api(
                                         '/' . $passenger->facebook_id . '/notifications', 
@@ -124,8 +118,8 @@ class Rides extends REST_Controller {
     }
 
     public function index_delete( $ride_id = '' ) {
-        if ( $this->session->userdata('user_id') ) {            
-            $driver_id = $this->session->userdata('user_id');
+        if ( $this->wheelzo_user_id ) {            
+            $driver_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_driver( $ride_id, $driver_id) ) {
                 // Handle the deleting of all comments
@@ -166,7 +160,7 @@ class Rides extends REST_Controller {
                         
                         if ( $to_notify ) {        
                             $fb_response_to_old = false;
-                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, unserialize(WHEELZO_ADMINS)) ) {
+                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
                                 try {
                                     $fb_response_to_old = $this->facebook->api(
                                         '/' . $old_passenger->facebook_id . '/notifications', 

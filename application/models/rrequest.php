@@ -37,7 +37,7 @@ class rrequest extends CI_Model{
     }
 
     function retrieve_active() {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->wheelzo_user_id;
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
         $conditions = "`start`>'".$current."'";
         $rrequests = $this->rrequest->retrieve( $conditions );
@@ -52,7 +52,7 @@ class rrequest extends CI_Model{
     }
 
     function retrieve_personal() {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->wheelzo_user_id;
         if ( $user_id ) {
             $rrequests = $this->rrequest->retrieve(
                 array(

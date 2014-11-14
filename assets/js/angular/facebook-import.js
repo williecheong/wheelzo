@@ -13,7 +13,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
         $scope.loading = true;
         $http({
             'method': 'GET',
-            'url': '/api/tools/fetch_messages?token=' + accessToken
+            'url': '/api/tools/facebook_import/fetch_messages?token=' + accessToken
         }).success(function(data, status, headers, config) {
             if ( data.message ) {
                 toaster.pop('success', 'Success: ' + status, data.message);
@@ -34,7 +34,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
         $scope.loading = true;
         $http({
             'method': 'POST',
-            'url': '/api/tools/forget_ride',
+            'url': '/api/tools/facebook_import/forget_ride',
             'data': {
                 'posting': posting
             }
@@ -53,7 +53,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
         $scope.loading = true;
         $http({
             'method': 'POST',
-            'url': '/api/tools/import_ride',
+            'url': '/api/tools/facebook_import/import_ride',
             'data': {
                 'posting': posting
             }
