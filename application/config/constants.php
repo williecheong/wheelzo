@@ -24,10 +24,16 @@ define('NOTIFY_IMPORT',         'P');
 $GLOBALS['WHEELZO_ROOT'] = array('616512487', '100001375166320', '592441839');
 
 // TECH: ROOT, Terry, Jathusan
-$GLOBALS['WHEELZO_TECH'] = $GLOBALS['WHEELZO_ROOT'] + array('1612834909', '1288730489');
+$GLOBALS['WHEELZO_TECH'] = array_merge( 
+                                $GLOBALS['WHEELZO_ROOT'],  
+                                array('1612834909', '1288730489')
+                            );
 
 // BDEV: ROOT
-$GLOBALS['WHEELZO_BDEV'] = $GLOBALS['WHEELZO_ROOT'] + array();
+$GLOBALS['WHEELZO_BDEV'] = array_merge(
+                                $GLOBALS['WHEELZO_ROOT'],
+                                array()
+                            );
 
 /*
 |--------------------------------------------------------------------------
