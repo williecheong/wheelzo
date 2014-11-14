@@ -25,6 +25,21 @@ wheelzo
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with ride details
     - Creates a ride using the specified details
+    - Specify params as such:
+```json
+{   
+    "origin" : "Waterloo", 
+    "destination" : "Toronto",
+    "departureDate" : "2014-09-23",
+    "departureTime" : "00:00:00",
+    "capacity" : "2",
+    "price" : "10",
+    "dropOffs" : [
+        "Milton",
+        "Mississauga"
+    ]
+}
+```
     
 - DELETE /rides/index/{{ ride_id }}
     - Must be logged in to use this endpoint
@@ -37,7 +52,7 @@ wheelzo
     - Specify params as such:
 ```json
 {   
-    "comment" : "hello", 
+    "comment" : "Can I have a ride please?", 
     "rideID" : "522" 
 }
 ```
@@ -46,6 +61,15 @@ wheelzo
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with ride request details
     - Creates a ride request using the specified details
+    - Specify params as such:
+```json
+{   
+    "origin" : "Waterloo", 
+    "destination" : "Toronto",
+    "departureDate" : "2014-09-23",
+    "departureTime" : "00:00:00"
+}
+```
 
 - DELETE /rrequests/index/{{ rrequest_id }}
     - Must be logged in to use this endpoint
@@ -55,6 +79,12 @@ wheelzo
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with a `receiver_id`
     - Gifts the specified receiving user with a street cred
+    - Specify params as such:
+```json
+{   
+    "receiver_id" : "123"
+}
+```
 
 - GET /reviews?receiver_id={{ user_id }}
     - Returns an array of review objects for a specified user
@@ -64,6 +94,13 @@ wheelzo
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with a `receiver_id` and `review`
     - Creates a review for the receiving user from the logged in user
+    - Specify params as such:
+```json
+{   
+    "receiver_id" : "123",
+    "review" : "This driver is awesome!"
+}
+```
 
 - DELETE /reviews/index/{{ review_id }}
     - Must be logged in to use this endpoint
@@ -74,12 +111,26 @@ wheelzo
     - Accepts a JSON post parameter with a `rideID` and `passengerID`
     - Assigns the specified passenger to the specified ride
     - Can only be executed by the driver for the ride
+    - Specify params as such:
+```json
+{   
+    "rideID" : "522",
+    "passengerID" : "123"
+}
+```
 
 - PUT /user_rides
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with a `user-rideID` and `passengerID`
     - Re-assigns the specified user-ride assignment to the specified passenger
     - Can only be executed by the driver for the ride
+    - Specify params as such:
+```json
+{   
+    "user-rideID" : "333",
+    "passengerID" : "123"
+}
+```
 
 - DELETE /user_rides/index/{{ user_ride_id }}
     - Must be logged in to use this endpoint
@@ -88,3 +139,10 @@ wheelzo
 - POST /feedbacks
     - Creates a feedback message in the database
     - Accepts a JSON post parameter with `message` and `email`
+    - Specify params as such:
+```json
+{   
+    "email" : "example@gmail.com",      // optional
+    "message" : "I love wheelzo! It makes me happy..." 
+}
+```
