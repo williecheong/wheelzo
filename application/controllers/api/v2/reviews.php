@@ -71,7 +71,7 @@ class Reviews extends API_Controller {
         $notification_type = $giver->id . NOTIFY_REVIEWED; 
         $to_notify = $this->user->to_notify( $receiver->id, $notification_type );
 
-        if ( $to_notify ) {
+        if ( !$to_notify ) {
             http_response_code("200");
             header('Content-Type: application/json');
             echo $this->message("Review successfully posted. Receiver already notified on Facebook.");
