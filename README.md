@@ -35,9 +35,12 @@ wheelzo
     - Accepts a JSON post parameter with comment details
     - Creates a `comment` for the specified `rideID`
     - Specify params as such:
-```json
-{ "comment" : "hello", "rideID" : "522" }
-```
+        ```json
+        {   
+            "comment" : "hello", 
+            "rideID" : "522" 
+        }
+        ```
 
 
 - POST /rrequests
