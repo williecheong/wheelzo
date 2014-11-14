@@ -48,13 +48,36 @@ class Rides extends API_Controller {
         $driver_id = $this->wheelzo_user_id;
         $origin = isset($data['origin']) ? $data['origin'] : '';
         $destination = isset($data['destination']) ? $data['destination'] : '';
+
+        if ( $origin == '' || $destination == '' ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Origin and destination cannot be empty");
+            return;
+        }
+
         $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
         $departure_time = isset($data['departureTime']) ? $data['departureTime'] : '';
+        $start = strtotime( $departure_date . ' ' . $departure_time );
+
+        if ( $start ) {
+            $start = date('Y-m-d H:i:s', $start);
+        } else {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Unable to recognize date time format");
+            return;
+        }
+
         $capacity = isset($data['capacity']) ? $data['capacity'] : '1';
         $price = isset($data['price']) ? $data['price'] : '0';
 
-        $start = strtotime( $departure_date . ' ' . $departure_time );
-        $start = date('Y-m-d H:i:s', $start);
+        if ( !ctype_digit($capacity) || !ctype_digit($price) ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Price and capacity must be numeric");
+            return;
+        }
 
         $drop_offs = isset($data['dropOffs']) ? implode(WHEELZO_DELIMITER, $data['dropOffs']) : '';
 
