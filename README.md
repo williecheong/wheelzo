@@ -26,7 +26,7 @@ wheelzo
     - This is of course, an array of either zero or one object
 
 - GET /rides
-    - Returns an array of active rides
+    - Returns an array of active rides (departure > 12am today)
     - Each ride contains ride details, `comments`, `passengers`
     
 - GET /rides/me
