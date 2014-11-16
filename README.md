@@ -13,8 +13,8 @@ wheelzo
     - Returns an array of all users
     - Each user contains `name`, `facebook_id`, `score`
 
-- GET /users/current
-    - Returns an array of users that is logged in
+- GET /users/me
+    - Returns an array of users that are currently logged in
     - This is of course, an array of either zero or one object
 
 - GET /users?id={{ user_id }}

@@ -17,7 +17,7 @@ $route['404_override'] = 'lost';
 $route['me'] = "main/index/true";
 $route['api/v1/rides/me'] = "api/v1/rides/index/true";
 $route['api/v2/rides/me'] = "api/v2/rides/index/true";
-$route['api/v2/users/current'] = "api/v2/users/index/true";
+$route['api/v2/users/me'] = "api/v2/users/index/true";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
