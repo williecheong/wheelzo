@@ -21,7 +21,7 @@ wheelzo
     - Returns an array of users that have the specified user id
     - This is of course, an array of either zero or one object
 
-- GET /users?facebook_id={{ user_facebook_id }}
+- GET /users?facebook_id={{ facebook_id }}
     - Returns an array of users that have the specified facebook id
     - This is of course, an array of either zero or one object
 
