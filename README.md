@@ -27,8 +27,10 @@ wheelzo
 
 - GET /rides
     - Returns an array of active rides (departure > 12am today)
-    - Each ride contains ride details, `comments`, `passengers`
-    
+    - Each object contains the details of the corresponding ride
+    - Comments may be retrieved seperately using the ride_id
+    - The same goes for passenger assignments (user_rides)
+
 - GET /rides/me
     - Returns an array of personal rides
     - Each ride contains ride details, `comments`, `passengers`
@@ -57,6 +59,10 @@ wheelzo
     - Must be logged in to use this endpoint
     - Deletes the ride associated with specified ride id
     
+- GET /comments?ride_id={{ ride_id }}
+    - Returns an array of comments for the specified ride id
+    - The returned array is already sorted in earliest comment first
+
 - POST /comments
     - Must be logged in to use this endpoint
     - Accepts a JSON post parameter with comment details
@@ -117,6 +123,9 @@ wheelzo
 - DELETE /reviews/index/{{ review_id }}
     - Must be logged in to use this endpoint
     - Deletes the review associated with specified review id
+
+- GET /user_rides?ride_id={{ ride_id }}
+    - Returns an array of passenger assignments for the specified ride id
 
 - POST /user_rides
     - Must be logged in to use this endpoint

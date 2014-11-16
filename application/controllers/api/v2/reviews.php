@@ -17,13 +17,16 @@ class Reviews extends API_Controller {
     }
 
     public function index_get() {
-        $receiver_id = $this->input->get('receiver_id');
+        $receiver_id = $this->get('receiver_id');
 
-        $reviews = $this->review->retrieve(
-            array(
-                'receiver_id' => $receiver_id
-            )
-        );
+        $reviews = array();
+        if ( $receiver_id ) {
+            $reviews = $this->review->retrieve(
+                array(
+                    'receiver_id' => $receiver_id
+                )
+            );
+        }
 
         http_response_code("200");
         header('Content-Type: application/json');

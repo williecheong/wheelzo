@@ -57,10 +57,27 @@ class Main extends CI_Controller {
 
         // Use user ID as the index key
         $rides = array();
+        $mapped_rides = array();
         if ( $load_personal ) {
             $rides = $this->ride->retrieve_personal();
         } else {
             $rides = $this->ride->retrieve_active();
+        }
+
+        foreach( $rides as $key => $ride ) {
+            $rides[$key]->comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+
+            $rides[$key]->passengers = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+
+            $mapped_rides[$ride->id] = $rides[$key];
         }
 
         $temp_users = array();
@@ -105,7 +122,7 @@ class Main extends CI_Controller {
         $this->blade->render($view, 
             array(
                 'users' => $temp_users,
-                'rides' => $rides,
+                'rides' => $mapped_rides,
                 'session' => $this->wheelzo_user_id,
                 'session_url' => $this->facebook_url,
                 'my_rrequests' => $my_rrequests,

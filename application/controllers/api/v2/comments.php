@@ -15,6 +15,23 @@ class Comments extends API_Controller {
         return;
     }
 
+    public function index_get() {
+        $comments = array();
+        
+        if ( $this->get('ride_id') ) {
+            $comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $this->get('ride_id')
+                )
+            );
+        } 
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($comments);
+        return;
+    }
+
     public function index_post() {
         if ( !$this->wheelzo_user_id ) {
             http_response_code("400");
