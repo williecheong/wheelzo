@@ -12,7 +12,19 @@ wheelzo
 - GET /users
     - Returns an array of all users
     - Each user contains `name`, `facebook_id`, `score`
-    
+
+- GET /users/current
+    - Returns an array of users that is logged in
+    - This is of course, an array of either zero or one object
+
+- GET /users?id={{ user_id }}
+    - Returns an array of users that have the specified user id
+    - This is of course, an array of either zero or one object
+
+- GET /users?facebook_id={{ user_facebook_id }}
+    - Returns an array of users that have the specified facebook id
+    - This is of course, an array of either zero or one object
+
 - GET /rides
     - Returns an array of active rides
     - Each ride contains ride details, `comments`, `passengers`

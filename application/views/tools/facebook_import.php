@@ -168,6 +168,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
         <script src="/assets/vendor/ng-quick-date/ng-quick-date.min.js"></script>
         <script src="/assets/vendor/ng-toaster/toaster.js"></script>
+        <script src="/assets/js/constants.js"></script>
         <script src="/assets/js/angular/facebook-import.js"></script>
     </body>
 </html>
