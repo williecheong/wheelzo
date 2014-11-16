@@ -27,8 +27,8 @@ wheelzo
 
 - GET /rides
     - Returns an array of active rides (departure > 12am today)
-    - Each object contains the details of the corresponding ride
-    - Comments may be retrieved seperately using the ride_id
+    - Each ride object contains the details of the corresponding ride
+    - Comments must now be retrieved seperately using the ride_id
     - The same goes for passenger assignments (user_rides)
 
 - GET /rides/me
