@@ -84,9 +84,18 @@ app.config(function(ngQuickDateDefaultsProvider) {
         }
     };
 
-}).filter('dateToISO', function() {
+}).filter('mysqlToISO', function() {
   return function(input) {
-    return new Date(input).toISOString();
+    var date = new Date();  
+    var parts = String(input).split(/[- :]/);  
+    date.setFullYear(parts[0]);  
+    date.setMonth(parts[1] - 1);  
+    date.setDate(parts[2]);  
+    date.setHours(parts[3]);  
+    date.setMinutes(parts[4]);  
+    date.setSeconds(parts[5]);  
+    date.setMilliseconds(0);      
+    return date.toISOString();  
   };
 }).filter('badDateToISO', function() {
   return function(badTime) {

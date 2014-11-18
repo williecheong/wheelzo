@@ -127,7 +127,7 @@
                             <tr ng-repeat="ride in posting.activeRides">
                                 <td ng-bind="ride.origin"></td>
                                 <td ng-bind="ride.destination"></td>
-                                <td ng-bind="ride.start*1000 | date:'MMM-dd, EEEE @ h:mma'"></td>
+                                <td ng-bind="ride.start | mysqlToISO | date:'MMM-dd, EEEE @ h:mma'"></td>
                                 <td>
                                     ${{ ride.price }}
                                 </td>

@@ -78,12 +78,7 @@ class Facebook_import extends API_Controller {
                     $processed_ride = json_decode( rest_curl($url, $type, $params) );
                     
                     $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
-                    if ( $posting->activeRides ) {
-                        foreach ($posting->activeRides as $key => $active_ride) { // for javascript
-                            $posting->activeRides[$key]->start = strtotime($active_ride->start); 
-                        }
-                    }
-                
+                    
                     if ( !isset($processed_ride) ) { // NLP did not return a valid ride. Not too sure what happened there. Send posting to front for judging
                         $postings[] = $posting; 
                         continue;
