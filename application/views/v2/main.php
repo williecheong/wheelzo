@@ -12,7 +12,10 @@
         <link rel="image_src"  href="/assets/img/logo.png">
         <meta name="viewport" content="width=device-width">
         
-        <title>Wheelzo<?= ( ENVIRONMENT != 'production' ) ? " :: " . ucfirst(ENVIRONMENT) : "" ; ?></title>
+        <title>
+            Wheelzo
+            <?= ( ENVIRONMENT != 'production' ) ? " :: " . ucfirst(ENVIRONMENT) : "" ; ?>
+        </title>
         <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
         
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
