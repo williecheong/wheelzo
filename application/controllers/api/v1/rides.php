@@ -8,18 +8,34 @@ class Rides extends API_Controller {
         // Autoloaded Config, Helpers, Models
     }
 
+    public function index_get( $load_personal = false ) {
+        $rides = array();
+        if ( $load_personal ) {
+            $rides = $this->ride->retrieve_personal();
+        } else {
+            $rides = $this->ride->retrieve_active();
+        }
 
-    public function index_get() {
-        $rides = $this->ride->retrieve_active();
-        echo json_encode($rides);
-        return;
-    }
+        $mapped_rides = array();
+        foreach( $rides as $key => $ride ) {
+            $rides[$key]->comments = $this->comment->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
 
-    public function me_get() {
-        $rides = $this->ride->retrieve_personal();
-        echo json_encode($rides);
+            $rides[$key]->passengers = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $ride->id 
+                )
+            );
+
+            $mapped_rides[$ride->id] = $rides[$key];
+        }
+
+        echo json_encode($mapped_rides);
         return;
-    }    
+    }  
 
     public function index_post() {
         if ( $this->wheelzo_user_id ) {            

@@ -15,16 +15,42 @@ class Users extends API_Controller {
         return;
     }
 
-    public function index_get() {
-        $users = $this->user->retrieve();
+    public function index_get( $current = false ) {
+        $users = array();
+        if ( $current ) { // request is coming in from a route
+            if ( $this->wheelzo_user_id ) {
+                $users = array(
+                    $this->user->retrieve_by_id( 
+                        $this->wheelzo_user_id 
+                    )
+                );
+            }
+        } else if ( $this->get('id') ) { // an id was specified
+            $users = array(
+                $this->user->retrieve_by_id( 
+                    $this->get('id') 
+                )
+            );
+        } else if ( $this->get('facebook_id') ) { // a facebook id was specified
+            $users = array(
+                $this->user->retrieve_by_fb( 
+                    $this->get('facebook_id') 
+                )
+            );
+        } else { // nothing special about this request, get all
+            $users = $this->user->retrieve();            
+        }
+
         $temp_users = array();
-        foreach( $users as $key => $user ) {
-            // Only display public user information
-            $temp_user['id'] = $user->id;
-            $temp_user['name'] = $user->name;
-            $temp_user['facebook_id'] = $user->facebook_id;
-            $temp_user['score'] = number_format(round(floatval($user->rating), 2), 2);
-            $temp_users[] = $temp_user;
+        if ( isset($users[0]->id) ) {
+            foreach( $users as $key => $user ) {
+                // Only display public user information
+                $temp_user['id'] = $user->id;
+                $temp_user['name'] = $user->name;
+                $temp_user['facebook_id'] = $user->facebook_id;
+                $temp_user['score'] = number_format(round(floatval($user->rating), 2), 2);
+                $temp_users[] = $temp_user;
+            }
         }
 
         http_response_code("200");

@@ -27,11 +27,27 @@ class Rrequests extends API_Controller {
 
         $origin = isset($data['origin']) ? $data['origin'] : '';
         $destination = isset($data['destination']) ? $data['destination'] : '';
-        $departure_date = isset($data['departureDate']) ? $data['departureDate'] : '';
-        $departure_time = isset($data['departureTime']) ? $data['departureTime'] : '';
-        
+
+        if ( $origin == '' || $destination == '' ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Origin and destination cannot be empty");
+            return;
+        }
+
+        // if unspecified, break with invalid string
+        $departure_date = isset($data['departureDate']) ? $data['departureDate'] : 'null'; 
+        $departure_time = isset($data['departureTime']) ? $data['departureTime'] : 'null';
         $start = strtotime( $departure_date . ' ' . $departure_time );
-        $start = date('Y-m-d H:i:s', $start);
+        
+        if ( $start ) {
+            $start = date('Y-m-d H:i:s', $start);
+        } else {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Unable to recognize date time format");
+            return;
+        }
 
         $rrequest_id = $this->rrequest->create(  
             array(  

@@ -13,62 +13,42 @@ class ride extends CI_Model{
         return $rides;
     }
 
-    function retrieve_active( $build_id_mapping = true ) {
+    function retrieve_active() {
         $user_id = $this->wheelzo_user_id;
         $current = date( 'Y-m-d H:i:s', strtotime('today midnight') );
         $conditions = "`start`>'".$current."'";
         $rides = $this->ride->retrieve( $conditions );
         
-
-        // Use ride ID as the index key
-        $temp_rides = array();
-        foreach( $rides as $ride ) { 
-            $temp_ride = $ride;
-
+        foreach( $rides as $key => $ride ) { 
+            
+            $rides[$key]->drop_offs = array() ;
+            $rides[$key]->is_personal = false;
+            
             if ( $ride->drop_offs == '' ) {
-                $temp_ride->drop_offs = array() ;
-            } else {
-                $temp_ride->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+                $rides[$key]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
             }
-         
-            $temp_ride->passengers = $this->user_ride->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-
-            $temp_ride->comments = $this->comment->retrieve(
-                array(
-                    'ride_id' => $ride->id 
-                )
-            );
-
+            
             if ( $ride->driver_id == $user_id ) {
-                $temp_ride->is_personal = true;
+                $rides[$key]->is_personal = true;
             } else {
-                foreach ( $temp_ride->passengers as $passenger ) {
+                $passengers = $this->user_ride->retrieve(
+                    array(
+                        'ride_id' => $ride->id 
+                    )
+                );
+                foreach ( $passengers as $passenger ) {
                     if ($passenger->user_id == $user_id ) {
-                        $temp_ride->is_personal = true;
+                        $rides[$key]->is_personal = true;
                         break;
                     }
                 }
             }
-
-            if ( !isset($temp_rides[$ride->id]->is_personal) ) {
-                $temp_ride->is_personal = false;
-            }
-
-            if ( $build_id_mapping ) {
-                $temp_rides[$ride->id] = $ride;
-            } else {
-                $temp_rides[] = $ride;
-            }
         }
 
-        return $temp_rides;
+        return $rides;
     }
 
-    function retrieve_personal( $build_id_mapping = true ) {
+    function retrieve_personal() {
         $user_id = $this->wheelzo_user_id;
         if ( $user_id ) {
             $conditions = '`driver_id` = '.$user_id;
@@ -85,37 +65,16 @@ class ride extends CI_Model{
 
             $rides = $this->ride->retrieve($conditions);
             
-            // Use ride ID as the index key
-            $temp_rides = array();
-            foreach( $rides as $ride ) { 
-                $temp_ride = $ride; 
-                $temp_ride->is_personal = true;
-                if ( $ride->drop_offs == '' ) {
-                    $temp_ride->drop_offs = array() ;
-                } else {
-                    $temp_ride->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
-                }
-             
-                $temp_ride->passengers = $this->user_ride->retrieve(
-                    array(
-                        'ride_id' => $ride->id 
-                    )
-                );
-
-                $temp_ride->comments = $this->comment->retrieve(
-                    array(
-                        'ride_id' => $ride->id 
-                    )
-                );
-
-                if ( $build_id_mapping ) {
-                    $temp_rides[$ride->id] = $ride;
-                } else {
-                    $temp_rides[] = $ride;
+            foreach( $rides as $key => $ride ) { 
+                $rides[$key]->is_personal = true;
+                
+                $rides[$key]->drop_offs = array();
+                if ( $ride->drop_offs ) {
+                    $rides[$key]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
                 }
             }
             
-            return $temp_rides;        
+            return $rides;        
         
         } else {
             return array();

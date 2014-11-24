@@ -69,25 +69,7 @@ app.config(function(ngQuickDateDefaultsProvider) {
         });
     };
 
-    $scope.defaultSuggestedPlaces = [
-        "Waterloo, UW Davis Center",
-        "Waterloo, University Plaza",
-        "Kitchener, St. Charles Terminal",
-        "Toronto, Sheppard/Yonge subway station",
-        "Toronto, Finch/Yonge subway station",
-        "Toronto, Downsview subway station",
-        "Toronto, Don Mills station",
-        "Toronto, York University",
-        "Toronto, Yorkdale Mall",
-        "Toronto, Eaton Center",
-        "Toronto, Union Station",
-        "Toronto, Pearson Airport",
-        "Scarborough, Scarborough Town Center",
-        "Mississauga, Square One",
-        "Markham, Pacific Mall",
-        "Richmond Hill",
-        "Vaughan"
-    ];
+    $scope.defaultSuggestedPlaces = defaultSuggestedPlaces;
 
     $scope.onlyDatesInFutureDateFilter = function (date) {
         var currentDate = new Date();
@@ -102,9 +84,18 @@ app.config(function(ngQuickDateDefaultsProvider) {
         }
     };
 
-}).filter('dateToISO', function() {
+}).filter('mysqlToISO', function() {
   return function(input) {
-    return new Date(input).toISOString();
+    var date = new Date();  
+    var parts = String(input).split(/[- :]/);  
+    date.setFullYear(parts[0]);  
+    date.setMonth(parts[1] - 1);  
+    date.setDate(parts[2]);  
+    date.setHours(parts[3]);  
+    date.setMinutes(parts[4]);  
+    date.setSeconds(parts[5]);  
+    date.setMilliseconds(0);      
+    return date.toISOString();  
   };
 }).filter('badDateToISO', function() {
   return function(badTime) {

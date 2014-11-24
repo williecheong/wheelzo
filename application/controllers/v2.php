@@ -1,6 +1,6 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Tools extends CI_Controller {
+class V2 extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -27,22 +27,28 @@ class Tools extends CI_Controller {
 
             $this->wheelzo_facebook_id = $user->facebook_id;
             $this->wheelzo_user_id = $user->id;
+
+            $this->facebook_url = $this->facebook->getLogouturl(
+                array(
+                    "next" => base_url() . 'logout'
+                )
+            );
+        
         } catch ( Exception $e ) {
             $this->wheelzo_facebook_id = false;
             $this->wheelzo_user_id = false;
+
+            $this->facebook_url = $this->facebook->getLoginUrl(
+                array(
+                    "scope" => "email,manage_notifications",
+                    "display" => "page"
+                )
+            );
         }
     }
+
 
     public function index() {
-        phpinfo();
+        $this->load->view('v2/main');
     }
-
-    public function facebook_import() {
-        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_BDEV']) ) {
-            $this->load->view('/tools/facebook_import');
-        } else {
-            redirect( base_url() );
-        }
-    }
-
 }

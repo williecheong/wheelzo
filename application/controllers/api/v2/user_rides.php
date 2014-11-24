@@ -15,6 +15,23 @@ class User_rides extends API_Controller {
         return;
     }
 
+    public function index_get() {
+        $user_rides = array();
+        
+        if ( $this->get('ride_id') ) {
+            $user_rides = $this->user_ride->retrieve(
+                array(
+                    'ride_id' => $this->get('ride_id')
+                )
+            );
+        } 
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($user_rides);
+        return;
+    }
+
     public function index_post() {
         if ( !$this->wheelzo_user_id ) {
             http_response_code("400");

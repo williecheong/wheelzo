@@ -124,15 +124,15 @@
             printName = shortenString( printName[0], 7 );
 
             html += '<div class="media">'+
-                    '    <a class="pull-left" target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">'+
-                    '        <img class="img-rounded media-object" src="'+fbImage(publicUsers[reviewObject.giver_id].facebook_id, 'square')+'">'+
-                    '    </a>'+
+                    '    <div class="pull-left">'+
+                    '        <img class="img-rounded media-object" id="reviewer-picture" src="/assets/img/empty_user.png">'+
+                    '    </div>'+
                     '    <div class="media-body">'+
                     '        <div id="single-review-message">'+
                     '            ' + reviewObject.review +
                     '        </div>'+
                     '        <small class="single-review-meta">'+
-                    '            <a target="_blank" href="'+fbProfile(publicUsers[reviewObject.giver_id].facebook_id)+'">' + printName + '</a> @ ' + moment(reviewObject.last_updated).format('MMM D, YYYY');
+                    '            Reviewed @ ' + moment(reviewObject.last_updated).format('MMM D, YYYY');
             
             if ( reviewObject.giver_id == session_id ) {
                 html += '        <a href="#delete-review" id="'+reviewObject.id+'"><i class="fa fa-trash-o fa-border"></i></a>';
