@@ -5,7 +5,7 @@ class Facebook_import extends API_Controller {
     
     function __construct() {
         parent::__construct();
-        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
+        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_BDEV']) ) {
             $this->load->model('facebook_ride');
         } else {
             redirect( base_url() );            

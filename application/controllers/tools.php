@@ -38,7 +38,7 @@ class Tools extends CI_Controller {
     }
 
     public function facebook_import() {
-        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
+        if ( in_array($this->wheelzo_facebook_id, $GLOBALS['WHEELZO_BDEV']) ) {
             $this->load->view('/tools/facebook_import');
         } else {
             redirect( base_url() );

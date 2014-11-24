@@ -29,10 +29,10 @@ $GLOBALS['WHEELZO_TECH'] = array_merge(
                                 array('1612834909', '1288730489')
                             );
 
-// BDEV: ROOT
+// BDEV: ROOT, TECH, Muz
 $GLOBALS['WHEELZO_BDEV'] = array_merge(
-                                $GLOBALS['WHEELZO_ROOT'],
-                                array()
+                                $GLOBALS['WHEELZO_TECH'],
+                                array('100000604400266')
                             );
 
 /*

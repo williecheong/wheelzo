@@ -54,6 +54,15 @@ img#passenger-picture.hoverable:hover {
     opacity: 0.9;
 }
 
+img#reviewer-picture {
+    max-width: 50px;
+    opacity: 0.5;
+}
+
+img#reviewer-picture.hoverable:hover {
+    opacity: 0.9;
+}
+
 img.brand-logo {
     width: 100%;
     max-width: 150px;
