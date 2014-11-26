@@ -54,9 +54,10 @@ class Facebook_import extends API_Controller {
                     if ( !isset($posting->from->id) ) {
                         continue;
                     }
+                    var_dump($posting->from->id);
                     var_dump("2");
                     $driver = $this->user->retrieve_by_fb( $posting->from->id );
-                    
+                    var_dump($driver);
                     if ( !$driver ) { // Check to see if this is a wheelzo user
                         continue;
                     }
