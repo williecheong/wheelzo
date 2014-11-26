@@ -93,6 +93,9 @@ class Facebook_import extends API_Controller {
                         $postings[] = $posting;
                         continue;
                     }
+                    
+                    $postings[] = $posting;
+                    
                 }
             } catch (Exception $e) {
                 http_response_code("400");
