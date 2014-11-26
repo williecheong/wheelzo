@@ -50,24 +50,25 @@ class Facebook_import extends API_Controller {
 
                 $response_data = $response_data + $response->data;
                 foreach ($response->data as $key => $posting) {
+                    var_dump("1");
                     if ( !isset($posting->from->id) ) {
                         continue;
                     }
-
+                    var_dump("2");
                     $driver = $this->user->retrieve_by_fb( $posting->from->id );
                     
                     if ( !$driver ) { // Check to see if this is a wheelzo user
                         continue;
                     }
-
+                    var_dump("3");
                     if ( !isset($posting->id) ) {
                         continue;
                     }
-
+                    var_dump("4");
                     if ( $this->facebook_ride->retrieve_by_fb($posting->id) ) { // Check to see if this posting has been made before
                         continue;
                     }
-
+                    var_dump("5");
                     $url = "http://ec2-54-148-33-40.us-west-2.compute.amazonaws.com:3000/nlpApi";
                     $type = "POST";
                     $params = (object) array(
@@ -76,26 +77,23 @@ class Facebook_import extends API_Controller {
                     );
 
                     $processed_ride = json_decode( rest_curl($url, $type, $params) );
-                    
+                    var_dump("6");
                     $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
                     
                     if ( !isset($processed_ride) ) { // NLP did not return a valid ride. Not too sure what happened there. Send posting to front for judging
                         $postings[] = $posting; 
                         continue;
                     }
-
+                    var_dump("7");
                     if ( !$this->_validate_processedRide_exists($processed_ride) ) { // This must be a passenger posting
                         continue;
                     }
-                    
+                    var_dump("8");
                     if ( $processed_ride->origin || $processed_ride->destination || $processed_ride->departure || $processed_ride->capacity || $processed_ride->price ) {
                         $posting->processedRide = $processed_ride;
                         $postings[] = $posting;
                         continue;
                     }
-                    
-                    $postings[] = $posting;
-                    
                 }
             } catch (Exception $e) {
                 http_response_code("400");
