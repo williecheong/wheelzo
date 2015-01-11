@@ -25,9 +25,26 @@
         <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body ng-app="myApp" ng-controller="myController">
+        <div class="jumbotron">
+            <div class="row text-center">
+                <div class="col-sm-6">
+                    <i class="fa fa-user fa-5x"></i><br>
+                    <button class="btn btn-primary">
+                        For Drivers
+                    </button>
+                </div>
+                <div class="col-sm-6">
+                    <i class="fa fa-users fa-5x"></i><br>
+                    <button class="btn btn-primary">
+                        For Passengers
+                    </button>
+                </div>
+            </div>
+        </div>
         <div class="container">
             HELLO WORLD
         </div>
+
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
