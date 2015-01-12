@@ -33,9 +33,23 @@ class API_Controller extends REST_Controller {
 
             $this->wheelzo_facebook_id = $user->facebook_id;
             $this->wheelzo_user_id = $user->id;
+            
+            $this->facebook_url = $this->facebook->getLogouturl(
+                array(
+                    "next" => base_url() . 'logout'
+                )
+            );
+
         } catch ( Exception $e ) {
             $this->wheelzo_facebook_id = false;
             $this->wheelzo_user_id = false;
+
+            $this->facebook_url = $this->facebook->getLoginUrl(
+                array(
+                    "scope" => "email,manage_notifications",
+                    "display" => "page"
+                )
+            );
         }
     }
 

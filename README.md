@@ -13,6 +13,11 @@ wheelzo
     - Returns an array of all users
     - Each user contains `name`, `facebook_id`, `score`
 
+- GET /users/session
+    - Returns an object containing `user_id` and `facebook_url`
+    - If `user_id` is 0, there is no session and url is for login
+    - If `user_id` is > 0, a session is active and url is for logout
+
 - GET /users/me
     - Returns an array of users that are currently logged in
     - This is of course, an array of either zero or one object
