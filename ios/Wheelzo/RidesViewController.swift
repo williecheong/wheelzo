@@ -32,8 +32,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         api.delegate = self;
-        //api.searchItunesFor("Jimmy Buffett")
+        api.getCurrentRides();
         
+//        self.appsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell");
     }
     
     override func didReceiveMemoryWarning() {
@@ -47,7 +48,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         println(results)
         if results.count>0 {
             self.tableData = results as NSArray
-            self.appsTableView?.reloadData()
+            self.appsTableView!.reloadData()
         }
     }
     
@@ -60,12 +61,41 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:
         NSIndexPath) -> UITableViewCell {
             
-            return UITableViewCell();
+            let kCellIdentifier: String = "MyCell"
+            
+            //the tablecell is optional to see if we can reuse cell
+            var cell : UITableViewCell?
+            cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell!
+            
+            //If we did not get a reuseable cell, then create a new one
+            if (cell? == nil) {
+                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier:
+                    kCellIdentifier)
+            }
+            
+//            var cell:UITableViewCell = self.appsTableView!.dequeueReusableCellWithIdentifier("MyCell") as UITableViewCell;
+            
+//            cell?.textLabel?.text = self.items[indexPath.row]
+            
+            //Get our data row
+            var rowData: NSDictionary = self.tableData[indexPath.row] as NSDictionary
+            
+            println(rowData)
+            
+            //Set the track name
+            let cellText: String? = rowData["destination"] as String?
+            cell?.textLabel?.text = cellText
+            
+            return cell!
+            
+//            return UITableViewCell();
             
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        println("You selected cell #\(indexPath.row)!")
+       
         
     }
     
