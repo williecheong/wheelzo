@@ -154,9 +154,53 @@ class WheelzoAPI: NSObject {
 //        connection.start()
 //    }
     
-    func postRide(ride: RideModel) {
+    func postRide(driverId: Int, origin: String, destination: String, capacity: Int, price: Int, departureDate: String, departureTime: String) {
         
-        println("postRide unsupported")
+        println("posting a ride...");
+        
+        
+        //posts a ride
+        
+        var session = FBSession()
+        var token = session.accessTokenData.accessToken
+        
+        var urlPath = "http://staging.wheelzo.com/api/v2/rides"
+        var url: NSURL! = NSURL(string: urlPath)
+        
+        let userId = driverId;
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        
+        
+        let postString = "{\"origin\": \"\(origin)\",\"destination\": \"\(destination)\",\"departureDate\":\"\(departureDate)\",\"departureTime\": \"\(departureTime)\",\"capacity\": \"\(capacity)\",\"price\": \"\(price)\"}"
+        
+        
+        //println(postString)
+        
+        // config stuff
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let tokenHeader = "Fb-Wheelzo-Token"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(token, forHTTPHeaderField: "Fb-Wheelzo-Token")
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                println("error=\(error)")
+                return
+            }
+            
+            println("response = \(response)")
+            
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("responseString = \(responseString)")
+        }
+        task.resume()
+        
+        //end of post ride
 
     }
     
