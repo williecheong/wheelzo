@@ -23,6 +23,8 @@ class RideModel {
     var start: String;
 
     var dropOffs: [String]?; // dropOffs is optional
+    
+    var comments = [CommentModel]();
 
     // todo: add dropOffs to the constructor
     
@@ -36,6 +38,14 @@ class RideModel {
         self.price = price;
         self.start = start;
         
+    }
+    
+    
+    func addComment(comment: CommentModel) {
+        // actually might be unncecesary since we only have to pull the comments from the web and and then add the throught the api
+        
+        // adds a comment to the array
+        self.comments.append(comment);
     }
     
 }

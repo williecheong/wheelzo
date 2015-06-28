@@ -12,11 +12,7 @@ import UIKit
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
     
-    
-    
     //@IBOutlet var fbLoginView : FBLoginView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +59,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         println(postString)
         
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         let tokenHeader = "Fb-Wheelzo-Token"
 

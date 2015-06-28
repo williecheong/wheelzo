@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D7114DDD1A5F87E100FBF575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114DDC1A5F87E100FBF575 /* AppDelegate.swift */; };
 		D7114DDF1A5F87E100FBF575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114DDE1A5F87E100FBF575 /* FirstViewController.swift */; };
 		D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE21A5F87E100FBF575 /* Main.storyboard */; };
 		D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE51A5F87E100FBF575 /* Images.xcassets */; };
 		D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */; };
 		D7114DF51A5F87E100FBF575 /* WheelzoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */; };
 		D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114E071A60475000FBF575 /* WheelzoAPI.swift */; };
+		D73FD7741B40822000943498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7731B40822000943498 /* AppDelegate.swift */; };
+		D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */ = {isa = PBXBuildFile; fileRef = D74CEDDB1B38976100FE7A86 /* Blank52.png */; };
+		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
+		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
 		D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */; };
+		D7D0533D1B3E738600059EBB /* empty_user.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533C1B3E738600059EBB /* empty_user.png */; };
+		D7D0533F1B3E738E00059EBB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo.png */; };
+		D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */; };
+		D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D053421B3EF13300059EBB /* CommentsTableCell.swift */; };
 		D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165D1A8C9283003C91B3 /* RideModel.swift */; };
 		D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */; };
 		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
@@ -37,7 +44,6 @@
 /* Begin PBXFileReference section */
 		D7114DD71A5F87E100FBF575 /* Wheelzo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wheelzo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7114DDB1A5F87E100FBF575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7114DDC1A5F87E100FBF575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D7114DDE1A5F87E100FBF575 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		D7114DE31A5F87E100FBF575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D7114DE51A5F87E100FBF575 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -46,7 +52,15 @@
 		D7114DF31A5F87E100FBF575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelzoTests.swift; sourceTree = "<group>"; };
 		D7114E071A60475000FBF575 /* WheelzoAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelzoAPI.swift; sourceTree = "<group>"; };
+		D73FD7731B40822000943498 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D74CEDDB1B38976100FE7A86 /* Blank52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blank52.png; sourceTree = "<group>"; };
+		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
+		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
 		D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		D7D0533C1B3E738600059EBB /* empty_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_user.png; sourceTree = "<group>"; };
+		D7D0533E1B3E738E00059EBB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableCell.xib; sourceTree = "<group>"; };
+		D7D053421B3EF13300059EBB /* CommentsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableCell.swift; sourceTree = "<group>"; };
 		D7F3165D1A8C9283003C91B3 /* RideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
 		D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		D7F316611A8C9825003C91B3 /* RidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RidesViewController.swift; sourceTree = "<group>"; };
@@ -99,12 +113,13 @@
 		D7114DD91A5F87E100FBF575 /* Wheelzo */ = {
 			isa = PBXGroup;
 			children = (
-				D7114DDC1A5F87E100FBF575 /* AppDelegate.swift */,
+				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
 				D7114DDE1A5F87E100FBF575 /* FirstViewController.swift */,
 				D7FE12B71A78C25D00677231 /* LoginViewController.swift */,
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
 				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
+				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
 				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
 				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
 				D7114DDA1A5F87E100FBF575 /* Supporting Files */,
@@ -113,7 +128,13 @@
 				D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */,
 				D7F316611A8C9825003C91B3 /* RidesViewController.swift */,
 				D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */,
+				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
+				D77E4E761B3BB77F009895BF /* RideTableCell.swift */,
+				D7D0533C1B3E738600059EBB /* empty_user.png */,
+				D7D0533E1B3E738E00059EBB /* logo.png */,
 				D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */,
+				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
+				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
 			);
 			path = Wheelzo;
 			sourceTree = "<group>";
@@ -231,8 +252,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */,
+				D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */,
+				D7D0533D1B3E738600059EBB /* empty_user.png in Resources */,
 				D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */,
+				D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */,
+				D7D0533F1B3E738E00059EBB /* logo.png in Resources */,
 				D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */,
+				D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,13 +276,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D73FD7741B40822000943498 /* AppDelegate.swift in Sources */,
 				D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */,
 				D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */,
+				D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */,
 				D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */,
 				D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */,
 				D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */,
-				D7114DDD1A5F87E100FBF575 /* AppDelegate.swift in Sources */,
 				D7114DDF1A5F87E100FBF575 /* FirstViewController.swift in Sources */,
+				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
 				D7FE12B81A78C25D00677231 /* LoginViewController.swift in Sources */,
 				D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */,
 				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
@@ -386,9 +414,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = Wheelzo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wheelzo/Bridge-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -398,9 +428,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = Wheelzo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Wheelzo/Bridge-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
