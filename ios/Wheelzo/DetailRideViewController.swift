@@ -14,7 +14,7 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
     
     // class that will show a detailed view of a ride that is clicked on the wheelzo table
     
-    
+
     // ui stuff
     
     @IBOutlet var profilePic: UIImageView! = UIImageView();

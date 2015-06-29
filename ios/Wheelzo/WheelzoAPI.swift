@@ -51,41 +51,20 @@ class WheelzoAPI: NSObject {
         delegate?.didRecieveResponse(jsonResult)
     }
     
-//    func searchItunesFor(searchTerm: String) {
+    // user stuff
+    
+//    func getAllUsers() {
 //        
-//        //Clean up the search terms by replacing spaces with +
-//        var itunesSearchTerm = searchTerm.stringByReplacingOccurrencesOfString(" ",
-//            withString: "+", options: NSStringCompareOptions.CaseInsensitiveSearch,
-//            range: nil)
-//        
-//        var escapedSearchTerm = itunesSearchTerm.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-//        
-//        //var urlPath = "https://itunes.apple.com/search?term=(escapedSearchTerm)&media=music"
 //        var urlPath = "http://staging.wheelzo.com/api/v2/users"
 //        var url: NSURL! = NSURL(string: urlPath)
 //        var request: NSURLRequest = NSURLRequest(URL: url)
 //        var connection: NSURLConnection! = NSURLConnection(request: request,
 //            delegate: self,startImmediately: false)
 //        
-//        println("Access Wheelzo API at URL \(url)")
+//        println("Requesting: \(urlPath)")
 //        
 //        connection.start()
 //    }
-    
-    // user stuff
-    
-    func getAllUsers() {
-        
-        var urlPath = "http://staging.wheelzo.com/api/v2/users"
-        var url: NSURL! = NSURL(string: urlPath)
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        var connection: NSURLConnection! = NSURLConnection(request: request,
-            delegate: self,startImmediately: false)
-        
-        println("Requesting: \(urlPath)")
-        
-        connection.start()
-    }
     
 //    func getMe() {
 //        
@@ -113,7 +92,7 @@ class WheelzoAPI: NSObject {
 //        connection.start()
 //    }
 //    
-//    func getUserFromFbId(fbId: int_fast64_t) {
+//    func getUserFromFbId(fbId: Int) {
 //        
 //        var urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(fbId)"
 //        var url: NSURL! = NSURL(string: urlPath)
@@ -154,7 +133,7 @@ class WheelzoAPI: NSObject {
 //        connection.start()
 //    }
     
-    func postRide(driverId: Int, origin: String, destination: String, capacity: Int, price: Int, departureDate: String, departureTime: String) {
+    func postRide(origin: String, destination: String, capacity: Int, price: Int, departureDate: String, departureTime: String) {
         
         println("posting a ride...");
         
@@ -167,16 +146,12 @@ class WheelzoAPI: NSObject {
         var urlPath = "http://staging.wheelzo.com/api/v2/rides"
         var url: NSURL! = NSURL(string: urlPath)
         
-        let userId = driverId;
-        
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
         
         
         let postString = "{\"origin\": \"\(origin)\",\"destination\": \"\(destination)\",\"departureDate\":\"\(departureDate)\",\"departureTime\": \"\(departureTime)\",\"capacity\": \"\(capacity)\",\"price\": \"\(price)\"}"
         
-        
-        //println(postString)
         
         // config stuff
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
@@ -233,8 +208,6 @@ class WheelzoAPI: NSObject {
 //        connection.start()
         
         
-        //posts a ride
-        
         var session = FBSession()
         var token = session.accessTokenData.accessToken
         
@@ -271,17 +244,7 @@ class WheelzoAPI: NSObject {
         }
         task.resume()
         
-        //end of post ride
-        
-        
-        
-        
-        
-        
-        
-        
-        println("postComment unsupported")
-        
+        // end on comment stuff
         
         // other way
 //        
@@ -313,9 +276,6 @@ class WheelzoAPI: NSObject {
 //        });
         // end of network request
         
-        
-        
-        
     }
     
     func getComments(rideId: Int) {
@@ -329,7 +289,6 @@ class WheelzoAPI: NSObject {
         println("Requesting: \(urlPath)")
         
         connection.start()
-        
     }
     
     // feedback stuff

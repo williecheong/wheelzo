@@ -25,8 +25,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         loginView.delegate = self
         loginView.readPermissions = ["public_profile", "email", "user_friends"]
-        
-        
     }
     
     // fb delegate methods

@@ -37,10 +37,8 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
         priceText.keyboardType = UIKeyboardType.DecimalPad;
         capacityText.keyboardType = UIKeyboardType.DecimalPad;
-        
         
         api.delegate = self;
     }
@@ -51,9 +49,7 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
     }
     
     func didRecieveResponse(results: NSArray) {
-        
         println("ride post recieved response")
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,9 +59,7 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
     
     @IBAction func myUIImageViewTapped(recognizer: UITapGestureRecognizer) {
         if(recognizer.state == UIGestureRecognizerState.Ended){
-            
             self.view.endEditing(true);
-            
         }
     }
     
@@ -97,20 +91,7 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         dateFormatter.dateFormat = formatString;
         let timeString = dateFormatter.stringFromDate(dateTimePicker.date);
 
-        
-        let driverId = 1;
-        
-        api.postRide(driverId, origin: originString, destination: destinationString, capacity: capacityInt, price: priceInt, departureDate: dateString, departureTime: timeString);
-        
-        //let commentText = postCommentText.text;
-        // todo pull rideId
-        //let rideId = rideData["id"]!.integerValue;
-        //let userId = rideData["driver_id"]!.integerValue;
-        
-        //api.postComment(commentText, rideId: rideId, userId: userId);
-        
-        
-        
+        api.postRide(originString, destination: destinationString, capacity: capacityInt, price: priceInt, departureDate: dateString, departureTime: timeString);
     }
     
 }
