@@ -42,8 +42,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Yxv-B2-IVH" secondAttribute="trailing" constant="-16" id="dYC-8C-tzE"/>
                             <constraint firstItem="2eZ-Zl-Fuj" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="dgH-sF-GM2"/>
                             <constraint firstItem="Yxv-B2-IVH" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="iaX-Yd-K6P"/>
+                            <constraint firstItem="2eZ-Zl-Fuj" firstAttribute="top" secondItem="Yxv-B2-IVH" secondAttribute="bottom" id="nub-W2-50O"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="2eZ-Zl-Fuj" secondAttribute="bottom" id="y5w-nt-yau"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TgT-uu-NiY"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="6DF-Ti-0ZH"/>
                     <connections>
@@ -386,10 +392,10 @@
             </objects>
             <point key="canvasLocation" x="1569" y="323"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Auto Login View Controller-->
         <scene sceneID="tj3-25-ubg">
             <objects>
-                <viewController id="d0e-Ct-EiR" customClass="LoginViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="d0e-Ct-EiR" customClass="AutoLoginViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jm0-Fp-HaW"/>
                         <viewControllerLayoutGuide type="bottom" id="e3y-IR-S7K"/>
@@ -398,22 +404,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNL-JK-hPV">
-                                <rect key="frame" x="284" y="285" width="32" height="30"/>
-                                <state key="normal" title="Next">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ul-3Z-AuE" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="16" y="267" width="568" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="d0e-Ct-EiR" id="EnX-7F-ga7"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHa-NT-ZLL">
+                                <rect key="frame" x="277" y="398" width="30" height="30"/>
+                                <state key="normal" title="next">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="49e-Tb-3d3" kind="show" id="irj-Hp-ycj"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="QNL-JK-hPV" secondAttribute="centerX" id="6II-6o-dSR"/>
-                            <constraint firstAttribute="centerY" secondItem="QNL-JK-hPV" secondAttribute="centerY" id="ve7-Y0-TWz"/>
+                            <constraint firstAttribute="centerY" secondItem="3Ul-3Z-AuE" secondAttribute="centerY" id="Gke-8x-cxI"/>
+                            <constraint firstAttribute="centerX" secondItem="mHa-NT-ZLL" secondAttribute="centerX" constant="8" id="Uin-ps-sVB"/>
+                            <constraint firstAttribute="centerX" secondItem="3Ul-3Z-AuE" secondAttribute="centerX" id="cTU-g6-96C"/>
+                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="top" secondItem="jm0-Fp-HaW" secondAttribute="bottom" constant="247" id="d87-re-xan"/>
+                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="leading" secondItem="xHQ-AF-deG" secondAttribute="leadingMargin" id="loj-Ur-ZUN"/>
+                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="trailing" secondItem="xHQ-AF-deG" secondAttribute="trailingMargin" id="rxl-xK-OTY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="fbLoginView" destination="3Ul-3Z-AuE" id="b24-UI-7S0"/>
+                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="fbAutoSegue" id="MiI-iB-c9F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgs-ba-bE5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -432,11 +450,43 @@
                     <connections>
                         <segue destination="Sx7-Ww-UHc" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="qbT-EL-HUO" kind="relationship" relationship="viewControllers" id="OvJ-Th-8Iw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-10" y="12"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="G1t-rv-osR">
+            <objects>
+                <viewController id="qbT-EL-HUO" customClass="SettingsViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gui-al-RTw"/>
+                        <viewControllerLayoutGuide type="bottom" id="XA1-Av-3ke"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zXF-HI-LrD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-51-FIk">
+                                <rect key="frame" x="114" y="266" width="373" height="67"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VK9-51-FIk" firstAttribute="leading" secondItem="zXF-HI-LrD" secondAttribute="leadingMargin" constant="98" id="0vf-Dj-qtF"/>
+                            <constraint firstAttribute="centerX" secondItem="VK9-51-FIk" secondAttribute="centerX" constant="-0.5" id="Miq-9Z-zDj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="VK9-51-FIk" secondAttribute="trailing" constant="97" id="nfS-DF-E2y"/>
+                            <constraint firstAttribute="centerY" secondItem="VK9-51-FIk" secondAttribute="centerY" constant="0.5" id="p6I-da-8cb"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="first" id="tyQ-ay-NgW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KzU-bl-bAL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96" y="970"/>
         </scene>
         <!--Rides-->
         <scene sceneID="T2h-eW-x8Z">

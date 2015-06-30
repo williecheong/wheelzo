@@ -9,6 +9,7 @@
 #ifndef Wheelzo_Bridge_Header_h
 #define Wheelzo_Bridge_Header_h
 
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #endif

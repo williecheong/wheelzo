@@ -18,6 +18,9 @@
 		D73FD7741B40822000943498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7731B40822000943498 /* AppDelegate.swift */; };
 		D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7751B40AE4800943498 /* PostRideViewController.swift */; };
 		D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */ = {isa = PBXBuildFile; fileRef = D74CEDDB1B38976100FE7A86 /* Blank52.png */; };
+		D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */; };
+		D759E6D51B41E30E0043AEC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */; };
+		D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D759E6D61B4214880043AEC3 /* SettingsViewController.swift */; };
 		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
 		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
 		D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */; };
@@ -30,8 +33,7 @@
 		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
 		D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */; };
 		D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */; };
-		D7FE12B81A78C25D00677231 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FE12B71A78C25D00677231 /* LoginViewController.swift */; };
-		D7FE12BA1A78C68100677231 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FE12B91A78C68000677231 /* FacebookSDK.framework */; };
+		D7FE12B81A78C25D00677231 /* AutoLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FE12B71A78C25D00677231 /* AutoLoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,9 @@
 		D73FD7731B40822000943498 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D73FD7751B40AE4800943498 /* PostRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRideViewController.swift; sourceTree = "<group>"; };
 		D74CEDDB1B38976100FE7A86 /* Blank52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blank52.png; sourceTree = "<group>"; };
+		D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D759E6D61B4214880043AEC3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
 		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
 		D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -72,8 +77,7 @@
 		D7F316611A8C9825003C91B3 /* RidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RidesViewController.swift; sourceTree = "<group>"; };
 		D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailRideViewController.swift; sourceTree = "<group>"; };
-		D7FE12B71A78C25D00677231 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D7FE12B91A78C68000677231 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		D7FE12B71A78C25D00677231 /* AutoLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLoginViewController.swift; sourceTree = "<group>"; };
 		D7FE12BC1A78C96B00677231 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7FE12BA1A78C68100677231 /* FacebookSDK.framework in Frameworks */,
+				D759E6D51B41E30E0043AEC3 /* FBSDKLoginKit.framework in Frameworks */,
+				D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +110,6 @@
 				D7114DD91A5F87E100FBF575 /* Wheelzo */,
 				D7114DF11A5F87E100FBF575 /* WheelzoTests */,
 				D7114DD81A5F87E100FBF575 /* Products */,
-				D7FE12B91A78C68000677231 /* FacebookSDK.framework */,
 				D7FE12BB1A78C68C00677231 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -125,7 +129,7 @@
 				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
 				D7114DDE1A5F87E100FBF575 /* FirstViewController.swift */,
-				D7FE12B71A78C25D00677231 /* LoginViewController.swift */,
+				D7FE12B71A78C25D00677231 /* AutoLoginViewController.swift */,
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
 				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
 				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
@@ -144,6 +148,7 @@
 				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
 				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
 				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
+				D759E6D61B4214880043AEC3 /* SettingsViewController.swift */,
 			);
 			path = Wheelzo;
 			sourceTree = "<group>";
@@ -176,6 +181,8 @@
 		D7FE12BB1A78C68C00677231 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */,
+				D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -297,8 +304,9 @@
 				D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */,
 				D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */,
 				D7114DDF1A5F87E100FBF575 /* FirstViewController.swift in Sources */,
+				D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */,
 				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
-				D7FE12B81A78C25D00677231 /* LoginViewController.swift in Sources */,
+				D7FE12B81A78C25D00677231 /* AutoLoginViewController.swift in Sources */,
 				D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */,
 				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
 			);
@@ -427,7 +435,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wheelzo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -444,7 +455,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Wheelzo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

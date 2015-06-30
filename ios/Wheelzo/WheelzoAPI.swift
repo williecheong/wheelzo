@@ -140,8 +140,7 @@ class WheelzoAPI: NSObject {
         
         //posts a ride
         
-        var session = FBSession()
-        var token = session.accessTokenData.accessToken
+        var token = FBSDKAccessToken.currentAccessToken().tokenString
         
         var urlPath = "http://staging.wheelzo.com/api/v2/rides"
         var url: NSURL! = NSURL(string: urlPath)
@@ -208,8 +207,7 @@ class WheelzoAPI: NSObject {
 //        connection.start()
         
         
-        var session = FBSession()
-        var token = session.accessTokenData.accessToken
+        var token = FBSDKAccessToken.currentAccessToken().tokenString
         
         var urlPath = "http://staging.wheelzo.com/api/v2/comments"
         var url: NSURL! = NSURL(string: urlPath)
