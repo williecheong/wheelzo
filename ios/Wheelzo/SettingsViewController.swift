@@ -31,21 +31,14 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         if (FBSDKAccessToken.currentAccessToken() != nil) {
-            // User is already logged in, do work such as go to next view controller.
-            
-            // segue automatically if logged in
-            performSegueWithIdentifier("fbAutoSegue", sender: self)
-            
-            
+            // User is already logged in
+                        
         } else {
-            //let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            //self.view.addSubview(loginView)
-            //loginView.center = self.view.center
             
             fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
-            fbLoginView.delegate = self
             
         }
     }
@@ -60,48 +53,29 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
             // Process error
         } else if result.isCancelled {
             // Handle cancellations
+            
+            // do nothing, user will still have to login
+            
         } else {
             // If you ask for multiple permissions at once, you
             // should check if specific permissions missing
-            if result.grantedPermissions.contains("email") {
-                // Do work
-            }
+//            if result.grantedPermissions.contains("email") {
+//                // Do work
+//            }
+            
+            // after user logs in using the button, send them to the main app
+            performSegueWithIdentifier("settingsSegueToApp", sender: self)
+            
         }
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         println("User Logged Out")
+        
+        // stops user from navigating away after logging out
+        self.navigationController?.toolbarHidden = true;
+        
     }
-    
-    
-    // old fb delegate methods
-    
-    //    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-    //        println("User Logged In")
-    //        println("This is where you perform a segue.")
-    //    }
-    
-    //    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser){
-    //        println("User Name: \(user.name)")
-    //        //println("other stuff: \(user)")
-    //
-    //
-    //        var session = FBSession()
-    //        var token = session.accessTokenData.accessToken
-    //        //println("access token: \(token)")
-    //        println("~~~~~")
-    //
-    //            }
-    //
-    //    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-    //        println("User Logged Out")
-    //    }
-    //
-    //    func loginView(loginView : FBLoginView!, handleError:NSError) {
-    //        println("Error: \(handleError.localizedDescription)")
-    //    }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

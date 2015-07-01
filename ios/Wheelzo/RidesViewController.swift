@@ -19,6 +19,9 @@ import Foundation
 
 import UIKit
 
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 class RidesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WheelzoAPIProtocol {
     
     var api: WheelzoAPI = WheelzoAPI()
@@ -63,6 +66,17 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
 //        self.appsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell");
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in
+            // carry on
+        } else {
+            performSegueWithIdentifier("segueToLogin", sender: self);
+        }
     }
     
     override func didReceiveMemoryWarning() {

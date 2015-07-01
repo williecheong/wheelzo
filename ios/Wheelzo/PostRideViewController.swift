@@ -10,6 +10,9 @@ import Foundation
 
 import UIKit;
 
+import FBSDKCoreKit
+import FBSDKLoginKit
+
 class PostRideViewController: UIViewController, WheelzoAPIProtocol {
     
     // class that takes care of posting a new ride
@@ -44,8 +47,14 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
     }
     
     override func viewDidAppear(animated: Bool) {
-        //println("reloading data")
         super.viewDidAppear(animated)
+        
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in
+            // carry on
+        } else {
+            performSegueWithIdentifier("segueToLogin", sender: self);
+        }
     }
     
     func didRecieveResponse(results: NSArray) {

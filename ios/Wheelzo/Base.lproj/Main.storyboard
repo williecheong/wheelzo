@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="d0e-Ct-EiR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -55,11 +55,12 @@
                     <connections>
                         <outlet property="appsTableView" destination="2eZ-Zl-Fuj" id="iAY-Cg-wf7"/>
                         <segue destination="Uxl-K2-YpK" kind="show" identifier="rideSelectSegue" id="Ys5-2O-j54"/>
+                        <segue destination="qbT-EL-HUO" kind="showDetail" identifier="segueToLogin" id="LIr-Oo-mqC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1569" y="-320"/>
+            <point key="canvasLocation" x="1569" y="-1548"/>
         </scene>
         <!--Detail Ride View Controller-->
         <scene sceneID="vqe-eW-PiM">
@@ -246,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7Z-qh-uXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2383" y="-221"/>
+            <point key="canvasLocation" x="2379" y="-1548"/>
         </scene>
         <!--Create Ride-->
         <scene sceneID="wg7-f3-ORb">
@@ -351,6 +352,7 @@
                         <outlet property="postRideButton" destination="mm6-be-s9s" id="0EA-ZN-e32"/>
                         <outlet property="priceText" destination="qP9-A6-QL3" id="oN5-7P-IRQ"/>
                         <outlet property="tapGestureRecognizer" destination="ZVz-AN-d1S" id="cak-Wp-wAF"/>
+                        <segue destination="qbT-EL-HUO" kind="showDetail" identifier="segueToLogin" id="0lg-DH-gNC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -360,7 +362,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="750" y="323"/>
+            <point key="canvasLocation" x="758" y="-137"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="U7D-pb-s8X">
@@ -390,52 +392,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stg-bR-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1569" y="323"/>
-        </scene>
-        <!--Auto Login View Controller-->
-        <scene sceneID="tj3-25-ubg">
-            <objects>
-                <viewController id="d0e-Ct-EiR" customClass="AutoLoginViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jm0-Fp-HaW"/>
-                        <viewControllerLayoutGuide type="bottom" id="e3y-IR-S7K"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xHQ-AF-deG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ul-3Z-AuE" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="16" y="267" width="568" height="66"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="d0e-Ct-EiR" id="EnX-7F-ga7"/>
-                                </connections>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHa-NT-ZLL">
-                                <rect key="frame" x="277" y="398" width="30" height="30"/>
-                                <state key="normal" title="next">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="3Ul-3Z-AuE" secondAttribute="centerY" id="Gke-8x-cxI"/>
-                            <constraint firstAttribute="centerX" secondItem="mHa-NT-ZLL" secondAttribute="centerX" constant="8" id="Uin-ps-sVB"/>
-                            <constraint firstAttribute="centerX" secondItem="3Ul-3Z-AuE" secondAttribute="centerX" id="cTU-g6-96C"/>
-                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="top" secondItem="jm0-Fp-HaW" secondAttribute="bottom" constant="247" id="d87-re-xan"/>
-                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="leading" secondItem="xHQ-AF-deG" secondAttribute="leadingMargin" id="loj-Ur-ZUN"/>
-                            <constraint firstItem="3Ul-3Z-AuE" firstAttribute="trailing" secondItem="xHQ-AF-deG" secondAttribute="trailingMargin" id="rxl-xK-OTY"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="fbLoginView" destination="3Ul-3Z-AuE" id="b24-UI-7S0"/>
-                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="fbAutoSegue" id="MiI-iB-c9F"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fgs-ba-bE5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-816" y="-10"/>
+            <point key="canvasLocation" x="1577" y="-137"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -457,7 +414,7 @@
             </objects>
             <point key="canvasLocation" x="-10" y="12"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="G1t-rv-osR">
             <objects>
                 <viewController id="qbT-EL-HUO" customClass="SettingsViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
@@ -469,24 +426,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-51-FIk">
-                                <rect key="frame" x="114" y="266" width="373" height="67"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VK9-51-FIk" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="16" y="266" width="568" height="67"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="dIF-Kg-CjK"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="qbT-EL-HUO" id="Ehn-d9-u3b"/>
+                                </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Be aware that you must be logged in to Facebook for Wheelzo to work properly" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJT-T7-FJ8">
+                                <rect key="frame" x="156" y="341" width="288" height="202"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="392" id="1V6-yD-Wg9"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="2jp-81-356"/>
+                                    <constraint firstAttribute="width" constant="403" id="Apo-ko-LpP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="392" id="vPe-50-Cxj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1V6-yD-Wg9"/>
+                                        <exclude reference="Apo-ko-LpP"/>
+                                        <exclude reference="vPe-50-Cxj"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VK9-51-FIk" firstAttribute="leading" secondItem="zXF-HI-LrD" secondAttribute="leadingMargin" constant="98" id="0vf-Dj-qtF"/>
+                            <constraint firstAttribute="centerY" secondItem="VK9-51-FIk" secondAttribute="centerY" constant="0.5" id="5Jo-zn-L0t"/>
+                            <constraint firstItem="VK9-51-FIk" firstAttribute="top" secondItem="gui-al-RTw" secondAttribute="bottom" constant="246" id="8Th-yQ-Vna"/>
+                            <constraint firstItem="bJT-T7-FJ8" firstAttribute="top" secondItem="VK9-51-FIk" secondAttribute="bottom" constant="8" id="AwS-vN-BJp"/>
+                            <constraint firstAttribute="centerYWithinMargins" secondItem="bJT-T7-FJ8" secondAttribute="centerYWithinMargins" constant="-85.5" id="Fn9-m8-SLP"/>
+                            <constraint firstAttribute="centerX" secondItem="bJT-T7-FJ8" secondAttribute="centerX" constant="-0.5" id="J1X-8c-m2F"/>
                             <constraint firstAttribute="centerX" secondItem="VK9-51-FIk" secondAttribute="centerX" constant="-0.5" id="Miq-9Z-zDj"/>
+                            <constraint firstItem="XA1-Av-3ke" firstAttribute="top" secondItem="bJT-T7-FJ8" secondAttribute="bottom" constant="121" id="OVe-ej-bwe"/>
+                            <constraint firstItem="VK9-51-FIk" firstAttribute="leading" secondItem="zXF-HI-LrD" secondAttribute="leadingMargin" id="Y9F-68-ZcY"/>
+                            <constraint firstItem="XA1-Av-3ke" firstAttribute="top" secondItem="bJT-T7-FJ8" secondAttribute="bottom" constant="8" id="h5e-Tp-KFm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VK9-51-FIk" secondAttribute="trailing" constant="97" id="nfS-DF-E2y"/>
                             <constraint firstAttribute="centerY" secondItem="VK9-51-FIk" secondAttribute="centerY" constant="0.5" id="p6I-da-8cb"/>
+                            <constraint firstItem="VK9-51-FIk" firstAttribute="trailing" secondItem="zXF-HI-LrD" secondAttribute="trailingMargin" id="sl6-N1-hDM"/>
+                            <constraint firstAttribute="centerX" secondItem="VK9-51-FIk" secondAttribute="centerX" id="wy8-jY-Jo0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0vf-Dj-qtF"/>
+                                <exclude reference="8Th-yQ-Vna"/>
+                                <exclude reference="Miq-9Z-zDj"/>
+                                <exclude reference="nfS-DF-E2y"/>
+                                <exclude reference="p6I-da-8cb"/>
+                                <exclude reference="Fn9-m8-SLP"/>
+                                <exclude reference="OVe-ej-bwe"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="first" id="tyQ-ay-NgW"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="first" id="tyQ-ay-NgW"/>
+                    <connections>
+                        <outlet property="fbLoginView" destination="VK9-51-FIk" id="rYQ-G7-RiX"/>
+                        <segue destination="49e-Tb-3d3" kind="showDetail" identifier="settingsSegueToApp" id="fmT-0g-IGK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KzU-bl-bAL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="96" y="970"/>
+            <point key="canvasLocation" x="-250" y="-1236"/>
         </scene>
         <!--Rides-->
         <scene sceneID="T2h-eW-x8Z">
@@ -505,7 +512,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXu-EQ-yq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="758" y="-1548"/>
         </scene>
     </scenes>
     <resources>
@@ -513,4 +520,7 @@
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0lg-DH-gNC"/>
+    </inferredMetricsTieBreakers>
 </document>
