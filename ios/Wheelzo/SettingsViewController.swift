@@ -73,7 +73,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         println("User Logged Out")
         
         // stops user from navigating away after logging out
-        self.navigationController?.toolbarHidden = true;
+        //self.navigationController?.setNavigationBarHidden(true, animated: true);
         
     }
     

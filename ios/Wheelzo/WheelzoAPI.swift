@@ -178,9 +178,43 @@ class WheelzoAPI: NSObject {
 
     }
     
-    func deleteRide(rideId: int_fast64_t) {
+    func deleteRide(rideId: Int) {
         
-        println("deleteRide unsupported")
+        println("attempting ride deletion")
+        
+        //posts a ride
+        
+        var token = FBSDKAccessToken.currentAccessToken().tokenString
+        
+        var urlPath = "http://staging.wheelzo.com/api/v2/rides/index/\(rideId)"
+        var url: NSURL! = NSURL(string: urlPath)
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "DELETE"
+        
+       
+        // config stuff
+        let tokenHeader = "Fb-Wheelzo-Token"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(token, forHTTPHeaderField: "Fb-Wheelzo-Token")
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                println("error=\(error)")
+                return
+            }
+            
+            println("response = \(response)")
+            
+            let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("responseString = \(responseString)")
+        }
+        task.resume()
+        
+        // end of delete ride
         
     }
     

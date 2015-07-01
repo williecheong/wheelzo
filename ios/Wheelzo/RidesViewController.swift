@@ -22,7 +22,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class RidesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WheelzoAPIProtocol {
+class RidesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, WheelzoAPIProtocol, UISearchBarDelegate {
     
     var api: WheelzoAPI = WheelzoAPI()
     
@@ -33,7 +33,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     // loading checkpoints
     var ridesLoaded: Bool = false;
     
-    var refreshControl: UIRefreshControl!
+    var cellHidden: [Bool]?;
+    
+    //var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +50,10 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         
-        
         // it appears as though the parent frame is bigger than the emulator display window
         
-        
-        refreshControl = UIRefreshControl(frame: CGRectMake(0, 0, 20, 20));
-        refreshControl.tintColor = UIColor.purpleColor();
+//        refreshControl = UIRefreshControl(frame: CGRectMake(0, 0, 20, 20));
+//        refreshControl.tintColor = UIColor.purpleColor();
         
         
         //refreshControl.center = CGPoint(x: (appsTableView!.bounds.width)/2, y: (appsTableView!.bounds.height)/2)
@@ -62,7 +62,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
         
-        appsTableView!.addSubview(refreshControl);
+        //appsTableView!.addSubview(refreshControl);
         
         
 //        self.appsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell");
@@ -88,7 +88,11 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Store the results in our table data array
         //println("Received results")
         //println(results)
-        if results.count>0 {
+        if results.count > 0 {
+            
+            // filter array will be same size as results
+            cellHidden = [Bool](count:  results.count, repeatedValue: false);
+            
             self.tableData = results as NSArray
             self.appsTableView!.reloadData()
         }
@@ -103,9 +107,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:
         NSIndexPath) -> UITableViewCell {
             
-            // LOAD UP THE NIB FILE FOR THE CELL
-//            var cellNib = UINib(nibName:"RideTableCell", bundle: nil);
-            
+            // load the correct nib
             tableView.registerNib(UINib(nibName: "RideTableCell", bundle: nil), forCellReuseIdentifier: "RideTableCell");
             
             // how the app generates the cell in the table
@@ -119,6 +121,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             //Get our data row
             var rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
+            
             
             // all data
             cell.rideData = rowData;
@@ -215,17 +218,31 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
 //            }
             
+            
+            // hides cells that don't match search
+            
+            if (cellHidden?[indexPath.row] == true) {
+                cell.hidden = true;
+            }
+            
             return cell
     }
     
  
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 78;
+        
+        // hides cells that don't match search
+        if (cellHidden?[indexPath.row] == true) {
+            return 0;
+        }
+        
+        // otherwise, resizable height
+        return UITableViewAutomaticDimension;
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 78;
+        return 80;
     }
     
     
@@ -271,12 +288,24 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
 //            var indexPath = tableView.indexPathForSelectedRow;
             
-            
-        
         }
     }
     
-    
+    func searchBar(searchBar: UISearchBar,
+        textDidChange searchText: String) {
+            
+            // do stuff when text in search bar changes
+            
+            // look through table data
+            
+            // filter in any matches
+            
+            // reload table
+            
+            
+        
+            
+    }
     
     
     

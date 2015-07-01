@@ -122,26 +122,26 @@
 		D7114DD91A5F87E100FBF575 /* Wheelzo */ = {
 			isa = PBXGroup;
 			children = (
+				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
+				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
+				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
 				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
 				D759E6D61B4214880043AEC3 /* SettingsViewController.swift */,
 				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
 				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
 				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
-				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
 				D7114DDA1A5F87E100FBF575 /* Supporting Files */,
 				D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */,
 				D7F3165D1A8C9283003C91B3 /* RideModel.swift */,
 				D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */,
 				D7F316611A8C9825003C91B3 /* RidesViewController.swift */,
 				D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */,
-				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
 				D77E4E761B3BB77F009895BF /* RideTableCell.swift */,
 				D7D0533C1B3E738600059EBB /* empty_user.png */,
 				D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */,
 				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
-				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
 				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
 			);
 			path = Wheelzo;

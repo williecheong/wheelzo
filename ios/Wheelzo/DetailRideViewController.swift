@@ -8,7 +8,7 @@
 
 import Foundation
 
-import UIKit;
+import UIKit
 
 class DetailRideViewController: UIViewController , UITableViewDelegate, UITableViewDataSource ,WheelzoAPIProtocol {
     
@@ -129,16 +129,48 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
         return cell;
     }
     
-    @IBAction func buttonPressed(sender: AnyObject) {
+    @IBAction func postCommentButtonPressed(sender: AnyObject) {
         // button press events
         println("button was pressed");
         
         let commentText = postCommentText.text;
-        // todo pull rideId
+
         let rideId = rideData["id"]!.integerValue;
         let userId = rideData["driver_id"]!.integerValue;
         
         api.postComment(commentText, rideId: rideId, userId: userId);
+        
+    }
+    
+    @IBAction func deleteButtonPressed(sender: AnyObject) {
+
+        println("delete button was pressed");
+        
+        let rideId = rideData["id"]!.integerValue;
+        let userId = rideData["driver_id"]!.integerValue;
+        
+
+        var deleteAlert = UIAlertController(title: "Delete Ride?", message: "There is no going back.", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
+            println("Handle Ok logic here")
+            
+            // delete ride from server
+            self.api.deleteRide(rideId);
+            
+            // perform segue back to ride list
+            self.navigationController!.popToRootViewControllerAnimated(true);
+            
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+            println("Handle Cancel Logic here")
+            
+            // do nothing
+            
+        }))
+        
+        presentViewController(deleteAlert, animated: true, completion: nil)
         
     }
     
