@@ -18,6 +18,8 @@
                         <rect key="frame" x="0.0" y="4" width="69" height="69"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="v9w-LQ-YFu" secondAttribute="height" multiplier="1:1" id="0bZ-Mj-ZOw"/>
+                            <constraint firstAttribute="height" constant="69" id="d9w-wM-kSi"/>
+                            <constraint firstAttribute="width" constant="69" id="s0z-eB-Z3s"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BF-JN-VRD">

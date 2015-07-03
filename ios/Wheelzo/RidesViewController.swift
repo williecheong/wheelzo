@@ -8,15 +8,6 @@
 
 import Foundation
 
-
-//
-//  FirstViewController.swift
-//  Wheelzo
-//
-//  Created by Maksym Pikhteryev on 2015-01-08.
-//  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved.
-//
-
 import UIKit
 
 import FBSDKCoreKit
@@ -47,11 +38,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         if(ridesLoaded == false) {
             api.getCurrentRides();
             ridesLoaded = true;
-            filteredTableData = tableData;
         } else {
             
         }
-        
         
         // it appears as though the parent frame is bigger than the emulator display window
         
@@ -69,6 +58,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
 //        self.appsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell");
+        
+        println(filteredTableData)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -80,6 +72,8 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             performSegueWithIdentifier("segueToLogin", sender: self);
         }
+
+        appsTableView?.reloadData();
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,6 +91,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             cellHidden = [Bool](count:  results.count, repeatedValue: false);
             
             self.tableData = results as! [NSDictionary]
+            
+            filteredTableData = tableData;
+            
             self.appsTableView!.reloadData()
         }
     }
@@ -104,7 +101,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     //table view functions
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("rowcount \(filteredTableData.count)")
         return filteredTableData.count
     }
     
@@ -159,9 +155,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             formatString = "EEEE";
             dateFormatter.dateFormat = formatString;
             cell.dayLabel.text = dateFormatter.stringFromDate(dateObject!);
-            
-            
-//            cell.dateLabel.text = rowData["start"] as String?;
             
             
             // Start by setting the cell's image to a static file
@@ -221,13 +214,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
                 
 //            }
             
-            
-            // hides cells that don't match search
-            
-//            if (cellHidden?[indexPath.row] == true) {
-//                cell.hidden = true;
-//            }
-            
             return cell
     }
     
@@ -235,17 +221,12 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        // hides cells that don't match search
-//        if (cellHidden?[indexPath.row] == true) {
-//            return 0;
-//        }
-        
         // otherwise, resizable height
         return UITableViewAutomaticDimension;
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120;
+        return 78;
     }
     
     
@@ -298,13 +279,17 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func searchBar(searchBar: UISearchBar,
         textDidChange searchText: String) {
             
-            println("searching...")
-            
             // filter in any matches
             filterContentForSearchText(searchText);
 
             // reload table
+            println("reload")
             self.appsTableView?.reloadData();
+            
+            // custom animations
+            
+//            self.appsTableView?.reloadRowsAtIndexPaths(self.appsTableView!.indexPathsForVisibleRows()!,
+//                withRowAnimation: UITableViewRowAnimation.Fade);
     }
     
     // helper function to search rides
@@ -312,27 +297,46 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func filterContentForSearchText(searchText: String) {
         
         if searchText.isEmpty {
+
             self.filteredTableData = self.tableData;
+            
+            return
         }
         
         // Filter the array using the filter method
         self.filteredTableData = self.tableData.filter{( rowData: NSDictionary) -> Bool in
-            //let categoryMatch = (scope == "All") || (rowData.category == scope)
             
-            let searchableFields = ["capacity", "destination", "origin", "start", "price", "drop_offs"]
+            let searchableFields = ["capacity", "destination", "origin", "start", "price"]
             
             for field in searchableFields {
                 
                 var stringMatch : NSRange? = rowData.valueForKey(field)!.rangeOfString(searchText);
                 
-                if (stringMatch != nil) {
+                // if there is a partial match
+                if (stringMatch?.length > 0) {
                     return true
                 }
+                
+//                println(field)
+                
+                //println(rowData)
+                
+//                if ((rowData.valueForKey(field)!.isEqualToString(searchText)) == true) {
+//                    println(rowData)
+//                    return true;
+//                }
+
+                
             }
             
             // if no match, returns false
+            
+//            println("returning false")
             return false;
-        }
+        } // end of filter
+        
+//        println("filtered data:")
+//        println(self.filteredTableData)
         
     }
     

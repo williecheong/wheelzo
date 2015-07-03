@@ -109,10 +109,12 @@ class WheelzoAPI: NSObject {
     
     func getCurrentRides() {
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/rides"
-        var url: NSURL! = NSURL(string: urlPath)
-        var request: NSURLRequest = NSURLRequest(URL: url)
-        var connection: NSURLConnection! = NSURLConnection(request: request,
+        let urlPath = "http://staging.wheelzo.com/api/v2/rides"
+        let url: NSURL! = NSURL(string: urlPath)
+        let request = NSMutableURLRequest(URL: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let connection: NSURLConnection! = NSURLConnection(request: request,
             delegate: self, startImmediately: false)
         
         println("Requesting: \(urlPath)")
