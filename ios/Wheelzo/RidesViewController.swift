@@ -27,7 +27,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     var api: WheelzoAPI = WheelzoAPI()
     
     @IBOutlet var appsTableView : UITableView?
-    var tableData: NSArray = NSArray()
+    var tableData: [NSDictionary] = [NSDictionary]()
+    var filteredTableData: [NSDictionary] = [NSDictionary]()
+
     var imageCache = NSMutableDictionary()
     
     // loading checkpoints
@@ -45,6 +47,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         if(ridesLoaded == false) {
             api.getCurrentRides();
             ridesLoaded = true;
+            filteredTableData = tableData;
         } else {
             
         }
@@ -93,7 +96,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             // filter array will be same size as results
             cellHidden = [Bool](count:  results.count, repeatedValue: false);
             
-            self.tableData = results as NSArray
+            self.tableData = results as! [NSDictionary]
             self.appsTableView!.reloadData()
         }
     }
@@ -101,7 +104,8 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     //table view functions
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
+        println("rowcount \(filteredTableData.count)")
+        return filteredTableData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:
@@ -120,8 +124,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             
             //Get our data row
-            var rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
-            
+            var rowData: NSDictionary = self.filteredTableData[indexPath.row] as NSDictionary
             
             // all data
             cell.rideData = rowData;
@@ -221,9 +224,9 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             // hides cells that don't match search
             
-            if (cellHidden?[indexPath.row] == true) {
-                cell.hidden = true;
-            }
+//            if (cellHidden?[indexPath.row] == true) {
+//                cell.hidden = true;
+//            }
             
             return cell
     }
@@ -233,16 +236,16 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         // hides cells that don't match search
-        if (cellHidden?[indexPath.row] == true) {
-            return 0;
-        }
+//        if (cellHidden?[indexPath.row] == true) {
+//            return 0;
+//        }
         
         // otherwise, resizable height
         return UITableViewAutomaticDimension;
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80;
+        return 120;
     }
     
     
@@ -276,7 +279,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             svc.rideData = senderCell.rideData;
             
             svc.image = senderCell.profilePic.image!;
-              
             
             
             // or do we need .image?
@@ -291,21 +293,49 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    // seatch bar delegate
+    
     func searchBar(searchBar: UISearchBar,
         textDidChange searchText: String) {
             
-            // do stuff when text in search bar changes
-            
-            // look through table data
+            println("searching...")
             
             // filter in any matches
-            
+            filterContentForSearchText(searchText);
+
             // reload table
-            
-            
-        
-            
+            self.appsTableView?.reloadData();
     }
+    
+    // helper function to search rides
+    
+    func filterContentForSearchText(searchText: String) {
+        
+        if searchText.isEmpty {
+            self.filteredTableData = self.tableData;
+        }
+        
+        // Filter the array using the filter method
+        self.filteredTableData = self.tableData.filter{( rowData: NSDictionary) -> Bool in
+            //let categoryMatch = (scope == "All") || (rowData.category == scope)
+            
+            let searchableFields = ["capacity", "destination", "origin", "start", "price", "drop_offs"]
+            
+            for field in searchableFields {
+                
+                var stringMatch : NSRange? = rowData.valueForKey(field)!.rangeOfString(searchText);
+                
+                if (stringMatch != nil) {
+                    return true
+                }
+            }
+            
+            // if no match, returns false
+            return false;
+        }
+        
+    }
+    
     
     
     
