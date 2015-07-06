@@ -32,6 +32,7 @@
 		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
 		D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */; };
 		D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */; };
+		D7FFD56A1B4B05DD00D309BE /* WheeloCommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailRideViewController.swift; sourceTree = "<group>"; };
 		D7FE12BC1A78C96B00677231 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheeloCommentAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,15 +125,16 @@
 			isa = PBXGroup;
 			children = (
 				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
+				D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */,
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
 				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
 				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
+				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
 				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
 				D759E6D61B4214880043AEC3 /* SettingsViewController.swift */,
 				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
 				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
-				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
 				D7114DDA1A5F87E100FBF575 /* Supporting Files */,
 				D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */,
 				D7F3165D1A8C9283003C91B3 /* RideModel.swift */,
@@ -294,6 +297,7 @@
 				D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */,
 				D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */,
 				D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */,
+				D7FFD56A1B4B05DD00D309BE /* WheeloCommentAPI.swift in Sources */,
 				D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */,
 				D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */,
 				D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */,

@@ -57,7 +57,17 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         }
     }
     
-    func didRecieveResponse(results: NSArray) {
+    func didRecieveRideResponse(results: NSArray) {
+        
+        // not needed here
+        
+        println("ride post recieved response")
+    }
+    
+    func didRecieveUserResponse(results: NSArray) {
+        
+        // not needed here
+        
         println("ride post recieved response")
     }
     

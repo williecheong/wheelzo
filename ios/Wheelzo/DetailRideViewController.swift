@@ -10,7 +10,8 @@ import Foundation
 
 import UIKit
 
-class DetailRideViewController: UIViewController , UITableViewDelegate, UITableViewDataSource ,WheelzoAPIProtocol {
+class DetailRideViewController: UIViewController , UITableViewDelegate, UITableViewDataSource,
+WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     
     // class that will show a detailed view of a ride that is clicked on the wheelzo table
     
@@ -29,10 +30,13 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
     
     @IBOutlet var postCommentText: UITextField!;
     @IBOutlet var postCommentButton: UIButton!;
+    
+    @IBOutlet var deleteRideButton: UIButton!;
 
 
-    // wheelzo api
+    // wheelzo apis
     var api: WheelzoAPI = WheelzoAPI()
+    var commentApi: WheelzoCommentAPI = WheelzoCommentAPI()
 
     
     // data passed from ride list view to detail view
@@ -55,14 +59,33 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
         
         profilePic.image = image;
         
+        // grab wheelzo driver id
+        let driverId = rideData["driver_id"] as! String;
+        
         
         println(rideData)
         
         api.delegate = self;
+        commentApi.delegate = self;
+        
         var rideId = rideData["id"]!.integerValue;
         println(rideData["id"])
         println(rideId)
-        api.getComments(rideId);
+        
+        
+        // gets the driver data
+        api.getUserFromUserId(driverId.toInt()!);
+        
+        
+        commentApi.getComments(rideId);
+        
+        
+        
+        // get fb user
+        
+        // get driver user
+        
+        // if they are the same, display delete button, otherwise hide it
         
         
     }
@@ -73,9 +96,43 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
         commentsTableView.reloadData();
     }
     
-    func didRecieveResponse(results: NSArray) {
+    func didRecieveRideResponse(results: NSArray) {
+        // not used
+    }
+    
+    func didRecieveUserResponse(results: NSArray) {
         
-        println("detail recieved response")
+        if results.count>0 {
+            
+            // should be an array of one
+            println("found user")
+            
+            var userData = results.firstObject as! NSDictionary
+
+            
+            var wheelzoId = userData["id"] as! String;
+            var fbId = userData["facebook_id"] as! String;
+            
+            // if this is not the same as the person logged in, hide the delete button
+            if (fbId != FBSDKAccessToken.currentAccessToken().userID) {
+                
+                println("the driver is not logged in! will hide delete button")
+                deleteRideButton.hidden = true;
+                
+            }
+            
+            setProfilePicFromFbId(fbId);
+            
+            self.commentsTableView!.reloadData()
+        }
+        
+        
+        // not used? can probably just pass data through the table cell
+    }
+    
+    func didRecieveCommentResponse(results: NSArray) {
+        
+        println("detail recieved comment response")
         
         // comments loaded or posted new comment
         
@@ -85,6 +142,8 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
             self.tableData = results as NSArray
             self.commentsTableView!.reloadData()
         }
+        
+        // todo: once comment data is recieved, load user data for every comment
         
         commentsTableView.reloadData()
     }
@@ -122,6 +181,18 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
 
             
             cell.commentLabel.text = rowData["comment"] as! String?;
+            cell.dateLabel.text = rowData["last_updated"] as! String?;
+            
+            
+            // todo: look up the user info for the comments (should do after comments have loaded)
+            
+            var namePlaceholder = "user id: ";
+            namePlaceholder += rowData["user_id"] as! String;
+            
+            cell.nameLabel.text = namePlaceholder;
+            
+            
+            setProfilePicForCommentUsingFbId("4", indexPath: indexPath)
             
             println("loaded cell")
             
@@ -138,7 +209,7 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
         let rideId = rideData["id"]!.integerValue;
         let userId = rideData["driver_id"]!.integerValue;
         
-        api.postComment(commentText, rideId: rideId, userId: userId);
+        commentApi.postComment(commentText, rideId: rideId, userId: userId);
         
     }
     
@@ -173,5 +244,80 @@ class DetailRideViewController: UIViewController , UITableViewDelegate, UITableV
         presentViewController(deleteAlert, animated: true, completion: nil)
         
     }
+    
+    
+    func setProfilePicFromFbId(fbId: String) {
+        
+        // fb picture lookup
+        
+        // todo need to convert driverId to fbId
+        
+        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
+        
+        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+        let imgUrl = NSURL(string: urlString)
+        
+        let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
+        let mainQueue = NSOperationQueue.mainQueue()
+        NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+            if error == nil {
+                // Convert the downloaded data in to a UIImage object
+                let image = UIImage(data: data)
+                // Store the image in to our cache
+                //self.imageCache[urlString] = image
+                // Update the cell
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    self.profilePic.image = image;
+                    
+                })
+            }
+            else {
+                println("Error: \(error.localizedDescription)")
+            }
+        });
+        // end of network request
+        
+    }
+    
+    func setProfilePicForCommentUsingFbId(fbId: String, indexPath: NSIndexPath) {
+        
+        // fb picture lookup
+        
+        // todo need to convert driverId to fbId
+        
+        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
+        
+        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+        let imgUrl = NSURL(string: urlString)
+        
+        let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
+        let mainQueue = NSOperationQueue.mainQueue()
+        NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+            if error == nil {
+                // Convert the downloaded data in to a UIImage object
+                let image = UIImage(data: data)
+                // Store the image in to our cache
+                //self.imageCache[urlString] = image
+                // Update the cell
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // grab correct cell
+                    let cell = self.commentsTableView.cellForRowAtIndexPath(indexPath) as! CommentsTableCell;
+                    
+                    cell.profilePic.image = image;
+                    
+                })
+            }
+            else {
+                println("Error: \(error.localizedDescription)")
+            }
+        });
+        // end of network request
+        
+        
+    }
+    
+    
     
 }

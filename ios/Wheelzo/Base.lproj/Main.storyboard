@@ -251,6 +251,7 @@
                     <connections>
                         <outlet property="commentsTableView" destination="cEb-ac-dPI" id="bq1-Mb-lPX"/>
                         <outlet property="dateLabel" destination="Kw7-dy-9Ji" id="PsO-Gv-pjF"/>
+                        <outlet property="deleteRideButton" destination="paO-sb-ZL9" id="SD6-d0-9P3"/>
                         <outlet property="fromLabel" destination="D54-qg-l6B" id="xMl-Vf-KCC"/>
                         <outlet property="nameLabel" destination="Jt1-oN-aOA" id="93p-aA-80X"/>
                         <outlet property="postCommentButton" destination="byh-cL-cfD" id="2GM-3N-xaf"/>
@@ -399,13 +400,22 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="3SH-xg-EvB" secondAttribute="centerX" constant="-0.5" id="rLg-qg-sjw"/>
                             <constraint firstAttribute="centerY" secondItem="3SH-xg-EvB" secondAttribute="centerY" constant="0.5" id="xTs-Fl-qAV"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="CZe-CI-kjZ" appends="YES" id="6iP-ST-zc7"/>
+                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Stg-bR-kVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="CZe-CI-kjZ">
+                    <connections>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="tapToNavBar" id="gkd-OH-9tL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1577" y="-137"/>
         </scene>
@@ -536,6 +546,7 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LIr-Oo-mqC"/>
+        <segue reference="gkd-OH-9tL"/>
+        <segue reference="0lg-DH-gNC"/>
     </inferredMetricsTieBreakers>
 </document>

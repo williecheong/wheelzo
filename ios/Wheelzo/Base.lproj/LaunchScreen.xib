@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,11 +18,20 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPZ-S4-VMk">
-                    <rect key="frame" x="113" y="112" width="255" height="255"/>
+                    <rect key="frame" x="161" y="160" width="159" height="159"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="255" id="08q-9v-np3"/>
+                        <constraint firstAttribute="height" constant="159" id="Zzr-Bd-iRt"/>
                         <constraint firstAttribute="width" constant="255" id="j1O-YI-i0V"/>
+                        <constraint firstAttribute="width" secondItem="uPZ-S4-VMk" secondAttribute="height" multiplier="1:1" id="qPx-yl-Bqv"/>
+                        <constraint firstAttribute="width" constant="159" id="y0m-Ve-iJv"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="08q-9v-np3"/>
+                            <exclude reference="j1O-YI-i0V"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

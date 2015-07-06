@@ -81,7 +81,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    func didRecieveResponse(results: NSArray) {
+    func didRecieveRideResponse(results: NSArray) {
         // Store the results in our table data array
         //println("Received results")
         //println(results)
@@ -98,6 +98,28 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    func didRecieveUserResponse(results: NSArray) {
+        // Store the results in our table data array
+        //println("Received results")
+        //println(results)
+        if results.count > 0 {
+            
+            println("recieved user response")
+            
+            // should be an array of size 1
+            
+            
+            // filter array will be same size as results
+//            cellHidden = [Bool](count:  results.count, repeatedValue: false);
+//            
+//            self.tableData = results as! [NSDictionary]
+//            
+//            filteredTableData = tableData;
+//            
+//            self.appsTableView!.reloadData()
+        }
+    }
+
     //table view functions
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -220,7 +242,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
  
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
         // otherwise, resizable height
         return UITableViewAutomaticDimension;
     }
@@ -283,7 +304,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             filterContentForSearchText(searchText);
 
             // reload table
-            println("reload")
             self.appsTableView?.reloadData();
             
             // custom animations
@@ -339,8 +359,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
 //        println(self.filteredTableData)
         
     }
-    
-    
     
     
 //    func setImageOfCell(tableView: UITableView, cell: UITableViewCell) {
