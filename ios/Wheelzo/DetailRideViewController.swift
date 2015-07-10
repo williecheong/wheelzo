@@ -184,15 +184,27 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
             cell.dateLabel.text = rowData["last_updated"] as! String?;
             
             
+            cell.profilePic.image = UIImage(named: "empty_user");
+            
             // todo: look up the user info for the comments (should do after comments have loaded)
             
             var namePlaceholder = "user id: ";
             namePlaceholder += rowData["user_id"] as! String;
             
+            let userId = rowData["user_id"] as! String;
+            
             cell.nameLabel.text = namePlaceholder;
             
             
-            setProfilePicForCommentUsingFbId("4", indexPath: indexPath)
+            // update pics
+
+            {
+                self.api.syncGetFbIdFromUserId(userId)
+            } ~> {
+                self.setProfilePicForCommentUsingFbId($0, indexPath: indexPath)
+            };
+            
+ 
             
             println("loaded cell")
             

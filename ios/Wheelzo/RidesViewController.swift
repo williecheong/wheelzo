@@ -28,7 +28,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var cellHidden: [Bool]?;
     
-    //var refreshControl: UIRefreshControl!
+    var refreshControl: UIRefreshControl!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +42,13 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
         }
         
+        
         // it appears as though the parent frame is bigger than the emulator display window
         
-//        refreshControl = UIRefreshControl(frame: CGRectMake(0, 0, 20, 20));
-//        refreshControl.tintColor = UIColor.purpleColor();
+        refreshControl = UIRefreshControl(frame: CGRectMake(0, 0, 20, 20));
+        refreshControl.tintColor = UIColor.purpleColor();
+        
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
         
         //refreshControl.center = CGPoint(x: (appsTableView!.bounds.width)/2, y: (appsTableView!.bounds.height)/2)
@@ -54,13 +57,20 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         
         
-        //appsTableView!.addSubview(refreshControl);
+        appsTableView!.addSubview(refreshControl);
         
-        
-//        self.appsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell");
         
         println(filteredTableData)
         
+    }
+    
+    func refresh(sender:AnyObject) {
+        // when user pulls to refresh
+        api.getCurrentRides();
+        
+        appsTableView?.reloadData();
+        
+        self.refreshControl.endRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -157,8 +167,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             let dateString = rowData["start"] as! String;
             
-            
-            
             // date formatting
             var dateFormatter = NSDateFormatter();
             
@@ -188,41 +196,51 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             cell.profilePic.clipsToBounds = true;
 
-            
+
             // api for fb picture lookup
             
-            // todo need to convert driverId to fbId
-
-            var fbUserID = 4; //WheelzoAPI.getUserFromUserId(driverIdInt);
+            let driverId = rowData["driver_id"] as! String;
             
-            var urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
-            var imgUrl = NSURL(string: urlString)
+            {
+                self.api.syncGetFbIdFromUserId(driverId)
+            } ~> {
+                
+                // grabs id from closure
+                var fbUserID = $0;
+                
+                var urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+                var imgUrl = NSURL(string: urlString)
 
-            let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
-            let mainQueue = NSOperationQueue.mainQueue()
-            NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
-                if error == nil {
-                    // Convert the downloaded data in to a UIImage object
-                    let image = UIImage(data: data)
-                    // Store the image in to our cache
-                    //self.imageCache[urlString] = image
-                    // Update the cell
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? RideTableCell {
-                            tableView.beginUpdates();
-                            cellToUpdate.profilePic.image = image;
-                            //cellToUpdate.profilePic.layer.cornerRadius = cellToUpdate.profilePic.image!.size.height/2;
+                let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
+                let mainQueue = NSOperationQueue.mainQueue()
+                NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+                    if error == nil {
+                        // Convert the downloaded data in to a UIImage object
+                        let image = UIImage(data: data)
+                        // Store the image in to our cache
+                        //self.imageCache[urlString] = image
+                        // Update the cell
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? RideTableCell {
+                                tableView.beginUpdates();
+                                cellToUpdate.profilePic.image = image;
+                                //cellToUpdate.profilePic.layer.cornerRadius = cellToUpdate.profilePic.image!.size.height/2;
 
-                            
-                            tableView.endUpdates();
-                        }
-                    })
-                }
-                else {
-                    println("Error: \(error.localizedDescription)")
-                }
-            });
-            // end of network request
+                                
+                                tableView.endUpdates();
+                            }
+                        })
+                        
+                        
+                        
+                    } else {
+                        println("Error: \(error.localizedDescription)")
+                    }
+                });
+                // end of network request
+            
+            } // end of async
+    
             
 //            if (tableData.count == tableView.indexPathsForVisibleRows()?.count && indexPath.row == tableView.indexPathsForVisibleRows()?.last?.row) {
                 // runs on last cell update

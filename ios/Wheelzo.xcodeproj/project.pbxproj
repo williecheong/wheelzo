@@ -22,6 +22,7 @@
 		D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D759E6D61B4214880043AEC3 /* SettingsViewController.swift */; };
 		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
 		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
+		D7C577DD1B4F810300B1030F /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C577DC1B4F810300B1030F /* Threading.swift */; };
 		D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */; };
 		D7D0533D1B3E738600059EBB /* empty_user.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533C1B3E738600059EBB /* empty_user.png */; };
 		D7D0533F1B3E738E00059EBB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo.png */; };
@@ -65,6 +66,7 @@
 		D759E6D61B4214880043AEC3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
 		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
+		D7C577DC1B4F810300B1030F /* Threading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
 		D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D7D0533C1B3E738600059EBB /* empty_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_user.png; sourceTree = "<group>"; };
 		D7D0533E1B3E738E00059EBB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Wheelzo/logo.png; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */,
 				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
 				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
+				D7C577DC1B4F810300B1030F /* Threading.swift */,
 			);
 			path = Wheelzo;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */,
 				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
 				D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */,
+				D7C577DD1B4F810300B1030F /* Threading.swift in Sources */,
 				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

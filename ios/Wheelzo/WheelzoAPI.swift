@@ -125,6 +125,30 @@ class WheelzoAPI: NSObject {
         connection.start()
     }
     
+    func syncGetFbIdFromUserId(userId: String) -> String {
+        
+        let urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
+        let url: NSURL = NSURL(string: urlPath)!
+        let request1: NSURLRequest = NSURLRequest(URL: url)
+        
+        var response: AutoreleasingUnsafeMutablePointer<NSURLResponse? >= nil
+        var error: NSErrorPointer = nil
+        var dataVal: NSData =  NSURLConnection.sendSynchronousRequest(request1, returningResponse: response, error:nil)!
+        var err: NSError
+        
+        
+        var userArray: NSArray = NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
+
+        let userData = userArray.firstObject as! NSDictionary
+        
+        let fbid = userData["facebook_id"] as! String;
+        
+        println("got data \(fbid)")
+        
+        return userData["facebook_id"] as! String;
+        
+    }
+    
     // ride stuff
     
     func getCurrentRides() {
