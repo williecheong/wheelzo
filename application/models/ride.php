@@ -120,7 +120,17 @@ class ride extends CI_Model{
     function retrieve( $data = array() ){
         $this->db->where($data);
         $query = $this->db->get('ride');
-        return $query->result();
+        
+        $rides = $query->result();
+        if (count($rides) > 0) {
+           foreach ($rides as $key => $ride) {
+                $user = $this->user->retrieve_by_id($ride->driver_id);
+                if ($user) {
+                    $rides[$key]->facebook_id = $user->facebook_id;
+                }
+            } 
+        }
+        return $rides;
     }
     
     function update( $criteria = array(), $new_data = array() ){
