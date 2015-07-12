@@ -32,6 +32,7 @@ class comment extends CI_Model{
            foreach ($comments as $key => $ride) {
                 $user = $this->user->retrieve_by_id($ride->user_id);
                 if ($user) {
+                    $comments[$key]->user_name = $user->name;
                     $comments[$key]->user_facebook_id = $user->facebook_id;
                 }
             } 
