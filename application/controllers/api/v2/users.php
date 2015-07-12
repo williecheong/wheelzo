@@ -15,6 +15,23 @@ class Users extends API_Controller {
         return;
     }
 
+    public function session_get() {
+        $user_id = 0;
+        if ($this->wheelzo_user_id) {
+            $user_id = (int) $this->wheelzo_user_id;
+        }
+
+        $output = array(
+            "user_id" => $user_id,
+            "facebook_url" => $this->facebook_url
+        );
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($output);
+        return;
+    }
+
     public function index_get( $current = false ) {
         $users = array();
         if ( $current ) { // request is coming in from a route

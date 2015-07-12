@@ -50,24 +50,25 @@ class Facebook_import extends API_Controller {
 
                 $response_data = $response_data + $response->data;
                 foreach ($response->data as $key => $posting) {
+                    
                     if ( !isset($posting->from->id) ) {
                         continue;
                     }
-
+                    
                     $driver = $this->user->retrieve_by_fb( $posting->from->id );
                     
                     if ( !$driver ) { // Check to see if this is a wheelzo user
                         continue;
                     }
-
+                    
                     if ( !isset($posting->id) ) {
                         continue;
                     }
-
+                    
                     if ( $this->facebook_ride->retrieve_by_fb($posting->id) ) { // Check to see if this posting has been made before
                         continue;
                     }
-
+                    
                     $url = "http://ec2-54-148-33-40.us-west-2.compute.amazonaws.com:3000/nlpApi";
                     $type = "POST";
                     $params = (object) array(
@@ -83,7 +84,7 @@ class Facebook_import extends API_Controller {
                         $postings[] = $posting; 
                         continue;
                     }
-
+                    
                     if ( !$this->_validate_processedRide_exists($processed_ride) ) { // This must be a passenger posting
                         continue;
                     }
