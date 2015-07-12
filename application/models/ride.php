@@ -126,7 +126,7 @@ class ride extends CI_Model{
            foreach ($rides as $key => $ride) {
                 $user = $this->user->retrieve_by_id($ride->driver_id);
                 if ($user) {
-                    $rides[$key]->facebook_id = $user->facebook_id;
+                    $rides[$key]->driver_facebook_id = $user->facebook_id;
                 }
             } 
         }

@@ -27,7 +27,16 @@ class comment extends CI_Model{
         $this->db->where($data);
         $this->db->order_by('last_updated', 'asc');
         $query = $this->db->get('comment');
-        return $query->result();
+        $comments = $query->result();
+        if (count($comments) > 0) {
+           foreach ($comments as $key => $ride) {
+                $user = $this->user->retrieve_by_id($ride->user_id);
+                if ($user) {
+                    $comments[$key]->user_facebook_id = $user->facebook_id;
+                }
+            } 
+        }
+        return $comments;
     }
     
     function update( $criteria = array(), $new_data = array() ){
