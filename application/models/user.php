@@ -110,6 +110,20 @@ class user extends CI_Model{
         }
     }
 
+    function retrieve_by_name( $name = '' ) {
+        $objects = $this->user->retrieve(
+            array(
+                'name' => $name
+            )
+        );
+
+        if ( count($objects) > 0 ) {
+            return $objects[0];
+        } else {
+            return false;
+        }
+    }
+
     function retrieve_by_fb( $facebook_id = 0 ) {
         $objects = $this->user->retrieve(
             array(
