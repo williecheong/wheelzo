@@ -68,18 +68,20 @@ class user extends CI_Model{
                 'facebook_id' => $facebook_id
             )
         );
+
+        $facebook_profile = $this->facebook->api('/me');
         
         if ( count($availability) > 0 ) {
             // user exists, 
             // update image and name
             // update last_active for last login
-            $facebook_profile = $this->facebook->api('/me');
             $this->user->update(
                 array(
                     'id' => $availability[0]->id
                 ),
                 array(
                     'name' =>$facebook_profile['name'],
+                    'email' => ( isset($facebook_profile['email']) ) ? $facebook_profile['email'] : '',
                     'notifications' => '',
                     'last_login' => date( 'Y-m-d H:i:s' )
                 )
@@ -90,7 +92,6 @@ class user extends CI_Model{
         } else {
             // user does not exist yet.
             // put this facebook person inside our database
-            $facebook_profile = $this->facebook->api('/me');
             $user_id = $this->user->create(
                 array(
                     'name' => $facebook_profile['name'],
