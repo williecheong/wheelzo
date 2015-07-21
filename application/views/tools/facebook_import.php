@@ -26,7 +26,7 @@
             <div class="row">
                 <form class="col-lg-7">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Facebook Access Token..." ng-model="accessToken" ng-disabled="loading">
+                        <input type="text" class="form-control" placeholder="Facebook Access Token..." ng-model="accessToken" ng-init="accessToken='<?=$accessToken?>'" ng-disabled="loading">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" ng-click="retrievePosts(accessToken)" ng-disabled="loading">
                                 <i class="fa fa-facebook-square fa-lg"></i>

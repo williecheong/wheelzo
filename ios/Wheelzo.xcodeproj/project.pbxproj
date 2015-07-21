@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE21A5F87E100FBF575 /* Main.storyboard */; };
+		D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE51A5F87E100FBF575 /* Images.xcassets */; };
+		D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */; };
+		D7114DF51A5F87E100FBF575 /* WheelzoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */; };
+		D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114E071A60475000FBF575 /* WheelzoAPI.swift */; };
+		D71E3B271B40D59000A32EDC /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B251B40D59000A32EDC /* logo120.png */; };
+		D71E3B281B40D59000A32EDC /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B261B40D59000A32EDC /* logo180.png */; };
+		D73FD7741B40822000943498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7731B40822000943498 /* AppDelegate.swift */; };
+		D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7751B40AE4800943498 /* PostRideViewController.swift */; };
+		D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */ = {isa = PBXBuildFile; fileRef = D74CEDDB1B38976100FE7A86 /* Blank52.png */; };
+		D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */; };
+		D759E6D51B41E30E0043AEC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */; };
+		D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D759E6D61B4214880043AEC3 /* SettingsViewController.swift */; };
+		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
+		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
+		D7C577DD1B4F810300B1030F /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C577DC1B4F810300B1030F /* Threading.swift */; };
+		D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */; };
+		D7D0533D1B3E738600059EBB /* empty_user.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533C1B3E738600059EBB /* empty_user.png */; };
+		D7D0533F1B3E738E00059EBB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo.png */; };
+		D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */; };
+		D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D053421B3EF13300059EBB /* CommentsTableCell.swift */; };
+		D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165D1A8C9283003C91B3 /* RideModel.swift */; };
+		D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */; };
+		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
+		D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */; };
+		D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */; };
+		D7FFD56A1B4B05DD00D309BE /* WheeloCommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D7114DEF1A5F87E100FBF575 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7114DCF1A5F87E100FBF575 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7114DD61A5F87E100FBF575;
+			remoteInfo = Wheelzo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D7114DD71A5F87E100FBF575 /* Wheelzo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wheelzo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7114DDB1A5F87E100FBF575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7114DE31A5F87E100FBF575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D7114DE51A5F87E100FBF575 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D7114DE81A5F87E100FBF575 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D7114DEE1A5F87E100FBF575 /* WheelzoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WheelzoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7114DF31A5F87E100FBF575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelzoTests.swift; sourceTree = "<group>"; };
+		D7114E071A60475000FBF575 /* WheelzoAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelzoAPI.swift; sourceTree = "<group>"; };
+		D71E3B251B40D59000A32EDC /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo120.png; path = Wheelzo/logo120.png; sourceTree = "<group>"; };
+		D71E3B261B40D59000A32EDC /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo180.png; path = Wheelzo/logo180.png; sourceTree = "<group>"; };
+		D73FD7731B40822000943498 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D73FD7751B40AE4800943498 /* PostRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRideViewController.swift; sourceTree = "<group>"; };
+		D74CEDDB1B38976100FE7A86 /* Blank52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blank52.png; sourceTree = "<group>"; };
+		D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D759E6D61B4214880043AEC3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
+		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
+		D7C577DC1B4F810300B1030F /* Threading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
+		D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		D7D0533C1B3E738600059EBB /* empty_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_user.png; sourceTree = "<group>"; };
+		D7D0533E1B3E738E00059EBB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Wheelzo/logo.png; sourceTree = "<group>"; };
+		D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableCell.xib; sourceTree = "<group>"; };
+		D7D053421B3EF13300059EBB /* CommentsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableCell.swift; sourceTree = "<group>"; };
+		D7F3165D1A8C9283003C91B3 /* RideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
+		D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		D7F316611A8C9825003C91B3 /* RidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RidesViewController.swift; sourceTree = "<group>"; };
+		D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
+		D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailRideViewController.swift; sourceTree = "<group>"; };
+		D7FE12BC1A78C96B00677231 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
+		D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheeloCommentAPI.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D7114DD41A5F87E100FBF575 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D759E6D51B41E30E0043AEC3 /* FBSDKLoginKit.framework in Frameworks */,
+				D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7114DEB1A5F87E100FBF575 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D7114DCE1A5F87E100FBF575 = {
+			isa = PBXGroup;
+			children = (
+				D71E3B251B40D59000A32EDC /* logo120.png */,
+				D71E3B261B40D59000A32EDC /* logo180.png */,
+				D7D0533E1B3E738E00059EBB /* logo.png */,
+				D7114DD91A5F87E100FBF575 /* Wheelzo */,
+				D7114DF11A5F87E100FBF575 /* WheelzoTests */,
+				D7114DD81A5F87E100FBF575 /* Products */,
+				D7FE12BB1A78C68C00677231 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D7114DD81A5F87E100FBF575 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D7114DD71A5F87E100FBF575 /* Wheelzo.app */,
+				D7114DEE1A5F87E100FBF575 /* WheelzoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D7114DD91A5F87E100FBF575 /* Wheelzo */ = {
+			isa = PBXGroup;
+			children = (
+				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
+				D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */,
+				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
+				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
+				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
+				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
+				D73FD7731B40822000943498 /* AppDelegate.swift */,
+				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
+				D759E6D61B4214880043AEC3 /* SettingsViewController.swift */,
+				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
+				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
+				D7114DDA1A5F87E100FBF575 /* Supporting Files */,
+				D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */,
+				D7F3165D1A8C9283003C91B3 /* RideModel.swift */,
+				D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */,
+				D7F316611A8C9825003C91B3 /* RidesViewController.swift */,
+				D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */,
+				D77E4E761B3BB77F009895BF /* RideTableCell.swift */,
+				D7D0533C1B3E738600059EBB /* empty_user.png */,
+				D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */,
+				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
+				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
+				D7C577DC1B4F810300B1030F /* Threading.swift */,
+			);
+			path = Wheelzo;
+			sourceTree = "<group>";
+		};
+		D7114DDA1A5F87E100FBF575 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7114DDB1A5F87E100FBF575 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D7114DF11A5F87E100FBF575 /* WheelzoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */,
+				D7114DF21A5F87E100FBF575 /* Supporting Files */,
+			);
+			path = WheelzoTests;
+			sourceTree = "<group>";
+		};
+		D7114DF21A5F87E100FBF575 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7114DF31A5F87E100FBF575 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D7FE12BB1A78C68C00677231 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */,
+				D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D7114DD61A5F87E100FBF575 /* Wheelzo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7114DF81A5F87E100FBF575 /* Build configuration list for PBXNativeTarget "Wheelzo" */;
+			buildPhases = (
+				D7114DD31A5F87E100FBF575 /* Sources */,
+				D7114DD41A5F87E100FBF575 /* Frameworks */,
+				D7114DD51A5F87E100FBF575 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Wheelzo;
+			productName = Wheelzo;
+			productReference = D7114DD71A5F87E100FBF575 /* Wheelzo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D7114DED1A5F87E100FBF575 /* WheelzoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7114DFB1A5F87E100FBF575 /* Build configuration list for PBXNativeTarget "WheelzoTests" */;
+			buildPhases = (
+				D7114DEA1A5F87E100FBF575 /* Sources */,
+				D7114DEB1A5F87E100FBF575 /* Frameworks */,
+				D7114DEC1A5F87E100FBF575 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D7114DF01A5F87E100FBF575 /* PBXTargetDependency */,
+			);
+			name = WheelzoTests;
+			productName = WheelzoTests;
+			productReference = D7114DEE1A5F87E100FBF575 /* WheelzoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D7114DCF1A5F87E100FBF575 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Maksym Pikhteryev";
+				TargetAttributes = {
+					D7114DD61A5F87E100FBF575 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 9VG5LLE4FD;
+					};
+					D7114DED1A5F87E100FBF575 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = D7114DD61A5F87E100FBF575;
+					};
+				};
+			};
+			buildConfigurationList = D7114DD21A5F87E100FBF575 /* Build configuration list for PBXProject "Wheelzo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D7114DCE1A5F87E100FBF575;
+			productRefGroup = D7114DD81A5F87E100FBF575 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D7114DD61A5F87E100FBF575 /* Wheelzo */,
+				D7114DED1A5F87E100FBF575 /* WheelzoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D7114DD51A5F87E100FBF575 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */,
+				D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */,
+				D7D0533D1B3E738600059EBB /* empty_user.png in Resources */,
+				D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */,
+				D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */,
+				D71E3B271B40D59000A32EDC /* logo120.png in Resources */,
+				D71E3B281B40D59000A32EDC /* logo180.png in Resources */,
+				D7D0533F1B3E738E00059EBB /* logo.png in Resources */,
+				D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */,
+				D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7114DEC1A5F87E100FBF575 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7114DD31A5F87E100FBF575 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D73FD7741B40822000943498 /* AppDelegate.swift in Sources */,
+				D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */,
+				D7F316641A8C983D003C91B3 /* MyRidesViewController.swift in Sources */,
+				D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */,
+				D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */,
+				D7FFD56A1B4B05DD00D309BE /* WheeloCommentAPI.swift in Sources */,
+				D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */,
+				D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */,
+				D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */,
+				D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */,
+				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
+				D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */,
+				D7C577DD1B4F810300B1030F /* Threading.swift in Sources */,
+				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D7114DEA1A5F87E100FBF575 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7114DF51A5F87E100FBF575 /* WheelzoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D7114DF01A5F87E100FBF575 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D7114DD61A5F87E100FBF575 /* Wheelzo */;
+			targetProxy = D7114DEF1A5F87E100FBF575 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D7114DE21A5F87E100FBF575 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7114DE31A5F87E100FBF575 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D7114DE81A5F87E100FBF575 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D7114DF61A5F87E100FBF575 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D7114DF71A5F87E100FBF575 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7114DF91A5F87E100FBF575 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Wheelzo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wheelzo/Bridge-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D7114DFA1A5F87E100FBF575 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Wheelzo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Wheelzo/Bridge-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D7114DFC1A5F87E100FBF575 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WheelzoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wheelzo.app/Wheelzo";
+			};
+			name = Debug;
+		};
+		D7114DFD1A5F87E100FBF575 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = WheelzoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Wheelzo.app/Wheelzo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D7114DD21A5F87E100FBF575 /* Build configuration list for PBXProject "Wheelzo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7114DF61A5F87E100FBF575 /* Debug */,
+				D7114DF71A5F87E100FBF575 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7114DF81A5F87E100FBF575 /* Build configuration list for PBXNativeTarget "Wheelzo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7114DF91A5F87E100FBF575 /* Debug */,
+				D7114DFA1A5F87E100FBF575 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7114DFB1A5F87E100FBF575 /* Build configuration list for PBXNativeTarget "WheelzoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7114DFC1A5F87E100FBF575 /* Debug */,
+				D7114DFD1A5F87E100FBF575 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D7114DCF1A5F87E100FBF575 /* Project object */;
+}
