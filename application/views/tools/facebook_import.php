@@ -36,7 +36,7 @@
                     </div>
                     <p class="text-muted">
                         <i class="fa fa-clock-o"></i>
-                        Token expires around <?=WHEELZO_FACEBOOK_ACCESS_TOKEN_EXPIRY_READ_ONLY?>. Remind Willie to change it when this happens.
+                        Token expires on <?=date('F d, Y', WHEELZO_FACEBOOK_ACCESS_TOKEN_EXPIRY)?>. Remind Willie to change it when this happens.
                     </p>
                     <!--
                     <a href="https://developers.facebook.com/tools/explorer" target="_blank">
