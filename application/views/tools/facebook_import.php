@@ -34,10 +34,16 @@
                             </button>
                         </span>
                     </div>
+                    <p class="text-muted">
+                        <i class="fa fa-clock-o"></i>
+                        Token expires around <?=WHEELZO_FACEBOOK_ACCESS_TOKEN_EXPIRY_READ_ONLY?>. Remind Willie to change it when this happens.
+                    </p>
+                    <!--
                     <a href="https://developers.facebook.com/tools/explorer" target="_blank">
                         <i class="fa fa-external-link"></i>
                         Get my facebook access token
                     </a>
+                    -->
                 </form>
             </div>
             <div class="well well-sm" ng-repeat="(key, posting) in postings" ng-init="  showActiveRides[key]                =   false;
