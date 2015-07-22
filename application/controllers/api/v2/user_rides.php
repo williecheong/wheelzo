@@ -107,9 +107,9 @@ class User_rides extends API_Controller {
                     'driver_facebook_id' => $driver->facebook_id,
                     'driver_name' => $driver->name,
                     
-                    'passenger_id' => $driver->id,
-                    'passenger_facebook_id' => $driver->facebook_id,
-                    'passenger_name' => $driver->name,
+                    'passenger_id' => $passenger->id,
+                    'passenger_facebook_id' => $passenger->facebook_id,
+                    'passenger_name' => $passenger->name,
                     
                     'amount_total' => $amount_total,
                     'amount_wheelzo' => $amount_wheelzo,
