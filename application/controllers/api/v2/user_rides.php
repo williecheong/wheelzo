@@ -96,6 +96,7 @@ class User_rides extends API_Controller {
                 'receipt_email' => $receipt_email,
                 'description' => "USER_RIDE ID: ".$user_ride->id,
                 'metadata' => array(
+                    'source' => $_SERVER['SERVER_NAME'],
                     'assignmentId' => $user_ride->id,
 
                     'rideId' => $ride->id,
@@ -104,16 +105,16 @@ class User_rides extends API_Controller {
                     'start' => $ride->start,
                     
                     'driver_id' => $driver->id,
-                    'driver_facebook_id' => $driver->facebook_id,
+                    'driver_fb' => $driver->facebook_id,
                     'driver_name' => $driver->name,
                     
                     'passenger_id' => $passenger->id,
-                    'passenger_facebook_id' => $passenger->facebook_id,
+                    'passenger_fb' => $passenger->facebook_id,
                     'passenger_name' => $passenger->name,
                     
-                    'amount_total' => $amount_total,
                     'amount_wheelzo' => $amount_wheelzo,
                     'amount_driver' => $amount_driver,
+                    'amount_total' => $amount_total,
                     'commission' => WHEELZO_PAYMENT_COMMISSION
                 )
             );
