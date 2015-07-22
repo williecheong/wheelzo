@@ -19,6 +19,59 @@
 @endsection
 
 @section('jumbotron')
+    <div class="container" id="personal-profile">
+        <header class="jumbotron row">
+            <div class="col-sm-3 text-center">
+                <a target="_blank" href="//facebook.com/{{ $session_user->facebook_id }}" style="margin:0px auto;">
+                    <img class="img-circle img-responsive" id="driver-picture" style="display:block;margin:auto;" src="//graph.facebook.com/{{ $session_user->facebook_id }}/picture?width=200&height=200">
+                </a>
+            </div>
+            <div class="col-sm-9">
+                <div class="visible-xs text-center">
+                    <h3>
+                        Balance: ${{ number_format((float)$session_user->balance, 2, '.', '') }}
+                        <span style="cursor:pointer;" title="Contact the Wheelzo team to withdraw this balance">
+                            <i class="fa fa-info-circle"></i>
+                        </span>
+                    </h3>
+                </div>
+                <div class="hidden-xs">
+                    <?php $exploded_name = explode(' ', $session_user->name ); ?>
+                    <h3 style="margin-top:10px;">
+                        Hello {{ $exploded_name[0] }}, to date you have:
+                    </h3>
+                    <div style="padding-left:20px;">
+                        <li>
+                            Taken a ride with 
+                            {{ $session_user_statistics['total_carpools_taken'] }} 
+                            {{ pluralize($session_user_statistics['total_carpools_taken'], 'other carpooler', 'other carpoolers') }} 
+                        </li>
+                        <li>
+                            Written {{ $session_user_statistics['total_reviews_written'] }}
+                            {{ pluralize($session_user_statistics['total_reviews_written'], 'user review', 'user reviews') }} 
+                            and {{ $session_user_statistics['total_comments'] }} 
+                            {{ pluralize($session_user_statistics['total_comments'], 'comment', 'comments') }} 
+                        </li>
+                        <li>
+                            Driven {{ $session_user_statistics['total_rides'] }} 
+                            {{ pluralize($session_user_statistics['total_rides'], 'journey', 'journeys') }} 
+                            and taken on {{ $session_user_statistics['total_passengers'] }} 
+                            {{ pluralize($session_user_statistics['total_passengers'], 'passenger', 'passengers') }}
+                        </li>
+                        <li>
+                            Collected ${{ number_format((float)$session_user->balance, 2, '.', '') }} as a driver through Wheelzo
+                            <span style="cursor:pointer;" title="Contact the Wheelzo team to withdraw this balance">
+                                <i class="fa fa-info-circle"></i>
+                            </span>
+                        </li>
+                        <li>
+                            Want <a href="#" data-toggle="modal" data-target="#write-feedback">more statistics</a>? Let us know!
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
 @endsection
 
 @section('table')

@@ -6,7 +6,6 @@ class Reviews extends API_Controller {
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        $this->load->model('review');
     }
 
     public function ping_get() {

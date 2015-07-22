@@ -82,6 +82,10 @@ input#search-origin, input#search-destination {
     width: 100%;
 }
 
+div#personal-profile header.jumbotron {
+    padding: 20px 60px;
+}
+
 textarea {
     resize: vertical;
 }

@@ -29,6 +29,15 @@ if ( ! function_exists('rest_curl') ) {
     }
 }
 
+if ( ! function_exists('pluralize') ) {    
+    function pluralize( $amount, $singular = '', $plural = 's' ) {
+        if ( $amount == 1 )
+            return $singular;
+        else
+            return $plural;
+    }
+}
+
 if ( ! function_exists('clean_input') ) {    
     function clean_input( $data = '' ) {
         if ( is_array($data) || is_object($data) ) {
