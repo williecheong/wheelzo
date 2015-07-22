@@ -51,7 +51,14 @@ class User_rides extends API_Controller {
         if ( !$this->_verify_capacity($ride_id) ) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("The capacity of this ride is reached. Stop cheating.");
+            echo $this->message("The capacity of this ride is reached");
+            return;
+        }
+
+        if ($stripe_token == '') {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Stripe token must not be empty");
             return;
         }
 
@@ -71,10 +78,12 @@ class User_rides extends API_Controller {
         try {
             \Stripe\Stripe::setApiKey(WHEELZO_STRIPE_SECRET_KEY);
             
-            $amount = round(floatval($ride->price), 2);
+            $amount_total = round(floatval($ride->price), 2);
+            $amount_wheelzo = round(floatval(PAYMENT_COMMISSION)*$amount_total, 2);
+            $amount_driver = $total_amount - $wheelzo_amount;
 
             $chargeObject = array(
-                'source' => $stripeToken
+                'source' => $stripe_token
                 'amount' => $amount * 100,
                 'currency' => 'cad',
                 'description' => "USER_RIDE ID: ".$user_ride->id,
@@ -94,7 +103,10 @@ class User_rides extends API_Controller {
                     'passenger_facebook_id' => $driver->facebook_id,
                     'passenger_name' => $driver->name,
                     
-                    'amount' => $amount
+                    'amount_total' => $amount_total,
+                    'amount_wheelzo' => $amount_wheelzo,
+                    'amount_driver' => $amount_driver,
+                    'commission' => PAYMENT_COMMISSION
                 )
             );
 
@@ -113,14 +125,7 @@ class User_rides extends API_Controller {
             // Update the driver's balance
             $this->user->update(
                 array('id' => $driver->id),
-                array(
-                    'balance' => strval( 
-                        round( 
-                            (floatval($driver->balance) + floatval((1.0 - PAYMENT_COMMISSION) * $amount))
-                           , 4 
-                        ) 
-                    )
-                )
+                array('balance' => strval( floatval($driver->balance) + $amount_driver) )
             );
         } catch (Exception $e) {
             $this->user_ride->delete(
