@@ -1,4 +1,4 @@
-*/config/facebook.php
+*/config/secrets.php
 */config/staging/database.php
 */config/production/database.php
 */logs/log-*.php
