@@ -28,10 +28,10 @@ define('WHEELZO_FACEBOOK_ACCESS_TOKEN', 'CAAEApvyP7WsBAINJThBeKuzWG3ElfFiZAxLfOj
 // ROOT: Willie, Max, Dennis
 $GLOBALS['WHEELZO_ROOT'] = array('616512487', '100001375166320', '592441839');
 
-// TECH: ROOT, Terry, Jathusan
+// TECH: ROOT, Terry, Jathusan, Ryan
 $GLOBALS['WHEELZO_TECH'] = array_merge( 
                                 $GLOBALS['WHEELZO_ROOT'],  
-                                array('1612834909', '1288730489')
+                                array('1612834909', '1288730489', '10153365790115325')
                             );
 
 // BDEV: ROOT, TECH, Muz
