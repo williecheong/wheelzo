@@ -302,20 +302,30 @@
         deleteReview( reviewID, $button ); 
     }
 
-    handlePassenger = function ( event ) {
+    handlePayment = function ( event ) {
         var $listItem = $(this);
-        var passengerID = $listItem.attr('data-user-id');
-        var user_rideID = $listItem.closest('div#passenger-box').attr('data-user_ride-id');
+        var thisRide = rides[$listItem.attr('data-ride-id')];
+        var thisDriver = publicUsers[thisRide.driver_id];
 
-        if ( passengerID == '0' ) {
-            deleteUser_ride(user_rideID);
-        } else if ( user_rideID > 0 ) {
-            putUser_ride(passengerID, user_rideID);
-        } else {
-            var $modal = $listItem.closest('.modal');
-            var rideID = $modal.data('rideID');
-            postUser_ride(passengerID, rideID);
-        }
+        var stripeHandler = StripeCheckout.configure({
+            key: stripePublicKey,
+            image: fbImage(thisDriver.facebook_id),
+            token: function(token) {
+                // You can access the token ID with `token.id`
+                postUser_ride(thisRide.id, token);
+            }
+        });
+
+        stripeHandler.open({
+            name: 'Reserve Seat',
+            image: fbImage(thisDriver.facebook_id),
+            description : 'Make a payment to ' + thisDriver.name,
+            amount : parseFloat(thisRide.price) * 100,
+            currency : 'CAD',
+            allowRememberMe : false
+        });
+
+        event.preventDefault();
     }
 
     lookupUser = function ( event ) {

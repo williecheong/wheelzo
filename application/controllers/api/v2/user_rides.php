@@ -43,10 +43,10 @@ class User_rides extends API_Controller {
 
         $data = clean_input( $this->post() );
 
-        $driver_id = $this->wheelzo_user_id;
+        $passenger_id = $this->wheelzo_user_id;
         $ride_id = isset($data['rideID']) ? $data['rideID'] : '';
-        $passenger_id = isset($data['passengerID']) ? $data['passengerID'] : '';
         $stripe_token = isset($data['stripeToken']) ? $data['stripeToken'] : '';
+        $receipt_email = isset($data['receiptEmail']) ? $data['receiptEmail'] : '';
 
         if ( !$this->_verify_capacity($ride_id) ) {
             http_response_code("400");
@@ -59,6 +59,13 @@ class User_rides extends API_Controller {
             http_response_code("400");
             header('Content-Type: application/json');
             echo $this->message("Stripe token must not be empty");
+            return;
+        }
+
+        if ($receipt_email == '') {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Email must be specified for receipt");
             return;
         }
 
@@ -86,6 +93,7 @@ class User_rides extends API_Controller {
                 'source' => $stripe_token
                 'amount' => $amount * 100,
                 'currency' => 'cad',
+                'receipt_email' => $receipt_email,
                 'description' => "USER_RIDE ID: ".$user_ride->id,
                 'metadata' => array(
                     'assignmentId' => $user_ride->id,
@@ -109,10 +117,6 @@ class User_rides extends API_Controller {
                     'commission' => PAYMENT_COMMISSION
                 )
             );
-
-            if ($passenger->email) {
-                $chargeObject['receipt_email'] = $passenger->email;
-            }
 
             $charge = Stripe\Charge::create($chargeObject);
 

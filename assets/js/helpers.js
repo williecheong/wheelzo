@@ -54,12 +54,13 @@
         });
     }
 
-    function postUser_ride( passengerID, rideID ) {
+    function postUser_ride( rideID, stripeToken ) {
         $.ajax({
-            url: '/api/v1/user_rides',
+            url: '/api/v2/user_rides',
             data: {
                 "rideID" : rideID,
-                "passengerID" : passengerID
+                "stripeToken" : stripeToken.id,
+                "receiptEmail" : stripeToken.email
             },
             type: 'POST',
             dataType: "JSON",
@@ -67,61 +68,15 @@
                 console.log(response.message);
                 if ( response.status == 'success' ){
                     refreshRides(function(){
-                        $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
+                        $('tr[data-ride-id="'+rideID+'"]').trigger('click');
                     });
                 }
             }, 
             error: function(response) {
-                alert('Fail: API could not be reached.');
+                alert('Error: ' + response.message);
                 console.log(response);
             }
         });
-    }
-
-    function putUser_ride( passengerID, user_rideID ) {
-        $.ajax({
-            url: '/api/v1/user_rides',
-            data: {
-                "user-rideID" : user_rideID,
-                "passengerID" : passengerID
-            },
-            type: 'PUT',
-            dataType: "JSON",
-            success: function( response ) {
-                console.log(response.message);
-                
-                if ( response.status == 'success' ){
-                    refreshRides(function(){
-                        $('tr[data-ride-id="'+response.user_ride.ride_id+'"]').trigger('click');
-                    });
-                }
-            }, 
-            error: function(response) {
-                alert('Fail: API could not be reached.');
-                console.log(response);
-            }
-        });
-    }
-
-    function deleteUser_ride( user_rideID ) {
-        $.ajax({
-            url: '/api/v1/user_rides/index/' + user_rideID,
-            type: 'DELETE',
-            dataType: "JSON",
-            success: function( response ) {
-                console.log(response.message);
-                
-                if ( response.status == 'success' ){
-                    refreshRides(function(){
-                        $('tr[data-ride-id="'+response.ride_id+'"]').trigger('click');
-                    });
-                }
-            }, 
-            error: function(response) {
-                alert('Fail: API could not be reached.');
-                console.log(response);
-            }
-        });    
     }
 
     function postRrequest( saveRrequest, $button ) {

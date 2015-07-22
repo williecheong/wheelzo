@@ -208,11 +208,15 @@
         $('.btn#delete-ride').off('click', removeRide).hide();    
             
         if ( session_id ) {
-            var message = 'Write a request to join or ask questions to the driver';
+            var message = '';
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
                 message = 'Write about your ride or respond to potential passengers';
-                $('li#potential-passenger').on('click', handlePassenger);
-                $('.btn#delete-ride').on('click', removeRide).show();
+                if (thisRide.passengers.length == 0) {
+                    $('.btn#delete-ride').on('click', removeRide).show();
+                }
+            } else {
+                message = 'Write a request to join or ask questions to the driver';
+                $('a#open-payment').on('click', handlePayment);
             }
 
             $modal.find('input#write-comment').attr('placeholder', message);

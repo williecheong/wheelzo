@@ -163,6 +163,8 @@
         <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
+        <script src="//js.stripe.com/v2/" type="text/javascript"></script>
+        <script src="//checkout.stripe.com/checkout.js"></script>
         <script src="/assets/vendor/datatables/plugins/fnFilterAll.js"></script>
         <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
@@ -181,6 +183,7 @@
             var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
             var loadUser = {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }};
             var myRrequests = {{ json_encode($my_rrequests) }};
+            var stripePublicKey = '{{ WHEELZO_STRIPE_PUBLIC_KEY }}';
         </script>
         
         @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
