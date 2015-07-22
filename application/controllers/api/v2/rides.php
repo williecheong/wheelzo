@@ -190,11 +190,9 @@ class Rides extends API_Controller {
             )
         );
 
-        $output_message = "Ride successfully deleted.";
-
         http_response_code("200");
         header('Content-Type: application/json');
-        echo $this->message($output_message);
+        echo $this->message("Ride successfully deleted.");
         return;    
     }
 

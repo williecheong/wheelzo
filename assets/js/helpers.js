@@ -66,11 +66,9 @@
             dataType: "JSON",
             success: function( response ) {
                 console.log(response.message);
-                if ( response.status == 'success' ){
-                    refreshRides(function(){
-                        $('tr[data-ride-id="'+rideID+'"]').trigger('click');
-                    });
-                }
+                refreshRides(function(){
+                    $('tr[data-ride-id="'+rideID+'"]').trigger('click');
+                });
             }, 
             error: function(response) {
                 alert('Error: ' + response.message);

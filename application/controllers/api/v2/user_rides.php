@@ -1,6 +1,6 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require(APPPATH.'/libraries/API_Controller.php');
-require_once(APPPATH.'libraries/stripe-php-2.3.0/lib/Stripe.php');
+require_once(APPPATH.'libraries/stripe-php-2.3.0/init.php');
 
 class User_rides extends API_Controller {
     
@@ -86,12 +86,12 @@ class User_rides extends API_Controller {
             \Stripe\Stripe::setApiKey(WHEELZO_STRIPE_SECRET_KEY);
             
             $amount_total = round(floatval($ride->price), 2);
-            $amount_wheelzo = round(floatval(PAYMENT_COMMISSION)*$amount_total, 2);
-            $amount_driver = $total_amount - $wheelzo_amount;
+            $amount_wheelzo = round(floatval(WHEELZO_PAYMENT_COMMISSION)*$amount_total, 2);
+            $amount_driver = $amount_total - $amount_wheelzo;
 
             $chargeObject = array(
-                'source' => $stripe_token
-                'amount' => $amount * 100,
+                'source' => $stripe_token,
+                'amount' => $amount_total * 100,
                 'currency' => 'cad',
                 'receipt_email' => $receipt_email,
                 'description' => "USER_RIDE ID: ".$user_ride->id,
@@ -114,23 +114,12 @@ class User_rides extends API_Controller {
                     'amount_total' => $amount_total,
                     'amount_wheelzo' => $amount_wheelzo,
                     'amount_driver' => $amount_driver,
-                    'commission' => PAYMENT_COMMISSION
+                    'commission' => WHEELZO_PAYMENT_COMMISSION
                 )
             );
 
             $charge = Stripe\Charge::create($chargeObject);
 
-            // Log the transaction ID with the assignment
-            $this->user_ride->update(
-                array('id' => $user_ride->id),
-                array('transaction' => $charge->id)
-            );
-
-            // Update the driver's balance
-            $this->user->update(
-                array('id' => $driver->id),
-                array('balance' => strval( floatval($driver->balance) + $amount_driver) )
-            );
         } catch (Exception $e) {
             $this->user_ride->delete(
                 array('id' => $user_ride->id)
@@ -141,6 +130,18 @@ class User_rides extends API_Controller {
             echo $this->message($e->getMessage());
             return;
         }
+
+        // Log the transaction ID with the assignment
+        $this->user_ride->update(
+            array('id' => $user_ride->id),
+            array('transaction' => $charge->id)
+        );
+
+        // Update the driver's balance
+        $this->user->update(
+            array('id' => $driver->id),
+            array('balance' => strval(floatval($driver->balance) + $amount_driver) )
+        );
                     
         $fb_response = false;
         
