@@ -139,7 +139,24 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+                <div class="well well-sm payment-message" id="payment-message-guest">
+                    <i class="fa fa-facebook-square fa-lg"></i> 
+                    Sign in to 
+                    <a href="{{ $session_url }}">reserve a seat</a> 
+                    on this ride.
+                </div>
+                <div class="well well-sm payment-message" id="payment-message-passenger">
+                    <i class="fa fa-credit-card"></i> 
+                    Passengers are encouraged to contact drivers before making a payment.
+                    In the event of a refund or dispute, please reach out directly to the Wheelzo team.
+                </div>
+                <div class="well well-sm payment-message" id="payment-message-driver">
+                    <i class="fa fa-car"></i>
+                    Drivers can check for <a href="/me">account balances</a> on their profile. 
+                    Wheelzo collects a {{ WHEELZO_PAYMENT_COMMISSION*100 }}% commission 
+                    to cover maintenance fees such as processing charges from  
+                    <a target="_blank" href="https://stripe.com">Stripe</a>.
+                </div>
                 <div class="row text-center">
                     <div class="col-xs-5">
                         <span class="lead" id="ride-origin"></span>

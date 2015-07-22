@@ -205,16 +205,22 @@
             });
         }
 
-        $('.btn#delete-ride').off('click', removeRide).hide();    
+        $('.btn#delete-ride').off('click', removeRide).hide();
+        $('div.payment-message#payment-message-guest').show();
+        $('div.payment-message#payment-message-driver').hide();
+        $('div.payment-message#payment-message-passenger').hide();
             
         if ( session_id ) {
             var message = '';
+            $('div.payment-message#payment-message-guest').hide();
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
+                $('div.payment-message#payment-message-driver').show();
                 message = 'Write about your ride or respond to potential passengers';
                 if (thisRide.passengers.length == 0) {
                     $('.btn#delete-ride').on('click', removeRide).show();
                 }
             } else {
+                $('div.payment-message#payment-message-passenger').show();
                 message = 'Write a request to join or ask questions to the driver';
                 $('a#open-payment').on('click', handlePayment);
             }

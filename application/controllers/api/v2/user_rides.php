@@ -153,7 +153,7 @@ class User_rides extends API_Controller {
                     'POST', 
                     array(
                         'href' => '/fb?goto='.$ride->id, 
-                        'template' => '@[' . $passenger->facebook_id . '] has paid you for a ride scheduled on '. date( 'l, M j', strtotime($ride->start) ) .'.',
+                        'template' => '@[' . $passenger->facebook_id . '] has made a payment for your ride scheduled on '. date( 'l, F j', strtotime($ride->start) ) .'.',
                         'access_token' => FB_APPID . '|' . FB_SECRET
                     )
                 );
