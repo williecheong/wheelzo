@@ -26,6 +26,9 @@
         $modal.find('img#driver-picture')
               .attr('src', fbImage(driver['facebook_id']))
         
+        $modal.find('a#driver-reviews')
+              .attr('href', '?user='+thisRide.driver_id)
+        
         $modal.find('#ride-departure')
               .html( moment(thisRide.start).format('dddd MMM D, h:mma') );        
         

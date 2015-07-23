@@ -118,6 +118,9 @@
                             </a>
                         </p>
                         <a class="lead" id="driver-name" target="_blank" href="#"></a>
+                        <a class="lead" id="driver-reviews" target="_blank" href="#">
+                            <i class="fa fa-external-link"></i>
+                        </a>
                     </div>
                     <div class="col-sm-8">
                         <div class="row">
