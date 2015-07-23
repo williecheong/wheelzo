@@ -17,17 +17,17 @@
         var $modal = $('.modal#view-ride');
 
         $modal.find('a#driver-name')
-              .attr('href', fbProfile(driver['facebook_id']))
+              .attr('href', '?user='+thisRide.driver_id)
               .html(driver['name']);
 
         $modal.find('a#driver-picture')
-              .attr('href', fbProfile(driver['facebook_id']));
+              .attr('href', '?user='+thisRide.driver_id);
 
         $modal.find('img#driver-picture')
               .attr('src', fbImage(driver['facebook_id']))
         
-        $modal.find('a#driver-reviews')
-              .attr('href', '?user='+thisRide.driver_id)
+        $modal.find('a#driver-facebook')
+              .attr('href', fbProfile(driver['facebook_id']))
         
         $modal.find('#ride-departure')
               .html( moment(thisRide.start).format('dddd MMM D, h:mma') );        
