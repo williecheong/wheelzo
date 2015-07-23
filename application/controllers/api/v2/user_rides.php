@@ -94,7 +94,7 @@ class User_rides extends API_Controller {
                 'amount' => $amount_total * 100,
                 'currency' => 'cad',
                 'receipt_email' => $receipt_email,
-                'description' => "Payment from ". $passenger->name ." to ". $driver->name ." through Wheelzo",
+                'description' => "Payment from ". $passenger->name ." to ". $driver->name,
                 'metadata' => array(
                     'source' => $_SERVER['SERVER_NAME'],
                     'assignmentId' => $user_ride->id,
