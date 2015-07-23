@@ -53,7 +53,7 @@
         // Initializing sliders
         $('.slider#price').slider({
             value: 10,
-            min: 0,
+            min: 5,
             max: 35,
             step: 1,
             slide: function( event, ui ) {
@@ -205,14 +205,24 @@
             });
         }
 
-        $('.btn#delete-ride').off('click', removeRide).hide();    
+        $('.btn#delete-ride').off('click', removeRide).hide();
+        $('div.payment-message#payment-message-guest').show();
+        $('div.payment-message#payment-message-driver').hide();
+        $('div.payment-message#payment-message-passenger').hide();
             
         if ( session_id ) {
-            var message = 'Write a request to join or ask questions to the driver';
+            var message = '';
+            $('div.payment-message#payment-message-guest').hide();
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
+                $('div.payment-message#payment-message-driver').show();
                 message = 'Write about your ride or respond to potential passengers';
-                $('li#potential-passenger').on('click', handlePassenger);
-                $('.btn#delete-ride').on('click', removeRide).show();
+                if (thisRide.passengers.length == 0) {
+                    $('.btn#delete-ride').on('click', removeRide).show();
+                }
+            } else {
+                $('div.payment-message#payment-message-passenger').show();
+                message = 'Write a request to join or ask questions to the driver';
+                $('a#open-payment').on('click', handlePayment);
             }
 
             $modal.find('input#write-comment').attr('placeholder', message);

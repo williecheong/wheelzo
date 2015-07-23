@@ -138,13 +138,6 @@ class Rides extends API_Controller {
             $driver_id = $this->wheelzo_user_id;
             
             if ( $this->_verify_driver( $ride_id, $driver_id) ) {
-                // Handle the deleting of all comments
-                $this->comment->delete(
-                    array(
-                        'ride_id' => $ride_id
-                    )
-                );
-
                 // Handle the deleting of all assignments
                 // Use user_rides API to notify passengers
                 $user_rides = $this->user_ride->retrieve(
@@ -153,73 +146,35 @@ class Rides extends API_Controller {
                     )
                 );
 
-                $output_message = '';
-
-                foreach( $user_rides as $user_ride ) {
-                    $response = array();
-                    $old_user_ride = $this->user_ride->retrieve_by_id( $user_ride->id );
-                
-                    $this->user_ride->delete( 
-                        array( 
-                            'id' => $user_ride->id
+                if (count($user_rides) == 0) {
+                    // Handle the deleting of all comments
+                    $this->comment->delete(
+                        array(
+                            'ride_id' => $ride_id
                         )
                     );
 
-                    $ride = $this->ride->retrieve_by_id( $old_user_ride->ride_id );
-                    
-                    if ( $old_user_ride->user_id != $driver_id ) {
-                        $driver = $this->user->retrieve_by_id( $ride->driver_id );
-                        $old_passenger = $this->user->retrieve_by_id( $old_user_ride->user_id );
-                        
-                        $notification_type = $ride->id . NOTIFY_DELETED;
-                        $to_notify = $this->user->to_notify( $old_passenger->id, $notification_type );
-                        
-                        if ( $to_notify ) {        
-                            $fb_response_to_old = false;
-                            if ( ENVIRONMENT == 'production' || in_array($old_passenger->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
-                                try {
-                                    $fb_response_to_old = $this->facebook->api(
-                                        '/' . $old_passenger->facebook_id . '/notifications', 
-                                        'POST', 
-                                        array(
-                                            'href' => '/fb?goto='.$ride->id, 
-                                            'template' => '@[' . $driver->facebook_id . '] cancelled a ride you were in that was scheduled for '. date( 'l, M j', strtotime($ride->start) ) .'.',
-                                            'access_token' => FB_APPID . '|' . FB_SECRET
-                                        )
-                                    );
-                                } catch ( Exception $e ) {
-                                    log_message('error', $e->getMessage() );
-                                }
-                            }
+                    // Finally, delete the ride
+                    $this->ride->delete(
+                        array(
+                            'id' => $ride_id
+                        )
+                    );
 
-                            if ( $fb_response_to_old ) {
-                                $output_message .= $old_passenger->name." successfully removed and notified on Facebook.\n";
-                            } else {
-                                $output_message .= $old_passenger->name." successfully removed but could not be notified on Facebook.\n";
-                            }
-                        } else {
-                            $output_message .= $old_passenger->name." successfully removed and already notified on Facebook.\n";
-                        }
-                    } else {
-                        $output_message .= "You were successfully removed from your own ride.\n";
-                    }
+                    echo json_encode(
+                        array(
+                            'status' => 'success',
+                            'message' => "Ride successfully deleted."
+                        )
+                    );
+                } else {
+                    echo json_encode(
+                        array(
+                            'status' => 'fail',
+                            'message' => 'Rides with passengers cannot be deleted. Contact Wheelzo for assistance.'
+                        )
+                    );
                 }
-
-                // Finally, delete the ride
-                $this->ride->delete(
-                    array(
-                        'id' => $ride_id
-                    )
-                );
-
-                $output_message .= "Ride successfully deleted.";
-
-                echo json_encode(
-                    array(
-                        'status' => 'success',
-                        'message' => $output_message
-                    )
-                );
             } else {
                 echo json_encode(
                     array(

@@ -6,7 +6,6 @@ class Points extends API_Controller {
     function __construct() {
         parent::__construct();
         // Autoloaded Config, Helpers, Models
-        $this->load->model('point');
     }
 
     // Used to create a new group in the DB

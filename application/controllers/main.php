@@ -119,17 +119,74 @@ class Main extends CI_Controller {
             $my_rrequests = $temp_my_rrequests;
         }
 
-        $this->blade->render($view, 
-            array(
-                'users' => $temp_users,
-                'rides' => $mapped_rides,
-                'session' => $this->wheelzo_user_id,
-                'session_url' => $this->facebook_url,
-                'my_rrequests' => $my_rrequests,
-                'rrequests' => $this->rrequest->retrieve_active(),
-                'request_ride_id' => $this->input->get('ride'),
-                'request_user_id' => $this->input->get('user')
-            )
+        $view_variables = array(
+            'users' => $temp_users,
+            'rides' => $mapped_rides,
+            'session' => $this->wheelzo_user_id,
+            'session_url' => $this->facebook_url,
+            'my_rrequests' => $my_rrequests,
+            'rrequests' => $this->rrequest->retrieve_active(),
+            'request_ride_id' => $this->input->get('ride'),
+            'request_user_id' => $this->input->get('user')
         );
+
+        if ($load_personal) {
+            $view_variables['session_user'] = $this->user->retrieve_by_id($this->wheelzo_user_id);
+            
+            $driven_rides = $this->ride->retrieve(
+                array(
+                    'driver_id' => $this->wheelzo_user_id
+                )
+            );
+
+            $view_variables['session_user_statistics'] = array(
+                'total_comments' => count(
+                    $this->comment->retrieve(
+                        array(
+                            'user_id' => $this->wheelzo_user_id
+                        )
+                    )
+                ),
+                'total_reviews_written' => count(
+                    $this->review->retrieve(
+                        array(
+                            'giver_id' => $this->wheelzo_user_id
+                        )
+                    )
+                ),
+                'total_carpools_taken' => count(
+                    $this->user_ride->retrieve(
+                        array(
+                            'user_id' => $this->wheelzo_user_id
+                        )
+                    )
+                ),
+                'total_rides' => count($driven_rides),
+                'total_passengers' => 0 
+            );
+
+            foreach ( $driven_rides as $ride ) {
+                $view_variables['session_user_statistics']['total_passengers'] += count(
+                    $this->user_ride->retrieve(
+                        array(
+                            'ride_id' => $ride->id
+                        )
+                    )
+                );
+            }
+
+            $view_variables['session_user_reviews'] = $this->review->retrieve(
+                array(
+                    'receiver_id' => $this->wheelzo_user_id
+                )
+            );
+
+            $view_variables['session_user_points'] = $this->point->retrieve(
+                array(
+                    'receiver_id' => $this->wheelzo_user_id
+                )
+            );
+        }
+        $this->blade->render($view, $view_variables);
     }
 }

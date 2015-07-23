@@ -16,69 +16,31 @@
         else { for(var i=0; i < capacity; i++) colSizes[i] = 2; }
         var count = 0 ;
 
-        if ( rides[rideID].driver_id == session_id ) { // isOwner
-            var commentersHTML = listofCommentersTemplate(rides[rideID].comments);
+        $.each(rides[rideID].passengers, function(key, value){
+            var passenger = publicUsers[value.user_id];
+            html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
+                    '    <a target="_blank" href="'+fbProfile(passenger.facebook_id)+'">'+
+                    '        <img class="img-circle hoverable" id="passenger-picture" src="'+fbImage(passenger.facebook_id)+'">'+
+                    '    </a>'+
+                    '</div>';
+            count++;
+        });
 
-            $.each(rides[rideID].passengers, function(key, value){
-                var passenger = publicUsers[value.user_id];
-                var shortName = passenger.name.split(' ');
-                shortName = shortenString( shortName[0], 7 );
-
-                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="'+value.id+'">'+
-                        '    <div class="btn-group">'+                        
-                        '        <a type="button" class="btn btn-default btn-xs" target="_blank" href="'+fbProfile(passenger.facebook_id)+'">'+
-                        '            <i class="fa fa-facebook-square"></i> ' + shortName +
-                        '        </a>'+
-                        '        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">'+
-                        '            <span class="caret"></span>'+
-                        '            <span class="sr-only">Toggle Dropdown</span>'+
-                        '        </button>'+
-                        '        <ul class="dropdown-menu text-left" role="menu">'+
-                        '            ' + commentersHTML + 
-                        '            <li class="divider"></li>' +  
-                        '            <li id="potential-passenger" data-user-id="0">'+
-                        '                <a href="#">'+
-                        '                    <i class="fa fa-minus-circle"></i> Empty'+
-                        '                </a>'+
-                        '            </li>' +  
-                        '        </ul>'+
-                        '    </div>'+
-                        '</div>';
-                count++;
-            });
-
-            while ( count < capacity ) {
-                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box" data-user_ride-id="0">'+
-                        '    <div class="btn-group">'+                        
-                        '        <button type="button" class="btn btn-default btn-xs">'+
-                        '            Empty'+
-                        '        </button>'+
-                        '        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">'+
-                        '            <span class="caret"></span>'+
-                        '            <span class="sr-only">Toggle Dropdown</span>'+
-                        '        </button>'+
-                        '        <ul class="dropdown-menu text-left" role="menu">'+
-                        '            ' + commentersHTML +
-                        '        </ul>'+
-                        '    </div>'+
-                        '</div>';
-                count++;
-            }
-
-        } else { // is not owner
-            $.each(rides[rideID].passengers, function(key, value){
-                var passenger = publicUsers[value.user_id];
-                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
-                        '    <a target="_blank" href="'+fbProfile(passenger.facebook_id)+'">'+
-                        '        <img class="img-circle hoverable" id="passenger-picture" src="'+fbImage(passenger.facebook_id)+'">'+
-                        '    </a>'+
-                        '</div>';
-                count++;
-            });
-
+        if ( rides[rideID].driver_id == session_id || session_id == false) { // isOwner
+            // Owners will see vacant stock
             while ( count < capacity ) {
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
                         '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
+                        '</div>';
+                count++;
+            }
+        } else { // is not owner
+            // Non owners get a button that will bring up stripe
+            while ( count < capacity ) {
+                html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
+                        '    <a href="#" id="open-payment" data-ride-id="'+rideID+'">'+
+                        '        <img class="img-circle hoverable" id="passenger-picture" src="/assets/img/payment.png">'+
+                        '    </a>'+
                         '</div>';
                 count++;
             }
@@ -183,36 +145,6 @@
         });
         html += '</ul>';
         
-        return html;
-    }
-
-    function listofCommentersTemplate( comments ) {
-        var html = '';
-        var commenters = {};
-        var count = 0;
-
-        $.each(comments, function(key, comment){
-            commenter_id = comment.user_id;
-            commenters[commenter_id] = publicUsers[commenter_id];
-            count++;
-        });
-
-        if ( count > 0 ) {
-            $.each(commenters, function(userID, user){
-                html += '<li id="potential-passenger" data-user-id="'+userID+'">'+
-                        '    <a href="#">' + 
-                        '        <i class="fa fa-plus-circle"></i> ' + user.name + 
-                        '    </a>'+
-                        '</li>'; 
-            });
-        } else {
-            html += '<li class="disabled">'+
-                    '    <a href="#">' + 
-                    '        <em>Nobody yet...</em>' + 
-                    '    </a>'+
-                    '</li>';
-        }
-
         return html;
     }
 
