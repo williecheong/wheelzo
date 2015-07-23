@@ -173,7 +173,19 @@ class Main extends CI_Controller {
                         )
                     )
                 );
-            } 
+            }
+
+            $view_variables['session_user_reviews'] = $this->review->retrieve(
+                array(
+                    'receiver_id' => $this->wheelzo_user_id
+                )
+            );
+
+            $view_variables['session_user_points'] = $this->point->retrieve(
+                array(
+                    'receiver_id' => $this->wheelzo_user_id
+                )
+            );
         }
         $this->blade->render($view, $view_variables);
     }

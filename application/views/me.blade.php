@@ -36,37 +36,77 @@
                     </h3>
                 </div>
                 <div class="hidden-xs">
-                    <?php $exploded_name = explode(' ', $session_user->name ); ?>
-                    <h3 style="margin-top:10px;">
-                        Hello {{ $exploded_name[0] }}, to date you have:
-                    </h3>
-                    <div style="padding-left:20px;">
-                        <li>
-                            Taken a ride with 
-                            {{ $session_user_statistics['total_carpools_taken'] }} 
-                            {{ pluralize($session_user_statistics['total_carpools_taken'], 'other carpooler', 'other carpoolers') }} 
-                        </li>
-                        <li>
-                            Written {{ $session_user_statistics['total_reviews_written'] }}
-                            {{ pluralize($session_user_statistics['total_reviews_written'], 'user review', 'user reviews') }} 
-                            and {{ $session_user_statistics['total_comments'] }} 
-                            {{ pluralize($session_user_statistics['total_comments'], 'comment', 'comments') }} 
-                        </li>
-                        <li>
-                            Driven {{ $session_user_statistics['total_rides'] }} 
-                            {{ pluralize($session_user_statistics['total_rides'], 'journey', 'journeys') }} 
-                            and taken on {{ $session_user_statistics['total_passengers'] }} 
-                            {{ pluralize($session_user_statistics['total_passengers'], 'passenger', 'passengers') }}
-                        </li>
-                        <li>
-                            Collected ${{ number_format((float)$session_user->balance, 2, '.', '') }} as a driver through Wheelzo
-                            <span style="cursor:pointer;" title="Contact the Wheelzo team to withdraw this balance">
-                                <i class="fa fa-info-circle"></i>
-                            </span>
-                        </li>
-                        <li>
-                            Want <a href="#" data-toggle="modal" data-target="#write-feedback">more statistics</a>? Let us know!
-                        </li>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <?php $exploded_name = explode(' ', $session_user->name ); ?>
+                            <h3 style="margin-top:10px;">
+                                <i class="fa fa-paw"></i>
+                                About {{ $exploded_name[0] }}:
+                            </h3>
+                            <div style="padding-left:20px;">
+                                <li>
+                                    Taken a ride with 
+                                    {{ $session_user_statistics['total_carpools_taken'] }} 
+                                    {{ pluralize($session_user_statistics['total_carpools_taken'], 'other carpooler', 'other carpoolers') }} 
+                                </li>
+                                <li>
+                                    Written {{ $session_user_statistics['total_reviews_written'] }}
+                                    {{ pluralize($session_user_statistics['total_reviews_written'], 'user review', 'user reviews') }} 
+                                    and {{ $session_user_statistics['total_comments'] }} 
+                                    {{ pluralize($session_user_statistics['total_comments'], 'comment', 'comments') }} 
+                                </li>
+                                <li>
+                                    Driven {{ $session_user_statistics['total_rides'] }} 
+                                    {{ pluralize($session_user_statistics['total_rides'], 'journey', 'journeys') }} 
+                                    and taken on {{ $session_user_statistics['total_passengers'] }} 
+                                    {{ pluralize($session_user_statistics['total_passengers'], 'passenger', 'passengers') }}
+                                </li>
+                                <li>
+                                    Collected 
+                                    <strong>
+                                        ${{ number_format((float)$session_user->balance, 2, '.', '') }} 
+                                    </strong>
+                                    as a driver through Wheelzo
+                                    <span style="cursor:pointer;" title="Contact the Wheelzo team to withdraw this balance">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
+                                </li>
+                                <li>
+                                    Want <a href="#" data-toggle="modal" data-target="#write-feedback">more statistics</a>? Let us know!
+                                </li>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 visible-lg">
+                            <h3 style="margin-top:10px;">
+                                <i class="fa fa-users"></i>
+                                Community Feedback:
+                            </h3>
+                            <div class="well well-sm" style="max-height:100%;">
+                                @if (count($session_user_points) == 0)
+                                    <em>Nobody has vouched for you yet.</em>
+                                @else
+                                    <?php $supporters = array(); foreach($session_user_points as $point){ if(!in_array($point->giver_id, $supporters)){$supporters[] = $point->giver_id;}} ?>
+                                        @foreach($supporters as $key => $supporter_id) 
+                                            @if ($key < count($supporters)-2)
+                                                <a href="/me?user={{$supporter_id }}">{{ $users[$supporter_id]['name'] }}</a>,
+                                            @elseif ($key < count($supporters)-1)
+                                                <a href="/me?user={{$supporter_id }}">{{ $users[$supporter_id]['name'] }}</a> and
+                                            @else
+                                                <a href="/me?user={{$supporter_id }}">{{ $users[$supporter_id]['name'] }}</a>
+                                            @endif
+                                        @endforeach
+                                        {{ pluralize(count($supporters), 'has', 'have') }} 
+                                        vouched for you.
+                                @endif
+                                @if (count($session_user_reviews) == 0)
+                                    <em>You have not received any reviews from the Wheelzo community.</em>
+                                @else
+                                    You have received 
+                                    <a href="/me?user={{$session_user->id}}">{{ count($session_user_reviews) }} {{ pluralize(count($session_user_reviews), 'review', 'reviews') }}</a>
+                                    from the Wheelzo community.
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
