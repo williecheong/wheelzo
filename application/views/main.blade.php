@@ -20,10 +20,10 @@
             <div class="row">
                 <div class="col-sm-3">
                     <h3>
-                        <i class="fa fa-search fa-2x"></i> Search
+                        <i class="fa fa-shield fa-2x"></i> Trust
                     </h3>
                     <div style="text-align:justify;">
-                        Find a ride quickly. Search by location, departure time, drop-off spots or the driver's name. Just start typing.
+                        Pay through wheelzo to guarantee peace of mind and reliability. Drivers and passengers are held accountable.
                     </div>
                 </div>
                 <div class="col-sm-3"> 
