@@ -53,7 +53,7 @@
         // Initializing sliders
         $('.slider#price').slider({
             value: 10,
-            min: 0,
+            min: 5,
             max: 35,
             step: 1,
             slide: function( event, ui ) {
