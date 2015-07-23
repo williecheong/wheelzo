@@ -23,7 +23,7 @@
                         <i class="fa fa-shield fa-2x"></i> Assurance
                     </h3>
                     <div style="text-align:justify;">
-                        Pay through wheelzo to guarantee peace of mind and reliability. Drivers and passengers are held accountable.
+                        Pay through Wheelzo to guarantee peace of mind and reliability. Drivers and passengers are held accountable.
                     </div>
                 </div>
                 <div class="col-sm-3"> 
