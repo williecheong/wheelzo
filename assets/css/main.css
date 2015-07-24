@@ -86,6 +86,21 @@ div#personal-profile header.jumbotron {
     padding: 20px 60px;
 }
 
+div.faq-box {
+    padding: 10px 40px;
+}
+
+div.faq-box strong {
+    cursor: pointer;
+}
+
+div.faq-box p {
+    display: none;
+    padding-top: 10px;
+    padding-right: 88px;
+    text-align: justify;
+}
+
 textarea {
     resize: vertical;
 }
