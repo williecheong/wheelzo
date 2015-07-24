@@ -13,11 +13,7 @@ protocol WheelzoCommentAPIProtocol {
 }
 
 class WheelzoCommentAPI: NSObject {
-    
-    // this api is used exclusively for laoding and posting comments (probably only used in detail view)
-    
-    
-    
+    // this api is used exclusively for loading and posting comments (probably only used in detail view)
     
     var data: NSMutableData = NSMutableData()
     var delegate: WheelzoCommentAPIProtocol?
@@ -49,22 +45,22 @@ class WheelzoCommentAPI: NSObject {
         var jsonResult: NSArray = NSJSONSerialization.JSONObjectWithData(data,
             options:NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
         
-        
         delegate?.didRecieveCommentResponse(jsonResult)
-
     }
     
     // comment stuff
     
-    func postComment(commentText: String, rideId: Int, userId: Int) {
+    func postComment(commentText: String, rideId: Int, userId: Int, callback: ()->Void ) {
+        
+        // synchronous
+        
+        // does not use the connection flow, so no delegate
         
         // only works if you are logged in
         var token = FBSDKAccessToken.currentAccessToken().tokenString
         
         var urlPath = "http://staging.wheelzo.com/api/v2/comments"
         var url: NSURL! = NSURL(string: urlPath)
-        
-        let userId = 1;
         
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
@@ -87,13 +83,14 @@ class WheelzoCommentAPI: NSObject {
                 return
             }
             
-            println("response = \(response)")
+            //println("response = \(response)")
             
             let responseString = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("responseString = \(responseString)")
+            println("responseString = \(responseString)")            
         }
-       
-        task.resume()
+        
+        task.resume();
+        callback();
     }
     
     func getComments(rideId: Int) {
@@ -102,7 +99,7 @@ class WheelzoCommentAPI: NSObject {
         var url: NSURL! = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         var connection: NSURLConnection! = NSURLConnection(request: request,
-            delegate: self,startImmediately: false)
+            delegate: self, startImmediately: false)
         
         println("Requesting: \(urlPath)")
         

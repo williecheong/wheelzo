@@ -20,8 +20,8 @@ upon completion, the righthand closure on the main thread.
 */
 
 //func ~> (
-//    backgroundClosure: () -> (),
-//    mainClosure:       () -> ())
+//    backgroundClosure: () -> Void,
+//    mainClosure:       () -> Void)
 //{
 //    dispatch_async(queue) {
 //        backgroundClosure()
@@ -35,9 +35,9 @@ upon completion, the righthand closure on the main thread.
 Passes the background closure's output to the main closure.
 */
 
-func ~> <R> (
-    backgroundClosure: () -> R,
-    mainClosure:       (result: R) -> ())
+func ~> <T> (
+    backgroundClosure: () -> T,
+    mainClosure:       (result: T) -> ())
 {
     dispatch_async(queue) {
         let result = backgroundClosure()

@@ -82,6 +82,14 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        
+        //dismiss keyboard
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
     @IBAction func buttonPressed(sender: AnyObject) {
         // button press events
         println("post ride button was pressed");

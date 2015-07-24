@@ -43,7 +43,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     var image = UIImage();
     var rideData : NSDictionary = NSDictionary();
     
-    // other data stuff
+    // other data stuff (comments)
     var tableData = NSArray();
 
    
@@ -58,6 +58,10 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         dateLabel.text = rideData["start"] as! String?;
         
         profilePic.image = image;
+        
+        // rounded corners
+        profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
+        profilePic.clipsToBounds = true;
         
         // grab wheelzo driver id
         let driverId = rideData["driver_id"] as! String;
@@ -76,10 +80,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         // gets the driver data
         api.getUserFromUserId(driverId.toInt()!);
         
-        
         commentApi.getComments(rideId);
-        
-        
         
         // get fb user
         
@@ -101,6 +102,8 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     }
     
     func didRecieveUserResponse(results: NSArray) {
+        
+        // todo: delete this whole thing
         
         if results.count>0 {
             
@@ -140,7 +143,6 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         //println(results)
         if results.count>0 {
             self.tableData = results as NSArray
-            self.commentsTableView!.reloadData()
         }
         
         // todo: once comment data is recieved, load user data for every comment
@@ -176,38 +178,34 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
             let cellIdentifier: String = "CommentsTableCell"
             var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CommentsTableCell
             
-            
             var rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
-
             
             cell.commentLabel.text = rowData["comment"] as! String?;
             cell.dateLabel.text = rowData["last_updated"] as! String?;
-            
-            
             cell.profilePic.image = UIImage(named: "empty_user");
             
             // todo: look up the user info for the comments (should do after comments have loaded)
             
-            var namePlaceholder = "user id: ";
-            namePlaceholder += rowData["user_id"] as! String;
+            // placeholder
+            cell.nameLabel.text = "";
+            
+            // update pics and name
+            // todo: remove this and just grab from jsono
+            
             
             let userId = rowData["user_id"] as! String;
-            
-            cell.nameLabel.text = namePlaceholder;
-            
-            
-            // update pics
-
             {
-                self.api.syncGetFbIdFromUserId(userId)
+                self.api.syncGetUserDataFromUserId(userId);
             } ~> {
-                self.setProfilePicForCommentUsingFbId($0, indexPath: indexPath)
+                // $0 is the user data nsdictionary
+                let name = $0["name"] as! String;
+                println("got name \(name)");
+                cell.nameLabel.text = name;
+                let fbId = $0["facebook_id"] as! String;
+                self.setProfilePicForCommentUsingFbId(fbId, cell: cell)
             };
             
- 
-            
             println("loaded cell")
-            
             
         return cell;
     }
@@ -221,8 +219,17 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         let rideId = rideData["id"]!.integerValue;
         let userId = rideData["driver_id"]!.integerValue;
         
-        commentApi.postComment(commentText, rideId: rideId, userId: userId);
+        let callback: ()->Void = {
+            self.commentApi.getComments(rideId)
+            };
         
+        commentApi.postComment(commentText, rideId: rideId, userId: userId, callback: callback);
+        
+        
+        // reloads comments to include new one
+        // bug: this i slsightly too quick. need to have it as a callback
+        //
+
     }
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
@@ -292,7 +299,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
     }
     
-    func setProfilePicForCommentUsingFbId(fbId: String, indexPath: NSIndexPath) {
+    func setProfilePicForCommentUsingFbId(fbId: String, cell: CommentsTableCell) {
         
         // fb picture lookup
         
@@ -314,8 +321,9 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
                 // Update the cell
                 dispatch_async(dispatch_get_main_queue(), {
                     
-                    // grab correct cell
-                    let cell = self.commentsTableView.cellForRowAtIndexPath(indexPath) as! CommentsTableCell;
+                    // rounded corners
+                    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2;
+                    cell.profilePic.clipsToBounds = true;
                     
                     cell.profilePic.image = image;
                     
