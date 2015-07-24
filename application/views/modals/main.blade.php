@@ -148,7 +148,8 @@
                 </div>
                 <div class="well well-sm payment-message" id="payment-message-passenger">
                     <i class="fa fa-credit-card"></i> 
-                    Passengers are encouraged to contact drivers before making a payment.
+                    Passengers are encouraged to 
+                    <a target="_blank" id="driver-facebook" href="#">contact drivers</a> before making a payment.
                     In the event of a refund or dispute, please reach out directly to the Wheelzo team.
                 </div>
                 <div class="well well-sm payment-message" id="payment-message-driver">

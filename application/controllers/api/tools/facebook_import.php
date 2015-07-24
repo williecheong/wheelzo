@@ -236,7 +236,7 @@ class Facebook_import extends API_Controller {
             array(  
                 'user_id' => $this->wheelzo_user_id,
                 'ride_id' => $ride_id,
-                'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a></em>',
+                'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a>.</em><br><em>'.$driver->name.' may not be aware of comments posted here.</em><br><em>Please <a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">send a private message</a> through Facebook instead.</em>',
                 'last_updated' => date( 'Y-m-d H:i:s' )
             )
         );
