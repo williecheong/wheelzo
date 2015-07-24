@@ -26,7 +26,7 @@
             <div class="row">
                 <form class="col-lg-7">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Facebook Access Token..." ng-model="accessToken" ng-disabled="loading">
+                        <input type="text" class="form-control" placeholder="Facebook Access Token..." ng-model="accessToken" ng-init="accessToken='<?=$accessToken?>'" ng-disabled="loading">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" ng-click="retrievePosts(accessToken)" ng-disabled="loading">
                                 <i class="fa fa-facebook-square fa-lg"></i>
@@ -34,10 +34,16 @@
                             </button>
                         </span>
                     </div>
+                    <p class="text-muted">
+                        <i class="fa fa-clock-o"></i>
+                        Token expires on <?=date('F d, Y', WHEELZO_FACEBOOK_ACCESS_TOKEN_EXPIRY)?>. Remind Willie to change it when this happens.
+                    </p>
+                    <!--
                     <a href="https://developers.facebook.com/tools/explorer" target="_blank">
                         <i class="fa fa-external-link"></i>
                         Get my facebook access token
                     </a>
+                    -->
                 </form>
             </div>
             <div class="well well-sm" ng-repeat="(key, posting) in postings" ng-init="  showActiveRides[key]                =   false;

@@ -7,7 +7,7 @@
 |--------------------------------------------------------------------------
 */
 
-require(APPPATH.'/config/facebook.php');
+require(APPPATH.'/config/secrets.php');
 define('CURRENT_VERSION',       '9.001');
 
 define('WHEELZO_DELIMITER',     '{?}');
@@ -20,13 +20,18 @@ define('NOTIFY_VOUCHED',        'V');
 define('NOTIFY_REVIEWED',       'W');
 define('NOTIFY_IMPORT',         'P');
 
+define('WHEELZO_PAYMENT_COMMISSION', 0.2);
+
+define('WHEELZO_FACEBOOK_ACCESS_TOKEN_EXPIRY', '1442551230');
+define('WHEELZO_FACEBOOK_ACCESS_TOKEN', 'CAAEApvyP7WsBAINJThBeKuzWG3ElfFiZAxLfOjJaZBXOWIhXYzu9cnDLJpOJGBK21ondAFENx7fZCXEH42IWp0ZCMQ32Iau1I6hq0u5oujSgm7aGbAsZAeAgyFZAds3P2RF9eesktMQufrGAK3eSsnZCQdFlUgbsHqPue4ZBGrilZBUErJ2WNHAlfZCNrTxJaAwUS1vgvjZA64Eo1nREnzZC0AHf');
+
 // ROOT: Willie, Max, Dennis
 $GLOBALS['WHEELZO_ROOT'] = array('616512487', '100001375166320', '592441839');
 
-// TECH: ROOT, Terry, Jathusan
+// TECH: ROOT, Terry, Jathusan, Ryan
 $GLOBALS['WHEELZO_TECH'] = array_merge( 
                                 $GLOBALS['WHEELZO_ROOT'],  
-                                array('1612834909', '1288730489')
+                                array('1612834909', '1288730489', '10153365790115325')
                             );
 
 // BDEV: ROOT, TECH, Muz

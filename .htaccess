@@ -2,6 +2,11 @@
     RewriteEngine On
     RewriteBase /
 
+    # Force into HTTPS for production site
+    RewriteCond %{HTTP_HOST} ^wheelzo\.com [NC]
+    RewriteCond %{SERVER_PORT} 80 
+    RewriteRule ^(.*)$ https://wheelzo.com/$1 [R,L]
+
     RewriteCond %{REQUEST_URI} ^system.*
     RewriteRule ^(.*)$ /index.php?/$1 [L]
     

@@ -40,6 +40,10 @@ div#passenger-box {
     min-height: 50px;
 }
 
+div.payment-message {
+    margin: 20px auto;
+}
+
 img.greyed-out {
     opacity: 0.5;
 }
@@ -76,6 +80,25 @@ img.brand {
 
 input#search-origin, input#search-destination {
     width: 100%;
+}
+
+div#personal-profile header.jumbotron {
+    padding: 20px 60px;
+}
+
+div.faq-box {
+    padding: 10px 40px;
+}
+
+div.faq-box strong {
+    cursor: pointer;
+}
+
+div.faq-box p {
+    display: none;
+    padding-top: 10px;
+    padding-right: 88px;
+    text-align: justify;
 }
 
 textarea {

@@ -58,7 +58,20 @@ class Facebook_import extends API_Controller {
                     $driver = $this->user->retrieve_by_fb( $posting->from->id );
                     
                     if ( !$driver ) { // Check to see if this is a wheelzo user
-                        continue;
+                        if ($this->user->retrieve_by_name($posting->from->name) != false) {
+                            // this user might already exist
+                            // stop to avoid potential duplicate
+                            continue;
+                        }
+
+                        $user_id = $this->user->create(  
+                            array(
+                                'facebook_id' => $posting->from->id,
+                                'name' => $posting->from->name
+                            )
+                        );
+                        
+                        $driver = $this->user->retrieve_by_id($user_id);
                     }
                     
                     if ( !isset($posting->id) ) {
@@ -219,11 +232,16 @@ class Facebook_import extends API_Controller {
             )
         );
 
+        $comment_text = '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a>.</em>';
+        if (is_null($driver->email) || $driver->email == '') {
+            $comment_text = $comment_text . '<br><em>'.$driver->name.' may not be aware of comments posted here.</em><br><em>Please <a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">send a private message</a> through Facebook instead.</em>';
+        }
+
         $comment_id = $this->comment->create(  
             array(  
                 'user_id' => $this->wheelzo_user_id,
                 'ride_id' => $ride_id,
-                'comment' => '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a></em>',
+                'comment' => $comment_text,
                 'last_updated' => date( 'Y-m-d H:i:s' )
             )
         );

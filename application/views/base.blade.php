@@ -118,12 +118,14 @@
                     Can't find the ideal ride? <br>
                     Want notifications when a driver posts it? <br>
                     @if ( $session )  
-                        <a class="btn btn-default btn-xs" href="#" data-toggle="modal" data-target="#create-request">
-                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        <a class="btn btn-xs" href="#" data-toggle="modal" data-target="#create-request" style="background-color:#512673;padding:2px 20px;color:whitesmoke;">
+                            <i class="fa fa-bullhorn"></i> 
+                            Request a Ride
                         </a>
                     @else
-                        <a class="btn btn-default btn-xs" href="{{ $session_url }}">
-                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        <a class="btn btn-xs" href="{{ $session_url }}" style="background-color:#512673;padding:2px 20px;color:whitesmoke;">
+                            <i class="fa fa-bullhorn fa-lg"></i> 
+                            Request a Ride
                         </a>
                     @endif
                 </small>
@@ -135,17 +137,29 @@
             <footer>
                 <hr>
                 <div>
-                    <!-- AddThis Button BEGIN -->
-                    <div class="addthis_toolbox addthis_default_style pull-right hidden-xs" addthis:url="{{base_url()}}">
-                        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-                        <a class="addthis_button_tweet" tw:counturl="{{$_SERVER['SERVER_NAME']}}"></a>
+                    <div class="pull-right hidden-xs text-right">
+                        <a class="" href="#" data-toggle="modal" data-target="#read-faq">
+                            <i class="fa fa-info-circle"></i>
+                            Frequently Asked Questions
+                        </a>
+                        <br>
+                        <a class="btn btn-xs" href="https://facebook.com/wheelzo" style="background-color:#354C8C;color:whitesmoke;">
+                            <i class="fa fa-facebook-square fa-lg"></i> 
+                            Like Us
+                        </a>
+                        <a class="btn btn-default btn-xs" href="https://twitter.com/gowheelzo" style="color:#333;">
+                            <i class="fa fa-twitter fa-lg" style="color:#4099FF;"></i> 
+                            Follow
+                        </a>
                     </div>
-                    <!-- AddThis Button END -->
                     &copy; Wheelzo v{{ CURRENT_VERSION }} - 
-                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
+                    Made by <a href="mailto:info@wheelzo.com" title="<i class='fa fa-coffee fa-lg'></i> Contact us">nerds</a> 
+                    from <a href="//uwaterloo.ca" title="University of Waterloo">uWaterloo</a>
                     <br>
                     <small>
-                        <i class="fa fa-lock"></i> Verified secure by <a href="http://www.startssl.com/" title="SSL Secured By StartCom">StartSSL</a>
+                        <i class="fa fa-lock"></i> 
+                        Verified secure by 
+                        <a href="https://www.comodo.com/" title="SSL Secured By COMODO CA">ComodoCA</a>
                     </small>
                 </div>
                 <br>
@@ -162,7 +176,8 @@
         <script src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
         <script src="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-        <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-535c72ab7e2385c1" type="text/javascript"></script>
+        <script src="//js.stripe.com/v2/" type="text/javascript"></script>
+        <script src="//checkout.stripe.com/checkout.js"></script>
         <script src="/assets/vendor/datatables/plugins/fnFilterAll.js"></script>
         <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
         <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
@@ -181,6 +196,7 @@
             var loadRide = {{ $request_ride_id ? '"'.encode_to_chinese($request_ride_id).'"' : "false" }};
             var loadUser = {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }};
             var myRrequests = {{ json_encode($my_rrequests) }};
+            var stripePublicKey = '{{ WHEELZO_STRIPE_PUBLIC_KEY }}';
         </script>
         
         @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
