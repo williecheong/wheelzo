@@ -26,8 +26,8 @@
             count++;
         });
 
-        if ( rides[rideID].driver_id == session_id || session_id == false) { // isOwner
-            // Owners will see vacant stock
+        if ( rides[rideID].allow_payments != 1 || rides[rideID].driver_id == session_id || session_id == false) { // paymentsDisabled || isOwner OR notLoggedIn
+            // display stock empty passengers
             while ( count < capacity ) {
                 html += '<div class="col-xs-'+colSizes[count]+'" id="passenger-box">'+
                         '    <img class="img-circle" id="passenger-picture" src="/assets/img/empty_user.png">'+
