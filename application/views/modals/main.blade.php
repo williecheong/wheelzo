@@ -146,11 +146,17 @@
                     <a href="{{ $session_url }}">reserve a seat</a> 
                     on this ride.
                 </div>
-                <div class="well well-sm payment-message" id="payment-message-passenger">
+                <div class="well well-sm payment-message" id="payment-message-passenger-enabled">
                     <i class="fa fa-credit-card"></i> 
                     Passengers are encouraged to 
                     <a target="_blank" id="driver-facebook" href="#">contact drivers</a> before making a payment.
                     In the event of a refund or dispute, please reach out directly to the Wheelzo team.
+                </div>
+                <div class="well well-sm payment-message" id="payment-message-passenger-disabled">
+                    <i class="fa fa-exclamation-triangle"></i> 
+                    Online payments have been disabled for this ride. <br>
+                    Passengers should contact the driver directly to 
+                    <a target="_blank" id="driver-facebook" href="#">make arrangements</a>.
                 </div>
                 <div class="well well-sm payment-message" id="payment-message-driver">
                     <i class="fa fa-car"></i>

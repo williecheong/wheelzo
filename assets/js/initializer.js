@@ -208,7 +208,8 @@
         $('.btn#delete-ride').off('click', removeRide).hide();
         $('div.payment-message#payment-message-guest').show();
         $('div.payment-message#payment-message-driver').hide();
-        $('div.payment-message#payment-message-passenger').hide();
+        $('div.payment-message#payment-message-passenger-enabled').hide();
+        $('div.payment-message#payment-message-passenger-disabled').hide();
             
         if ( session_id ) {
             var message = '';
@@ -220,7 +221,11 @@
                     $('.btn#delete-ride').on('click', removeRide).show();
                 }
             } else {
-                $('div.payment-message#payment-message-passenger').show();
+                if (thisRide.allow_payments == 1) {
+                    $('div.payment-message#payment-message-passenger-enabled').show();
+                } else {
+                    $('div.payment-message#payment-message-passenger-disabled').show();
+                }
                 message = 'Write a request to join or ask questions to the driver';
                 $('a#open-payment').on('click', handlePayment);
             }
