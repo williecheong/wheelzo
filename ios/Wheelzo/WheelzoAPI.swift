@@ -72,33 +72,7 @@ class WheelzoAPI: NSObject {
     }
     
     // user stuff
-    
-//    func getAllUsers() {
-//        
-//        var urlPath = "http://staging.wheelzo.com/api/v2/users"
-//        var url: NSURL! = NSURL(string: urlPath)
-//        var request: NSURLRequest = NSURLRequest(URL: url)
-//        var connection: NSURLConnection! = NSURLConnection(request: request,
-//            delegate: self,startImmediately: false)
-//        
-//        println("Requesting: \(urlPath)")
-//        
-//        connection.start()
-//    }
-    
-//    func getMe() {
-//        
-//        var urlPath = "http://staging.wheelzo.com/api/v2/users/me"
-//        var url: NSURL! = NSURL(string: urlPath)
-//        var request: NSURLRequest = NSURLRequest(URL: url)
-//        var connection: NSURLConnection! = NSURLConnection(request: request,
-//            delegate: self,startImmediately: false)
-//        
-//        println("Requesting: \(urlPath)")
-//        
-//        connection.start()
-//    }
-    
+        
     func getUserFromUserId(userId: Int) {
         
         var urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
@@ -123,6 +97,26 @@ class WheelzoAPI: NSObject {
         println("Requesting: \(urlPath)")
         
         connection.start()
+    }
+    
+    func syncGetUserDataFromUserId(userId: String) -> NSDictionary {
+        
+        let urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
+        let url: NSURL = NSURL(string: urlPath)!
+        let request1: NSURLRequest = NSURLRequest(URL: url)
+        
+        var response: AutoreleasingUnsafeMutablePointer<NSURLResponse? >= nil
+        var error: NSErrorPointer = nil
+        var dataVal: NSData =  NSURLConnection.sendSynchronousRequest(request1, returningResponse: response, error:nil)!
+        var err: NSError
+        
+        
+        var userArray: NSArray = NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
+        
+        let userData = userArray.firstObject as! NSDictionary
+        
+        return userData;
+        
     }
     
     func syncGetFbIdFromUserId(userId: String) -> String {

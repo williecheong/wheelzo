@@ -18,6 +18,11 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     var api: WheelzoAPI = WheelzoAPI()
     
     @IBOutlet var appsTableView : UITableView?
+    
+    @IBOutlet var tapGestureRecognizer: UITapGestureRecognizer!;
+
+    
+    
     var tableData: [NSDictionary] = [NSDictionary]()
     var filteredTableData: [NSDictionary] = [NSDictionary]()
 
@@ -41,7 +46,6 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
         } else {
             
         }
-        
         
         // it appears as though the parent frame is bigger than the emulator display window
         
@@ -109,26 +113,13 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func didRecieveUserResponse(results: NSArray) {
-        // Store the results in our table data array
-        //println("Received results")
-        //println(results)
-        if results.count > 0 {
-            
-            println("recieved user response")
-            
-            // should be an array of size 1
-            
-            
-            // filter array will be same size as results
-//            cellHidden = [Bool](count:  results.count, repeatedValue: false);
-//            
-//            self.tableData = results as! [NSDictionary]
-//            
-//            filteredTableData = tableData;
-//            
-//            self.appsTableView!.reloadData()
-        }
     }
+    
+//    @IBAction func myUIImageViewTapped(recognizer: UITapGestureRecognizer) {
+//        // dismiss keyboard
+//        if(recognizer.state == UIGestureRecognizerState.Ended){
+//        }
+//    }
 
     //table view functions
     
@@ -158,8 +149,15 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             cell.rideData = rowData;
             
             
-            cell.toLabel.text = rowData["destination"] as! String?;
-            cell.fromLabel.text = rowData["origin"] as! String?;
+            var toString = "T: ";
+            toString += rowData["origin"] as! String;
+            
+            cell.toLabel.text = toString;
+            
+            var fromString = "F: ";
+            fromString += rowData["origin"] as! String;
+            
+            cell.fromLabel.text = fromString;
             
             var priceString = "$";
             priceString += rowData["price"] as! String;
@@ -170,14 +168,14 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             // date formatting
             var dateFormatter = NSDateFormatter();
             
-            // input format
+            // input format (don't change unless api changes)
             var formatString = "yyyy'-'MM'-'dd' 'HH':'mm':'ss";
             dateFormatter.dateFormat = formatString;
             let dateObject = dateFormatter.dateFromString(dateString);
             
             // date output
-            //      Jun-26 @ 8:00pm
-            formatString = "MMM'-'dd' @ 'h':'mm a";
+            //      Jun-26
+            formatString = "MMM'-'dd";
             dateFormatter.dateFormat = formatString;
             cell.dateLabel.text = dateFormatter.stringFromDate(dateObject!);
   
@@ -186,60 +184,66 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             dateFormatter.dateFormat = formatString;
             cell.dayLabel.text = dateFormatter.stringFromDate(dateObject!);
             
+            // time output
+            //      8:00pm
+            formatString = "h':'mm a";
+            dateFormatter.dateFormat = formatString;
+            cell.timeLabel.text = dateFormatter.stringFromDate(dateObject!);
+            
             
             // Start by setting the cell's image to a static file
             // Without this, we will end up without an image view!
             
-            cell.profilePic.image = UIImage(named: "empty_user");
+            // cell.profilePic.image = UIImage(named: "empty_user");
             
-            cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2;
+            // cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2;
             
-            cell.profilePic.clipsToBounds = true;
+            // cell.profilePic.clipsToBounds = true;
 
 
             // api for fb picture lookup
             
-            let driverId = rowData["driver_id"] as! String;
-            
-            {
-                self.api.syncGetFbIdFromUserId(driverId)
-            } ~> {
-                
-                // grabs id from closure
-                var fbUserID = $0;
-                
-                var urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
-                var imgUrl = NSURL(string: urlString)
-
-                let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
-                let mainQueue = NSOperationQueue.mainQueue()
-                NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
-                    if error == nil {
-                        // Convert the downloaded data in to a UIImage object
-                        let image = UIImage(data: data)
-                        // Store the image in to our cache
-                        //self.imageCache[urlString] = image
-                        // Update the cell
-                        dispatch_async(dispatch_get_main_queue(), {
-                            if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? RideTableCell {
-                                tableView.beginUpdates();
-                                cellToUpdate.profilePic.image = image;
-                                //cellToUpdate.profilePic.layer.cornerRadius = cellToUpdate.profilePic.image!.size.height/2;
-
-                                
-                                tableView.endUpdates();
-                            }
-                        })
-                        
-                        
-                        
-                    } else {
-                        println("Error: \(error.localizedDescription)")
-                    }
-                });
+//            let driverId = rowData["driver_id"] as! String;
+//            
+//            {
+//                self.api.syncGetFbIdFromUserId(driverId)
+//            } ~> {
+//                
+//                // grabs id from closure
+//                var fbUserID = $0;
+//                
+//                var urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+//                var imgUrl = NSURL(string: urlString)
+//
+//                let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
+//                let mainQueue = NSOperationQueue.mainQueue()
+//                NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+//                    if error == nil {
+//                        // Convert the downloaded data in to a UIImage object
+//                        let image = UIImage(data: data)
+//                        // Store the image in to our cache
+//                        //self.imageCache[urlString] = image
+//                        // Update the cell
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? RideTableCell {
+//                                tableView.beginUpdates();
+//                                cellToUpdate.profilePic.image = image;
+//                                //cellToUpdate.profilePic.layer.cornerRadius = cellToUpdate.profilePic.image!.size.height/2;
+//
+//                                
+//                                tableView.endUpdates();
+//                            }
+//                        })
+//                        
+//                        
+//                        
+//                    } else {
+//                        println("Error: \(error.localizedDescription)")
+//                    }
+//                });
                 // end of network request
             
-            } // end of async
+            //} // end of async
     
             
 //            if (tableData.count == tableView.indexPathsForVisibleRows()?.count && indexPath.row == tableView.indexPathsForVisibleRows()?.last?.row) {
@@ -295,14 +299,14 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             //sprintln(svc.profilePic)
             
             
-            // passes data about the ride to the detail view
+            // passes data about the ride to the detail view (will have to load picture later or something)
             svc.rideData = senderCell.rideData;
             
-            svc.image = senderCell.profilePic.image!;
+            //svc.image = senderCell.profilePic.image!;
             
             
             // or do we need .image?
-            svc.profilePic = senderCell.profilePic;
+            //svc.profilePic = senderCell.profilePic;
             
             svc.toLabel = senderCell.toLabel;
             
@@ -328,6 +332,11 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             
 //            self.appsTableView?.reloadRowsAtIndexPaths(self.appsTableView!.indexPathsForVisibleRows()!,
 //                withRowAnimation: UITableViewRowAnimation.Fade);
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        // dismisses keyboard
+        self.view.endEditing(true);
     }
     
     // helper function to search rides

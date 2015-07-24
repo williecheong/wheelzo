@@ -234,7 +234,8 @@ class Facebook_import extends API_Controller {
 
         $comment_text = '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a>.</em>';
         if (is_null($driver->email) || $driver->email == '') {
-            $comment_text = $comment_text . '<br><em>'.$driver->name.' may not be aware of comments posted here.</em><br><em>Please <a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">send a private message</a> through Facebook instead.</em>';
+            $comment_text = $comment_text . 
+            '<br><em><a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">'.$driver->name.'</a> may not be aware of comments posted here.</em>';
         }
 
         $comment_id = $this->comment->create(  
