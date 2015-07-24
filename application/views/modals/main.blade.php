@@ -94,6 +94,12 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <div class="pull-left checkbox" style="margin-top:5px;">
+                    <label>
+                        <input type="checkbox" id="allow-payments"> 
+                        Allow passengers to make online payments
+                    </label>
+                </div>
                 <button class="btn btn-success" id="post-ride">
                     <i class="fa fa-truck"></i> Publish
                 </button>
