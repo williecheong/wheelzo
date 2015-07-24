@@ -118,8 +118,9 @@
                     Can't find the ideal ride? <br>
                     Want notifications when a driver posts it? <br>
                     @if ( $session )  
-                        <a class="btn btn-default btn-xs" href="#" data-toggle="modal" data-target="#create-request">
-                            <i class="fa fa-bullhorn"></i> Request a Ride
+                        <a class="btn btn-xs" href="#" data-toggle="modal" data-target="#create-request" style="background-color:#512673;padding:2px 20px;color:whitesmoke;">
+                            <i class="fa fa-bullhorn"></i> 
+                            Request a Ride
                         </a>
                     @else
                         <a class="btn btn-xs" href="{{ $session_url }}" style="background-color:#512673;padding:2px 20px;color:whitesmoke;">
