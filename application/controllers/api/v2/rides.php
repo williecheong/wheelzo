@@ -76,6 +76,14 @@ class Rides extends API_Controller {
 
         $drop_offs = isset($data['dropOffs']) ? implode(WHEELZO_DELIMITER, $data['dropOffs']) : '';
 
+        $allow_payments = isset($data['allowPayments']) ? $data['allowPayments'] : 0;
+        if ($allow_payments != 0 && $allow_payments != 1) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Invalid payment option provided");
+            return;
+        }
+
         $ride_id = $this->ride->create(  
             array(  
                 'driver_id' => $driver_id,
@@ -84,7 +92,8 @@ class Rides extends API_Controller {
                 'capacity' => $capacity,
                 'price' => $price,
                 'start' => $start,
-                'drop_offs' => $drop_offs   
+                'drop_offs' => $drop_offs,
+                'allow_payments' => $allow_payments
             )
         );
         $ride = $this->ride->retrieve_by_id( $ride_id );

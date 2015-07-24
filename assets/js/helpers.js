@@ -190,6 +190,9 @@
         
         } else if ( ride.capacity > 7 ) {
             return 'Are you driving a bus?';
+
+        } else if (ride.allowPayments != 0 && ride.allowPayments != 1) {
+            return 'So do you want online payments or not?';
         }
 
         return false;
@@ -217,6 +220,7 @@
             departureTime   : $modal.find('input#departure-time').val(),
             price           : $modal.find('span#price').text(),
             capacity        : $modal.find('span#capacity').text(),
+            allowPayments   : $modal.find('input#allow-payments').is(':checked') ? 1 : 0,
             dropOffs        : dropoffs,
             invitees        : invitees
         };

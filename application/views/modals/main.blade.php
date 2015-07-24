@@ -94,6 +94,12 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <div class="pull-left checkbox" style="margin-top:5px;">
+                    <label>
+                        <input type="checkbox" id="allow-payments"> 
+                        Allow passengers to make online payments
+                    </label>
+                </div>
                 <button class="btn btn-success" id="post-ride">
                     <i class="fa fa-truck"></i> Publish
                 </button>
@@ -158,12 +164,17 @@
                     Passengers should contact the driver directly to 
                     <a target="_blank" id="driver-facebook" href="#">make arrangements</a>.
                 </div>
-                <div class="well well-sm payment-message" id="payment-message-driver">
+                <div class="well well-sm payment-message" id="payment-message-driver-enabled">
                     <i class="fa fa-car"></i>
                     Drivers can check for <a href="/me">account balances</a> on their profile. 
                     Wheelzo collects a {{ WHEELZO_PAYMENT_COMMISSION*100 }}% commission 
                     to cover maintenance fees such as processing charges from  
                     <a target="_blank" href="https://stripe.com">Stripe</a>.
+                </div>
+                <div class="well well-sm payment-message" id="payment-message-driver-disabled">
+                    <i class="fa fa-car"></i>
+                    This ride will not receive online payments through Wheelzo. <br>
+                    Instead, passengers will be prompted to reach out directly through Facebook.
                 </div>
                 <div class="row text-center">
                     <div class="col-xs-5">
