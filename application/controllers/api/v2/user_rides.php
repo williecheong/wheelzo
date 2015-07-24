@@ -55,6 +55,15 @@ class User_rides extends API_Controller {
             return;
         }
 
+        $ride = $this->ride->retrieve_by_id( $ride_id );        
+
+        if ($ride->allow_payments != 1) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Online payments have been disabled for this ride");
+            return;
+        }
+
         if ($stripe_token == '') {
             http_response_code("400");
             header('Content-Type: application/json');
@@ -78,7 +87,6 @@ class User_rides extends API_Controller {
 
         $user_ride = $this->user_ride->retrieve_by_id( $user_ride_id );
  
-        $ride = $this->ride->retrieve_by_id( $ride_id );        
         $driver = $this->user->retrieve_by_id( $ride->driver_id );
         $passenger = $this->user->retrieve_by_id( $user_ride->user_id );
 
