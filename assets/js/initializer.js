@@ -207,7 +207,8 @@
 
         $('.btn#delete-ride').off('click', removeRide).hide();
         $('div.payment-message#payment-message-guest').show();
-        $('div.payment-message#payment-message-driver').hide();
+        $('div.payment-message#payment-message-driver-enabled').hide();
+        $('div.payment-message#payment-message-driver-disabled').hide();
         $('div.payment-message#payment-message-passenger-enabled').hide();
         $('div.payment-message#payment-message-passenger-disabled').hide();
             
@@ -215,7 +216,11 @@
             var message = '';
             $('div.payment-message#payment-message-guest').hide();
             if ( publicUsers[session_id].facebook_id == driver.facebook_id ) {
-                $('div.payment-message#payment-message-driver').show();
+                if (thisRide.allow_payments == 1) {
+                    $('div.payment-message#payment-message-driver-enabled').show();
+                } else {
+                    $('div.payment-message#payment-message-driver-disabled').show();
+                }
                 message = 'Write about your ride or respond to potential passengers';
                 if (thisRide.passengers.length == 0) {
                     $('.btn#delete-ride').on('click', removeRide).show();
