@@ -28,6 +28,23 @@ class Facebook_import extends API_Controller {
             return;
         }
 
+        $access_token_url = "https://graph.facebook.com/app?access_token=" . $token;
+        $access_token_response = json_decode( rest_curl($access_token_url) );
+
+        if (!isset($access_token_response->id)) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Check that you are using a valid access token");
+            return;
+        }
+                
+        if ($access_token_response->id != 282192178572651) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Check that the access token you are using belongs to the Wheelzo app");
+            return;
+        }
+
         $facebook_groups = array(
             '372772186164295',  // University of Waterloo Carpool
             '231943393631223'   // Rideshare Wilfred Laurier               
