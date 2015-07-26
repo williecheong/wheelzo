@@ -45,6 +45,7 @@ class Facebook_import extends API_Controller {
             return;
         }
 
+        $feed_limit = 75;
         $facebook_groups = array(
             '372772186164295',  // University of Waterloo Carpool
             '231943393631223'   // Rideshare Wilfred Laurier               
@@ -54,7 +55,7 @@ class Facebook_import extends API_Controller {
         $response_data = array();
         foreach ( $facebook_groups as $facebook_group ) {
             try {
-                $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=100&access_token=" . $token;
+                $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=".$feed_limit."&access_token=" . $token;
                 $response = json_decode( rest_curl($url) );
                 
                 if ( isset($response->error->message) ) { // Token was not valid for accessing this group

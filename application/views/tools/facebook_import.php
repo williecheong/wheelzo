@@ -13,6 +13,15 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/assets/vendor/ng-quick-date/ng-quick-date.css">
         <link rel="stylesheet" href="/assets/vendor/ng-toaster/toaster.css">
+        <style>
+            table[show-meridian] tbody tr:first-of-type,
+            table[show-meridian] tbody tr:last-of-type {
+                display: none;
+            }
+            ul[datepicker-popup-wrap] {
+                min-width: 250px;
+            }
+        </style>
     </head>
     <body>
         <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
@@ -110,10 +119,11 @@
                                         <input type="text" class="form-control" placeholder="Capacity" ng-model="posting.processedRide.capacity" ng-disabled="loading" valid-number>
                                     </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <div class="form-control-static">
-                                        <quick-datepicker ng-model="posting.processedRide.departure" label-format="MMM-d, EEEE @ h:mma" date-filter="onlyDatesInFutureDateFilter" disable-clear-button="true"></quick-datepicker>
-                                    </div>
+                                <div class="col-xs-3">
+                                    <input ng-model="posting.processedRide.departure" datepicker-popup="dd-MMM-yyyy" is-open="showCalendar" ng-focus="showCalendar=!showCalendar" datepicker-options="dateOptions" min="<?=time()*1000?>" ng-init="showCalendar=false" ng-disabled="loading" class="form-control" placeholder="ex. 23-Sep-2015" close-text="Close" />
+                                </div>
+                                <div class="col-xs-3">
+                                    <timepicker ng-model="posting.processedRide.departure" minute-step="15" show-meridian="true"></timepicker>
                                 </div>
                             </div>
                         </form>

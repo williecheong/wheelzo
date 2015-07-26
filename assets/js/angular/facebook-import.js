@@ -1,14 +1,6 @@
 var app = angular.module('myApp', ['ui.bootstrap', 'ngQuickDate', 'toaster']);
 
-app.config(function(ngQuickDateDefaultsProvider) {
-    // Configure with icons from font-awesome
-    return ngQuickDateDefaultsProvider.set({
-        closeButtonHtml: " <i class='fa fa-times'></i> ",
-        buttonIconHtml: " <i class='fa fa-calendar'></i> ",
-        nextLinkHtml: " <i class='fa fa-chevron-right'></i> ",
-        prevLinkHtml: " <i class='fa fa-chevron-left'></i> ",
-    });
-}).controller('myController', function( $scope, $sce, $http, $filter, toaster ) {
+app.controller('myController', function( $scope, $sce, $http, $filter, toaster ) {
     $scope.retrievePosts = function( accessToken ) {
         $scope.loading = true;
         $http({
@@ -71,11 +63,10 @@ app.config(function(ngQuickDateDefaultsProvider) {
 
     $scope.defaultSuggestedPlaces = defaultSuggestedPlaces;
 
-    $scope.onlyDatesInFutureDateFilter = function (date) {
-        var currentDate = new Date();
-        return date >= currentDate;
+    $scope.dateOptions = { 
+        'show-weeks' : false
     };
-
+    
     $scope.Date = function(arg) {
         if ( arg ) {
             return new Date( arg );
