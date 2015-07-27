@@ -38,6 +38,16 @@ if ( ! function_exists('pluralize') ) {
     }
 }
 
+if ( ! function_exists('shorten_string') ) {
+    function shorten_string( $string, $size ) {
+        if (strlen($string) > $size) {
+            return substr($string, 0, $size-3) . "... ";
+        } else {
+            return $string;
+        }
+    }
+}
+
 if ( ! function_exists('clean_input') ) {    
     function clean_input( $data = '' ) {
         if ( is_array($data) || is_object($data) ) {
