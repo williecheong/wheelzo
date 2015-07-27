@@ -45,17 +45,25 @@ class Facebook_import extends API_Controller {
             return;
         }
 
-        $feed_limit = 75;
+        $feed_limit = 50;
+        $yesterday_date = date("Y-m-d", time() - 60 * 60 * 24);
         $facebook_groups = array(
-            '372772186164295',  // University of Waterloo Carpool
-            '231943393631223'   // Rideshare Wilfred Laurier               
+            '227191854109597', // Carpool Toronto-Ottawa-Montreal-Sherbrooke-Quebec-covoiturage
+            '372772186164295', // University of Waterloo Carpool
+            '453970331348083', // Montreal-Toronto rideshare
+            '231943393631223', // Rideshare Wilfred Laurier               
+            '30961982319' // RIDESHARE Queen's University
         );
 
         $postings = array();                     
         $response_data = array();
         foreach ( $facebook_groups as $facebook_group ) {
             try {
-                $url = "https://graph.facebook.com/" . $facebook_group . "/feed?limit=".$feed_limit."&access_token=" . $token;
+                $url = "https://graph.facebook.com/" . $facebook_group . "/feed" 
+                        . "?access_token=" . $token 
+                        . "&limit=" . $feed_limit
+                        . "&since=" . $yesterday_date;
+
                 $response = json_decode( rest_curl($url) );
                 
                 if ( isset($response->error->message) ) { // Token was not valid for accessing this group
@@ -66,6 +74,18 @@ class Facebook_import extends API_Controller {
                     continue;
                 }
 
+                if (count($response->data) < $feed_limit) {
+                    $temp_url = "https://graph.facebook.com/" . $facebook_group . "/feed" 
+                            . "?access_token=" . $token 
+                            . "&limit=" . $feed_limit;
+
+                    if ( !isset($temp_response->error->message) ) { // There is no error in response
+                        if ( isset($temp_response->data) ) { // Data is available in response     
+                            $response = $temp_response;
+                        }
+                    }
+                }
+ 
                 $response_data = $response_data + $response->data;
                 foreach ($response->data as $key => $posting) {
                     
@@ -250,7 +270,7 @@ class Facebook_import extends API_Controller {
             )
         );
 
-        $comment_text = '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . $posting->to->data[0]->name . '</a>.</em>';
+        $comment_text = '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . shorten_string($posting->to->data[0]->name, 38) . '</a></em>';
         if (is_null($driver->email) || $driver->email == '') {
             $comment_text = $comment_text . 
             '<br><em><a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">'.$driver->name.'</a> may not be aware of comments posted here.</em>';
