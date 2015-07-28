@@ -18,8 +18,8 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="//cdn.jsdelivr.net/qtip2/2.2.0/jquery.qtip.min.css">
-        <link rel="stylesheet" href="/assets/css/main.css">
-        <script src="/assets/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <link rel="stylesheet" href="/assets/css/v1/main.css">
+        <script src="/assets/vendor/v1/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -167,9 +167,9 @@
             </footer><!-- /.footer -->
         </div><!-- /container -->
 
-        @include('modals/main')
+        @include('v1/modals/main')
         @yield('custom_modals')
-        @include('modals/feedback')
+        @include('v1/modals/feedback')
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -178,17 +178,17 @@
         <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script src="//js.stripe.com/v2/" type="text/javascript"></script>
         <script src="//checkout.stripe.com/checkout.js"></script>
-        <script src="/assets/vendor/datatables/plugins/fnFilterAll.js"></script>
-        <script src="/assets/vendor/typeahead/bootstrap3-typeahead.js"></script>
-        <script src="/assets/vendor/timepicker/jquery-ui-timepicker-addon.js"></script>
-        <script src="/assets/vendor/timepicker/jquery-ui-sliderAccess.js"></script>
-        <script src="/assets/vendor/moment/moment.min.js"></script>
-        <script src="/assets/js/constants.js"></script>
-        <script src="/assets/js/initializer.js"></script>
-        <script src="/assets/js/templates.js"></script>
-        <script src="/assets/js/handlers.js"></script>
-        <script src="/assets/js/helpers.js"></script>
-        <script src="/assets/js/main.js"></script>
+        <script src="/assets/vendor/v1/datatables/plugins/fnFilterAll.js"></script>
+        <script src="/assets/vendor/v1/typeahead/bootstrap3-typeahead.js"></script>
+        <script src="/assets/vendor/v1/timepicker/jquery-ui-timepicker-addon.js"></script>
+        <script src="/assets/vendor/v1/timepicker/jquery-ui-sliderAccess.js"></script>
+        <script src="/assets/vendor/v1/moment/moment.min.js"></script>
+        <script src="/assets/js/v1/constants.js"></script>
+        <script src="/assets/js/v1/initializer.js"></script>
+        <script src="/assets/js/v1/templates.js"></script>
+        <script src="/assets/js/v1/handlers.js"></script>
+        <script src="/assets/js/v1/helpers.js"></script>
+        <script src="/assets/js/v1/main.js"></script>
         <script>
             var rides = {{ json_encode($rides) }} ;
             var publicUsers = {{ json_encode($users) }} ;

@@ -182,9 +182,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
-        <script src="/assets/vendor/ng-quick-date/ng-quick-date.min.js"></script>
-        <script src="/assets/vendor/ng-toaster/toaster.js"></script>
-        <script src="/assets/js/constants.js"></script>
-        <script src="/assets/js/angular/facebook-import.js"></script>
+        <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
+        <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
+        <script src="/assets/js/v2/constants.js"></script>
+        <script src="/assets/js/tools/facebook-import.js"></script>
     </body>
 </html>

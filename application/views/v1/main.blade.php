@@ -1,4 +1,4 @@
-@layout('base')
+@layout('v1/base')
 
 @section('title')
     Wheelzo
