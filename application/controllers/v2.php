@@ -47,8 +47,7 @@ class V2 extends CI_Controller {
         }
     }
 
-
     public function index() {
-        $this->load->view('v2/main');
+        $this->blade->render('v2/main');
     }
 }

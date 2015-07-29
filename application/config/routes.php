@@ -5,7 +5,7 @@
 | -------------------------------------------------------------------------
 */
 
-$route['default_controller'] = "main";
+$route['default_controller'] = "v1";
 $route['404_override'] = 'lost';
 
 /*
@@ -14,7 +14,7 @@ $route['404_override'] = 'lost';
 | -------------------------------------------------------------------------
 */
 
-$route['me'] = "main/index/true";
+$route['me'] = "v1/index/true";
 $route['api/v1/rides/me'] = "api/v1/rides/index/true";
 $route['api/v2/rides/me'] = "api/v2/rides/index/true";
 $route['api/v2/users/me'] = "api/v2/users/index/true";

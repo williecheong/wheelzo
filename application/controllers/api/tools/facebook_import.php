@@ -119,7 +119,11 @@ class Facebook_import extends API_Controller {
                     if ( $this->facebook_ride->retrieve_by_fb($posting->id) ) { // Check to see if this posting has been made before
                         continue;
                     }
-                    
+
+                    if (!isset($posting->message) || !isset($posting->updated_time)) {
+                        continue;
+                    }
+
                     $url = "http://ec2-54-148-33-40.us-west-2.compute.amazonaws.com:3000/nlpApi";
                     $type = "POST";
                     $params = (object) array(

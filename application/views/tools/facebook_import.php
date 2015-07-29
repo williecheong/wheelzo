@@ -11,8 +11,8 @@
         <link rel="shortcut icon" href="/assets/img/<?=ENVIRONMENT?>.ico" type="image/x-icon">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/assets/vendor/ng-quick-date/ng-quick-date.css">
-        <link rel="stylesheet" href="/assets/vendor/ng-toaster/toaster.css">
+        <link rel="stylesheet" href="/assets/vendor/v2/ng-quick-date/ng-quick-date.css">
+        <link rel="stylesheet" href="/assets/vendor/v2/ng-toaster/toaster.css">
         <style>
             table[show-meridian] tbody tr:first-of-type,
             table[show-meridian] tbody tr:last-of-type {
@@ -182,9 +182,9 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
-        <script src="/assets/vendor/ng-quick-date/ng-quick-date.min.js"></script>
-        <script src="/assets/vendor/ng-toaster/toaster.js"></script>
-        <script src="/assets/js/constants.js"></script>
-        <script src="/assets/js/angular/facebook-import.js"></script>
+        <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
+        <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
+        <script src="/assets/js/v2/constants.js"></script>
+        <script src="/assets/js/tools/facebook-import.js"></script>
     </body>
 </html>
