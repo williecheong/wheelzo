@@ -1,6 +1,6 @@
 <?php // if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class V2 extends CI_Controller {
 
     function __construct() {
         parent::__construct();
@@ -47,8 +47,7 @@ class Main extends CI_Controller {
         }
     }
 
-
     public function index() {
-        $this->load->view('v2/main');
+        $this->blade->render('v2/main');
     }
 }

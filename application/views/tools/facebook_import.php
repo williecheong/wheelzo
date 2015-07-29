@@ -11,8 +11,8 @@
         <link rel="shortcut icon" href="/assets/img/<?=ENVIRONMENT?>.ico" type="image/x-icon">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/assets/vendor/ng-quick-date/ng-quick-date.css">
-        <link rel="stylesheet" href="/assets/vendor/ng-toaster/toaster.css">
+        <link rel="stylesheet" href="/assets/vendor/v2/ng-quick-date/ng-quick-date.css">
+        <link rel="stylesheet" href="/assets/vendor/v2/ng-toaster/toaster.css">
         <style>
             table[show-meridian] tbody tr:first-of-type,
             table[show-meridian] tbody tr:last-of-type {
