@@ -31,6 +31,18 @@
 @endsection
 
 @section('main_body')
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <h3>
+                <i class="fa fa-angle-right"></i>
+                Discover Our Panels
+            </h3>
+            <div class="row mt">
+                <div class="col-lg-12"> 
+                </div>
+            </div>
+        </section>
+    </section><!-- /MAIN CONTENT -->
 @endsection
 
 @section('custom_js')

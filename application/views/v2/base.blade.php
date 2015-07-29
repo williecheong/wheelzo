@@ -92,18 +92,7 @@
             </aside><!--sidebar end-->
       
             <!--main content start-->
-            <section id="main-content">
-                <section class="wrapper site-min-height">
-                  	<h3>
-                        <i class="fa fa-angle-right"></i>
-                        Discover Our Panels
-                    </h3>
-                  	<div class="row mt">
-                  		<div class="col-lg-12">	
-                  		</div>
-                  	</div>
-        		</section>
-            </section><!-- /MAIN CONTENT -->
+            @yield('main_body')
             <!--main content end-->
             
             <!--footer start-->
