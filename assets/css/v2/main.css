@@ -1,1 +1,12 @@
- 
+a.logo {
+	margin-top: 0px;
+}
+
+img.brand {
+    position:relative;
+    max-width: 60px;
+    top: 1px;
+    left: 5px;
+} 
+
+
