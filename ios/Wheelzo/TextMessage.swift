@@ -11,7 +11,18 @@ import Foundation
 
 class TextMessage : JSQMessage {
     
+    var fbUserId : String!;
     
+//    init!(text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!, fbUserId: String!) {
+//        super.init(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text!)
+//        
+//        fbUserId_ = fbUserId;
+//    }
+//
+//    required init(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
+
     
 }

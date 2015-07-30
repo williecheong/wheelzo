@@ -10,8 +10,15 @@ import Foundation
 
 import UIKit
 
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class ChatViewController: JSQMessagesViewController {
+class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
+    
+    var commentApi: WheelzoCommentAPI = WheelzoCommentAPI()
+    
+    var commentData: [NSDictionary] = [NSDictionary]()
+
     
     var messages = [TextMessage]()
     
@@ -23,24 +30,74 @@ class ChatViewController: JSQMessagesViewController {
     
     var senderImageUrl: String!
     var batchMessages = true
-//    var ref: Firebase!
+    
 
     
-//    func setupFirebase() {
-//        // *** STEP 2: SETUP FIREBASE
-//        messagesRef = Firebase(url: "https://swift-chat.firebaseio.com/messages")
-//        
-//        // *** STEP 4: RECEIVE MESSAGES FROM FIREBASE (limited to latest 25 messages)
-//        messagesRef.queryLimitedToNumberOfChildren(25).observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
-//            let text = snapshot.value["text"] as? String
-//            let sender = snapshot.value["sender"] as? String
-//            let imageUrl = snapshot.value["imageUrl"] as? String
-//            
-//            let message = Message(text: text, sender: sender, imageUrl: imageUrl)
-//            self.messages.append(message)
-//            self.finishReceivingMessage()
-//        })
-//    }
+    // ride data, destination, etc,etc
+    
+    let myFbId = FBSDKAccessToken.currentAccessToken().userID
+    var rideId : String = "";
+    
+    var rideData : NSDictionary = NSDictionary();
+
+    
+
+    
+    func didRecieveCommentResponse(results: NSArray) {
+        
+        println("chat recieved response")
+        
+        // comments loaded or posted new comment
+        
+        // Store the results in our table data array
+        //println(results)
+        if results.count>0 {
+            
+            // clears old messages out
+            messages.removeAll(keepCapacity: true)
+            
+            self.commentData = results as! [NSDictionary]
+            
+            for i in 0...results.count-1 {
+            
+                var rowData: NSDictionary = self.commentData[i]
+                
+                var text = rowData["comment"] as! String!;
+                let senderId = rowData["user_id"] as! String!;
+                let senderDisplayName = rowData["user_name"] as! String;
+                
+                // todo, probably need to have a date posted field
+                // date formatting
+                let dateString = rowData["last_updated"] as! String;
+                var dateFormatter = NSDateFormatter();
+                
+                // input format (don't change unless api changes)
+                var formatString = "yyyy'-'MM'-'dd' 'HH':'mm':'ss";
+                dateFormatter.dateFormat = formatString;
+                let date = dateFormatter.dateFromString(dateString);
+                
+                let fbUserId = rowData["user_facebook_id"] as! String!;
+                
+
+                println(fbUserId)
+                
+                // workaround for auto-gen comments
+                if text.rangeOfString("<em>") != nil {
+                    text = "This ride has been imported, \(senderDisplayName) may be unaware of comments posted here."
+                }
+                
+                
+                let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+                message.fbUserId = fbUserId;
+                
+                messages.append(message)
+                
+            }
+            
+        }
+        
+        self.collectionView.reloadData()
+    }
     
     func createFakeMessages() {
         
@@ -57,48 +114,66 @@ class ChatViewController: JSQMessagesViewController {
         
     }
     
-    func setupChat(){
+    func setupChat() {
+        commentApi.delegate = self;
+        
+
         
         // have to load own profile
-        senderId = "0"
-        senderDisplayName = "Max P"
+        senderId = rideData["driver_id"] as! String;
+        senderDisplayName = rideData["driver_name"] as! String;
+        rideId = rideData["id"] as! String;
         
+        // request comments
+        commentApi.getComments(rideId.toInt()!)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         setupChat()
         
-        createFakeMessages()
+//        createFakeMessages()
         
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //collectionView.collectionViewLayout.springinessEnabled = true
+        collectionView.collectionViewLayout.springinessEnabled = true
+        
+//        self.tabBarController!.tabBar.hidden = true;
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        self.tabBarController!.tabBar.hidden = false;
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    func sendMessage(text: String!, senderId: String!, senderDisplayName: String!) {
-        // *** STEP 3: ADD A MESSAGE TO FIREBASE
-//        messagesRef.childByAutoId().setValue([
-//            "text":text,
-//            "sender":sender,
-//            "imageUrl":senderImageUrl
-//            ])
+    func sendMessage(text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
-        // temp
+        //let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+        //message.fbUserId = myFbId;
         
-//        let message = Message(text: text, sender: sender, imageUrl: senderImageUrl)
-        let message = TextMessage(senderId: senderId, displayName: senderDisplayName, text: text)
-        messages.append(message)
+        //messages.append(message)
         
+        
+        let callback: ()->Void = {
+            // seems like I need to delay this even further to account for server processing time
+            sleep(2)
+            self.commentApi.getComments(self.rideId.toInt()!)
+        };
+        
+        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
+        
+        finishReceivingMessage()
+        finishSendingMessage()
     }
     
     func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
@@ -140,7 +215,7 @@ class ChatViewController: JSQMessagesViewController {
         
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
-        sendMessage(text, senderId: senderId, senderDisplayName: senderDisplayName)
+        sendMessage(text, senderId: senderId, senderDisplayName: senderDisplayName, date: date)
         
         finishSendingMessage()
     }
@@ -166,7 +241,6 @@ class ChatViewController: JSQMessagesViewController {
         
     }
     
-    // View  usernames bellow bubbles
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
     
         let message = messages[indexPath.item];
@@ -207,10 +281,7 @@ class ChatViewController: JSQMessagesViewController {
             return JSQMessagesAvatarImageFactory.avatarImageWithImage(avatar.avatarImage, diameter: 32)
         } else {
             
-            // get the message avatar url
-            // thanks, mark!
-            let fbUserId = 4;
-            let imageUrl = "https://graph.facebook.com/v2.3/\(fbUserId)/picture" as String
+            let imageUrl = "https://graph.facebook.com/v2.3/\(message.fbUserId)/picture" as String
             
             setupAvatarImage(message.senderId, imageUrl: imageUrl, incoming: true)
             let avatar = avatars[messages[indexPath.item].senderId]

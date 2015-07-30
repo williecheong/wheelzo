@@ -23,7 +23,6 @@
 		D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D759E6D61B4214880043AEC3 /* SettingsViewController.swift */; };
 		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
 		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
-		D791424B1B69AAC300DE972D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D791424A1B69AAC300DE972D /* Message.swift */; };
 		D791424D1B69C7A300DE972D /* TextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D791424C1B69C7A300DE972D /* TextMessage.swift */; };
 		D7A536E21B699E310042C496 /* Speech Bubble-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A536E11B699E310042C496 /* Speech Bubble-32.png */; };
 		D7A536E41B69A1610042C496 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A536E31B69A1610042C496 /* ChatViewController.swift */; };
@@ -80,7 +79,6 @@
 		D759E6D61B4214880043AEC3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
 		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
-		D791424A1B69AAC300DE972D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		D791424C1B69C7A300DE972D /* TextMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessage.swift; sourceTree = "<group>"; };
 		D7A536E11B699E310042C496 /* Speech Bubble-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Speech Bubble-32.png"; sourceTree = "<group>"; };
 		D7A536E31B69A1610042C496 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -173,8 +171,6 @@
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
 				D7F316611A8C9825003C91B3 /* RidesViewController.swift */,
 				D7A536E31B69A1610042C496 /* ChatViewController.swift */,
-				D791424A1B69AAC300DE972D /* Message.swift */,
-				D791424C1B69C7A300DE972D /* TextMessage.swift */,
 				D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */,
 				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
 				D77E4E761B3BB77F009895BF /* RideTableCell.swift */,
@@ -194,6 +190,7 @@
 				D7D0533C1B3E738600059EBB /* empty_user.png */,
 				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
 				D7C577DC1B4F810300B1030F /* Threading.swift */,
+				D791424C1B69C7A300DE972D /* TextMessage.swift */,
 			);
 			path = Wheelzo;
 			sourceTree = "<group>";
@@ -397,7 +394,6 @@
 				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
 				D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */,
 				D7C577DD1B4F810300B1030F /* Threading.swift in Sources */,
-				D791424B1B69AAC300DE972D /* Message.swift in Sources */,
 				D7A536E41B69A1610042C496 /* ChatViewController.swift in Sources */,
 				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
 			);

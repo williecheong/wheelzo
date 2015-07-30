@@ -10,8 +10,7 @@ import Foundation
 
 import UIKit
 
-class DetailRideViewController: UIViewController , UITableViewDelegate, UITableViewDataSource,
-WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
+class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     
     // class that will show a detailed view of a ride that is clicked on the wheelzo table
     
@@ -25,9 +24,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var fromLabel: UILabel!
-    
-    @IBOutlet var commentsTableView: UITableView!
-    
+        
     @IBOutlet var postCommentText: UITextField!;
     @IBOutlet var postCommentButton: UIButton!;
     
@@ -89,12 +86,14 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         // if they are the same, display delete button, otherwise hide it
         
         
+        // todo: fix the weird behaviour of this:
+        self.hidesBottomBarWhenPushed = true;
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         //println("reloading data")
         super.viewDidAppear(animated)
-        commentsTableView.reloadData();
     }
     
     func didRecieveRideResponse(results: NSArray) {
@@ -126,7 +125,6 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
             
             setProfilePicFromFbId(fbId);
             
-            self.commentsTableView!.reloadData()
         }
         
         
@@ -147,7 +145,6 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
         // todo: once comment data is recieved, load user data for every comment
         
-        commentsTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -155,60 +152,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    // comment table view functions
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        // resizable height
-        return UITableViewAutomaticDimension;
-    }
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120;
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:
-        NSIndexPath) -> UITableViewCell {
-            
-            tableView.registerNib(UINib(nibName: "CommentsTableCell", bundle: nil), forCellReuseIdentifier: "CommentsTableCell");
-            let cellIdentifier: String = "CommentsTableCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CommentsTableCell
-            
-            var rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
-            
-            cell.commentLabel.text = rowData["comment"] as! String?;
-            cell.dateLabel.text = rowData["last_updated"] as! String?;
-            cell.profilePic.image = UIImage(named: "empty_user");
-            
-            // todo: look up the user info for the comments (should do after comments have loaded)
-            
-            // placeholder
-            cell.nameLabel.text = "";
-            
-            // update pics and name
-            // todo: remove this and just grab from jsono
-            
-            
-            let userId = rowData["user_id"] as! String;
-            {
-                self.api.syncGetUserDataFromUserId(userId);
-            } ~> {
-                // $0 is the user data nsdictionary
-                let name = $0["name"] as! String;
-                println("got name \(name)");
-                cell.nameLabel.text = name;
-                let fbId = $0["facebook_id"] as! String;
-                self.setProfilePicForCommentUsingFbId(fbId, cell: cell)
-            };
-            
-            println("loaded cell")
-            
-        return cell;
-    }
+
     
     @IBAction func postCommentButtonPressed(sender: AnyObject) {
         // button press events
@@ -219,11 +163,7 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         let rideId = rideData["id"]!.integerValue;
         let userId = rideData["driver_id"]!.integerValue;
         
-        let callback: ()->Void = {
-            self.commentApi.getComments(rideId)
-            };
         
-        commentApi.postComment(commentText, rideId: rideId, userId: userId, callback: callback);
         
         
         // reloads comments to include new one
@@ -299,44 +239,21 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
     }
     
-    func setProfilePicForCommentUsingFbId(fbId: String, cell: CommentsTableCell) {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        // fb picture lookup
-        
-        // todo need to convert driverId to fbId
-        
-        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
-        
-        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
-        let imgUrl = NSURL(string: urlString)
-        
-        let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
-        let mainQueue = NSOperationQueue.mainQueue()
-        NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
-            if error == nil {
-                // Convert the downloaded data in to a UIImage object
-                let image = UIImage(data: data)
-                // Store the image in to our cache
-                //self.imageCache[urlString] = image
-                // Update the cell
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    // rounded corners
-                    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2;
-                    cell.profilePic.clipsToBounds = true;
-                    
-                    cell.profilePic.image = image;
-                    
-                })
-            }
-            else {
-                println("Error: \(error.localizedDescription)")
-            }
-        });
-        // end of network request
-        
-        
+        if (segue.identifier == "chatSegue") {
+            // when user clicks chat button
+            println("starting chat")
+            
+            var svc = segue.destinationViewController as! ChatViewController;
+            
+            // passes data about the ride to the detail view (will have to load picture later or something)
+            svc.rideData = self.rideData;
+            
+        }
     }
+    
     
     
     
