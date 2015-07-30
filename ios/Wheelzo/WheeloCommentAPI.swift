@@ -50,7 +50,7 @@ class WheelzoCommentAPI: NSObject {
     
     // comment stuff
     
-    func postComment(commentText: String, rideId: Int, userId: Int, callback: ()->Void ) {
+    func postComment(commentText: String, rideId: Int, callback: ()->Void ) {
         
         // synchronous
         

@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
     }
     
     override func viewDidAppear(animated: Bool) {

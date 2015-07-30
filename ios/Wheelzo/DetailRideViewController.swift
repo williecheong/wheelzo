@@ -65,14 +65,12 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
         let driverFbId = rideData["driver_facebook_id"] as! String;
         
         // if this is not the same as the person logged in, hide the delete button
         if (driverFbId != FBSDKAccessToken.currentAccessToken().userID) {
             deleteRideButton.hidden = true;
         }
-        
         
         // text stuff
         setInfo()

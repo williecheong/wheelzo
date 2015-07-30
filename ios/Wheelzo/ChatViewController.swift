@@ -27,10 +27,6 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     var outgoingBubbleImageView = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
     var incomingBubbleImageView =
         JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
-    
-    var senderImageUrl: String!
-    var batchMessages = true
-    
 
     
     // ride data, destination, etc,etc
@@ -39,9 +35,6 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     var rideId : String = "";
     
     var rideData : NSDictionary = NSDictionary();
-
-    
-
     
     func didRecieveCommentResponse(results: NSArray) {
         
@@ -63,7 +56,8 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
                 var rowData: NSDictionary = self.commentData[i]
                 
                 var text = rowData["comment"] as! String!;
-                let senderId = rowData["user_id"] as! String!;
+                //let senderId = rowData["user_id"] as! String!;
+                let senderId = rowData["user_facebook_id"] as! String!;
                 let senderDisplayName = rowData["user_name"] as! String;
                 
                 // todo, probably need to have a date posted field
@@ -91,7 +85,6 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
                 message.fbUserId = fbUserId;
                 
                 messages.append(message)
-                
             }
             
         }
@@ -99,28 +92,16 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
         self.collectionView.reloadData()
     }
     
-    func createFakeMessages() {
-        
-        let fakeMessage1 = TextMessage(senderId: senderId, displayName: "dude", text: "guys")
-        let fakeMessage2 = TextMessage(senderId: senderId, displayName: "dude2", text: "guys")
-        let fakeMessage3 = TextMessage(senderId: "10", displayName: "some other dude", text: "are you excited?")
-        let fakeMessage4 = TextMessage(senderId: senderId, displayName: "dude3", text: "you should be")
-        
-        
-        messages.append(fakeMessage1)
-        messages.append(fakeMessage2)
-        messages.append(fakeMessage3)
-        messages.append(fakeMessage4)
-        
-    }
-    
     func setupChat() {
         commentApi.delegate = self;
         
         // have to load own profile
-        senderId = rideData["driver_id"] as! String;
-        senderDisplayName = rideData["driver_name"] as! String;
+        self.senderId = myFbId
+        self.senderDisplayName = FBSDKProfile.currentProfile().firstName
+        
         rideId = rideData["id"] as! String;
+        
+        println("setting id to \(self.senderId)")
         
         // request comments
         commentApi.getComments(rideId.toInt()!)
@@ -128,50 +109,21 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         setupChat()
-        
-//        createFakeMessages()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         collectionView.collectionViewLayout.springinessEnabled = true
-        
-//        self.tabBarController!.tabBar.hidden = true;
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        self.tabBarController!.tabBar.hidden = false;
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func sendMessage(text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        
-//        let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
-//        message.fbUserId = myFbId;
-//        
-//        messages.append(message)
-        
-        
-        let callback: ()->Void = {
-            // seems like I need to delay this even further to account for server processing time
-            sleep(2)
-            self.commentApi.getComments(self.rideId.toInt()!)
-        };
-        
-        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
-        
-        finishReceivingMessage()
-        finishSendingMessage()
     }
     
     func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
@@ -201,7 +153,7 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
         let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
         
         let nameLength = count(name)
-        let initials : String? = name.substringToIndex(advance(senderId.startIndex, min(3, nameLength)))
+        let initials : String? = name.substringToIndex(advance(name.startIndex, min(3, nameLength)))
         let userImage = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
         
         avatars[name] = userImage
@@ -209,13 +161,26 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     
     // Actions
     
+    func sendMessage(text: String!) {
+        
+        let callback: ()->Void = {
+            // seems like I need to delay this even further to account for server processing time
+            sleep(2)
+            self.commentApi.getComments(self.rideId.toInt()!)
+        };
+        
+        commentApi.postComment(text, rideId: self.rideId.toInt()!, callback: callback);
+        
+        finishReceivingMessage()
+        finishSendingMessage()
+    }
+    
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
-        sendMessage(text, senderId: senderId, senderDisplayName: senderDisplayName, date: date)
-                
-        println("should finish sending")
+        sendMessage(text)
+        
         finishSendingMessage()
     }
     
@@ -229,10 +194,10 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
     
-        // check if yours or someone elses messages, and colour accordingly
+        // check if yours or someone elses messages, and display accordingly
         let message = messages[indexPath.item]
         
-        if message.senderId == senderId {
+        if message.fbUserId == myFbId {
             return outgoingBubbleImageView;
         } else {
             return incomingBubbleImageView;
@@ -244,19 +209,15 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     
         let message = messages[indexPath.item];
         
-        println("bubble text")
-        
         // Sent by me, skip
-        if message.senderId == senderId {
-            println("nil")
+        if message.fbUserId == myFbId {
             return nil;
         }
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
             let previousMessage = messages[indexPath.item - 1];
-            if previousMessage.senderId == message.senderId {
-                println("nil")
+            if previousMessage.fbUserId == message.fbUserId {
                 return nil;
             }
         }
@@ -297,7 +258,7 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.item]
-        if message.senderId == senderId {
+        if message.fbUserId == myFbId {
             cell.textView.textColor = UIColor.blackColor()
         } else {
             cell.textView.textColor = UIColor.whiteColor()
@@ -316,14 +277,14 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
         let message = messages[indexPath.item]
         
         // Sent by me, skip
-        if message.senderId == senderId {
+        if message.fbUserId == myFbId {
             return CGFloat(0.0);
         }
         
         // Same as previous sender, skip
         if indexPath.item > 0 {
             let previousMessage = messages[indexPath.item - 1];
-            if previousMessage.senderId == message.senderId {
+            if previousMessage.fbUserId == message.fbUserId {
                 return CGFloat(0.0);
             }
         }
