@@ -388,6 +388,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     
+    
 //    func setImageOfCell(tableView: UITableView, cell: UITableViewCell) {
 //        
 //    }

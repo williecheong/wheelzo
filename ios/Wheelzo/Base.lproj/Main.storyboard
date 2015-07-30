@@ -178,6 +178,13 @@
                                     <outlet property="delegate" destination="Uxl-K2-YpK" id="wUS-1m-uIP"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-dn-UZ3">
+                                <rect key="frame" x="552" y="267" width="32" height="32"/>
+                                <state key="normal" image="Speech Bubble-32.png"/>
+                                <connections>
+                                    <segue destination="tkf-Gr-Fdz" kind="show" identifier="chatSegue" id="3D8-6b-whe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -209,7 +216,9 @@
                             <constraint firstItem="gDl-Al-ldD" firstAttribute="top" secondItem="cEb-ac-dPI" secondAttribute="bottom" constant="8" id="Ug2-jK-1Du"/>
                             <constraint firstItem="cEb-ac-dPI" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="W9T-j6-obT"/>
                             <constraint firstItem="lSe-f0-cmm" firstAttribute="top" secondItem="cEb-ac-dPI" secondAttribute="top" constant="-37" id="X2T-Qk-6YC"/>
+                            <constraint firstItem="cEb-ac-dPI" firstAttribute="top" secondItem="rbA-dn-UZ3" secondAttribute="bottom" constant="8" id="X60-bQ-BZw"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="leading" secondItem="1Ss-TT-des" secondAttribute="leadingMargin" id="XHc-Io-EVe"/>
+                            <constraint firstItem="rbA-dn-UZ3" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="aFF-xi-PcH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cEb-ac-dPI" secondAttribute="trailing" constant="-16" id="b0T-bU-m96"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cEb-ac-dPI" secondAttribute="trailing" constant="-16" id="cwe-rb-r0z"/>
                             <constraint firstItem="cEb-ac-dPI" firstAttribute="leading" secondItem="1Ss-TT-des" secondAttribute="leadingMargin" id="drk-7G-yyJ"/>
@@ -273,6 +282,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7Z-qh-uXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2379" y="-1548"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="139-0t-yHF">
+            <objects>
+                <viewController id="tkf-Gr-Fdz" customClass="ChatViewController" customModule="Wheelzo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lVu-Yi-DIw"/>
+                        <viewControllerLayoutGuide type="bottom" id="l8b-j0-eG1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uHM-cp-41r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rac-Oe-viB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3123" y="-1548"/>
         </scene>
         <!--Drive-->
         <scene sceneID="wg7-f3-ORb">
@@ -574,11 +601,12 @@
         <image name="Blank52.png" width="52" height="52"/>
         <image name="Cars-32.png" width="32" height="32"/>
         <image name="Settings-32.png" width="32" height="32"/>
+        <image name="Speech Bubble-32.png" width="32" height="32"/>
         <image name="drive-32.png" width="32" height="32"/>
         <image name="logo180.png" width="180" height="180"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fmT-0g-IGK"/>
+        <segue reference="gkd-OH-9tL"/>
         <segue reference="0lg-DH-gNC"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -271,9 +271,9 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
         // todo need to convert driverId to fbId
         
-        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
+        let fbUserId = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
         
-        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+        let urlString = "https://graph.facebook.com/v2.3/\(fbUserId)/picture" as String
         let imgUrl = NSURL(string: urlString)
         
         let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
