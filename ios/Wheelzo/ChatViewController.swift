@@ -117,8 +117,6 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     func setupChat() {
         commentApi.delegate = self;
         
-
-        
         // have to load own profile
         senderId = rideData["driver_id"] as! String;
         senderDisplayName = rideData["driver_name"] as! String;
@@ -158,22 +156,22 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
 
     func sendMessage(text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
-        //let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
-        //message.fbUserId = myFbId;
+        let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+        message.fbUserId = myFbId;
         
-        //messages.append(message)
+        messages.append(message)
         
         
-        let callback: ()->Void = {
-            // seems like I need to delay this even further to account for server processing time
-            sleep(2)
-            self.commentApi.getComments(self.rideId.toInt()!)
-        };
-        
-        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
-        
-        finishReceivingMessage()
-        finishSendingMessage()
+//        let callback: ()->Void = {
+//            // seems like I need to delay this even further to account for server processing time
+//            sleep(2)
+//            self.commentApi.getComments(self.rideId.toInt()!)
+//        };
+//        
+//        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
+//        
+//        finishReceivingMessage()
+//        finishSendingMessage()
     }
     
     func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
@@ -216,7 +214,8 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
         sendMessage(text, senderId: senderId, senderDisplayName: senderDisplayName, date: date)
-        
+                
+        println("should finish sending")
         finishSendingMessage()
     }
     
