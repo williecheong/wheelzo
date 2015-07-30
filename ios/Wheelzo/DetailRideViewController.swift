@@ -43,16 +43,39 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
     // other data stuff (comments)
     var tableData = NSArray();
 
+    func setInfo() {
+        
+        nameLabel.text = rideData["driver_name"] as! String?;
+        
+        println("the driver is \(nameLabel.text) ")
+        
+        fromLabel.text = rideData["origin"] as! String?;
+        fromLabel.numberOfLines = 0
+        fromLabel.sizeToFit()
+        toLabel.text = rideData["destination"] as! String?;
+        toLabel.numberOfLines = 0
+        toLabel.sizeToFit()
+        priceLabel.text = rideData["price"] as! String?;
+        dateLabel.text = rideData["start"] as! String?;
+        
+    }
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-                
-        fromLabel.text = rideData["origin"] as! String?;
-        toLabel.text = rideData["destination"] as! String?;
         
-        priceLabel.text = rideData["price"] as! String?;
-        dateLabel.text = rideData["start"] as! String?;
+        
+        let driverFbId = rideData["driver_facebook_id"] as! String;
+        
+        // if this is not the same as the person logged in, hide the delete button
+        if (driverFbId != FBSDKAccessToken.currentAccessToken().userID) {
+            deleteRideButton.hidden = true;
+        }
+        
+        
+        // text stuff
+        setInfo()
         
         profilePic.image = image;
         
@@ -115,13 +138,7 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
             var wheelzoId = userData["id"] as! String;
             var fbId = userData["facebook_id"] as! String;
             
-            // if this is not the same as the person logged in, hide the delete button
-            if (fbId != FBSDKAccessToken.currentAccessToken().userID) {
-                
-                println("the driver is not logged in! will hide delete button")
-                deleteRideButton.hidden = true;
-                
-            }
+            
             
             setProfilePicFromFbId(fbId);
             
@@ -213,7 +230,7 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
         
         let fbUserId = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
         
-        let urlString = "https://graph.facebook.com/v2.3/\(fbUserId)/picture" as String
+        let urlString = "https://graph.facebook.com/v2.3/\(fbUserId)/picture?type=large&redirect=true&width=128&height=128" as String
         let imgUrl = NSURL(string: urlString)
         
         let request: NSURLRequest = NSURLRequest(URL: imgUrl!)

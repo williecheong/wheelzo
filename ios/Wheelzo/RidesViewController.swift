@@ -148,16 +148,15 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             // all data
             cell.rideData = rowData;
             
-            
-            var toString = "T: ";
-            toString += rowData["origin"] as! String;
-            
-            cell.toLabel.text = toString;
-            
             var fromString = "F: ";
             fromString += rowData["origin"] as! String;
             
             cell.fromLabel.text = fromString;
+            
+            var toString = "T: ";
+            toString += rowData["destination"] as! String;
+            
+            cell.toLabel.text = toString;
             
             var priceString = "$";
             priceString += rowData["price"] as! String;

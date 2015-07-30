@@ -156,22 +156,22 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
 
     func sendMessage(text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         
-        let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
-        message.fbUserId = myFbId;
-        
-        messages.append(message)
-        
-        
-//        let callback: ()->Void = {
-//            // seems like I need to delay this even further to account for server processing time
-//            sleep(2)
-//            self.commentApi.getComments(self.rideId.toInt()!)
-//        };
+//        let message = TextMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: date, text: text)
+//        message.fbUserId = myFbId;
 //        
-//        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
-//        
-//        finishReceivingMessage()
-//        finishSendingMessage()
+//        messages.append(message)
+        
+        
+        let callback: ()->Void = {
+            // seems like I need to delay this even further to account for server processing time
+            sleep(2)
+            self.commentApi.getComments(self.rideId.toInt()!)
+        };
+        
+        commentApi.postComment(text, rideId: self.rideId.toInt()!, userId: senderId.toInt()!, callback: callback);
+        
+        finishReceivingMessage()
+        finishSendingMessage()
     }
     
     func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
