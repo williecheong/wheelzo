@@ -21,6 +21,7 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var dayLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var fromLabel: UILabel!
@@ -55,9 +56,25 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
         toLabel.text = rideData["destination"] as! String?;
         toLabel.numberOfLines = 0
         toLabel.sizeToFit()
-        priceLabel.text = rideData["price"] as! String?;
-        dateLabel.text = rideData["start"] as! String?;
         
+        // date formatting
+        let dateString = rideData["start"] as! String;
+        var dateFormatter = NSDateFormatter();
+        
+        // input format (don't change unless api changes)
+        var formatString = "yyyy'-'MM'-'dd' 'HH':'mm':'ss";
+        dateFormatter.dateFormat = formatString;
+        let dateObject = dateFormatter.dateFromString(dateString);
+        
+        // date output
+        //      
+        formatString = "EEEE' 'MMM' 'dd', 'h':'mm a";
+        dateFormatter.dateFormat = formatString;
+        dateLabel.text = dateFormatter.stringFromDate(dateObject!);
+
+        var priceText = "$"
+        priceText += rideData["price"] as! String;
+        priceLabel.text = priceText
     }
     
    

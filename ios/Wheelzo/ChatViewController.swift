@@ -110,6 +110,10 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // This button will call the `didPressAccessoryButton:` selector on your JSQMessagesViewController subclass
+        self.inputToolbar.contentView.leftBarButtonItem = nil // custom button or nil to remove
+        
         setupChat()
     }
     
