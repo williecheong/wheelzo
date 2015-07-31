@@ -6,14 +6,6 @@
 //  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved.
 //
 
-//
-//  PostRideViewController.swift
-//  Wheelzo
-//
-//  Created by Maksym Pikhteryev on 2015-06-28.
-//  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved.
-//
-
 import Foundation
 
 import UIKit;
