@@ -75,9 +75,10 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
 
                 println(fbUserId)
                 
+                let driverName = rideData["driver_name"] as! String!;
                 // workaround for auto-gen comments
                 if text.rangeOfString("<em>") != nil {
-                    text = "This ride has been imported, \(senderDisplayName) may be unaware of comments posted here."
+                    text = "This ride has been imported, \(driverName) may be unaware of comments posted here."
                 }
                 
                 
@@ -114,7 +115,7 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.collectionViewLayout.springinessEnabled = true
+//        collectionView.collectionViewLayout.springinessEnabled = true
     }
     
     override func viewDidDisappear(animated: Bool) {

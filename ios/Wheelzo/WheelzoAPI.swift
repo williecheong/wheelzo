@@ -19,6 +19,13 @@ protocol WheelzoAPIProtocol {
 
 
 class WheelzoAPI: NSObject {
+    // API for anything non-comment related
+    
+    static let stagingPrefix = "http://staging."
+    static let productionPrefix = "https://"
+    
+    let urlPrefix = (SettingsViewController.useProduction ? productionPrefix : stagingPrefix)
+
     var data: NSMutableData = NSMutableData()
     var delegate: WheelzoAPIProtocol?
     
@@ -75,7 +82,7 @@ class WheelzoAPI: NSObject {
         
     func getUserFromUserId(userId: Int) {
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/users?id=\(userId)"
         var url: NSURL! = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         var connection: NSURLConnection! = NSURLConnection(request: request,
@@ -88,7 +95,7 @@ class WheelzoAPI: NSObject {
 
     func getUserFromFbId(fbId: Int) {
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/users?facebook_id=\(fbId)"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/users?facebook_id=\(fbId)"
         var url: NSURL! = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         var connection: NSURLConnection! = NSURLConnection(request: request,
@@ -101,7 +108,7 @@ class WheelzoAPI: NSObject {
     
     func syncGetUserDataFromUserId(userId: String) -> NSDictionary {
         
-        let urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
+        let urlPath = "\(urlPrefix).wheelzo.com/api/v2/users?id=\(userId)"
         let url: NSURL = NSURL(string: urlPath)!
         let request1: NSURLRequest = NSURLRequest(URL: url)
         
@@ -121,7 +128,7 @@ class WheelzoAPI: NSObject {
     
     func syncGetFbIdFromUserId(userId: String) -> String {
         
-        let urlPath = "http://staging.wheelzo.com/api/v2/users?id=\(userId)"
+        let urlPath = "\(urlPrefix)wheelzo.com/api/v2/users?id=\(userId)"
         let url: NSURL = NSURL(string: urlPath)!
         let request1: NSURLRequest = NSURLRequest(URL: url)
         
@@ -147,7 +154,7 @@ class WheelzoAPI: NSObject {
     
     func getCurrentRides() {
         
-        let urlPath = "http://staging.wheelzo.com/api/v2/rides"
+        let urlPath = "\(urlPrefix)wheelzo.com/api/v2/rides"
         let url: NSURL! = NSURL(string: urlPath)
         let request = NSMutableURLRequest(URL: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -182,7 +189,7 @@ class WheelzoAPI: NSObject {
         
         var token = FBSDKAccessToken.currentAccessToken().tokenString
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/rides"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/rides"
         var url: NSURL! = NSURL(string: urlPath)
         
         let request = NSMutableURLRequest(URL: url)
@@ -226,7 +233,7 @@ class WheelzoAPI: NSObject {
         
         var token = FBSDKAccessToken.currentAccessToken().tokenString
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/rides/index/\(rideId)"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/rides/index/\(rideId)"
         var url: NSURL! = NSURL(string: urlPath)
         
         let request = NSMutableURLRequest(URL: url)
