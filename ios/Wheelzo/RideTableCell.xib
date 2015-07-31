@@ -23,11 +23,12 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guy-rD-pcy">
-                        <rect key="frame" x="274" y="37" width="36" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Guy-rD-pcy">
+                        <rect key="frame" x="281" y="37" width="29" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="68r-UM-E3y"/>
                             <constraint firstAttribute="width" constant="100" id="8zi-Fn-bGD"/>
+                            <constraint firstAttribute="width" constant="29" id="IC6-Nw-sTK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,10 +40,12 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="248" misplaced="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-wz-LnO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="248" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-wz-LnO">
                         <rect key="frame" x="8" y="8" width="50" height="21"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="B3S-94-qVh"/>
                             <constraint firstAttribute="width" constant="125" id="CqR-zS-ngZ"/>
+                            <constraint firstAttribute="height" constant="21" id="ZzL-LJ-WER"/>
                             <constraint firstAttribute="width" constant="50" id="dlS-dT-PzA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -50,11 +53,12 @@
                         <nil key="highlightedColor"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="B3S-94-qVh"/>
                                 <exclude reference="CqR-zS-ngZ"/>
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="246" misplaced="YES" text="time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn2-Ym-DSE">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="246" text="time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fn2-Ym-DSE">
                         <rect key="frame" x="8" y="37" width="54" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="54" id="0E5-hY-7vW"/>
@@ -71,10 +75,11 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wok-8k-ppV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wok-8k-ppV">
                         <rect key="frame" x="81" y="8" width="165" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="125" id="GSx-si-UQ9"/>
+                            <constraint firstAttribute="height" constant="21" id="pem-7V-5Ex"/>
                             <constraint firstAttribute="width" constant="88" id="ytG-Xu-zS5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -87,8 +92,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BF-JN-VRD">
-                        <rect key="frame" x="81" y="37" width="165" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BF-JN-VRD">
+                        <rect key="frame" x="81" y="37" width="172" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="130" id="gG7-Sq-db5"/>
                         </constraints>
