@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "empty_user.png"
+      "filename" : "Speech Bubble Icon.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "empty_user-1.png"
+      "filename" : "Speech Bubble Icon@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "empty_user-2.png"
+      "filename" : "Speech Bubble Icon@3x.png"
     }
   ],
   "info" : {

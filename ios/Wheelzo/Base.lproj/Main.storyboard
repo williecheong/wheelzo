@@ -82,7 +82,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Blank52.png" translatesAutoresizingMaskIntoConstraints="NO" id="lPV-bU-tX1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_user" translatesAutoresizingMaskIntoConstraints="NO" id="lPV-bU-tX1">
                                 <rect key="frame" x="236" y="72" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="8ge-gT-2Pz"/>
@@ -114,8 +114,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-dn-UZ3">
-                                <rect key="frame" x="284" y="472" width="32" height="32"/>
-                                <state key="normal" image="Speech Bubble Icon.png"/>
+                                <rect key="frame" x="284" y="501" width="32" height="32"/>
+                                <state key="normal" image="speech_bubble"/>
                                 <connections>
                                     <segue destination="tkf-Gr-Fdz" kind="show" identifier="chatSegue" id="3D8-6b-whe"/>
                                 </connections>
@@ -170,6 +170,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="yrW-1j-8FN">
                                 <rect key="frame" x="284" y="319" width="32" height="32"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nbv-oR-FWm">
+                                <rect key="frame" x="272" y="476" width="56" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="vxa-CR-rtS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -183,6 +192,7 @@
                             <constraint firstItem="D54-qg-l6B" firstAttribute="top" secondItem="Jt1-oN-aOA" secondAttribute="bottom" constant="43" id="8Qq-pQ-Zej"/>
                             <constraint firstAttribute="centerX" secondItem="lPV-bU-tX1" secondAttribute="centerX" id="98H-Bd-bhH"/>
                             <constraint firstItem="yrW-1j-8FN" firstAttribute="top" secondItem="D54-qg-l6B" secondAttribute="bottom" constant="8" id="AHq-fW-e6A"/>
+                            <constraint firstAttribute="centerX" secondItem="Nbv-oR-FWm" secondAttribute="centerX" constant="2.5" id="AOm-rJ-JUo"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ig5-xk-Wbx" secondAttribute="trailing" constant="242" id="AVa-Za-hO0"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="top" secondItem="eUQ-Zo-eb2" secondAttribute="bottom" constant="8" id="BFK-Xc-gHx"/>
                             <constraint firstItem="ig5-xk-Wbx" firstAttribute="leading" secondItem="1Ss-TT-des" secondAttribute="leadingMargin" id="Cuh-Kn-a5V"/>
@@ -210,14 +220,19 @@
                             <constraint firstItem="lPV-bU-tX1" firstAttribute="top" secondItem="zfa-xc-6qC" secondAttribute="bottom" constant="10" id="SBY-SK-EQa"/>
                             <constraint firstItem="Kw7-dy-9Ji" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="U4g-Nw-IbI"/>
                             <constraint firstItem="ig5-xk-Wbx" firstAttribute="top" secondItem="yrW-1j-8FN" secondAttribute="bottom" constant="8" id="UgF-TK-mJx"/>
+                            <constraint firstAttribute="centerX" secondItem="Nbv-oR-FWm" secondAttribute="centerX" id="XDA-1J-XDQ"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="leading" secondItem="1Ss-TT-des" secondAttribute="leadingMargin" id="XHc-Io-EVe"/>
                             <constraint firstItem="lSe-f0-cmm" firstAttribute="baseline" secondItem="Kw7-dy-9Ji" secondAttribute="baseline" id="Yiq-Hj-mgo"/>
                             <constraint firstItem="ig5-xk-Wbx" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="ZWo-42-C4m"/>
+                            <constraint firstAttribute="centerX" secondItem="Nbv-oR-FWm" secondAttribute="centerX" constant="2.5" id="ZzC-gk-o7I"/>
+                            <constraint firstItem="Rrd-wi-yzh" firstAttribute="top" secondItem="rbA-dn-UZ3" secondAttribute="bottom" constant="18" id="a7p-Rv-2zJ"/>
                             <constraint firstItem="rbA-dn-UZ3" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="aFF-xi-PcH"/>
                             <constraint firstAttribute="centerX" secondItem="yrW-1j-8FN" secondAttribute="centerX" id="aMc-UX-SzQ"/>
+                            <constraint firstItem="Nbv-oR-FWm" firstAttribute="top" secondItem="rbA-dn-UZ3" secondAttribute="bottom" constant="8" id="amT-dt-JXu"/>
                             <constraint firstItem="rbA-dn-UZ3" firstAttribute="top" secondItem="lSe-f0-cmm" secondAttribute="bottom" constant="8" id="bP5-mj-qpd"/>
                             <constraint firstItem="eUQ-Zo-eb2" firstAttribute="top" secondItem="Kw7-dy-9Ji" secondAttribute="bottom" constant="8" id="cDi-Eo-Vwj"/>
                             <constraint firstAttribute="centerX" secondItem="D54-qg-l6B" secondAttribute="centerX" id="cbr-Oh-vgO"/>
+                            <constraint firstItem="rbA-dn-UZ3" firstAttribute="top" secondItem="Nbv-oR-FWm" secondAttribute="bottom" constant="8" id="d9K-60-rg3"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="top" secondItem="eUQ-Zo-eb2" secondAttribute="bottom" constant="41" id="h0D-6O-IBz"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="top" secondItem="lPV-bU-tX1" secondAttribute="bottom" constant="72" id="j0G-sv-gY1"/>
                             <constraint firstItem="D54-qg-l6B" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="kdB-Tm-q8F"/>
@@ -232,7 +247,9 @@
                             <constraint firstItem="Jt1-oN-aOA" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="tub-yo-Nbn"/>
                             <constraint firstItem="Kw7-dy-9Ji" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="w28-hd-Ar4"/>
                             <constraint firstItem="lSe-f0-cmm" firstAttribute="trailing" secondItem="1Ss-TT-des" secondAttribute="trailingMargin" id="wXl-jj-ZEl"/>
+                            <constraint firstItem="Rrd-wi-yzh" firstAttribute="top" secondItem="rbA-dn-UZ3" secondAttribute="bottom" constant="8" id="y4o-i1-D0w"/>
                             <constraint firstItem="Kw7-dy-9Ji" firstAttribute="top" secondItem="ig5-xk-Wbx" secondAttribute="bottom" constant="8" id="yEi-6V-Dd8"/>
+                            <constraint firstItem="rbA-dn-UZ3" firstAttribute="top" secondItem="Nbv-oR-FWm" secondAttribute="bottom" constant="8" id="yJD-8l-0hW"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -263,11 +280,17 @@
                                 <exclude reference="Gps-wC-g9g"/>
                                 <exclude reference="HGh-mG-D83"/>
                                 <exclude reference="qGn-7n-M6t"/>
+                                <exclude reference="AOm-rJ-JUo"/>
+                                <exclude reference="ZzC-gk-o7I"/>
+                                <exclude reference="amT-dt-JXu"/>
+                                <exclude reference="Lo1-tG-aF9"/>
+                                <exclude reference="Quf-WJ-RIi"/>
+                                <exclude reference="y4o-i1-D0w"/>
                                 <exclude reference="5PX-2x-CSe"/>
                                 <exclude reference="Fvi-Zq-g1p"/>
                                 <exclude reference="aFF-xi-PcH"/>
                                 <exclude reference="bP5-mj-qpd"/>
-                                <exclude reference="Lo1-tG-aF9"/>
+                                <exclude reference="d9K-60-rg3"/>
                             </mask>
                         </variation>
                     </view>
@@ -452,7 +475,7 @@
                             <outletCollection property="gestureRecognizers" destination="ZVz-AN-d1S" appends="YES" id="0c6-NB-axh"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Drive" image="drive-32.png" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Drive" image="drive" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -633,7 +656,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings-32.png" id="tyQ-ay-NgW"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="tyQ-ay-NgW"/>
                     <connections>
                         <outlet property="fbLoginView" destination="VK9-51-FIk" id="rYQ-G7-RiX"/>
                         <segue destination="49e-Tb-3d3" kind="showDetail" identifier="settingsSegueToApp" id="fmT-0g-IGK"/>
@@ -647,7 +670,7 @@
         <scene sceneID="T2h-eW-x8Z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Sx7-Ww-UHc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Rides" image="Cars-32.png" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Rides" image="cars" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eSa-hh-gOr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -664,16 +687,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Blank52.png" width="52" height="52"/>
-        <image name="Cars-32.png" width="32" height="32"/>
-        <image name="Settings-32.png" width="32" height="32"/>
-        <image name="Speech Bubble Icon.png" width="32" height="32"/>
+        <image name="cars" width="32" height="32"/>
         <image name="down_arrow" width="32" height="32"/>
-        <image name="drive-32.png" width="32" height="32"/>
+        <image name="drive" width="32" height="32"/>
+        <image name="empty_user" width="400" height="400"/>
         <image name="logo180.png" width="180" height="180"/>
+        <image name="settings" width="32" height="32"/>
+        <image name="speech_bubble" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fmT-0g-IGK"/>
-        <segue reference="0lg-DH-gNC"/>
+        <segue reference="OvJ-Th-8Iw"/>
     </inferredMetricsTieBreakers>
 </document>

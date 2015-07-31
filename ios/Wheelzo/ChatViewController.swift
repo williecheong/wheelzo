@@ -190,7 +190,7 @@ class ChatViewController: JSQMessagesViewController, WheelzoCommentAPIProtocol {
     }
     
     override func didPressAccessoryButton(sender: UIButton!) {
-        println("Camera pressed!")
+        //println("Camera pressed!")
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {

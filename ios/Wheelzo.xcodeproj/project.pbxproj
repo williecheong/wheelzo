@@ -15,31 +15,20 @@
 		D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114E071A60475000FBF575 /* WheelzoAPI.swift */; };
 		D71E3B271B40D59000A32EDC /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B251B40D59000A32EDC /* logo120.png */; };
 		D71E3B281B40D59000A32EDC /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B261B40D59000A32EDC /* logo180.png */; };
-		D72DBFC81B6AAF53004BD299 /* Speech Bubble Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D72DBFC61B6AAF53004BD299 /* Speech Bubble Icon@2x.png */; };
-		D72DBFC91B6AAF53004BD299 /* Speech Bubble Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D72DBFC71B6AAF53004BD299 /* Speech Bubble Icon@3x.png */; };
 		D73FD7741B40822000943498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7731B40822000943498 /* AppDelegate.swift */; };
 		D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7751B40AE4800943498 /* PostRideViewController.swift */; };
-		D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */ = {isa = PBXBuildFile; fileRef = D74CEDDB1B38976100FE7A86 /* Blank52.png */; };
 		D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */; };
 		D759E6D51B41E30E0043AEC3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */; };
 		D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D759E6D61B4214880043AEC3 /* SettingsViewController.swift */; };
 		D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D77E4E741B3BB516009895BF /* RideTableCell.xib */; };
 		D77E4E771B3BB77F009895BF /* RideTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77E4E761B3BB77F009895BF /* RideTableCell.swift */; };
 		D791424D1B69C7A300DE972D /* TextMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D791424C1B69C7A300DE972D /* TextMessage.swift */; };
-		D7A536E21B699E310042C496 /* Speech Bubble Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A536E11B699E310042C496 /* Speech Bubble Icon.png */; };
 		D7A536E41B69A1610042C496 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A536E31B69A1610042C496 /* ChatViewController.swift */; };
 		D7C577DD1B4F810300B1030F /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C577DC1B4F810300B1030F /* Threading.swift */; };
 		D7C8CA501A8C925A0000CF03 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */; };
-		D7D0533D1B3E738600059EBB /* empty_user.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533C1B3E738600059EBB /* empty_user.png */; };
-		D7D0533F1B3E738E00059EBB /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo.png */; };
+		D7D0533F1B3E738E00059EBB /* logo800.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo800.png */; };
 		D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */; };
 		D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D053421B3EF13300059EBB /* CommentsTableCell.swift */; };
-		D7E780AC1B51EBE1001540FB /* Location Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780AB1B51EBE1001540FB /* Location Filled-50.png */; };
-		D7E780AE1B51EC3F001540FB /* Settings-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780AD1B51EC3F001540FB /* Settings-50.png */; };
-		D7E780B01B51EF44001540FB /* Settings-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780AF1B51EF44001540FB /* Settings-32.png */; };
-		D7E780B21B51F07E001540FB /* Taxi-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780B11B51F07E001540FB /* Taxi-32.png */; };
-		D7E780B41B51F08C001540FB /* drive-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780B31B51F08C001540FB /* drive-32.png */; };
-		D7E780B61B51F0E3001540FB /* Cars-32.png in Resources */ = {isa = PBXBuildFile; fileRef = D7E780B51B51F0E3001540FB /* Cars-32.png */; };
 		D7F3165E1A8C9283003C91B3 /* RideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165D1A8C9283003C91B3 /* RideModel.swift */; };
 		D7F316601A8C92BE003C91B3 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */; };
 		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
@@ -73,31 +62,20 @@
 		D7114E071A60475000FBF575 /* WheelzoAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelzoAPI.swift; sourceTree = "<group>"; };
 		D71E3B251B40D59000A32EDC /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo120.png; path = Wheelzo/logo120.png; sourceTree = "<group>"; };
 		D71E3B261B40D59000A32EDC /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo180.png; path = Wheelzo/logo180.png; sourceTree = "<group>"; };
-		D72DBFC61B6AAF53004BD299 /* Speech Bubble Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Speech Bubble Icon@2x.png"; sourceTree = "<group>"; };
-		D72DBFC71B6AAF53004BD299 /* Speech Bubble Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Speech Bubble Icon@3x.png"; sourceTree = "<group>"; };
 		D73FD7731B40822000943498 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D73FD7751B40AE4800943498 /* PostRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRideViewController.swift; sourceTree = "<group>"; };
-		D74CEDDB1B38976100FE7A86 /* Blank52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blank52.png; sourceTree = "<group>"; };
 		D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		D759E6D31B41E30E0043AEC3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D759E6D61B4214880043AEC3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D77E4E741B3BB516009895BF /* RideTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RideTableCell.xib; sourceTree = "<group>"; };
 		D77E4E761B3BB77F009895BF /* RideTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideTableCell.swift; sourceTree = "<group>"; };
 		D791424C1B69C7A300DE972D /* TextMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessage.swift; sourceTree = "<group>"; };
-		D7A536E11B699E310042C496 /* Speech Bubble Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Speech Bubble Icon.png"; sourceTree = "<group>"; };
 		D7A536E31B69A1610042C496 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		D7C577DC1B4F810300B1030F /* Threading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
 		D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		D7D0533C1B3E738600059EBB /* empty_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_user.png; sourceTree = "<group>"; };
-		D7D0533E1B3E738E00059EBB /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Wheelzo/logo.png; sourceTree = "<group>"; };
+		D7D0533E1B3E738E00059EBB /* logo800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo800.png; path = Wheelzo/logo800.png; sourceTree = "<group>"; };
 		D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableCell.xib; sourceTree = "<group>"; };
 		D7D053421B3EF13300059EBB /* CommentsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableCell.swift; sourceTree = "<group>"; };
-		D7E780AB1B51EBE1001540FB /* Location Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location Filled-50.png"; sourceTree = "<group>"; };
-		D7E780AD1B51EC3F001540FB /* Settings-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-50.png"; sourceTree = "<group>"; };
-		D7E780AF1B51EF44001540FB /* Settings-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Settings-32.png"; sourceTree = "<group>"; };
-		D7E780B11B51F07E001540FB /* Taxi-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Taxi-32.png"; sourceTree = "<group>"; };
-		D7E780B31B51F08C001540FB /* drive-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drive-32.png"; sourceTree = "<group>"; };
-		D7E780B51B51F0E3001540FB /* Cars-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cars-32.png"; sourceTree = "<group>"; };
 		D7F3165D1A8C9283003C91B3 /* RideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideModel.swift; sourceTree = "<group>"; };
 		D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		D7F316611A8C9825003C91B3 /* RidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RidesViewController.swift; sourceTree = "<group>"; };
@@ -142,16 +120,7 @@
 			children = (
 				D71E3B251B40D59000A32EDC /* logo120.png */,
 				D71E3B261B40D59000A32EDC /* logo180.png */,
-				D7D0533E1B3E738E00059EBB /* logo.png */,
-				D7E780B51B51F0E3001540FB /* Cars-32.png */,
-				D7E780B31B51F08C001540FB /* drive-32.png */,
-				D7E780AB1B51EBE1001540FB /* Location Filled-50.png */,
-				D7E780AF1B51EF44001540FB /* Settings-32.png */,
-				D7E780AD1B51EC3F001540FB /* Settings-50.png */,
-				D7A536E11B699E310042C496 /* Speech Bubble Icon.png */,
-				D72DBFC61B6AAF53004BD299 /* Speech Bubble Icon@2x.png */,
-				D72DBFC71B6AAF53004BD299 /* Speech Bubble Icon@3x.png */,
-				D7E780B11B51F07E001540FB /* Taxi-32.png */,
+				D7D0533E1B3E738E00059EBB /* logo800.png */,
 				D7114DD91A5F87E100FBF575 /* Wheelzo */,
 				D7114DF11A5F87E100FBF575 /* WheelzoTests */,
 				D7114DD81A5F87E100FBF575 /* Products */,
@@ -172,6 +141,7 @@
 		D7114DD91A5F87E100FBF575 /* Wheelzo */ = {
 			isa = PBXGroup;
 			children = (
+				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
 				D7114E071A60475000FBF575 /* WheelzoAPI.swift */,
 				D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */,
 				D7114DE21A5F87E100FBF575 /* Main.storyboard */,
@@ -186,14 +156,11 @@
 				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
 				D759E6D61B4214880043AEC3 /* SettingsViewController.swift */,
-				D7114DE51A5F87E100FBF575 /* Images.xcassets */,
-				D74CEDDB1B38976100FE7A86 /* Blank52.png */,
 				D7114DDA1A5F87E100FBF575 /* Supporting Files */,
 				D7C8CA4F1A8C925A0000CF03 /* UserModel.swift */,
 				D7F3165D1A8C9283003C91B3 /* RideModel.swift */,
 				D7F3165F1A8C92BE003C91B3 /* CommentModel.swift */,
 				D7F316631A8C983D003C91B3 /* MyRidesViewController.swift */,
-				D7D0533C1B3E738600059EBB /* empty_user.png */,
 				D73FD7751B40AE4800943498 /* PostRideViewController.swift */,
 				D7C577DC1B4F810300B1030F /* Threading.swift */,
 				D791424C1B69C7A300DE972D /* TextMessage.swift */,
@@ -319,23 +286,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72DBFC81B6AAF53004BD299 /* Speech Bubble Icon@2x.png in Resources */,
 				D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */,
-				D7A536E21B699E310042C496 /* Speech Bubble Icon.png in Resources */,
-				D7E780AE1B51EC3F001540FB /* Settings-50.png in Resources */,
-				D7E780AC1B51EBE1001540FB /* Location Filled-50.png in Resources */,
-				D74CEDDC1B38976100FE7A86 /* Blank52.png in Resources */,
-				D7D0533D1B3E738600059EBB /* empty_user.png in Resources */,
-				D7E780B41B51F08C001540FB /* drive-32.png in Resources */,
 				D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */,
-				D72DBFC91B6AAF53004BD299 /* Speech Bubble Icon@3x.png in Resources */,
-				D7E780B01B51EF44001540FB /* Settings-32.png in Resources */,
 				D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */,
-				D7E780B61B51F0E3001540FB /* Cars-32.png in Resources */,
-				D7E780B21B51F07E001540FB /* Taxi-32.png in Resources */,
 				D71E3B271B40D59000A32EDC /* logo120.png in Resources */,
 				D71E3B281B40D59000A32EDC /* logo180.png in Resources */,
-				D7D0533F1B3E738E00059EBB /* logo.png in Resources */,
+				D7D0533F1B3E738E00059EBB /* logo800.png in Resources */,
 				D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */,
 				D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */,
 			);

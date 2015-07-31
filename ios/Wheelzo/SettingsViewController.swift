@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet var fbLoginView : FBSDKLoginButton!
     
     // used in the API classes to use staging or not
-    static let useProduction = false;
+    static let useProduction = true;
     
     override func viewDidLoad() {
         super.viewDidLoad()
