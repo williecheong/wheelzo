@@ -26,8 +26,6 @@
 		D7C862C51B6B3AB1004EA11C /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C862C31B6B3AB1004EA11C /* logo120.png */; };
 		D7C862C61B6B3AB1004EA11C /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C862C41B6B3AB1004EA11C /* logo180.png */; };
 		D7D0533F1B3E738E00059EBB /* logo800.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D0533E1B3E738E00059EBB /* logo800.png */; };
-		D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */; };
-		D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D053421B3EF13300059EBB /* CommentsTableCell.swift */; };
 		D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316611A8C9825003C91B3 /* RidesViewController.swift */; };
 		D7F316661A8C9851003C91B3 /* DetailRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */; };
 		D7FFD56A1B4B05DD00D309BE /* WheeloCommentAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FFD5691B4B05DD00D309BE /* WheeloCommentAPI.swift */; };
@@ -69,8 +67,6 @@
 		D7C862C31B6B3AB1004EA11C /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo120.png; sourceTree = "<group>"; };
 		D7C862C41B6B3AB1004EA11C /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo180.png; sourceTree = "<group>"; };
 		D7D0533E1B3E738E00059EBB /* logo800.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo800.png; path = Wheelzo/logo800.png; sourceTree = "<group>"; };
-		D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsTableCell.xib; sourceTree = "<group>"; };
-		D7D053421B3EF13300059EBB /* CommentsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableCell.swift; sourceTree = "<group>"; };
 		D7F316611A8C9825003C91B3 /* RidesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RidesViewController.swift; sourceTree = "<group>"; };
 		D7F316651A8C9851003C91B3 /* DetailRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailRideViewController.swift; sourceTree = "<group>"; };
 		D7FE12BC1A78C96B00677231 /* Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridge-Header.h"; sourceTree = "<group>"; };
@@ -142,8 +138,6 @@
 				D7A536E31B69A1610042C496 /* ChatViewController.swift */,
 				D77E4E741B3BB516009895BF /* RideTableCell.xib */,
 				D77E4E761B3BB77F009895BF /* RideTableCell.swift */,
-				D7D053401B3EF0CE00059EBB /* CommentsTableCell.xib */,
-				D7D053421B3EF13300059EBB /* CommentsTableCell.swift */,
 				D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */,
 				D73FD7731B40822000943498 /* AppDelegate.swift */,
 				D7FE12BC1A78C96B00677231 /* Bridge-Header.h */,
@@ -278,7 +272,6 @@
 				D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */,
 				D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */,
 				D7C862C51B6B3AB1004EA11C /* logo120.png in Resources */,
-				D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */,
 				D7D0533F1B3E738E00059EBB /* logo800.png in Resources */,
 				D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */,
 				D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */,
@@ -340,7 +333,6 @@
 				D7F316621A8C9825003C91B3 /* RidesViewController.swift in Sources */,
 				D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */,
 				D759E6D71B4214880043AEC3 /* SettingsViewController.swift in Sources */,
-				D7D053431B3EF13300059EBB /* CommentsTableCell.swift in Sources */,
 				D7C577DD1B4F810300B1030F /* Threading.swift in Sources */,
 				D7A536E41B69A1610042C496 /* ChatViewController.swift in Sources */,
 				D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */,
@@ -476,7 +468,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wheelzo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -497,7 +489,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Wheelzo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
