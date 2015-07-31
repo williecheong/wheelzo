@@ -283,14 +283,14 @@
                                 <exclude reference="AOm-rJ-JUo"/>
                                 <exclude reference="ZzC-gk-o7I"/>
                                 <exclude reference="amT-dt-JXu"/>
-                                <exclude reference="Lo1-tG-aF9"/>
-                                <exclude reference="Quf-WJ-RIi"/>
-                                <exclude reference="y4o-i1-D0w"/>
                                 <exclude reference="5PX-2x-CSe"/>
                                 <exclude reference="Fvi-Zq-g1p"/>
                                 <exclude reference="aFF-xi-PcH"/>
                                 <exclude reference="bP5-mj-qpd"/>
                                 <exclude reference="d9K-60-rg3"/>
+                                <exclude reference="Lo1-tG-aF9"/>
+                                <exclude reference="Quf-WJ-RIi"/>
+                                <exclude reference="y4o-i1-D0w"/>
                             </mask>
                         </variation>
                     </view>
@@ -605,7 +605,7 @@
                                     <constraint firstAttribute="height" constant="180" id="uOh-6H-XwB"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact info@wheelzo.com for comments, questions, or suggestions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s5-Wv-BUu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Contact info@wheelzo.com for comments, questions, or suggestions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s5-Wv-BUu">
                                 <rect key="frame" x="140" y="504" width="321" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="OTi-MX-yDq"/>
