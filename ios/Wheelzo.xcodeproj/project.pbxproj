@@ -13,8 +13,6 @@
 		D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7114DE71A5F87E100FBF575 /* LaunchScreen.xib */; };
 		D7114DF51A5F87E100FBF575 /* WheelzoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */; };
 		D7114E081A60475000FBF575 /* WheelzoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7114E071A60475000FBF575 /* WheelzoAPI.swift */; };
-		D71E3B271B40D59000A32EDC /* logo120.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B251B40D59000A32EDC /* logo120.png */; };
-		D71E3B281B40D59000A32EDC /* logo180.png in Resources */ = {isa = PBXBuildFile; fileRef = D71E3B261B40D59000A32EDC /* logo180.png */; };
 		D73FD7741B40822000943498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7731B40822000943498 /* AppDelegate.swift */; };
 		D73FD7761B40AE4800943498 /* PostRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73FD7751B40AE4800943498 /* PostRideViewController.swift */; };
 		D759E6D41B41E30E0043AEC3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */; };
@@ -60,8 +58,6 @@
 		D7114DF31A5F87E100FBF575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7114DF41A5F87E100FBF575 /* WheelzoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelzoTests.swift; sourceTree = "<group>"; };
 		D7114E071A60475000FBF575 /* WheelzoAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WheelzoAPI.swift; sourceTree = "<group>"; };
-		D71E3B251B40D59000A32EDC /* logo120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo120.png; path = Wheelzo/logo120.png; sourceTree = "<group>"; };
-		D71E3B261B40D59000A32EDC /* logo180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo180.png; path = Wheelzo/logo180.png; sourceTree = "<group>"; };
 		D73FD7731B40822000943498 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D73FD7751B40AE4800943498 /* PostRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostRideViewController.swift; sourceTree = "<group>"; };
 		D759E6D21B41E30E0043AEC3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -118,8 +114,6 @@
 		D7114DCE1A5F87E100FBF575 = {
 			isa = PBXGroup;
 			children = (
-				D71E3B251B40D59000A32EDC /* logo120.png */,
-				D71E3B261B40D59000A32EDC /* logo180.png */,
 				D7D0533E1B3E738E00059EBB /* logo800.png */,
 				D7114DD91A5F87E100FBF575 /* Wheelzo */,
 				D7114DF11A5F87E100FBF575 /* WheelzoTests */,
@@ -289,8 +283,6 @@
 				D7114DE41A5F87E100FBF575 /* Main.storyboard in Resources */,
 				D7114DE91A5F87E100FBF575 /* LaunchScreen.xib in Resources */,
 				D7D053411B3EF0CE00059EBB /* CommentsTableCell.xib in Resources */,
-				D71E3B271B40D59000A32EDC /* logo120.png in Resources */,
-				D71E3B281B40D59000A32EDC /* logo180.png in Resources */,
 				D7D0533F1B3E738E00059EBB /* logo800.png in Resources */,
 				D7114DE61A5F87E100FBF575 /* Images.xcassets in Resources */,
 				D77E4E751B3BB516009895BF /* RideTableCell.xib in Resources */,
