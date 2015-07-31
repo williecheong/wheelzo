@@ -47,6 +47,7 @@ class API_Controller extends REST_Controller {
             $this->facebook_url = $this->facebook->getLoginUrl(
                 array(
                     "scope" => "email,manage_notifications",
+                    "redirect_uri" => base_url(),
                     "display" => "page"
                 )
             );

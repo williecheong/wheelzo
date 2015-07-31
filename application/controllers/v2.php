@@ -50,4 +50,8 @@ class V2 extends CI_Controller {
     public function index() {
         $this->blade->render('v2/main');
     }
+
+    public function lookup() {
+        $this->blade->render('v2/main');
+    }
 }

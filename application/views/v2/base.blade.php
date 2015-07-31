@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="/assets/vendor/v2/theme-dashgum/css/style.css">
         <link rel="stylesheet" href="/assets/vendor/v2/theme-dashgum/css/style-responsive.css">
         <link rel="stylesheet" href="/assets/vendor/v2/ng-quick-date/ng-quick-date.css">
+        <link rel="stylesheet" href="/assets/vendor/v2/ng-sweet-alert/sweet-alert.css">
         <link rel="stylesheet" href="/assets/vendor/v2/ng-toaster/toaster.css">
         <link rel="stylesheet" href="/assets/css/v2/helpers.css">        
         @yield('custom_css')
@@ -35,7 +36,7 @@
         <![endif]-->
     </head>
 
-    <body>
+    <body ng-app="myApp" ng-controller="myController">
         <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
         <section id="container" >
             <header class="header black-bg">
@@ -43,48 +44,62 @@
                     <img class="brand" src="/assets/img/logo-light.png">
                 </a>
                 @yield('top_search_bar')
+                <div class="top-menu pull-right mTop15 visible-xs">
+                    <button ng-init="isCollapsed=true" ng-click="isCollapsed=!isCollapsed" style="background:#D3D6D4;" class="btn">
+                        <i class="fa fa-bars"></i>   
+                    </button>
+                </div>
             </header>
             <aside>
-                <div id="sidebar" class="nav-collapse">
+                <div ng-class="{ 'hidden-xs' : isCollapsed }" id="sidebar" class="nav-collapse">
                     <ul class="sidebar-menu" id="nav-accordion">
                   	    <p class="centered">
-                            <a href="profile.html">
-                                <img src="/assets/img/empty_user.png" class="img-circle" width="110">
+                            <a href="">
+                                <img ng-if="isActive()" src="<% session.user.facebook_id | fbImage %>" class="img-circle" width="110">
+                                <img ng-if="!isActive()" src="/assets/img/empty_user.png" class="img-circle" width="110">
                             </a> 
                         </p>
                         <h5 class="centered">
-                            Anonymous
+                            <span ng-if="isActive()" ng-bind="session.user.name"></span>
+                            <span ng-if="!isActive()" ng-bind="'Anonymous'"></span>
                         </h5>
                         @yield('side_search_bar')
                         <li class="">
-                            <a href="">
-                                <?php //$exploded_name = explode(' ', $users[$session]['name'] ); ?>
-                                <i class="fa fa-home fa-lg"></i> 
-                                My Profile
+                            <a href="<% isActive() ? '/me' : session.facebook_url %>">
+                                <i class="fa fa-home fa-lg"></i> My Profile
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
-                                <i class="fa fa-group fa-lg"></i> 
-                                User Lookup
+                            <a href="<% isActive() ? '/lookup' : session.facebook_url %>">
+                                <i class="fa fa-group fa-lg"></i> User Lookup
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
-                                <i class="fa fa-bullhorn"></i> 
-                                Request a Ride
+                            <a ng-if="isActive()" ng-click="openModal('request')" href="">
+                                <i class="fa fa-bullhorn"></i> Request a Ride
+                            </a>
+                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                                <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
-                                <i class="fa fa-tachometer fa-lg"></i> 
-                                Post a Ride
+                            <a ng-if="isActive()" ng-click="openModal('drive')" href="">
+                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
+                            </a>
+                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
                         </li>
                         <li class="">
-                            <a href="">
-                                <i class="fa fa-facebook-square fa-lg"></i> 
-                                Sign in
+                            <a href="<% session.facebook_url %>">
+                                <span ng-if="isActive()">
+                                    <i class="fa fa-sign-out fa-lg"></i> 
+                                    Sign out
+                                </span>
+                                <span ng-if="!isActive()">
+                                    <i class="fa fa-facebook-square fa-lg"></i> 
+                                    Sign in
+                                </span>
                             </a>
                         </li>
                     </ul><!-- sidebar menu end-->
@@ -98,15 +113,14 @@
             <!--footer start-->
             <footer class="site-footer">
                 <div class="text-right mRight15">
-                    <div>
+                    <small>
                         <i class="fa fa-lock"></i> 
                         Verified secure by
                         <a href="https://www.comodo.com/" title="SSL Secured By COMODO CA">ComodoCA</a>
-                    </div>
-                    <div>
+                        &middot;
                         <i class="fa fa-copyright"></i>
                         Wheelzo v{{ CURRENT_VERSION }}
-                    </div>
+                    </small>
                 </div>
             </footer><!--footer end-->
         </section>
@@ -115,6 +129,26 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
         <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
-        <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>   
+        <script src="/assets/vendor/v2/ng-linkify/angular-linkify.min.js"></script>
+        <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>
+        <script src="/assets/vendor/v2/ng-timeago/ng-timeago.js"></script>
+        <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
+        <script src="/assets/js/v2/base.js"></script>
+        
+        @yield('custom_js')
+        
+        @yield('custom_modals')
+
+        @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', 'UA-50068607-1', 'wheelzo.com');
+                ga('require', 'displayfeatures');
+                ga('send', 'pageview');
+            </script>
+        @endif
     </body>
 </html>

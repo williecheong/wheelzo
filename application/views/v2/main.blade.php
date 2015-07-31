@@ -20,14 +20,17 @@
             <input placeholder="Going to ..." class="form-control opaque9">
         </div>
     </div>
-    <div class="top-menu pull-right mTop15 visible-xs">
-        <button style="background:#D3D6D4;" class="btn">
-            <i class="fa fa-bars"></i>   
-        </button>
-    </div>
 @endsection
 
 @section('side_search_bar')
+    <div class="row mTop15 mBottom5 mLeft5 mRight5 visible-xs">
+        <div class="col-xs-12">
+            <input placeholder="Leaving from ..." class="form-control opaque9">
+        </div>
+        <div class="col-xs-12">
+            <input placeholder="Going to ..." class="form-control opaque9">
+        </div>
+    </div>
 @endsection
 
 @section('main_body')
@@ -45,5 +48,10 @@
     </section><!-- /MAIN CONTENT -->
 @endsection
 
+@section('custom_modals')
+    @include('v2/ng-modals/drive')
+@endsection
+
 @section('custom_js')
+    <script src="/assets/js/v2/main.js"></script>
 @endsection
