@@ -20,7 +20,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo180.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPZ-S4-VMk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo800.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPZ-S4-VMk">
                     <rect key="frame" x="150" y="150" width="180" height="180"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="255" id="08q-9v-np3"/>
@@ -68,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logo180.png" width="180" height="180"/>
+        <image name="logo800.png" width="800" height="800"/>
     </resources>
 </document>
