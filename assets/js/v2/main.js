@@ -24,7 +24,9 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
                     ridesToDisplay[i] = null;
                     continue;
                 }
- 
+            }
+            
+            if (searchDestination.length > 0) {
                 if (!ridesToDisplay[i].destination.toLowerCase().contains(searchDestination)) {
                     ridesToDisplay[i] = null;
                     continue;
