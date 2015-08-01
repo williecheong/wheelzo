@@ -42,11 +42,11 @@
                         <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo">
                             <i class="fa fa-calendar hidden-xs"></i>
                             @if ($key == 0)
-                                Today
+                                Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
                             @elseif($key==1)
-                                Tomorrow
+                                Tomorrow<span class="hidden-xs">, {{ date('M j', strtotime('+1 day')) }}</span>
                             @else
-                                {{ $day }}
+                                {{ $day }}<span class="hidden-xs">, {{ date('M j', strtotime('next '.$day)) }}</span>
                             @endif
                         </button>
                     </div>  
@@ -56,16 +56,16 @@
                 <div ng-repeat="ride in displayRides" class="col-md-4">
                     <div class="panel panel-default" ng-init="menuVisible=false">
                         <div class="panel-heading">
+                            <strong ng-bind="ride.price | currency:'$':'0'" class="pull-right"></strong>
                             <a tooltip="<% ride.start | mysqlDateToIso | date : 'fullDate' %>" tooltip-placement="right">
                                 <i class="fa fa-calendar"></i>
                             </a>
                             <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
                             <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE, '"></strong>
                             <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'"></strong>
-                            <strong ng-bind="ride.price | currency:'$':'0'" class="pull-right"></strong>
                         </div>
                         <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
-                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle pull-right" width="78">
+                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right" width="78">
                             <div class="mBottom10">
                                 <strong>Origin</strong><br>
                                 <a tooltip="<% ride.origin %>" tooltip-placement="right" style="cursor:pointer;">
@@ -81,11 +81,11 @@
                                 <span ng-bind="ride.destination | shortenString:28"></span>
                             </div>
                             <div ng-show="menuVisible" style="position:absolute;top:0%;right:0%;">
+                                <a class="btn btn-xs btn-wheelzo">
+                                    <i class="fa fa-car"></i> Details
+                                </a>
                                 <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-info" style="background:#3B5998;border:none;">
                                     <i class="fa fa-envelope"></i> Message
-                                </a>
-                                <a class="btn btn-xs btn-info" style="background:#512673;border:none;">
-                                    <i class="fa fa-car"></i> Details
                                 </a>
                             </div>
                         </div>
