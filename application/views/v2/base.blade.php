@@ -60,7 +60,10 @@
                             </a> 
                         </p>
                         <h5 class="centered">
-                            <span ng-if="isActive()" ng-bind="session.user.name"></span>
+                            <span ng-if="isActive() && session.user.name" ng-bind="session.user.name"></span>
+                            <span ng-if="isActive() && !session.user.name">
+                                <i class="fa fa-cog fa-spin"></i> Loading...
+                            </span>
                             <span ng-if="!isActive()" ng-bind="'Anonymous'"></span>
                         </h5>
                         @yield('side_search_bar')
@@ -125,9 +128,9 @@
             </footer><!--footer end-->
         </section>
 
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.min.js"></script>
         <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
         <script src="/assets/vendor/v2/ng-linkify/angular-linkify.min.js"></script>
         <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>

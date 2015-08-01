@@ -94,6 +94,21 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
     $scope.session = { };
     $scope.loadSession();
 
+}).filter('mysqlDateToIso', function() {
+    return function(badTime) {
+        var components = badTime.split(' ');
+        var dateComponent = components[0].split('-');
+        var timeComponent = components[1].split(':')
+        var goodDate = new Date(
+            dateComponent[0],
+            dateComponent[1] - 1,
+            dateComponent[2],
+            timeComponent[0],
+            timeComponent[1],
+            timeComponent[2]
+        );
+        return goodDate;
+    };
 }).filter('fbProfile', function() {
     return function(facebookId) {
         return '//facebook.com/' + facebookId ;
@@ -231,6 +246,11 @@ $core.extensionModal = function($scope, $modalInstance, $http, toaster) {
     };
 };
 
-
+/************************************************
+ * General helpers to make life easier
+ ************************************************/
+String.prototype.contains = function(it) { 
+    return this.indexOf(it) != -1; 
+};
 
 
