@@ -8,4 +8,8 @@ img.brand {
     left: 5px;
 } 
 
-
+.btn-wheelzo {
+	background: #702B90;
+	color: whitesmoke;
+	border: none;
+}

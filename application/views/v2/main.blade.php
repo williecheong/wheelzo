@@ -36,10 +36,22 @@
 @section('main_body')
     <section id="main-content">
         <section class="wrapper site-min-height">
-            <h3>
-                <i class="fa fa-angle-right"></i>
-                Discover Our Panels
-            </h3>
+            <div class="row mTop20">
+                @foreach($day_filters as $key => $day)
+                    <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
+                        <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo">
+                            <i class="fa fa-calendar hidden-xs"></i>
+                            @if ($key == 0)
+                                Today
+                            @elseif($key==1)
+                                Tomorrow
+                            @else
+                                {{ $day }}
+                            @endif
+                        </button>
+                    </div>  
+                @endforeach
+            </div>
             <div class="row mTop20">
                 <div ng-repeat="ride in displayRides" class="col-md-4">
                     <div class="panel panel-default" ng-init="menuVisible=false">

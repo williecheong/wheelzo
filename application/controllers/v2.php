@@ -48,7 +48,16 @@ class V2 extends CI_Controller {
     }
 
     public function index() {
-        $this->blade->render('v2/main');
+        $this->blade->render('v2/main',
+            array(
+                'day_filters' => array(
+                    date('l', strtotime("now")),
+                    date('l', strtotime("+1 day")),
+                    date('l', strtotime("+2 days")),
+                    date('l', strtotime("+3 days")),
+                )
+            )
+        );
     }
 
     public function lookup() {

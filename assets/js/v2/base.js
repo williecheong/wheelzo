@@ -253,4 +253,11 @@ String.prototype.contains = function(it) {
     return this.indexOf(it) != -1; 
 };
 
+function compareByStart(a, b) {
+    if (a.start < b.start)
+        return -1;
+    if (a.start > b.start)
+        return 1;
+    return 0;
+}
 

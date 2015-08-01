@@ -8,15 +8,31 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
             $scope.rides = data;
             $scope.filterRides();
         }).error(function(data, status, headers, config) {
-            toaster.pop('error', 'Error: ' + 'Could not retrieve rides');
+            toaster.pop('error', 'Error: ' + status, 'Could not retrieve rides');
             console.log(data);
         });
     };
 
+    $scope.filterDate = function(day) {
+        if (day!='Monday' && day!='Tuesday' && day!='Wednesday' && day!='Thursday' && day!='Friday' && day!='Saturday' && day!='Sunday') {
+            toaster.pop('error', 'Error', 'Invalid day selection for filtering rides');
+            return;
+        }
+
+        if ($scope.activeDateFilter == day) {
+            $scope.activeDateFilter = "";
+            $scope.filterRides();
+            return;
+        }
+
+        $scope.activeDateFilter = day;
+        $scope.filterRides();
+    };
+
     $scope.filterRides = function() {
+        var activeDateFilter = $scope.activeDateFilter;
         var searchOrigin = $scope.inputSearchOrigin.toLowerCase();
         var searchDestination = $scope.inputSearchDestination.toLowerCase();
-
         var ridesToDisplay = JSON.parse(JSON.stringify($scope.rides)); // copy rides
         for (var i = 0; i < ridesToDisplay.length; i++) {
             if (searchOrigin.length > 0) {
@@ -25,16 +41,31 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
                     continue;
                 }
             }
-            
+
             if (searchDestination.length > 0) {
                 if (!ridesToDisplay[i].destination.toLowerCase().contains(searchDestination)) {
                     ridesToDisplay[i] = null;
                     continue;
                 }
-            } 
-        };
+            }
 
-        $scope.displayRides = ridesToDisplay.filter(function(n){ return n != null }); 
+            if (activeDateFilter != "") {
+                var ONE_WEEK = 7 * 24 * 60 * 60 * 1000; /* ms */
+                var thisRideStart = $filter('mysqlDateToIso')(ridesToDisplay[i].start);
+                if (((thisRideStart.getTime()) - (new Date().getTime())) > ONE_WEEK) {
+                    ridesToDisplay[i] = null;
+                    continue;
+                }
+
+                if ($filter('date')(thisRideStart, 'EEEE') != activeDateFilter) {
+                    ridesToDisplay[i] = null;
+                    continue;
+                }
+            }
+        };
+        ridesToDisplay = ridesToDisplay.filter(function(n){ return n != null });
+        ridesToDisplay.sort(compareByStart);
+        $scope.displayRides = ridesToDisplay; 
     };
 
     $scope.initialize = function() {        
@@ -42,6 +73,7 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         $scope.displayRides = [ ];
         $scope.inputSearchOrigin = "";
         $scope.inputSearchDestination = "";
+        $scope.activeDateFilter = "";
 
         $scope.loadSession();
         $scope.loadRides();
