@@ -74,6 +74,20 @@ class Rides extends API_Controller {
             return;
         }
 
+        if ($capacity < 1 || $capacity > 7) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Capacity must be between 1 and 7");
+            return;
+        }
+
+        if ($price < 1 || $price > 40) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Price must be between 1 and 40");
+            return;
+        }
+
         $drop_offs = isset($data['dropOffs']) ? implode(WHEELZO_DELIMITER, $data['dropOffs']) : '';
 
         $allow_payments = isset($data['allowPayments']) ? $data['allowPayments'] : 0;

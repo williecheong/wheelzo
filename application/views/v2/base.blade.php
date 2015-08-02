@@ -86,7 +86,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a ng-if="isActive()" ng-click="openModal('drive')" href="">
+                            <a ng-if="isActive()" ng-click="openModal('drive', 'lg')" href="">
                                 <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
                             <a ng-if="!isActive()" href="<% session.facebook_url %>">
@@ -136,11 +136,12 @@
         <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>
         <script src="/assets/vendor/v2/ng-timeago/ng-timeago.js"></script>
         <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
+        <script src="/assets/js/v2/constants.js"></script>
         <script src="/assets/js/v2/base.js"></script>
         
         @yield('custom_js')
         
-        @yield('custom_modals')
+        @include('v2/ng-modals/drive')
 
         @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
             <script>

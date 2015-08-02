@@ -96,10 +96,6 @@
     </section><!-- /MAIN CONTENT -->
 @endsection
 
-@section('custom_modals')
-    @include('v2/ng-modals/drive')
-@endsection
-
 @section('custom_js')
     <script src="/assets/js/v2/main.js"></script>
 @endsection

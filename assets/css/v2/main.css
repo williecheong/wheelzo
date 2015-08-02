@@ -13,3 +13,12 @@ img.brand {
 	color: whitesmoke;
 	border: none;
 }
+
+.modal-header button.close {
+	color: whitesmoke;
+}
+
+
+ul[datepicker-popup-wrap] {
+    min-width: 250px;
+}

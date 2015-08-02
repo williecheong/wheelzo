@@ -1,93 +1,125 @@
 <script type="text/ng-template" id="drive.html">
     <div class="modal-header">
-        <h1>
-            <i class="fa fa-calendar"> </i> Create New Event
-            <button class="btn btn-default pull-right" ng-click="cancel()"><i class="fa fa-close"></i></button>
-        </h1>
+        <button ng-click="cancel()" type="button" class="close">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+            <i class="fa fa-car"></i>
+            Create Ride
+        </h4>
     </div>
-    <div class="modal-body">
-        <form class="form-horizontal" role="form">
-            <h2><small><i>Enter Event Information</i></small></h2>
-            <div class="form-group">
-                <!-- Event Name -->
-                <div class="col-md-6">
-                    <label for="inputName">Give your event a name</label>
-                    <input ng-model="input.name" ng-disabled="loading" type="name" class="form-control" id="inputName" placeholder="Event Name">
-                </div>
-                <!-- Date -->
-                <div class="col-md-3">
-                    <label for="inputStartDate">Date of event</label>
-                    <input ng-model="input.start" datepicker-popup="dd-MMM-yyyy" is-open="$parent.showStartCalendar" ng-focus="openStartCalendar($event)" class="form-control" id="inputStartDate" placeholder="ex. 23-Sep-2015" datepicker-options="dateOptions" close-text="Close" />
-                </div>
-                <div class="col-md-3">
-                    <label for="inputStartTime">Start time</label>
-                    <timepicker ng-model="input.start" minute-step="15" show-meridian="true"></timepicker>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <label for="inputRestrictions">Event restrictions</label>
-                    <select ng-model="input.restriction" ng-disabled="loading" ng-options="restriction.value as restriction.label for restriction in selectOptions.restrictions" class="form-control" id="inputRestrictions"></select> 
-                </div>
-                <div class="col-md-3">
-                    <label for="inputDeadline">Deadline</label>
-                    <input ng-model="input.deadline" datepicker-popup="dd-MMM-yyyy" is-open="$parent.showDeadlineCalendar" ng-focus="openDeadlineCalendar($event)" class="form-control" id="inputDeadline" placeholder="ex. 23-Sep-2015" datepicker-options="dateOptions" close-text="Close" />
-                </div>
-                <div class="col-md-3">
-                    <label for="inputIncluded">What is included</label>
-                    <input ng-model="input.included" ng-disabled="loading" type="text" class="form-control" id="inputIncluded" placeholder="Golf, cart, meal, etc...">
-                </div>
-                <div class="col-md-3">
-                    <label for="inputCost">Player cost </label><i class="fa fa-info-circle" tooltip-placement="right" tooltip="The entered price will be increased by 2.5%"></i>
-                    <input ng-hide="input.playerCostMulti" ng-model="input.playerCostRegular" ng-disabled="loading" type="price" class="form-control" id="inputCost" placeholder="Price" valid-decimal>
-                    <div ng-show="input.playerCostMulti">
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">N</span>
-                          <input ng-model="input.playerCost0" type="text" class="form-control" placeholder="Non-Member" aria-describedby="sizing-addon2" valid-decimal>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">B</span>
-                          <input ng-model="input.playerCost1" type="text" class="form-control" placeholder="Bronze" aria-describedby="sizing-addon2" valid-decimal>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">S</span>
-                          <input ng-model="input.playerCost2" type="text" class="form-control" placeholder="Silver" aria-describedby="sizing-addon2" valid-decimal>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">G</span>
-                          <input ng-model="input.playerCost3" type="text" class="form-control" placeholder="Gold" aria-describedby="sizing-addon2" valid-decimal>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">D</span>
-                          <input ng-model="input.playerCost4" type="text" class="form-control" placeholder="Diamond" aria-describedby="sizing-addon2" valid-decimal>
-                        </div>
-                        <div class="input-group">
-                          <span class="input-group-addon" id="sizing-addon2">D+</span>
-                          <input ng-model="input.playerCost5" type="text" class="form-control" placeholder="Diamond +" aria-describedby="sizing-addon2" valid-decimal>
+    <div class="modal-body"> 
+        <div class="row">
+            <div class="col-sm-12">
+                <form class="" role="form">  
+                    <div class="form-group">  
+                        <label class="control-label" for="origin">Travelling</label>  
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input ng-model="input.origin" ng-disabled="loading" typeahead="place for place in suggestedPlaces | filter:$viewValue | limitTo:6" class="form-control" id="origin" placeholder="Origin" autocomplete="off">  
+                            </div>
+                            <div class="col-sm-6" id="destination-group">
+                                <div class="input-group">
+                                    <input ng-model="input.destination" ng-disabled="loading" typeahead="place for place in suggestedPlaces | filter:$viewValue | limitTo:6" class="form-control" id="destination" placeholder="Destination" autocomplete="off">  
+                                    <span class="input-group-btn">
+                                        <button ng-click="addDropoff()" ng-disabled="loading" class="btn btn-default" tooltip="Add drop off destinations" tooltip-placement="left">
+                                            <i class="fa fa-road fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div ng-repeat="dropoff in input.dropoffs track by $index" class="input-group">
+                                    <input ng-model="input.dropoffs[$index]" ng-disabled="loading" typeahead="place for place in suggestedPlaces | filter:$viewValue | limitTo:6" class="form-control" placeholder="Drop off location" autocomplete="off">
+                                    <span class="input-group-btn">
+                                        <button ng-click="removeDropoff($index)" ng-disabled="loading" class="btn btn-danger" tooltip="Remove this dropoff" tooltip-placement="left">
+                                            <i class="fa fa-times fa-lg"></i>
+                                        </button>
+                                    </span>
+                                </div>                                
+                            </div>
                         </div>
                     </div>
-                    <div class="pull-right">
-                        <input ng-model="input.playerCostMulti" type="checkbox" id="showMultiplePrices">
-                        <label for="showMultiplePrices" style="color:#9e9e9e; font-style:italic; font-size:14px"> Multiple Prices</label>
+                    <div class="form-group">  
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label class="control-label" for="departure-date">Departure Date</label>  
+                                <input ng-model="input.startDate" datepicker-popup="MMMM d, yyyy" is-open="showCalendar" ng-focus="showCalendar=!showCalendar" datepicker-options="dateOptions" min-date="<?=time()*1000?>" ng-init="showCalendar=false" ng-disabled="loading" class="form-control" placeholder="ex. 23-Sep-2015" close-text="Close" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label" for="departure-time">Departure Time</label>
+                                <timepicker ng-model="input.startTime" minute-step="15" show-meridian="true"></timepicker>
+                            </div>
+                            <div class="col-sm-3 col-xs-6">  
+                                <label class="control-label" for="price">
+                                    Asking from each passenger
+                                </label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">$</div>
+                                        <input ng-model="input.price" ng-disabled="loading" class="form-control" id="price" placeholder="Price" valid-number>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-6">
+                                <label class="control-label" for="capacity">
+                                    Number of seats available
+                                </label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input ng-model="input.capacity" ng-disabled="loading" class="form-control" id="capacity" placeholder="Capacity" valid-number>
+                                        <div class="input-group-addon">persons</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </form>
+            </div>
+            <br>
+            <div class="col-sm-12">
+                <div class="well well-sm non-rrequests-table-container">
+                    <span class="lead">Recommended passengers for inviting to your ride</span>
+                    <p>
+                        <i class="fa fa-info-circle"></i> Send a Facebook notification to someone who has requested for a similar ride. This list automatically generates recommendations for people who are most likely to be interested in the ride you are going to publish.
+                    </p>
+                </div>
+                <div class="well well-sm rrequests-table-container" style="display:none;">
+                    <span class="lead">Set up an invitation by clicking on the row</span>
+                    <table class="table table-hover table-condensed rrequests-table">
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">Requester</th>
+                                <th style="width:30%;">Origin</th>
+                                <th style="width:30%;">Destination</th>
+                                <th style="width:20%;">Preferred Departure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($rrequests as $rrequest)
+                                <tr data-rrequest-id="{{ $rrequest->id }}">
+                                    <td>
+                                        <a href="//facebook.com/{{ $users[$rrequest->user_id]['facebook_id'] }}" target="_blank">
+                                            {{ $users[$rrequest->user_id]['name'] }}
+                                        </a>
+                                    </td>
+                                    <td>{{ $rrequest->origin }}</td>
+                                    <td>{{ $rrequest->destination }}</td>
+                                    <td>{{ date( 'M-d @ g:ia', strtotime($rrequest->start) ) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-    
-            <h2><small><i>Additional Information</i></small></h2>
-            <div class="form-group">
-                <div class="col-lg-6">
-                    <label>Event description</label>
-                    <textarea ng-model="input.description" ng-disabled="loading" class="form-control" rows="6" placeholder="Enter description here..."></textarea>
-                </div>
-                <div class="col-lg-6">
-                    <label>Rules and organization</label>
-                    <textarea ng-model="input.rules" ng-disabled="loading" class="form-control" rows="6" placeholder="Enter rules here..."></textarea>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
     <div class="modal-footer">
-        <button ng-click="submit(input)" ng-disabled="loading" class="btn btn-success"><i class="fa fa-check"></i> Create Event</button>
+        <div class="pull-left checkbox mTop5">
+            <label>
+                <input ng-model="input.allowPayments" ng-disabled="loading" type="checkbox"> 
+                Allow passengers to make online payments
+            </label>
+        </div>
+        <button ng-click="submit(input)" ng-disabled="loading" class="btn btn-success">
+            <i class="fa fa-truck"></i> Publish Ride
+        </button>
     </div>
 </script>
 
