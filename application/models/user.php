@@ -164,6 +164,12 @@ class user extends CI_Model{
         $query = $this->db->get('user');
         return $query->result();
     }
+
+    function retrieve_like( $data = array() ){
+        $this->db->like($data);
+        $query = $this->db->get('user');
+        return $query->result();
+    }
     
     function update( $criteria = array(), $new_data = array() ){
         $this->db->where($criteria);

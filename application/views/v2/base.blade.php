@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a ng-if="isActive()" ng-click="openModal('request')" href="">
+                            <a ng-if="isActive()" ng-click="openModal('rrequest')" href="">
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
                             <a ng-if="!isActive()" href="<% session.facebook_url %>">
@@ -141,7 +141,10 @@
         
         @yield('custom_js')
         
+        @include('v2/ng-modals/ride')
         @include('v2/ng-modals/drive')
+        @include('v2/ng-modals/review')
+        @include('v2/ng-modals/rrequest')
 
         @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
             <script>

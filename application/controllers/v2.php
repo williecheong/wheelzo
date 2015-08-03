@@ -61,6 +61,6 @@ class V2 extends CI_Controller {
     }
 
     public function lookup() {
-        $this->blade->render('v2/main');
+        $this->blade->render('v2/lookup');
     }
 }

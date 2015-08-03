@@ -54,6 +54,12 @@ class Users extends API_Controller {
                     $this->get('facebook_id') 
                 )
             );
+        } else if ( $this->get('name') ) { // a name was specified
+            $users = $this->user->retrieve_like(
+                array(
+                    'name' => $this->get('name')
+                )
+            );
         } else { // nothing special about this request, get all
             $users = $this->user->retrieve();            
         }
