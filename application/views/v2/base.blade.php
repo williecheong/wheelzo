@@ -129,7 +129,7 @@
         </section>
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.min.js"></script>
         <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
         <script src="/assets/vendor/v2/ng-linkify/angular-linkify.min.js"></script>

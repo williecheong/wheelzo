@@ -65,7 +65,9 @@
                             <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'"></strong>
                         </div>
                         <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
-                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right" width="78">
+                            <a ng-click="openReviewModal(ride.driver_id)" href="">
+                                <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right" width="78">
+                            </a>
                             <div class="mBottom10">
                                 <strong>Origin</strong><br>
                                 <a tooltip="<% ride.origin %>" tooltip-placement="right" style="cursor:pointer;">

@@ -1,90 +1,113 @@
-angular.module('myApp').controller('reviewModalController', function ($scope, $modalInstance, $http, $filter, toaster, initialize) {
+angular.module('myApp').controller('reviewModalController', function ($scope, $modalInstance, $http, $filter, toaster, userId) {
     
     $core.extensionModal($scope, $modalInstance, $http, toaster);
 
-    $scope.suggestedPlaces = defaultSuggestedPlaces;
+    $scope.user = { };
 
-    $scope.dateOptions = { 
-        'show-weeks' : false
-    };
-    
     $scope.initializeModal = function() {
-        var defaultDate = new Date();
-        var defaultTime = new Date();
-        defaultDate = defaultDate.setDate(defaultDate.getDate() + 3);
-        defaultTime = new Date(defaultTime).setHours(12);
-        defaultTime = new Date(defaultTime).setMinutes(0);
-        defaultTime = new Date(defaultTime).setSeconds(0);
-        
-        $scope.input = { 
-            'origin' : '',
-            'destination' : '',
-            'dropoffs' : [ ],
-            'startDate' : defaultDate,
-            'startTime' : defaultTime,
-            'price' : '10',
-            'capacity' : '2',
-            'allowPayments': false
-        };
+        $scope.inputReview = "";
+        $scope.loadUser();
+        $scope.loadSession();
     };
 
-    $scope.addDropoff = function() {
-        $scope.input.dropoffs.push('');
+    $scope.loadSession = function() {
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/users/session'
+        }).success(function(data, status, headers, config) {
+            $scope.session = data;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + 'Could not retrieve session');
+            $scope.session.active = false;
+            console.log(data);
+        });
     };
 
-    $scope.removeDropoff = function(index) {
-        $scope.input.dropoffs.splice(index, 1);
-    };    
+    $scope.loadUser = function() {
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/users/?id=' + userId
+        }).success(function(data, status, headers, config) {
+            if (data.length > 0) {
+                $scope.user = data[0];
+                $scope.loadReviews();
+            } else {
+                toaster.pop('error', 'Error: ' + status, 'User not found');
+            }
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, 'Could not retrieve user');
+            console.log(data);
+        });
+    };
 
-    $scope.submit = function (input) {
-        var inputData = {
-            'origin' : input.origin,
-            'destination' : input.destination,
-            'dropOffs' : input.dropoffs,
-            'departureDate' : $filter('date')(input.startDate, 'yyyy-MM-dd'),
-            'departureTime' : $filter('date')(input.startTime, 'HH:mm:ss'),
-            'price' : input.price,
-            'capacity' : input.capacity,
-            'allowPayments' : input.allowPayments ? 1 : 0,
-            'invitees' : [ ],
-        };
+    $scope.loadReviews = function() {
+        $scope.loadingReviews = true;
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/reviews?receiver_id=' + $scope.user.id
+        }).success(function(data, status, headers, config) {
+            $scope.user.reviews = data;
+            $scope.loadingReviews = false;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, 'Could not retrieve reviews');
+            $scope.loadingReviews = false;
+            console.log(data);
+        });
+    };
 
-        if ( inputData.origin.length == 0 || inputData.destination.length == 0 ) {
-            toaster.pop('error', 'Error', 'Origin and destination cannot be empty'); 
-            return;
-        } 
+    $scope.submitReview = function (inputReview) {
+        $scope.loading = true;
 
-        if ( inputData.origin == inputData.destination ) {
-            toaster.pop('error', 'Error', 'Origin and destination cannot be the same'); 
-            return;
-        } 
-
-        if ( inputData.departureDate.length == 0 || inputData.departureTime == 0 ) {
-            toaster.pop('error', 'Error', 'Departure date and time must be specified.'); 
+        if (inputReview.length < 15) {
+            toaster.pop('error', 'Error', 'Reviews should be a little more detailed');
+            $scope.loading = false;
             return;
         }
 
-        if ( inputData.price < 1 || inputData.price > 40 ) {
-            toaster.pop('error', 'Error', 'Ride price must be between 1 and 40'); 
-            return;
-        }
+        $http({
+            'method': 'POST',
+            'url': '/api/v2/reviews',
+            'data': {
+                receiver_id : $scope.user.id,
+                review : inputReview
+            }
+        }).success(function(data, status, headers, config) {
+            toaster.pop('success', 'Success: ' + status, data.message);
+            $scope.initializeModal();
+            $scope.loading = false;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loading = false;
+        });
+    };
 
-        if ( inputData.capacity < 1 || inputData.capacity > 7 ) {
-            toaster.pop('error', 'Error', 'Ride capacity must be between 1 and 7'); 
-            return;
-        }
+    $scope.deleteReview = function(reviewId) {
+        $scope.loading = true;
+        $http({
+            'method': 'DELETE',
+            'url': '/api/v1/reviews/index/' + reviewId
+        }).success(function(data, status, headers, config) {
+            toaster.pop('success', 'Success: ' + status, data.message);
+            $scope.initializeModal();
+            $scope.loading = false;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loading = false;
+        });
+    };
 
+    $scope.submitPoint = function() {
         $scope.loading = true;
         $http({
             'method': 'POST',
-            'url': '/api/v2/rides',
-            'data': inputData
+            'url': '/api/v2/points',
+            'data': {
+                receiver_id : $scope.user.id
+            }
         }).success(function(data, status, headers, config) {
             toaster.pop('success', 'Success: ' + status, data.message);
-            $scope.loading = false;
-            initialize();
-            $modalInstance.close();
-            
+            $scope.initializeModal();
+            $scope.loading = false;            
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, data.message);
             $scope.loading = false;

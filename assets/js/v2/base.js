@@ -70,6 +70,17 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
         }, 1500);
     };
 
+    $scope.openReviewModal = function(userId) {
+        var modalInstance = $modal.open({
+            templateUrl: 'review.html',
+            controller: 'reviewModalController',
+            size: 'sm',
+            resolve: {
+                'userId' : function() { return userId; }
+            }
+        });
+    };
+
     $scope.openModal = function(modalTitle, modalSize, params) {
         var modalParams = { } ;
 

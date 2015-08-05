@@ -41,8 +41,8 @@
                 <div ng-repeat="user in users" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="well well-sm">
                         <div>
-                            <a ng-click="openModal('review', 'sm')" href="">
-                                <img class="img-responsive img-circle" src="<% user.facebook_id | fbImage %>" style="min-width:100%;">
+                            <a ng-click="openReviewModal(user.id)" href="">
+                                <img class="img-responsive img-circle hoverable8" src="<% user.facebook_id | fbImage %>" style="min-width:100%;">
                             </a>
                         </div>
                         <div class="text-center mTop10">

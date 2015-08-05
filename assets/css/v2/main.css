@@ -18,6 +18,21 @@ img.brand {
 	color: whitesmoke;
 }
 
+img#reviewer-picture {
+    max-width: 50px;
+    opacity: 0.5;
+}
+
+div#lookup-reviews {
+    margin-top: 15px;
+    max-height: 210px;
+    overflow-y: scroll; 
+}
+ 
+img#driver-picture, img#lookup-picture {
+    width: 100%;
+    max-width: 150px;
+}
 
 ul[datepicker-popup-wrap] {
     min-width: 250px;
