@@ -70,6 +70,17 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
         }, 1500);
     };
 
+    $scope.openRideModal = function(rideId) {
+        var modalInstance = $modal.open({
+            templateUrl: 'ride.html',
+            controller: 'rideModalController',
+            size: 'md',
+            resolve: {
+                'rideId' : function() { return rideId; }
+            }
+        });
+    };
+
     $scope.openReviewModal = function(userId) {
         var modalInstance = $modal.open({
             templateUrl: 'review.html',

@@ -11,7 +11,7 @@
 * Author: Jiri Kavulak
 * Related to project of John Papa and Hans Fjällemark
 */
-angular.module('toaster', ['ngAnimate'])
+angular.module('toaster', [])
 .service('toaster', ['$rootScope', function ($rootScope) {
 this.pop = function (type, title, body, timeout, bodyOutputType, clickHandler) {
 this.toast = {

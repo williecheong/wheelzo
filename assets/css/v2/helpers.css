@@ -44,8 +44,11 @@
 .opaque8 { opacity: 0.8; }
 .opaque9 { opacity: 0.9; }
 
+.hoverable5 { opacity: 0.5; }
+.hoverable6 { opacity: 0.6; }
+.hoverable7 { opacity: 0.7; }
+.hoverable8 { opacity: 0.8; }
 .hoverable5:hover { opacity: 0.9; }
 .hoverable6:hover { opacity: 0.9; }
 .hoverable7:hover { opacity: 0.9; }
 .hoverable8:hover { opacity: 0.9; }
-.hoverable9:hover { opacity: 0.9; }

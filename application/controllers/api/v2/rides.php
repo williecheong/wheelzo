@@ -29,6 +29,22 @@ class Rides extends API_Controller {
         return;
     }
 
+    public function search_get() {
+        $rides = array();
+        if ( $this->get('id') ) {
+            $rides = array(
+                $this->ride->retrieve_by_id( 
+                    $this->get('id') 
+                )
+            );
+        }
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rides);
+        return;
+    }
+
     public function index_post() {
         if ( !$this->wheelzo_user_id ) {
             http_response_code("400");
@@ -195,7 +211,7 @@ class Rides extends API_Controller {
         if (count($user_rides) > 0) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("Rides with passengers cannot be deleted. Contact Wheelzo for assistance.");
+            echo $this->message("Rides with passengers cannot be deleted. Please contact Wheelzo for further assistance.");
             return;
         }
 

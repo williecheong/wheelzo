@@ -34,6 +34,23 @@ img#driver-picture, img#lookup-picture {
     max-width: 150px;
 }
 
+img#passenger-picture {
+    width: 75%;
+    max-width: 75px;
+}
+
+div#passenger-box {
+    min-height: 50px;
+}
+
+div.payment-message {
+    margin: 20px auto;
+}
+
+#toast-container div {
+    opacity: 0.98;
+}
+
 table[show-meridian] tbody tr:first-of-type,
 table[show-meridian] tbody tr:last-of-type {
     display: none;

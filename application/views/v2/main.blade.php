@@ -39,7 +39,7 @@
             <div class="row mTop20">
                 @foreach($day_filters as $key => $day)
                     <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
-                        <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo">
+                        <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable8">
                             <i class="fa fa-calendar hidden-xs"></i>
                             @if ($key == 0)
                                 Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
@@ -65,29 +65,33 @@
                             <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'"></strong>
                         </div>
                         <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
-                            <a ng-click="openReviewModal(ride.driver_id)" href="">
-                                <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable6" width="78">
-                            </a>
-                            <div class="mBottom10" style="white-space:nowrap;">
-                                <strong>Origin</strong><br>
-                                <a tooltip="<% ride.origin %>" tooltip-placement="right" style="cursor:pointer;">
-                                    <i class="fa fa-flag fa-border"></i>
+                            <div class="mBottom10">    
+                                <a ng-click="openReviewModal(ride.driver_id)" href="">
+                                    <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable7" width="78">
                                 </a>
-                                <span ng-bind="ride.origin | shortenString:28"></span>
+                                <div class="mBottom10" style="white-space:nowrap;">
+                                    <strong>Origin</strong><br>
+                                    <a tooltip="<% ride.origin %>" tooltip-placement="right" style="cursor:pointer;">
+                                        <i class="fa fa-flag fa-border"></i>
+                                    </a>
+                                    <span ng-bind="ride.origin | shortenString:28"></span>
+                                </div>
+                                <div class="mTop10" style="white-space:nowrap;">
+                                    <strong>Destination</strong><br>
+                                    <a tooltip="<% ride.destination %>" tooltip-placement="right" style="cursor:pointer;">
+                                        <i class="fa fa-flag-checkered fa-border"></i>
+                                    </a>
+                                    <span ng-bind="ride.destination | shortenString:28"></span>
+                                </div>
                             </div>
-                            <div class="mTop10" style="white-space:nowrap;">
-                                <strong>Destination</strong><br>
-                                <a tooltip="<% ride.destination %>" tooltip-placement="right" style="cursor:pointer;">
-                                    <i class="fa fa-flag-checkered fa-border"></i>
+                            <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
+                                <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-block btn-info hoverable8" style="background:#3B5998;border:none;">
+                                    <i class="fa fa-facebook-square fa-lg"></i> Message
                                 </a>
-                                <span ng-bind="ride.destination | shortenString:28"></span>
                             </div>
-                            <div ng-show="menuVisible" style="position:absolute;top:0%;right:0%;">
-                                <a class="btn btn-xs btn-wheelzo">
-                                    <i class="fa fa-car"></i> Details
-                                </a>
-                                <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-info" style="background:#3B5998;border:none;">
-                                    <i class="fa fa-envelope"></i> Message
+                            <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;right:0%;">
+                                <a ng-click="openRideModal(ride.id)" class="btn btn-xs btn-block btn-wheelzo hoverable8">
+                                    <i class="fa fa-car"></i> More
                                 </a>
                             </div>
                         </div>

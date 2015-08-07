@@ -45,10 +45,10 @@
                 <div ng-class="{ 'hidden-xs' : isCollapsed }" id="sidebar" class="nav-collapse">
                     <ul class="sidebar-menu" id="nav-accordion">
                   	    <p class="centered">
-                            <a href="">
-                                <img ng-if="isActive()" src="<% session.user.facebook_id | fbImage %>" class="img-circle" width="110">
-                                <img ng-if="!isActive()" src="/assets/img/empty_user.png" class="img-circle" width="110">
-                            </a> 
+                            <a ng-click="openReviewModal(session.user_id)" ng-if="isActive()" href="">
+                                <img src="<% session.user.facebook_id | fbImage %>" class="img-circle hoverable8" width="110">
+                            </a>
+                            <img ng-if="!isActive()" src="/assets/img/empty_user.png" class="img-circle opaque8" width="110">
                         </p>
                         <h5 class="centered">
                             <span ng-if="isActive() && session.user.name" ng-bind="session.user.name"></span>
@@ -122,6 +122,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.min.js"></script>
+        <script src="//js.stripe.com/v2/" type="text/javascript"></script>
+        <script src="//checkout.stripe.com/checkout.js"></script>
         <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
         <script src="/assets/vendor/v2/ng-linkify/angular-linkify.min.js"></script>
         <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>
@@ -129,7 +131,11 @@
         <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
         <script src="/assets/js/v2/constants.js"></script>
         <script src="/assets/js/v2/base.js"></script>
-        
+        <script>
+            $wheelzo = {
+                'stripePublicKey' : '{{ WHEELZO_STRIPE_PUBLIC_KEY }}'
+            };
+        </script>
         @yield('custom_js')
         
         @include('v2/ng-modals/ride')

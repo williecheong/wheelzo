@@ -61,6 +61,10 @@ class V2 extends CI_Controller {
     }
 
     public function lookup() {
+        if ($this->wheelzo_user_id == false) {
+            redirect( base_url() );
+        }
+
         $this->blade->render('v2/lookup');
     }
 }
