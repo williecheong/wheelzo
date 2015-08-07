@@ -34,6 +34,15 @@ img#driver-picture, img#lookup-picture {
     max-width: 150px;
 }
 
+table[show-meridian] tbody tr:first-of-type,
+table[show-meridian] tbody tr:last-of-type {
+    display: none;
+}
+
 ul[datepicker-popup-wrap] {
     min-width: 250px;
+}
+
+.tooltip-inner {
+    max-width: none;
 }

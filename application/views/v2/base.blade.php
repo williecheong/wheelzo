@@ -18,15 +18,6 @@
         <link rel="stylesheet" href="/assets/vendor/v2/ng-toaster/toaster.css">
         <link rel="stylesheet" href="/assets/css/v2/helpers.css">        
         @yield('custom_css')
-        <style>
-            table[show-meridian] tbody tr:first-of-type,
-            table[show-meridian] tbody tr:last-of-type {
-                display: none;
-            }
-            ul[datepicker-popup-wrap] {
-                min-width: 250px;
-            }
-        </style>
 
         <script src="/assets/vendor/v2/theme-dashgum/js/chart-master/Chart.js"></script>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

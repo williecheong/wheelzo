@@ -66,16 +66,16 @@
                         </div>
                         <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
                             <a ng-click="openReviewModal(ride.driver_id)" href="">
-                                <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right" width="78">
+                                <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable6" width="78">
                             </a>
-                            <div class="mBottom10">
+                            <div class="mBottom10" style="white-space:nowrap;">
                                 <strong>Origin</strong><br>
                                 <a tooltip="<% ride.origin %>" tooltip-placement="right" style="cursor:pointer;">
                                     <i class="fa fa-flag fa-border"></i>
                                 </a>
                                 <span ng-bind="ride.origin | shortenString:28"></span>
                             </div>
-                            <div class="mTop10">
+                            <div class="mTop10" style="white-space:nowrap;">
                                 <strong>Destination</strong><br>
                                 <a tooltip="<% ride.destination %>" tooltip-placement="right" style="cursor:pointer;">
                                     <i class="fa fa-flag-checkered fa-border"></i>
