@@ -48,6 +48,10 @@ class V2 extends CI_Controller {
     }
 
     public function index() {
+        if ($this->wheelzo_user_id == false) {
+            redirect( base_url() );
+        }
+
         $this->blade->render('v2/main',
             array(
                 'requested_ride' => $this->ride->retrieve_by_id($this->input->get('ride')),
