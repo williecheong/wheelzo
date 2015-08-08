@@ -191,18 +191,29 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
     }
 
     $scope.deleteRide = function() {
-        $scope.loading = true;
-        $http({
-            'method': 'DELETE',
-            'url': '/api/v2/rides/index/' + $scope.ride.id
-        }).success(function(data, status, headers, config) {
-            toaster.pop('success', 'Success: ' + status, data.message);
-            setTimeout(function() {
-                window.location.href = '/';
-            }, 1500);
-        }).error(function(data, status, headers, config) {
-            toaster.pop('error', 'Error: ' + status, data.message);
-            $scope.loading = false;
+        swal({
+            title: "Confirm deleting this ride?",
+            type: "error",
+            confirmButtonColor: "#D9534F",
+            allowOutsideClick: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            closeOnCancel: true,
+            allowHtml: true
+        }, function(isConfirm){
+            $scope.loading = true;
+            $http({
+                'method': 'DELETE',
+                'url': '/api/v2/rides/index/' + $scope.ride.id
+            }).success(function(data, status, headers, config) {
+                toaster.pop('success', 'Success: ' + status, data.message);
+                setTimeout(function() {
+                    window.location.href = '/';
+                }, 1500);
+            }).error(function(data, status, headers, config) {
+                toaster.pop('error', 'Error: ' + status, data.message);
+                $scope.loading = false;
+            });
         });
     };
 

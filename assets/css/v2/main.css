@@ -122,6 +122,10 @@ div.faq-box p {
     opacity: 0.98;
 }
 
+div.sweet-alert {
+    background: #D3D6D4;
+}
+
 table[show-meridian] tbody tr:first-of-type,
 table[show-meridian] tbody tr:last-of-type {
     display: none;
