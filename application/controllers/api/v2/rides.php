@@ -29,6 +29,22 @@ class Rides extends API_Controller {
         return;
     }
 
+    public function search_get() {
+        $rides = array();
+        if ( $this->get('id') ) {
+            $rides = array();
+            $ride = $this->ride->retrieve_by_id($this->get('id'));
+            if ($ride) {
+                $rides[] = $ride;
+            }
+        }
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rides);
+        return;
+    }
+
     public function index_post() {
         if ( !$this->wheelzo_user_id ) {
             http_response_code("400");
@@ -74,6 +90,20 @@ class Rides extends API_Controller {
             return;
         }
 
+        if ($capacity < 1 || $capacity > 7) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Capacity must be between 1 and 7");
+            return;
+        }
+
+        if ($price < 1 || $price > 40) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Price must be between 1 and 40");
+            return;
+        }
+
         $drop_offs = isset($data['dropOffs']) ? implode(WHEELZO_DELIMITER, $data['dropOffs']) : '';
 
         $allow_payments = isset($data['allowPayments']) ? $data['allowPayments'] : 0;
@@ -104,14 +134,14 @@ class Rides extends API_Controller {
         foreach( $invitees as $invitee ) {
             $rrequest = $this->rrequest->retrieve_by_id( $invitee );
             if ( !$rrequest ) {
-                $output_message .= " Ride request not found. Stop hacking.";
+                $output_message .= " Ride request not found.";
                 continue;
             }
 
             $passenger = $this->user->retrieve_by_id( $rrequest->user_id );
             
             if ( !$passenger ) {
-                $output_message .= " Passenger of ride request not found. So weird.";
+                $output_message .= " Passenger of ride request not found.";
                 continue;
             }
                     
@@ -181,7 +211,7 @@ class Rides extends API_Controller {
         if (count($user_rides) > 0) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("Rides with passengers cannot be deleted. Contact Wheelzo for assistance.");
+            echo $this->message("Rides with passengers cannot be deleted. Please contact Wheelzo for further assistance.");
             return;
         }
 

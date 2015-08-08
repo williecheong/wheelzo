@@ -15,9 +15,22 @@
 @endsection
 
 @section('jumbotron')
-    <div class="jumbotron" id="introduction">
+    <div class="jumbotron" id="introduction-container">
         <div class="container">
-            <div class="row">
+            @if ( $session )  
+            <a href="/v2" class="btn btn-block btn-default">
+                <i class="fa fa-star"></i>
+                Use the new version 
+                <span class="hidden-xs">that is over v{{ CURRENT_VERSION }}</span>
+            </a>
+            @else
+            <a href="{{ $session_url }}" class="btn btn-block btn-default">
+                <i class="fa fa-star"></i>
+                Login to use the new version 
+                <span class="hidden-xs">that is over v{{ CURRENT_VERSION }}</span>
+            </a>
+            @endif
+            <div class="row" id="introduction">
                 <div class="col-sm-3">
                     <h3>
                         <i class="fa fa-shield fa-2x" style="color:forestgreen;"></i> Assurance

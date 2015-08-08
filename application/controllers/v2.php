@@ -48,6 +48,29 @@ class V2 extends CI_Controller {
     }
 
     public function index() {
-        $this->blade->render('v2/main');
+        if ($this->wheelzo_user_id == false) {
+            redirect( base_url() );
+        }
+
+        $this->blade->render('v2/main',
+            array(
+                'requested_ride' => $this->ride->retrieve_by_id($this->input->get('ride')),
+                'requested_user' => $this->user->retrieve_by_id($this->input->get('user')),
+                'day_filters' => array(
+                    date('l', strtotime("now")),
+                    date('l', strtotime("+1 day")),
+                    date('l', strtotime("+2 days")),
+                    date('l', strtotime("+3 days")),
+                )
+            )
+        );
+    }
+
+    public function lookup() {
+        if ($this->wheelzo_user_id == false) {
+            redirect( base_url() );
+        }
+
+        $this->blade->render('v2/lookup');
     }
 }

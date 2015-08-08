@@ -98,7 +98,37 @@ class rrequest extends CI_Model{
     function retrieve( $data = array() ){
         $this->db->where($data);
         $query = $this->db->get('rrequest');
-        return $query->result();
+        
+        $rrequests = $query->result();
+        if (count($rrequests) > 0) {
+            foreach ($rrequests as $key => $rrequest) {
+                $user = $this->user->retrieve_by_id($rrequest->user_id);
+                if ($user) {
+                    $rrequests[$key]->user_name = $user->name; 
+                    $rrequests[$key]->user_facebook_id = $user->facebook_id; 
+                    $rrequests[$key]->user_score = number_format(round(floatval($user->rating), 2), 2);
+                }
+            }
+        }
+        return $rrequests;
+    }
+    
+    function retrieve_like( $data = array() ){
+        $this->db->like($data);
+        $query = $this->db->get('rrequest');
+        
+        $rrequests = $query->result();
+        if (count($rrequests) > 0) {
+            foreach ($rrequests as $key => $rrequest) {
+                $user = $this->user->retrieve_by_id($rrequest->user_id);
+                if ($user) {
+                    $rrequests[$key]->user_name = $user->name; 
+                    $rrequests[$key]->user_facebook_id = $user->facebook_id; 
+                    $rrequests[$key]->user_score = number_format(round(floatval($user->rating), 2), 2);
+                }
+            }
+        }
+        return $rrequests;
     }
     
     function update( $criteria = array(), $new_data = array() ){

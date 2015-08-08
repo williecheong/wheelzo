@@ -38,6 +38,22 @@ if ( ! function_exists('pluralize') ) {
     }
 }
 
+if ( ! function_exists('extract_city') ) {    
+    function extract_city( $input = '' ) {
+        $commaExplode = explode(',', $input);
+        if ( !isset($commaExplode[0]) ) { // If it is not found, we have a problem
+            return $input;
+        }
+
+        $spaceExplode = explode(' ', $commaExplode[0]);
+        if ( !isset($spaceExplode[0]) ) {
+            return $commaExplode[0];
+        }
+
+        return $spaceExplode[0];
+    }
+}
+
 if ( ! function_exists('shorten_string') ) {
     function shorten_string( $string, $size ) {
         if (strlen($string) > $size) {

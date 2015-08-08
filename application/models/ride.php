@@ -20,13 +20,7 @@ class ride extends CI_Model{
         $rides = $this->ride->retrieve( $conditions );
         
         foreach( $rides as $key => $ride ) { 
-            
-            $rides[$key]->drop_offs = array() ;
             $rides[$key]->is_personal = false;
-            
-            if ( $ride->drop_offs == '' ) {
-                $rides[$key]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
-            }
             
             if ( $ride->driver_id == $user_id ) {
                 $rides[$key]->is_personal = true;
@@ -67,11 +61,6 @@ class ride extends CI_Model{
             
             foreach( $rides as $key => $ride ) { 
                 $rides[$key]->is_personal = true;
-                
-                $rides[$key]->drop_offs = array();
-                if ( $ride->drop_offs ) {
-                    $rides[$key]->drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
-                }
             }
             
             return $rides;        
@@ -124,6 +113,12 @@ class ride extends CI_Model{
         $rides = $query->result();
         if (count($rides) > 0) {
            foreach ($rides as $key => $ride) {
+                $drop_offs = array();
+                if ( strlen($ride->drop_offs) > 0 ) {
+                    $drop_offs = explode(WHEELZO_DELIMITER, $ride->drop_offs) ; 
+                }
+                $rides[$key]->drop_offs = $drop_offs;
+
                 $user = $this->user->retrieve_by_id($ride->driver_id);
                 if ($user) {
                     $rides[$key]->driver_name = $user->name;

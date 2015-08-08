@@ -30,7 +30,7 @@ img#driver-picture, img#lookup-picture {
     max-width: 150px;
 }
 
-div#introduction {
+div#introduction-container {
     margin-top: -20px;
     padding-top: 5px;
     padding-bottom: 20px;

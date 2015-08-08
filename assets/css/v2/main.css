@@ -1,1 +1,136 @@
+a.logo {
+	margin-top: 0px;
+}
+
+div.master-loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9000;
+    background-color: rgba(211, 214, 212, 0.8);
+}
+
+div.master-loading .master-loading-text {
+    bottom: 50%;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    color: #702B90;
+    opacity: 1.0;
+}
+
+img.brand {
+    position:relative;
+    max-width: 60px;
+    left: 5px;
+} 
+
+.btn-wheelzo {
+	background: #702B90;
+	color: whitesmoke;
+	border: none;
+}
+
+.btn-wheelzo:hover {
+    color: whitesmoke;
+}
+
+.modal-header button.close {
+	color: whitesmoke;
+}
+
+img#reviewer-picture {
+    max-width: 50px;
+    opacity: 0.5;
+}
+
+div#lookup-reviews {
+    margin-top: 15px;
+    max-height: 210px;
+    overflow-y: scroll; 
+}
  
+img#driver-picture, img#lookup-picture {
+    width: 100%;
+    max-width: 150px;
+}
+
+img#passenger-picture {
+    width: 75%;
+    max-width: 75px;
+}
+
+div#passenger-box {
+    min-height: 50px;
+}
+
+div.payment-message {
+    margin: 20px auto;
+}
+
+div.faq-box {
+    padding: 10px 40px;
+}
+
+div.faq-box strong {
+    cursor: pointer;
+}
+
+div.faq-box p {
+    padding-top: 10px;
+    text-align: justify;
+}
+
+/**************************** 
+    EXTERNAL REFERENCES 
+****************************/
+
+/* Input boxes with icons inside */
+.left-inner-addon {
+    position: relative;
+}
+
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+}
+
+
+/**************************** 
+    RE-STYLING FOR ANGULAR UI
+****************************/
+
+#toast-container div {
+    opacity: 0.98;
+}
+
+table[show-meridian] tbody tr:first-of-type,
+table[show-meridian] tbody tr:last-of-type {
+    display: none;
+}
+
+ul[datepicker-popup-wrap] {
+    min-width: 250px;
+}
+
+.tooltip-inner {
+    max-width: none;
+}

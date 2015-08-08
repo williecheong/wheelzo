@@ -14,6 +14,8 @@ $route['404_override'] = 'lost';
 | -------------------------------------------------------------------------
 */
 
+$route['lookup'] = "v2/lookup";
+
 $route['me'] = "v1/index/true";
 $route['api/v1/rides/me'] = "api/v1/rides/index/true";
 $route['api/v2/rides/me'] = "api/v2/rides/index/true";

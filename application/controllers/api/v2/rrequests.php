@@ -15,6 +15,32 @@ class Rrequests extends API_Controller {
         return;
     }
 
+    public function search_get() {
+        $origin = $this->get('origin');
+        $destination = $this->get('destination');
+        $departure = $this->get('departure');
+
+        $query_data = array();
+        if ($origin) { 
+            $query_data['origin'] = extract_city($origin); 
+        }
+
+        if ($destination) { 
+            $query_data['destination'] = extract_city($destination); 
+        }
+
+        if ($departure) { 
+            $query_data['start'] = $departure; 
+        }
+
+        $rrequests = $this->rrequest->retrieve_like($query_data);
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rrequests);
+        return;
+    }
+
     public function index_post() {
         if ( !$this->wheelzo_user_id ) {
             http_response_code("400");
