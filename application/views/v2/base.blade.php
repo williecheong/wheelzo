@@ -44,13 +44,13 @@
             <aside>
                 <div ng-class="{ 'hidden-xs' : isCollapsed }" id="sidebar" class="nav-collapse">
                     <ul class="sidebar-menu" id="nav-accordion">
-                  	    <p class="centered">
+                  	    <p class="centered hidden-xs">
                             <a ng-click="openReviewModal(session.user_id)" ng-if="isActive()" href="">
-                                <img src="<% session.user.facebook_id | fbImage %>" class="img-circle hoverable8" width="110">
+                                <img src="<% session.user.facebook_id | fbImage %>" class="img-circle hoverable8" width="80">
                             </a>
-                            <img ng-if="!isActive()" src="/assets/img/empty_user.png" class="img-circle opaque8" width="110">
+                            <img ng-if="!isActive()" src="/assets/img/empty_user.png" class="img-circle opaque8" width="80">
                         </p>
-                        <h5 class="centered">
+                        <h5 class="centered hidden-xs">
                             <span ng-if="isActive() && session.user.name" ng-bind="session.user.name"></span>
                             <span ng-if="isActive() && !session.user.name">
                                 <i class="fa fa-cog fa-spin"></i> Loading...
@@ -58,9 +58,15 @@
                             <span ng-if="!isActive()" ng-bind="'Anonymous'"></span>
                         </h5>
                         @yield('side_search_bar')
+                        
+                        <hr class="opaque5 mTop5 mBottom5 mLeft20 mRight20 hidden-xs">
+                        
                         <li class="">
-                            <a href="<% isActive() ? '/me' : session.facebook_url %>">
-                                <i class="fa fa-home fa-lg"></i> My Profile
+                            <a ng-if="isActive()" ng-click="openModal('drive', 'lg')" href="">
+                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
+                            </a>
+                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
                         </li>
                         <li class="">
@@ -76,12 +82,22 @@
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
                         </li>
+
+                        <hr class="opaque5 mTop5 mBottom5 mLeft20 mRight20">
+
                         <li class="">
-                            <a ng-if="isActive()" ng-click="openModal('drive', 'lg')" href="">
-                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
+                            <a ng-click="openModal('about', 'lg')" href="">
+                                <i class="fa fa-newspaper-o fa-lg"></i> About Wheelzo
                             </a>
-                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
-                                <i class="fa fa-tachometer fa-lg"></i> Post a Ride
+                        </li>                        
+                        <li  ng-if="isActive()" class="">
+                            <a ng-click="openReviewModal(session.user_id)" class="visible-xs" href="">
+                                <i class="fa fa-get-pocket fa-lg"></i> My Reviews
+                            </a>
+                        </li>                    
+                        <li class="">
+                            <a href="<% isActive() ? '/me' : session.facebook_url %>">
+                                <i class="fa fa-car fa-lg"></i> My Rides
                             </a>
                         </li>
                         <li class="">
@@ -101,19 +117,28 @@
             </aside><!--sidebar end-->
       
             <!--main content start-->
-            @yield('main_body')
+            <section id="main-content">
+                <section class="wrapper site-min-height">
+                    @yield('main_body')
+                </section>
+            </section><!-- /MAIN CONTENT -->
             <!--main content end-->
             
             <!--footer start-->
             <footer class="site-footer">
                 <div class="text-right mRight15">
                     <small>
-                        <i class="fa fa-lock"></i> 
-                        Verified secure by
-                        <a href="https://www.comodo.com/" title="SSL Secured By COMODO CA">ComodoCA</a>
+                        <i class="fa fa-envelope"></i>
+                        <a href="mailto:info@wheelzo.com">Contact Us</a>
                         &middot;
                         <i class="fa fa-copyright"></i>
                         Wheelzo v{{ CURRENT_VERSION }}
+                    </small>
+                    <br>
+                    <small class="">
+                        <i class="fa fa-check-square"></i> 
+                        Verified secure by
+                        <a href="https://www.comodo.com/" title="SSL Secured By COMODO CA">ComodoCA</a>
                     </small>
                 </div>
             </footer><!--footer end-->
@@ -138,6 +163,7 @@
         </script>
         @yield('custom_js')
         
+        @include('v2/ng-modals/about')
         @include('v2/ng-modals/ride')
         @include('v2/ng-modals/drive')
         @include('v2/ng-modals/review')

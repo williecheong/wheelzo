@@ -12,54 +12,50 @@
 @endsection
 
 @section('main_body')
-    <section id="main-content">
-        <section class="wrapper site-min-height">
-            <div class="row mTop20">
-                <div class="col-sm-12">
-                    <span class="lead">
-                        <i class="fa fa-users"></i>
-                        Community Lookup
-                    </span>
-                </div>
-                <form class="col-xs-7">
-                    <div class="input-group">
-                        <input ng-model="name" ng-disabled="loading" type="text" class="form-control" placeholder="e.g. Maksym Pikhteryev">
-                        <span class="input-group-btn">
-                            <button class="btn btn-success" ng-click="searchUsers(name)" ng-disabled="loading">
-                                <i class="fa fa-search fa-lg"></i>
-                                Search
-                            </button>
-                        </span>
-                    </div>
-                    <p class="text-muted mLeft5">
-                        <i class="fa fa-shield"></i>
-                        Reviewing helps keep everyone in the community accountable
-                    </p>
-                </form>
+    <div class="row mTop20">
+        <div class="col-sm-12">
+            <span class="lead">
+                <i class="fa fa-users"></i>
+                Community Lookup
+            </span>
+        </div>
+        <form class="col-sm-7">
+            <div class="input-group">
+                <input ng-model="name" ng-disabled="loading" type="text" class="form-control" placeholder="e.g. Maksym Pikhteryev">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" ng-click="searchUsers(name)" ng-disabled="loading">
+                        <i class="fa fa-search fa-lg"></i>
+                        <span class="hidden-xs">Search</span>
+                    </button>
+                </span>
             </div>
-            <div class="row">
-                <div ng-repeat="user in users" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                    <div class="well well-sm">
-                        <div>
-                            <a ng-click="openReviewModal(user.id)" href="">
-                                <img class="img-responsive img-circle hoverable8" src="<% user.facebook_id | fbImage %>" style="min-width:100%;">
-                            </a>
-                        </div>
-                        <div class="text-center mTop10">
-                            <a tooltip="<% user.name %>" tooltip-placement="right" tooltip-trigger="click" href="">
-                                <i class="fa fa-caret-square-o-right"></i>
-                            </a>
-                            <strong ng-bind="user.name | shortenString:12"></strong>
-                        </div>
-                        <div>
-                            <span>Reputation:</span>
-                            <strong ng-bind="user.score" class="pull-right"></strong>
-                        </div>
-                    </div>
+            <p class="text-muted mLeft5">
+                <i class="fa fa-shield"></i>
+                Reviewing helps keep everyone in the community accountable
+            </p>
+        </form>
+    </div>
+    <div class="row">
+        <div ng-repeat="user in users" class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <div class="well well-sm">
+                <div>
+                    <a ng-click="openReviewModal(user.id)" href="">
+                        <img class="img-responsive img-circle hoverable8" src="<% user.facebook_id | fbImage %>" style="min-width:100%;">
+                    </a>
+                </div>
+                <div class="text-center mTop10">
+                    <a tooltip="<% user.name %>" tooltip-placement="right" tooltip-trigger="click" href="">
+                        <i class="fa fa-caret-square-o-right"></i>
+                    </a>
+                    <strong ng-bind="user.name | shortenString:12"></strong>
+                </div>
+                <div>
+                    <span>Reputation:</span>
+                    <strong ng-bind="user.score" class="pull-right"></strong>
                 </div>
             </div>
-        </section>
-    </section><!-- /MAIN CONTENT -->
+        </div>
+    </div>
 @endsection
 
 @section('custom_js')

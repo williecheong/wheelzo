@@ -19,34 +19,17 @@ angular.module('myApp').controller('rrequestModalController', function ($scope, 
         $scope.input = { 
             'origin' : '',
             'destination' : '',
-            'dropoffs' : [ ],
             'startDate' : defaultDate,
             'startTime' : defaultTime,
-            'price' : '10',
-            'capacity' : '2',
-            'allowPayments': false
         };
     };
-
-    $scope.addDropoff = function() {
-        $scope.input.dropoffs.push('');
-    };
-
-    $scope.removeDropoff = function(index) {
-        $scope.input.dropoffs.splice(index, 1);
-    };    
 
     $scope.submit = function (input) {
         var inputData = {
             'origin' : input.origin,
             'destination' : input.destination,
-            'dropOffs' : input.dropoffs,
             'departureDate' : $filter('date')(input.startDate, 'yyyy-MM-dd'),
-            'departureTime' : $filter('date')(input.startTime, 'HH:mm:ss'),
-            'price' : input.price,
-            'capacity' : input.capacity,
-            'allowPayments' : input.allowPayments ? 1 : 0,
-            'invitees' : [ ],
+            'departureTime' : $filter('date')(input.startTime, 'HH:mm:ss')
         };
 
         if ( inputData.origin.length == 0 || inputData.destination.length == 0 ) {
@@ -64,25 +47,16 @@ angular.module('myApp').controller('rrequestModalController', function ($scope, 
             return;
         }
 
-        if ( inputData.price < 1 || inputData.price > 40 ) {
-            toaster.pop('error', 'Error', 'Ride price must be between 1 and 40'); 
-            return;
-        }
-
-        if ( inputData.capacity < 1 || inputData.capacity > 7 ) {
-            toaster.pop('error', 'Error', 'Ride capacity must be between 1 and 7'); 
-            return;
-        }
-
         $scope.loading = true;
         $http({
             'method': 'POST',
-            'url': '/api/v2/rides',
+            'url': '/api/v2/rrequests',
             'data': inputData
         }).success(function(data, status, headers, config) {
             toaster.pop('success', 'Success: ' + status, data.message);
             $scope.loading = false;
             initialize();
+            console.log(data);
             $modalInstance.close();
             
         }).error(function(data, status, headers, config) {

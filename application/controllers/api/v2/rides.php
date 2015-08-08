@@ -134,14 +134,14 @@ class Rides extends API_Controller {
         foreach( $invitees as $invitee ) {
             $rrequest = $this->rrequest->retrieve_by_id( $invitee );
             if ( !$rrequest ) {
-                $output_message .= " Ride request not found. Stop hacking.";
+                $output_message .= " Ride request not found.";
                 continue;
             }
 
             $passenger = $this->user->retrieve_by_id( $rrequest->user_id );
             
             if ( !$passenger ) {
-                $output_message .= " Passenger of ride request not found. So weird.";
+                $output_message .= " Passenger of ride request not found.";
                 continue;
             }
                     

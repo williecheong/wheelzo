@@ -1,9 +1,9 @@
-angular.module('myApp').controller('driveModalController', function ($scope, $modalInstance, $http, $filter, toaster, initialize) {
+angular.module('myApp').controller('driveModalController', function ($scope, $modalInstance, $modal, $http, $filter, toaster, initialize) {
     
     $core.extensionModal($scope, $modalInstance, $http, toaster);
 
     $scope.suggestedPlaces = defaultSuggestedPlaces;
-
+    $scope.rrequests = [ ];
     $scope.dateOptions = { 
         'show-weeks' : false
     };
@@ -36,6 +36,59 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
         $scope.input.dropoffs.splice(index, 1);
     };    
 
+    $scope.searchRrequests = function(input) {
+        if ($scope.searchingNow) {
+            return; // still loading a search. try again later.
+        }
+
+        var inputData = {
+            'origin' : input.origin,
+            'destination' : input.destination,
+            'departureDate' : $filter('date')(input.startDate, 'yyyy-MM-dd'),
+        }
+
+        if ( inputData.origin.length < 3 || inputData.destination.length < 3 ) {
+            return; // too little information about origin and destination
+        } 
+
+        if ( inputData.departureDate.length == 0 ) {
+            return; // can't search with empty time
+        }
+
+        $scope.firstSearchExecuted = true;
+        $scope.searchingNow = true;
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/rrequests/search?origin='+inputData.origin+'&destination='+inputData.destination+'&departure='+inputData.departureDate
+        }).success(function(data, status, headers, config) {
+            $scope.searchingNow = false;
+            if ($scope.rrequests.length == data.length) { // potentially the same set of rrequests
+                var isDuplicateSet = true;
+                for (var i=0; i<$scope.rrequests.length; i++) {
+                    var matchFound = false;
+                    for (var j=0; j<data.length; j++) {
+                        if ($scope.rrequests[i].id == data[j].id) {
+                            matchFound = true;
+                            break;
+                        }
+                    }
+                    if (matchFound == false) {
+                        isDuplicateSet = false;
+                        break; 
+                    } 
+                }
+                if (isDuplicateSet) {
+                    return;
+                }
+            } 
+            $scope.input.invitees = { };
+            $scope.rrequests = data;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.searchingNow = false;
+        });
+    };
+
     $scope.submit = function (input) {
         var inputData = {
             'origin' : input.origin,
@@ -48,6 +101,12 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'allowPayments' : input.allowPayments ? 1 : 0,
             'invitees' : [ ],
         };
+
+        for (var key in input.invitees) {
+            if (input.invitees[key]) {
+                inputData.invitees.push(key);
+            }
+        }
 
         if ( inputData.origin.length == 0 || inputData.destination.length == 0 ) {
             toaster.pop('error', 'Error', 'Origin and destination cannot be empty'); 
@@ -88,6 +147,17 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, data.message);
             $scope.loading = false;
+        });
+    };
+
+    $scope.openReviewModal = function(userId) {
+        var modalInstance = $modal.open({
+            templateUrl: 'review.html',
+            controller: 'reviewModalController',
+            size: 'sm',
+            resolve: {
+                'userId' : function() { return userId; }
+            }
         });
     };
 

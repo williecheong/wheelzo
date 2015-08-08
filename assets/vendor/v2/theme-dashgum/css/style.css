@@ -2191,8 +2191,8 @@ label {
 
 /*footer*/
 .site-footer {
-    background: #702B90;
-    color: whitesmoke;
+    background: none;
+    color: #702B90;
     padding: 10px 0;
 }
 
@@ -2212,7 +2212,7 @@ label {
 }
 
 .site-min-height {
-    min-height: 900px;
+    min-height: 600px;
 }
 
 

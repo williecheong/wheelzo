@@ -14,6 +14,10 @@ img.brand {
 	border: none;
 }
 
+.btn-wheelzo:hover {
+    color: whitesmoke;
+}
+
 .modal-header button.close {
 	color: whitesmoke;
 }
@@ -47,10 +51,18 @@ div.payment-message {
     margin: 20px auto;
 }
 
-#toast-container div {
-    opacity: 0.98;
+div.faq-box {
+    padding: 10px 40px;
 }
 
+div.faq-box strong {
+    cursor: pointer;
+}
+
+div.faq-box p {
+    padding-top: 10px;
+    text-align: justify;
+}
 
 /**************************** 
     EXTERNAL REFERENCES 
@@ -88,6 +100,10 @@ div.payment-message {
 /**************************** 
     RE-STYLING FOR ANGULAR UI
 ****************************/
+
+#toast-container div {
+    opacity: 0.98;
+}
 
 table[show-meridian] tbody tr:first-of-type,
 table[show-meridian] tbody tr:last-of-type {
