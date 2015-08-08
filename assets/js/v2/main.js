@@ -1,5 +1,9 @@
 $core.extensionController = function($scope, $sce, $http, $filter, $modal, toaster) {
 
+    $scope.rides = [ ];
+    $scope.displayRides = [ ];
+    $scope.disableEntirePage = true;
+
     $scope.loadRides = function() {
         $http({
             'method': 'GET',
@@ -7,8 +11,12 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         }).success(function(data, status, headers, config) {
             $scope.rides = data;
             $scope.filterRides();
+            setTimeout(function() {
+                $scope.disableEntirePage = false;
+            }, 500);
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, 'Could not retrieve rides');
+            $scope.disableEntirePage = false;
             console.log(data);
         });
     };
@@ -80,8 +88,6 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
     };
 
     $scope.initialize = function() {        
-        $scope.rides = [ ];
-        $scope.displayRides = [ ];
         $scope.inputSearchOrigin = "";
         $scope.inputSearchDestination = "";
         $scope.activeDateFilter = "";

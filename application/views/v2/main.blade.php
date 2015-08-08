@@ -47,7 +47,7 @@
     <div class="row mTop20">
         @foreach($day_filters as $key => $day)
             <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
-                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable8">
+                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9">
                     <i class="fa fa-calendar hidden-xs"></i>
                     @if ($key == 0)
                         Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
@@ -81,7 +81,7 @@
                 <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
                     <div class="mBottom10">    
                         <a ng-click="openReviewModal(ride.driver_id)" href="">
-                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable7" width="78">
+                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
                         </a>
                         <div class="mBottom10" style="white-space:nowrap;">
                             <strong>Origin</strong><br>
@@ -99,12 +99,12 @@
                         </div>
                     </div>
                     <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
-                        <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-block btn-info hoverable8" style="background:#3B5998;border:none;">
+                        <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-block btn-info hoverable9" style="background:#3B5998;border:none;">
                             <i class="fa fa-facebook-square fa-lg"></i> Message
                         </a>
                     </div>
                     <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;right:0%;">
-                        <a ng-click="openRideModal(ride.id)" class="btn btn-xs btn-block btn-wheelzo hoverable8">
+                        <a ng-click="openRideModal(ride.id)" class="btn btn-xs btn-block btn-wheelzo hoverable9">
                             <i class="fa fa-car"></i> More
                         </a>
                     </div>

@@ -29,7 +29,15 @@
 
     <body ng-app="myApp" ng-controller="myController">
         <toaster-container toaster-options="{'time-out': 5000}"></toaster-container>
-        <section id="container" >
+        <div ng-if="disableEntirePage" class="master-loading">
+            <div class="master-loading-text">
+                <h1>
+                    <i class="fa fa-cog fa-spin"></i>
+                    Loading...
+                </h1>
+            </div>
+        </div>
+        <section id="container">
             <header class="header black-bg">
                 <a href="/" class="logo">
                     <img class="brand" src="/assets/img/logo-light.png">

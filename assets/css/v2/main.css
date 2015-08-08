@@ -2,6 +2,23 @@ a.logo {
 	margin-top: 0px;
 }
 
+div.master-loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9000;
+    background-color: rgba(211, 214, 212, 0.8);
+}
+
+div.master-loading .master-loading-text {
+    bottom: 50%;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    color: #702B90;
+    opacity: 1.0;
+}
+
 img.brand {
     position:relative;
     max-width: 60px;
