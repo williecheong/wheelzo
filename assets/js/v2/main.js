@@ -74,17 +74,6 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         ridesToDisplay = ridesToDisplay.filter(function(n){ return n != null });
         ridesToDisplay.sort(compareByStart);
         $scope.displayRides = ridesToDisplay;
-        
-        toaster.clear();
-        if ($scope.displayRides.length == $scope.rides.length) {
-            toaster.pop('success', 'Success', 'Showing all ' + $scope.rides.length + ' active rides');
-        } else {
-            if ($scope.displayRides.length == 0) {
-                toaster.pop('error', 'No matching rides found', 'Please consider posting a ride request');
-            } else {
-                toaster.pop('success', 'Success', 'Showing ' + $scope.displayRides.length + ' out of ' + $scope.rides.length + ' active rides');    
-            }   
-        }
     };
 
     $scope.initialize = function() {        

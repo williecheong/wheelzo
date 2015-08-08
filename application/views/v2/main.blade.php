@@ -111,6 +111,16 @@
                 </div>
             </div>
         </div>
+        <div ng-if="session.user_id>0" ng-class="{'col-md-4':displayRides.length>0, 'col-md-offset-3 col-md-6':displayRides.length==0}" class="col-md-4">
+           <div ng-click="openModal('drive', 'lg')" class="well well-lg text-center clickable hoverable7" style="color:#333;border:dashed 8px;height:150px;">
+                <div class="mTop15">
+                    <i class="fa fa-car fa-2x"></i>
+                    <p class="lead">
+                        POST A RIDE
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
