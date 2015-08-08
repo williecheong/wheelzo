@@ -3,8 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Better rideshare and carpooling for people around the University of Waterloo">
-        <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+        @if ($requested_ride) 
+        <meta name="description" content="{{$requested_ride->driver_name}} is driving from {{$requested_ride->origin}} to {{$requested_ride->destination}} on {{date('M j, l', strtotime($requested_ride->start))}} @ {{date('g.ia', strtotime($requested_ride->start))}}">
+        @elseif ($requested_user) 
+        <meta name="description" content="Reviews about {{$requested_user->name}} from the rideshare community @ Wheelzo">
+        @else
+        <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
+        @endif
+        <meta name="keyword" content="Toronto, Kitchener, Waterloo, Rideshare, Carpool, Transportation, Commuting, Community, Environment">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">    
         <title>@yield('title')</title>
@@ -158,8 +164,8 @@
         <script src="/assets/js/v2/base.js"></script>
         <script>
             var $wheelzo = {
-                'autoQueryRide' : {{ $request_ride_id ? '"'. $request_ride_id .'"' : "false" }},
-                'autoQueryUser' : {{ $request_user_id ? '"'. $request_user_id .'"' : "false" }},
+                'autoQueryRide' : {{ $requested_ride ? '"'. $requested_ride->id .'"' : "false" }},
+                'autoQueryUser' : {{ $requested_user ? '"'. $requested_user->id .'"' : "false" }},
                 'stripePublicKey' : '{{ WHEELZO_STRIPE_PUBLIC_KEY }}'
             };
         </script>
