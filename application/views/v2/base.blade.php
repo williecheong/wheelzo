@@ -164,8 +164,6 @@
         <script src="/assets/js/v2/base.js"></script>
         <script>
             var $wheelzo = {
-                'autoQueryRide' : {{ $requested_ride ? '"'. $requested_ride->id .'"' : "false" }},
-                'autoQueryUser' : {{ $requested_user ? '"'. $requested_user->id .'"' : "false" }},
                 'stripePublicKey' : '{{ WHEELZO_STRIPE_PUBLIC_KEY }}'
             };
         </script>

@@ -99,5 +99,9 @@
 @endsection
 
 @section('custom_js')
+    <script>
+        $wheelzo['autoQueryRide'] = {{ $requested_ride ? '"'. $requested_ride->id .'"' : "false" }};
+        $wheelzo['autoQueryUser'] = {{ $requested_user ? '"'. $requested_user->id .'"' : "false" }};
+    </script>
     <script src="/assets/js/v2/main.js"></script>
 @endsection
