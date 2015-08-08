@@ -7,6 +7,10 @@
     @endif 
 @endsection
 
+@section('description')
+    <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
+@endsection
+
 @section('custom_css')
     <link rel="stylesheet" href="/assets/css/v2/main.css">
 @endsection

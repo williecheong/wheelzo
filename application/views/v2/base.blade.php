@@ -3,13 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @if ($requested_ride) 
-        <meta name="description" content="{{$requested_ride->driver_name}} is driving from {{$requested_ride->origin}} to {{$requested_ride->destination}} on {{date('M j, l', strtotime($requested_ride->start))}} @ {{date('g.ia', strtotime($requested_ride->start))}}">
-        @elseif ($requested_user) 
-        <meta name="description" content="Reviews about {{$requested_user->name}} from the rideshare community @ Wheelzo">
-        @else
-        <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
-        @endif
+        @yield('description')
         <meta name="keyword" content="Toronto, Kitchener, Waterloo, Rideshare, Carpool, Transportation, Commuting, Community, Environment">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">    

@@ -7,6 +7,16 @@
     @endif 
 @endsection
 
+@section('description')
+    @if ($requested_ride) 
+        <meta name="description" content="{{$requested_ride->driver_name}} is driving from {{$requested_ride->origin}} to {{$requested_ride->destination}} on {{date('M j, l', strtotime($requested_ride->start))}} @ {{date('g.ia', strtotime($requested_ride->start))}}">
+    @elseif ($requested_user) 
+        <meta name="description" content="Reviews about {{$requested_user->name}} from the rideshare community @ Wheelzo">
+    @else
+        <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
+    @endif
+@endsection
+
 @section('custom_css')
     <link rel="stylesheet" href="/assets/css/v2/main.css">
 @endsection
