@@ -25,13 +25,11 @@
                                         </button>
                                     </span>
                                 </div>
-                                <div ng-repeat="dropoff in input.dropoffs track by $index" class="input-group">
+                                <div ng-repeat="dropoff in input.dropoffs track by $index" class="right-inner-addon">
+                                    <a ng-click="removeDropoff($index)" class="" href="">
+                                        <i class="fa fa-times fa-lg"></i>
+                                    </a>
                                     <input ng-model="input.dropoffs[$index]" ng-disabled="loading" typeahead="place for place in suggestedPlaces | filter:$viewValue | limitTo:6" class="form-control" placeholder="Drop off location" autocomplete="off">
-                                    <span class="input-group-btn">
-                                        <button ng-click="removeDropoff($index)" ng-disabled="loading" class="btn btn-danger" tooltip="Remove this dropoff" tooltip-placement="left">
-                                            <i class="fa fa-times fa-lg"></i>
-                                        </button>
-                                    </span>
                                 </div>                                
                             </div>
                         </div>

@@ -86,7 +86,9 @@
             </div>
             <div class="col-xs-5">
                 <span ng-bind="ride.destination" class="lead"></span> 
-                <span id="ride-dropoffs"></span>
+                <a ng-if="ride.drop_offs.length>0" popover-html="ride.drop_offs_html" popover-title="Drop Off Locations:" popover-trigger="mouseenter" popover-animation="false" popover-placement="left" href="">
+                    <i class="fa fa-flag-checkered fa-lg fa-border"></i>
+                </span>
             </div>
         </div>
         <hr style="border-color:#EEE;">

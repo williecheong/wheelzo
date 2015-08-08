@@ -1,4 +1,4 @@
-angular.module('myApp').controller('rideModalController', function ($scope, $modalInstance, $modal, $http, $filter, toaster, rideId) {
+angular.module('myApp').controller('rideModalController', function ($scope, $modalInstance, $sce, $modal, $http, $filter, toaster, rideId) {
     
     $core.extensionModal($scope, $modalInstance, $http, toaster);
 
@@ -33,9 +33,10 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
         }).success(function(data, status, headers, config) {
             if (data.length > 0) {
                 $scope.ride = data[0];
-                $scope.calculateColSizes();
-                $scope.loadPassengers();
                 $scope.loadComments();
+                $scope.loadPassengers();
+                $scope.calculateColSizes();
+                $scope.ride.drop_offs_html = $scope.templateListDropOffsForPopover($scope.ride.drop_offs);
             } else {
                 toaster.pop('error', 'Error: ' + status, 'Ride not found');
             }
@@ -201,6 +202,17 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
             toaster.pop('error', 'Error: ' + status, data.message);
             $scope.loading = false;
         });
+    };
+
+    $scope.templateListDropOffsForPopover = function(dropOffs) {
+        var html = "<div>";
+        for (var i=0; i<dropOffs.length; i++) {
+            html += '   <p>';
+            html += '       <i class="fa fa-flag"></i> ' + dropOffs[i]; 
+            html += '   </p>';
+        };
+        html += "</div>";
+        return $sce.trustAsHtml(html);
     };
 
     $scope.openReviewModal = function(userId) {
