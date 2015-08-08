@@ -39,6 +39,7 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
                 $scope.ride.drop_offs_html = $scope.templateListDropOffsForPopover($scope.ride.drop_offs);
             } else {
                 toaster.pop('error', 'Error: ' + status, 'Ride not found');
+                $modalInstance.close();
             }
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, 'Could not retrieve ride');
@@ -92,6 +93,7 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
             $scope.ride.comments = data;
             if (data.length > 0) {
                 for (var i=0; i<data.length; i++) {
+                    $scope.ride.comments[i].comment = $sce.trustAsHtml($scope.ride.comments[i].comment);
                     $scope.loadUserForObject(i, 'comments');
                 }
             } else {

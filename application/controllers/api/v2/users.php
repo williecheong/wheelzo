@@ -43,17 +43,17 @@ class Users extends API_Controller {
                 );
             }
         } else if ( $this->get('id') ) { // an id was specified
-            $users = array(
-                $this->user->retrieve_by_id( 
-                    $this->get('id') 
-                )
-            );
+            $users = array();
+            $user = $this->user->retrieve_by_id($this->get('id'));
+            if ($user) {
+                $users[] = $user;
+            }
         } else if ( $this->get('facebook_id') ) { // a facebook id was specified
-            $users = array(
-                $this->user->retrieve_by_fb( 
-                    $this->get('facebook_id') 
-                )
-            );
+            $users = array();
+            $user = $this->user->retrieve_by_fb($this->get('facebook_id'));
+            if ($user) {
+                $users[] = $user;
+            }
         } else if ( $this->get('name') ) { // a name was specified
             $users = $this->user->retrieve_like(
                 array(

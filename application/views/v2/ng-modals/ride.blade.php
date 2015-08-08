@@ -88,7 +88,7 @@
                 <span ng-bind="ride.destination" class="lead"></span> 
                 <a ng-if="ride.drop_offs.length>0" popover-html="ride.drop_offs_html" popover-title="Drop Off Locations:" popover-trigger="mouseenter" popover-animation="false" popover-placement="left" href="">
                     <i class="fa fa-flag-checkered fa-lg fa-border"></i>
-                </span>
+                </a>
             </div>
         </div>
         <hr style="border-color:#EEE;">
@@ -98,7 +98,7 @@
                     <img src="<% comment.userObject.facebook_id | fbImageSquare %>" class="img-rounded media-object">
                 </a>
                 <div class="media-body">
-                    <div ng-bind="comment.comment"></div>
+                    <div ng-bind-html="comment.comment"></div>
                     <small class="single-comment-meta">
                         <a ng-click="openReviewModal(comment.user_id)" ng-bind="comment.userObject.name" target="_blank" href=""></a> 
                         @ <span ng-bind="comment.last_updated | mysqlDateToIso | date:'EEEE MMMM d, h:mm a'"></span>

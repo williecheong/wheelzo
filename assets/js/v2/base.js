@@ -116,6 +116,12 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
     $scope.session = { };
     $scope.loadSession();
 
+    if ($wheelzo.autoQueryRide) {
+        $scope.openRideModal($wheelzo.autoQueryRide);
+    } else if ($wheelzo.autoQueryUser) {
+        $scope.openReviewModal($wheelzo.autoQueryUser);
+    }
+
 }).filter('mysqlDateToIso', function() {
     return function(badTime) {
         var components = badTime.split(' ');

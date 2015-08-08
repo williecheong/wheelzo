@@ -33,6 +33,7 @@ angular.module('myApp').controller('reviewModalController', function ($scope, $m
                 $scope.loadReviews();
             } else {
                 toaster.pop('error', 'Error: ' + status, 'User not found');
+                $modalInstance.close();
             }
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, 'Could not retrieve user');

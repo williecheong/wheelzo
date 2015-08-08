@@ -32,11 +32,11 @@ class Rides extends API_Controller {
     public function search_get() {
         $rides = array();
         if ( $this->get('id') ) {
-            $rides = array(
-                $this->ride->retrieve_by_id( 
-                    $this->get('id') 
-                )
-            );
+            $rides = array();
+            $ride = $this->ride->retrieve_by_id($this->get('id'));
+            if ($ride) {
+                $rides[] = $ride;
+            }
         }
 
         http_response_code("200");
