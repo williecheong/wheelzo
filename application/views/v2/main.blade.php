@@ -64,6 +64,8 @@
         <div ng-repeat="ride in displayRides" class="col-md-4">
             <div class="panel panel-default" ng-init="menuVisible=false">
                 <div class="panel-heading">
+                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'" class="pull-right"></strong>
+                    <!--
                     <strong ng-if="!ride.is_personal" ng-bind="ride.price | currency:'$':'0'" class="pull-right"></strong>
                     <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="left" href="" class="pull-right">
                         <i class="fa fa-user fa-lg"></i>
@@ -71,12 +73,12 @@
                     <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="left" href="" class="pull-right">
                         <i class="fa fa-users fa-lg"></i>
                     </a>
+                    -->
                     <a tooltip="<% ride.start | mysqlDateToIso | date : 'fullDate' %>" tooltip-placement="right">
                         <i class="fa fa-calendar"></i>
                     </a>
                     <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE, '"></strong>
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'"></strong>
+                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE'"></strong>
                 </div>
                 <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
                     <div class="mBottom10">    
