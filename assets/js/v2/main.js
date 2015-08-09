@@ -11,9 +11,7 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         }).success(function(data, status, headers, config) {
             $scope.rides = data;
             $scope.filterRides();
-            setTimeout(function() {
-                $scope.disableEntirePage = false;
-            }, 500);
+            $scope.disableEntirePage = false;
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, 'Could not retrieve rides');
             $scope.disableEntirePage = false;
