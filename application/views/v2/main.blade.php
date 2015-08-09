@@ -84,18 +84,18 @@
                             <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
                         </a>
                         <div class="mBottom10" style="white-space:nowrap;">
-                            <strong>Origin</strong><br>
+                            <span>Origin</span><br>
                             <a tooltip="<% ride.origin %>" tooltip-placement="right" href="">
                                 <i class="fa fa-flag fa-border"></i>
                             </a>
-                            <span ng-bind="ride.origin | shortenString:28"></span>
+                            <strong ng-bind="ride.origin | shortenString:28"></strong>
                         </div>
                         <div class="mTop10" style="white-space:nowrap;">
-                            <strong>Destination</strong><br>
+                            <span>Destination</span><br>
                             <a tooltip="<% ride.destination %>" tooltip-placement="right" href="">
                                 <i class="fa fa-flag-checkered fa-border"></i>
                             </a>
-                            <span ng-bind="ride.destination | shortenString:28"></span>
+                            <strong ng-bind="ride.destination | shortenString:28"></strong>
                         </div>
                     </div>
                     <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
