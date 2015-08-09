@@ -1,8 +1,8 @@
 <script type="text/ng-template" id="ride.html">
-	<div class="modal-header visible-xs" style="background:none;border-bottom:0px;">
-        <button ng-click="cancel()" type="button" class="close">&times;</button>
+    <div class="modal-header visible-xs" style="background:none;border-bottom:0px;">
+        <button ng-click="cancel()" type="button" style="color:#333;" class="close">&times;</button>
     </div>
-    <div class="modal-body"> 
+    <div class="modal-body">
         <div class="row">
             <div class="col-sm-4 text-center">
                 <p>
@@ -21,7 +21,7 @@
                         <span ng-bind="ride.start | mysqlDateToIso | date:'EEEE MMM d, h:mm a'" class="lead"></span>
                         <span class="lead">
                             <a href="/?ride=<% ride.id %>">
-                                <i class="fa fa-share-square"></i>
+                                <i class="fa fa-share-alt-square"></i>
                             </a>
                         </span>
                     </h3>
