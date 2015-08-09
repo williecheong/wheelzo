@@ -47,7 +47,7 @@
     <div class="row mTop20">
         @foreach($day_filters as $key => $day)
             <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
-                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9">
+                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9" style="overflow:hidden;text-overflow:clip;">
                     <i class="fa fa-calendar hidden-xs"></i>
                     @if ($key == 0)
                         Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
