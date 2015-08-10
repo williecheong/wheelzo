@@ -73,12 +73,12 @@
                             <a ng-if="isActive()" ng-click="openModal('drive', 'lg')" href="">
                                 <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
-                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                            <a ng-if="!isActive()" href="/sign">
                                 <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
                         </li>
                         <li class="">
-                            <a href="<% isActive() ? '/lookup' : session.facebook_url %>">
+                            <a href="<% isActive() ? '/lookup' : '/sign' %>">
                                 <i class="fa fa-group fa-lg"></i> User Lookup
                             </a>
                         </li>
@@ -86,7 +86,7 @@
                             <a ng-if="isActive()" ng-click="openModal('rrequest')" href="">
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
-                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                            <a ng-if="!isActive()" href="/sign">
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
                         </li>
@@ -104,20 +104,18 @@
                             </a>
                         </li>                    
                         <li class="">
-                            <a href="<% isActive() ? '/me' : session.facebook_url %>">
+                            <a href="<% isActive() ? '/me' : '/sign' %>">
                                 <i class="fa fa-car fa-lg"></i> My Rides
                             </a>
                         </li>
                         <li class="">
-                            <a href="<% session.facebook_url %>">
-                                <span ng-if="isActive()">
-                                    <i class="fa fa-sign-out fa-lg"></i> 
-                                    Sign out
-                                </span>
-                                <span ng-if="!isActive()">
-                                    <i class="fa fa-facebook-square fa-lg"></i> 
-                                    Sign in
-                                </span>
+                            <a ng-if="isActive()" href="<% session.facebook_url %>">
+                                <i class="fa fa-sign-out fa-lg"></i> 
+                                Sign out
+                            </a>
+                            <a ng-if="!isActive()" href="/sign">
+                                <i class="fa fa-facebook-square fa-lg"></i> 
+                                Sign in
                             </a>
                         </li>
                     </ul><!-- sidebar menu end-->

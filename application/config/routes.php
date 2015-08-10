@@ -5,7 +5,7 @@
 | -------------------------------------------------------------------------
 */
 
-$route['default_controller'] = "v1";
+$route['default_controller'] = "v2";
 $route['404_override'] = 'lost';
 
 /*
@@ -14,6 +14,7 @@ $route['404_override'] = 'lost';
 | -------------------------------------------------------------------------
 */
 
+$route['sign'] = "v1/sign";
 $route['lookup'] = "v2/lookup";
 
 $route['me'] = "v1/index/true";

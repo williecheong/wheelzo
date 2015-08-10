@@ -17,19 +17,11 @@
 @section('jumbotron')
     <div class="jumbotron" id="introduction-container">
         <div class="container">
-            @if ( $session )  
             <a href="/v2" class="btn btn-block btn-default">
                 <i class="fa fa-star"></i>
                 Use the new version 
                 <span class="hidden-xs">that is over v{{ CURRENT_VERSION }}</span>
             </a>
-            @else
-            <a href="{{ $session_url }}" class="btn btn-block btn-default">
-                <i class="fa fa-star"></i>
-                Login to use the new version 
-                <span class="hidden-xs">that is over v{{ CURRENT_VERSION }}</span>
-            </a>
-            @endif
             <div class="row" id="introduction">
                 <div class="col-sm-3">
                     <h3>
