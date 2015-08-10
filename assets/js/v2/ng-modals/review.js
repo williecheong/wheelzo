@@ -115,5 +115,13 @@ angular.module('myApp').controller('reviewModalController', function ($scope, $m
         });
     };
 
+    $scope.copyShowMessage = function() {
+        toaster.pop('success', 'Success', "Successfully copied reviews about " + $scope.user.name);
+    };
+
+    $scope.copyFallback = function(copy) {
+        window.prompt('Copy the link below to share', copy);
+    };
+
     $scope.initializeModal();
 });

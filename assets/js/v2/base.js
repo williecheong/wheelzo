@@ -2,12 +2,14 @@ var $core = { } ;
 
 var app = angular.module(
     'myApp', 
-    ['ui.bootstrap', 'ngQuickDate', 'ngtimeago', 'linkify', 'toaster'], 
+    ['ui.bootstrap', 'ngQuickDate', 'ngtimeago', 'linkify', 'ngClipboard', 'toaster'], 
     function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     }
-);
+).config(['ngClipProvider', function(ngClipProvider) {
+    ngClipProvider.setPath("/assets/vendor/v2/ng-clipboard/ZeroClipboard.swf");
+}]);
 
 app.controller('myController', function ($scope, $sce, $http, $filter, $modal, toaster) {
     angular.element(document).ready(function() {

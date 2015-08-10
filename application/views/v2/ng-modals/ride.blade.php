@@ -20,7 +20,7 @@
                         -
                         <span ng-bind="ride.start | mysqlDateToIso | date:'EEEE MMM d, h:mm a'" class="lead"></span>
                         <span class="lead">
-                            <a href="/?ride=<% ride.id %>">
+                            <a tooltip="Get a direct link for sharing this ride" tooltip-placement="left" clip-copy="'{{base_url()}}?ride='+ride.id" clip-click="copyShowMessage()" clip-click-fallback="copyFallback('{{base_url()}}?ride='+ride.id)" href="">
                                 <i class="fa fa-share-alt-square"></i>
                             </a>
                         </span>
