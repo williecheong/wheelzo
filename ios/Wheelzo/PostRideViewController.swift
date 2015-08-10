@@ -13,7 +13,7 @@ import UIKit;
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class PostRideViewController: UIViewController, WheelzoAPIProtocol {
+class PostRideViewController: UIViewController {
     
     // class that takes care of posting a new ride
     
@@ -42,8 +42,6 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         
         priceText.keyboardType = UIKeyboardType.DecimalPad;
         capacityText.keyboardType = UIKeyboardType.DecimalPad;
-        
-        api.delegate = self;
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -55,20 +53,6 @@ class PostRideViewController: UIViewController, WheelzoAPIProtocol {
         } else {
             performSegueWithIdentifier("segueToLogin", sender: self);
         }
-    }
-    
-    func didRecieveRideResponse(results: NSArray) {
-        
-        // not needed here
-        
-        println("ride post recieved response")
-    }
-    
-    func didRecieveUserResponse(results: NSArray) {
-        
-        // not needed here
-        
-        println("ride post recieved response")
     }
     
     override func didReceiveMemoryWarning() {

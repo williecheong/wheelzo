@@ -21,13 +21,9 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var dayLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var fromLabel: UILabel!
-        
-    @IBOutlet var postCommentText: UITextField!;
-    @IBOutlet var postCommentButton: UIButton!;
     
     @IBOutlet var deleteRideButton: UIButton!;
 
@@ -91,8 +87,6 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
         
         // text stuff
         setInfo()
-        
-        profilePic.image = image;
         
         // rounded corners
         profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
@@ -163,6 +157,10 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
         // not used? can probably just pass data through the table cell
     }
     
+    func didRecieveReviewsResponse(results: NSArray) {
+        // not used
+    }
+    
     func didRecieveCommentResponse(results: NSArray) {
         
         println("detail recieved comment response")
@@ -182,26 +180,6 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-
-    
-    @IBAction func postCommentButtonPressed(sender: AnyObject) {
-        // button press events
-        println("button was pressed");
-        
-        let commentText = postCommentText.text;
-
-        let rideId = rideData["id"]!.integerValue;
-        let userId = rideData["driver_id"]!.integerValue;
-        
-        
-        
-        
-        // reloads comments to include new one
-        // bug: this i slsightly too quick. need to have it as a callback
-        //
-
     }
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
@@ -283,7 +261,21 @@ class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCo
             // passes data about the ride to the detail view (will have to load picture later or something)
             svc.rideData = self.rideData;
             
+        } else if (segue.identifier == "profileSegue") {
+            // when user clicks profile button
+            println("showing profile")
+            
+            var svc = segue.destinationViewController as! ProfileViewController;
+            
+            // passes data to the profile view
+            svc.rideData = self.rideData;
+            svc.imageData = self.profilePic.image;
+            
         }
+        
+        
+        
+        
     }
     
     

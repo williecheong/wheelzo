@@ -15,6 +15,7 @@ import UIKit
 protocol WheelzoAPIProtocol {
     func didRecieveRideResponse(results: NSArray)
     func didRecieveUserResponse(results: NSArray)
+    func didRecieveReviewsResponse(results: NSArray)
 }
 
 
@@ -74,6 +75,14 @@ class WheelzoAPI: NSObject {
             
             delegate?.didRecieveUserResponse(jsonResult)
 
+        } else if (connection.currentRequest.URL?.lastPathComponent == "reviews") {
+            
+            println("delegating to reviews")
+            
+            // otherise we are querying for users (need to find a more future-proof way to do this
+            
+            delegate?.didRecieveReviewsResponse(jsonResult)
+            
         }
         
     }
@@ -148,6 +157,23 @@ class WheelzoAPI: NSObject {
         
         return userData["facebook_id"] as! String;
         
+    }
+    
+    // review stuff
+    
+    func getReviews(userId: String) {
+        
+        let urlPath = "\(urlPrefix)wheelzo.com/api/v2/reviews?receiver_id=\(userId)"
+        let url: NSURL! = NSURL(string: urlPath)
+        let request = NSMutableURLRequest(URL: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let connection: NSURLConnection! = NSURLConnection(request: request,
+            delegate: self, startImmediately: false)
+        
+        println("requesting reviews: \(urlPath)")
+        
+        connection.start()
     }
     
     // ride stuff

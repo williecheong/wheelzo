@@ -14,5 +14,8 @@
 
 #import <JSQMessagesViewController/JSQMessages.h>    // chat
 
+#import <CommonCrypto/CommonDigest.h> // hashing for fb
+#import <CommonCrypto/CommonHMAC.h> // hashing for fb
+
 
 #endif
