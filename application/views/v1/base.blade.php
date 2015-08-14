@@ -183,7 +183,7 @@
         <script src="/assets/vendor/v1/timepicker/jquery-ui-timepicker-addon.js"></script>
         <script src="/assets/vendor/v1/timepicker/jquery-ui-sliderAccess.js"></script>
         <script src="/assets/vendor/v1/moment/moment.min.js"></script>
-        <script src="/assets/js/v1/constants.js"></script>
+        <script src="/assets/js/tools/places.js"></script>
         <script src="/assets/js/v1/initializer.js"></script>
         <script src="/assets/js/v1/templates.js"></script>
         <script src="/assets/js/v1/handlers.js"></script>

@@ -162,7 +162,7 @@
         <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>
         <script src="/assets/vendor/v2/ng-timeago/ng-timeago.js"></script>
         <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>
-        <script src="/assets/js/v2/constants.js"></script>
+        <script src="/assets/js/tools/places.js"></script>
         <script src="/assets/js/v2/base.js"></script>
         <script>
             var $wheelzo = {
