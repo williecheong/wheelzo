@@ -48,11 +48,11 @@ class Facebook_import extends API_Controller {
         $feed_limit = 50;
         $yesterday_date = date("Y-m-d", time() - 60 * 60 * 24);
         $facebook_groups = array(
-            '227191854109597', // Carpool Toronto-Ottawa-Montreal-Sherbrooke-Quebec-covoiturage
             '372772186164295', // University of Waterloo Carpool
             '453970331348083', // Montreal-Toronto rideshare
             '231943393631223', // Rideshare Wilfred Laurier               
-            '30961982319' // RIDESHARE Queen's University
+            '30961982319', // RIDESHARE Queen's University
+            '227191854109597' // Carpool Toronto-Ottawa-Montreal-Sherbrooke-Quebec-covoiturage            
         );
 
         $postings = array();                     
