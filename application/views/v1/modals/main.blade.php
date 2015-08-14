@@ -160,7 +160,7 @@
                 </div>
                 <div class="well well-sm payment-message" id="payment-message-passenger-disabled">
                     <i class="fa fa-exclamation-triangle"></i> 
-                    Online payments have been disabled for this ride. <br>
+                    Online payments have been disabled for this ride. <br class="hidden-xs">
                     Passengers should contact the driver directly to 
                     <a target="_blank" id="driver-facebook" href="#">make arrangements</a>.
                 </div>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="well well-sm payment-message" id="payment-message-driver-disabled">
                     <i class="fa fa-car"></i>
-                    This ride will not receive online payments through Wheelzo. <br>
+                    This ride will not receive online payments through Wheelzo. <br class="hidden-xs">
                     Instead, passengers will be prompted to reach out directly through Facebook.
                 </div>
                 <div class="row text-center">
