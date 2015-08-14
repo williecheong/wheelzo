@@ -57,7 +57,7 @@
         </div>
         <div ng-if="session.user_id!=0 && session.user_id!=ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
             <i class="fa fa-exclamation-triangle"></i> 
-            Online payments have been disabled for this ride. <br>
+            Online payments have been disabled for this ride. <br class="hidden-xs">
             Passengers should contact the driver directly to 
             <a target="_blank" href="<% ride.driver_facebook_id | fbProfile %>">make arrangements</a>.
         </div>
@@ -70,7 +70,7 @@
         </div>
         <div ng-if="session.user_id!=0 && session.user_id==ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
             <i class="fa fa-car"></i>
-            This ride will not receive online payments through Wheelzo. <br>
+            This ride will not receive online payments through Wheelzo. <br class="hidden-xs">
             Instead, passengers will be prompted to reach out directly through Facebook.
         </div>
         <div class="row text-center">
