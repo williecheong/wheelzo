@@ -11,23 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPZ-S4-VMk">
-                    <rect key="frame" x="161" y="160" width="159" height="159"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="255" id="08q-9v-np3"/>
-                        <constraint firstAttribute="height" constant="159" id="Zzr-Bd-iRt"/>
-                        <constraint firstAttribute="width" constant="255" id="j1O-YI-i0V"/>
-                        <constraint firstAttribute="width" secondItem="uPZ-S4-VMk" secondAttribute="height" multiplier="1:1" id="qPx-yl-Bqv"/>
-                        <constraint firstAttribute="width" constant="159" id="y0m-Ve-iJv"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="08q-9v-np3"/>
-                            <exclude reference="j1O-YI-i0V"/>
-                        </mask>
-                    </variation>
-                </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Wheelzo. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="8" y="460" width="464" height="12"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="464" id="qaI-qj-gAs"/>
@@ -36,8 +20,28 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo800.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPZ-S4-VMk">
+                    <rect key="frame" x="150" y="150" width="180" height="180"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="255" id="08q-9v-np3"/>
+                        <constraint firstAttribute="height" constant="180" id="Ea2-4Q-cLV"/>
+                        <constraint firstAttribute="height" constant="159" id="Zzr-Bd-iRt"/>
+                        <constraint firstAttribute="width" constant="255" id="j1O-YI-i0V"/>
+                        <constraint firstAttribute="width" secondItem="uPZ-S4-VMk" secondAttribute="height" multiplier="1:1" id="qPx-yl-Bqv"/>
+                        <constraint firstAttribute="width" constant="180" id="sax-1K-2kF"/>
+                        <constraint firstAttribute="width" constant="159" id="y0m-Ve-iJv"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="08q-9v-np3"/>
+                            <exclude reference="Zzr-Bd-iRt"/>
+                            <exclude reference="j1O-YI-i0V"/>
+                            <exclude reference="y0m-Ve-iJv"/>
+                        </mask>
+                    </variation>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="uPZ-S4-VMk" secondAttribute="centerX" constant="-0.5" id="5Sc-Uq-a6r"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="8" id="BuA-wk-09S"/>
@@ -64,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="logo.png" width="800" height="800"/>
+        <image name="logo800.png" width="800" height="800"/>
     </resources>
 </document>

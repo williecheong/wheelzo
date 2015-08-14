@@ -113,6 +113,11 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func didRecieveUserResponse(results: NSArray) {
+        // unused
+    }
+    
+    func didRecieveReviewsResponse(results: NSArray) {
+        // unused
     }
     
 //    @IBAction func myUIImageViewTapped(recognizer: UITapGestureRecognizer) {
@@ -148,16 +153,15 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
             // all data
             cell.rideData = rowData;
             
-            
-            var toString = "T: ";
-            toString += rowData["origin"] as! String;
-            
-            cell.toLabel.text = toString;
-            
             var fromString = "F: ";
             fromString += rowData["origin"] as! String;
             
             cell.fromLabel.text = fromString;
+            
+            var toString = "T: ";
+            toString += rowData["destination"] as! String;
+            
+            cell.toLabel.text = toString;
             
             var priceString = "$";
             priceString += rowData["price"] as! String;
@@ -286,34 +290,15 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         if (segue.identifier == "rideSelectSegue") {
-            // when user selects one of the rides in the table
-
-            
-//            self.storyboard?.instantiateViewControllerWithIdentifier("DetailRideViewController")
-            
-        
+            // when user selects one of the rides in the table        
             var svc = segue.destinationViewController as! DetailRideViewController;
             
             var senderCell = sender as! RideTableCell;
             
-            //sprintln(svc.profilePic)
-            
-            
             // passes data about the ride to the detail view (will have to load picture later or something)
             svc.rideData = senderCell.rideData;
             
-            //svc.image = senderCell.profilePic.image!;
-            
-            
-            // or do we need .image?
-            //svc.profilePic = senderCell.profilePic;
-            
-            svc.toLabel = senderCell.toLabel;
-            
             //println(svc.rideData)
-            
-//            var indexPath = tableView.indexPathForSelectedRow;
-            
         }
     }
     
@@ -386,6 +371,7 @@ class RidesViewController: UIViewController, UITableViewDataSource, UITableViewD
 //        println(self.filteredTableData)
         
     }
+    
     
     
 //    func setImageOfCell(tableView: UITableView, cell: UITableViewCell) {

@@ -6,14 +6,6 @@
 //  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved.
 //
 
-//
-//  PostRideViewController.swift
-//  Wheelzo
-//
-//  Created by Maksym Pikhteryev on 2015-06-28.
-//  Copyright (c) 2015 Maksym Pikhteryev. All rights reserved.
-//
-
 import Foundation
 
 import UIKit;
@@ -24,10 +16,14 @@ class SettingsViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet var fbLoginView : FBSDKLoginButton!
     
+    // used in the API classes to use staging or not
+    static let useProduction = true;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
     }
     
     override func viewDidAppear(animated: Bool) {

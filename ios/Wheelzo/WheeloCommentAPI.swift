@@ -15,6 +15,11 @@ protocol WheelzoCommentAPIProtocol {
 class WheelzoCommentAPI: NSObject {
     // this api is used exclusively for loading and posting comments (probably only used in detail view)
     
+    static let stagingPrefix = "http://staging."
+    static let productionPrefix = "https://"
+    
+    let urlPrefix = (SettingsViewController.useProduction ? productionPrefix : stagingPrefix)
+    
     var data: NSMutableData = NSMutableData()
     var delegate: WheelzoCommentAPIProtocol?
     
@@ -50,7 +55,7 @@ class WheelzoCommentAPI: NSObject {
     
     // comment stuff
     
-    func postComment(commentText: String, rideId: Int, userId: Int, callback: ()->Void ) {
+    func postComment(commentText: String, rideId: Int, callback: ()->Void ) {
         
         // synchronous
         
@@ -59,7 +64,7 @@ class WheelzoCommentAPI: NSObject {
         // only works if you are logged in
         var token = FBSDKAccessToken.currentAccessToken().tokenString
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/comments"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/comments"
         var url: NSURL! = NSURL(string: urlPath)
         
         let request = NSMutableURLRequest(URL: url)
@@ -95,7 +100,7 @@ class WheelzoCommentAPI: NSObject {
     
     func getComments(rideId: Int) {
         
-        var urlPath = "http://staging.wheelzo.com/api/v2/comments?ride_id=\(rideId)"
+        var urlPath = "\(urlPrefix)wheelzo.com/api/v2/comments?ride_id=\(rideId)"
         var url: NSURL! = NSURL(string: urlPath)
         var request: NSURLRequest = NSURLRequest(URL: url)
         var connection: NSURLConnection! = NSURLConnection(request: request,

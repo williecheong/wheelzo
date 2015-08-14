@@ -10,8 +10,7 @@ import Foundation
 
 import UIKit
 
-class DetailRideViewController: UIViewController , UITableViewDelegate, UITableViewDataSource,
-WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
+class DetailRideViewController: UIViewController , WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     
     // class that will show a detailed view of a ride that is clicked on the wheelzo table
     
@@ -25,11 +24,6 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var toLabel: UILabel!
     @IBOutlet var fromLabel: UILabel!
-    
-    @IBOutlet var commentsTableView: UITableView!
-    
-    @IBOutlet var postCommentText: UITextField!;
-    @IBOutlet var postCommentButton: UIButton!;
     
     @IBOutlet var deleteRideButton: UIButton!;
 
@@ -46,18 +40,53 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
     // other data stuff (comments)
     var tableData = NSArray();
 
+    func setInfo() {
+        
+        nameLabel.text = rideData["driver_name"] as! String?;
+        
+        println("the driver is \(nameLabel.text) ")
+        
+        fromLabel.text = rideData["origin"] as! String?;
+        fromLabel.numberOfLines = 0
+        fromLabel.sizeToFit()
+        toLabel.text = rideData["destination"] as! String?;
+        toLabel.numberOfLines = 0
+        toLabel.sizeToFit()
+        
+        // date formatting
+        let dateString = rideData["start"] as! String;
+        var dateFormatter = NSDateFormatter();
+        
+        // input format (don't change unless api changes)
+        var formatString = "yyyy'-'MM'-'dd' 'HH':'mm':'ss";
+        dateFormatter.dateFormat = formatString;
+        let dateObject = dateFormatter.dateFromString(dateString);
+        
+        // date output
+        //      
+        formatString = "EEEE' 'MMM' 'dd', 'h':'mm a";
+        dateFormatter.dateFormat = formatString;
+        dateLabel.text = dateFormatter.stringFromDate(dateObject!);
+
+        var priceText = "$"
+        priceText += rideData["price"] as! String;
+        priceLabel.text = priceText
+    }
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-                
-        fromLabel.text = rideData["origin"] as! String?;
-        toLabel.text = rideData["destination"] as! String?;
         
-        priceLabel.text = rideData["price"] as! String?;
-        dateLabel.text = rideData["start"] as! String?;
+        let driverFbId = rideData["driver_facebook_id"] as! String;
         
-        profilePic.image = image;
+        // if this is not the same as the person logged in, hide the delete button
+        if (driverFbId != FBSDKAccessToken.currentAccessToken().userID) {
+            deleteRideButton.hidden = true;
+        }
+        
+        // text stuff
+        setInfo()
         
         // rounded corners
         profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
@@ -89,12 +118,14 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         // if they are the same, display delete button, otherwise hide it
         
         
+        // todo: fix the weird behaviour of this:
+        self.hidesBottomBarWhenPushed = true;
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         //println("reloading data")
         super.viewDidAppear(animated)
-        commentsTableView.reloadData();
     }
     
     func didRecieveRideResponse(results: NSArray) {
@@ -116,21 +147,18 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
             var wheelzoId = userData["id"] as! String;
             var fbId = userData["facebook_id"] as! String;
             
-            // if this is not the same as the person logged in, hide the delete button
-            if (fbId != FBSDKAccessToken.currentAccessToken().userID) {
-                
-                println("the driver is not logged in! will hide delete button")
-                deleteRideButton.hidden = true;
-                
-            }
+            
             
             setProfilePicFromFbId(fbId);
             
-            self.commentsTableView!.reloadData()
         }
         
         
         // not used? can probably just pass data through the table cell
+    }
+    
+    func didRecieveReviewsResponse(results: NSArray) {
+        // not used
     }
     
     func didRecieveCommentResponse(results: NSArray) {
@@ -147,89 +175,11 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
         // todo: once comment data is recieved, load user data for every comment
         
-        commentsTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
-    // comment table view functions
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.count
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        // resizable height
-        return UITableViewAutomaticDimension;
-    }
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120;
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:
-        NSIndexPath) -> UITableViewCell {
-            
-            tableView.registerNib(UINib(nibName: "CommentsTableCell", bundle: nil), forCellReuseIdentifier: "CommentsTableCell");
-            let cellIdentifier: String = "CommentsTableCell"
-            var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! CommentsTableCell
-            
-            var rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
-            
-            cell.commentLabel.text = rowData["comment"] as! String?;
-            cell.dateLabel.text = rowData["last_updated"] as! String?;
-            cell.profilePic.image = UIImage(named: "empty_user");
-            
-            // todo: look up the user info for the comments (should do after comments have loaded)
-            
-            // placeholder
-            cell.nameLabel.text = "";
-            
-            // update pics and name
-            // todo: remove this and just grab from jsono
-            
-            
-            let userId = rowData["user_id"] as! String;
-            {
-                self.api.syncGetUserDataFromUserId(userId);
-            } ~> {
-                // $0 is the user data nsdictionary
-                let name = $0["name"] as! String;
-                println("got name \(name)");
-                cell.nameLabel.text = name;
-                let fbId = $0["facebook_id"] as! String;
-                self.setProfilePicForCommentUsingFbId(fbId, cell: cell)
-            };
-            
-            println("loaded cell")
-            
-        return cell;
-    }
-    
-    @IBAction func postCommentButtonPressed(sender: AnyObject) {
-        // button press events
-        println("button was pressed");
-        
-        let commentText = postCommentText.text;
-
-        let rideId = rideData["id"]!.integerValue;
-        let userId = rideData["driver_id"]!.integerValue;
-        
-        let callback: ()->Void = {
-            self.commentApi.getComments(rideId)
-            };
-        
-        commentApi.postComment(commentText, rideId: rideId, userId: userId, callback: callback);
-        
-        
-        // reloads comments to include new one
-        // bug: this i slsightly too quick. need to have it as a callback
-        //
-
     }
     
     @IBAction func deleteButtonPressed(sender: AnyObject) {
@@ -271,9 +221,9 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
         // todo need to convert driverId to fbId
         
-        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
+        let fbUserId = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
         
-        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
+        let urlString = "https://graph.facebook.com/v2.3/\(fbUserId)/picture?type=large&redirect=true&width=128&height=128" as String
         let imgUrl = NSURL(string: urlString)
         
         let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
@@ -299,44 +249,35 @@ WheelzoAPIProtocol, WheelzoCommentAPIProtocol {
         
     }
     
-    func setProfilePicForCommentUsingFbId(fbId: String, cell: CommentsTableCell) {
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        // fb picture lookup
+        if (segue.identifier == "chatSegue") {
+            // when user clicks chat button
+            println("starting chat")
+            
+            var svc = segue.destinationViewController as! ChatViewController;
+            
+            // passes data about the ride to the detail view (will have to load picture later or something)
+            svc.rideData = self.rideData;
+            
+        } else if (segue.identifier == "profileSegue") {
+            // when user clicks profile button
+            println("showing profile")
+            
+            var svc = segue.destinationViewController as! ProfileViewController;
+            
+            // passes data to the profile view
+            svc.rideData = self.rideData;
+            svc.imageData = self.profilePic.image;
+            
+        }
         
-        // todo need to convert driverId to fbId
         
-        let fbUserID = fbId; //WheelzoAPI.getUserFromUserId(driverIdInt);
-        
-        let urlString = "https://graph.facebook.com/v2.3/\(fbUserID)/picture" as String
-        let imgUrl = NSURL(string: urlString)
-        
-        let request: NSURLRequest = NSURLRequest(URL: imgUrl!)
-        let mainQueue = NSOperationQueue.mainQueue()
-        NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
-            if error == nil {
-                // Convert the downloaded data in to a UIImage object
-                let image = UIImage(data: data)
-                // Store the image in to our cache
-                //self.imageCache[urlString] = image
-                // Update the cell
-                dispatch_async(dispatch_get_main_queue(), {
-                    
-                    // rounded corners
-                    cell.profilePic.layer.cornerRadius = cell.profilePic.frame.size.width / 2;
-                    cell.profilePic.clipsToBounds = true;
-                    
-                    cell.profilePic.image = image;
-                    
-                })
-            }
-            else {
-                println("Error: \(error.localizedDescription)")
-            }
-        });
-        // end of network request
         
         
     }
+    
     
     
     
