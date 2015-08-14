@@ -115,73 +115,75 @@
 @endsection
 
 @section('table')
-    <table class="table table-hover rides-table">
-        <thead>
-            <tr>
-                <th class="origin">Origin</th>  
-                <th class="destination">Destination</th>  
-                <th class="departure">Departure</th> 
-                <th class="price">Type</th>
-                <th class="ninja-header">Driver</th>
-                <th class="ninja-header">Dropoffs</th>
-                <th class="ninja-header">Encoded ID</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ( $rides as $ride )
-                <tr data-ride-id="{{ $ride->id }}">
-                    <td>{{ $ride->origin }}</td>
-                    <td>
-                        {{ $ride->destination }} 
-                        <?php if ( count($ride->drop_offs) > 0 ) { ?> 
-                            <a href="#">
-                                <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
-                            </a>
-                        <?php } ?>
-                    </td>
-                    <td>
-                        <span style="display:none;">
-                            {{ strtotime($ride->start) }}
-                        </span>
-                        {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
-                    </td>
-                    <td>
-                        @if ( $ride->driver_id == $session )
-                            <i class="fa fa-user"></i> Driver
-                        @elseif ( $ride->is_personal )
-                            <i class="fa fa-users"></i> Passenger
-                        @else                               
-                            ${{ $ride->price }}
-                        @endif
-                    </td>
-                    <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
-                    <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
-                    <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+    <div class="table-responsive">
+        <table class="table table-hover rides-table">
+            <thead>
+                <tr>
+                    <th class="origin">Origin</th>  
+                    <th class="destination">Destination</th>  
+                    <th class="departure">Departure</th> 
+                    <th class="price">Type</th>
+                    <th class="ninja-header">Driver</th>
+                    <th class="ninja-header">Dropoffs</th>
+                    <th class="ninja-header">Encoded ID</th>
                 </tr>
-            @endforeach
-                
-            @foreach( $my_rrequests as $my_rrequest )
-                <tr data-rrequest-id="{{ $my_rrequest->id }}">
-                    <td>{{ $my_rrequest->origin }}</td>
-                    <td>
-                        {{ $my_rrequest->destination }}
-                    </td>
-                    <td>
-                        <span style="display:none;">
-                            {{ strtotime($my_rrequest->start) }}
-                        </span>
-                        {{ date( 'M-d, l @ g:ia', strtotime($my_rrequest->start) ) }}
-                    </td>
-                    <td>
-                        <i class="fa fa-bullhorn"></i> Request
-                    </td>
-                    <td class="ninja-field"></td>
-                    <td class="ninja-field"></td>
-                    <td class="ninja-field"></td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ( $rides as $ride )
+                    <tr data-ride-id="{{ $ride->id }}">
+                        <td>{{ $ride->origin }}</td>
+                        <td>
+                            {{ $ride->destination }} 
+                            <?php if ( count($ride->drop_offs) > 0 ) { ?> 
+                                <a href="#">
+                                    <i class="fa fa-flag-checkered fa-border" title="{{count($ride->drop_offs)}} drop-off locations"></i>
+                                </a>
+                            <?php } ?>
+                        </td>
+                        <td>
+                            <span style="display:none;">
+                                {{ strtotime($ride->start) }}
+                            </span>
+                            {{ date( 'M-d, l @ g:ia', strtotime($ride->start) ) }}
+                        </td>
+                        <td>
+                            @if ( $ride->driver_id == $session )
+                                <i class="fa fa-user"></i> Driver
+                            @elseif ( $ride->is_personal )
+                                <i class="fa fa-users"></i> Passenger
+                            @else                               
+                                ${{ $ride->price }}
+                            @endif
+                        </td>
+                        <td class="ninja-field">{{ $users[$ride->driver_id]['name'] }}</td>
+                        <td class="ninja-field">{{ implode(', ', $ride->drop_offs) }}</td>
+                        <td class="ninja-field">{{ encode_to_chinese($ride->id) }}</td>
+                    </tr>
+                @endforeach
+                    
+                @foreach( $my_rrequests as $my_rrequest )
+                    <tr data-rrequest-id="{{ $my_rrequest->id }}">
+                        <td>{{ $my_rrequest->origin }}</td>
+                        <td>
+                            {{ $my_rrequest->destination }}
+                        </td>
+                        <td>
+                            <span style="display:none;">
+                                {{ strtotime($my_rrequest->start) }}
+                            </span>
+                            {{ date( 'M-d, l @ g:ia', strtotime($my_rrequest->start) ) }}
+                        </td>
+                        <td>
+                            <i class="fa fa-bullhorn"></i> Request
+                        </td>
+                        <td class="ninja-field"></td>
+                        <td class="ninja-field"></td>
+                        <td class="ninja-field"></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 
 @section('custom_modals')

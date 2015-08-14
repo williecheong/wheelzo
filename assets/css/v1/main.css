@@ -36,6 +36,10 @@ div#introduction-container {
     padding-bottom: 20px;
 }
 
+div.table-responsive {
+    border: none;
+}
+
 div#passenger-box {
     min-height: 50px;
 }
