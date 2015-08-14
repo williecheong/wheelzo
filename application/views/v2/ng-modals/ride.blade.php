@@ -49,26 +49,26 @@
             <a href="<% session.facebook_url %>">reserve a seat</a> 
             on this ride.
         </div>
-        <div ng-if="session.user_id!=ride.driver_id && ride.allow_payments==1" class="well well-sm payment-message">
+        <div ng-if="session.user_id!=0 && session.user_id!=ride.driver_id && ride.allow_payments==1" class="well well-sm payment-message">
             <i class="fa fa-credit-card"></i> 
             Passengers are encouraged to 
             <a target="_blank" href="<% ride.driver_facebook_id | fbProfile %>">contact drivers</a> before making a payment.
             In the event of a refund or dispute, please reach out directly to the Wheelzo team.
         </div>
-        <div ng-if="session.user_id!=ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
+        <div ng-if="session.user_id!=0 && session.user_id!=ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
             <i class="fa fa-exclamation-triangle"></i> 
             Online payments have been disabled for this ride. <br>
             Passengers should contact the driver directly to 
             <a target="_blank" href="<% ride.driver_facebook_id | fbProfile %>">make arrangements</a>.
         </div>
-        <div ng-if="session.user_id==ride.driver_id && ride.allow_payments==1" class="well well-sm payment-message">
+        <div ng-if="session.user_id!=0 && session.user_id==ride.driver_id && ride.allow_payments==1" class="well well-sm payment-message">
             <i class="fa fa-car"></i>
             Drivers can check for <a href="/me">account balances</a> on their profile. 
             Wheelzo collects a {{ WHEELZO_PAYMENT_COMMISSION*100 }}% commission 
             to cover maintenance fees such as processing charges from  
             <a target="_blank" href="https://stripe.com">Stripe</a>.
         </div>
-        <div ng-if="session.user_id==ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
+        <div ng-if="session.user_id!=0 && session.user_id==ride.driver_id && ride.allow_payments==0" class="well well-sm payment-message">
             <i class="fa fa-car"></i>
             This ride will not receive online payments through Wheelzo. <br>
             Instead, passengers will be prompted to reach out directly through Facebook.
