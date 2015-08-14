@@ -18,6 +18,10 @@ var defaultSuggestedPlaces = [
     "Scarborough, Scarborough Town Center",
     "Mississauga, Square One",
     "Markham, Pacific Mall",
+    "Ottawa, Rideau Center",
+    "Ottawa, University of Ottawa",
+    "Ottawa, Bayshore Shopping Center",
+    "Kingston, Queen's University",
     "Richmond Hill",
     "Scarborough",
     "Mississauga",
@@ -25,5 +29,11 @@ var defaultSuggestedPlaces = [
     "Waterloo",
     "Markham",
     "Vaughan",
-    "Toronto"
+    "Toronto",
+    "Montreal",
+    "Ottawa",
+    "Kingston",
+    "London",
+    "Windsor",
+    "Trenton"
 ];
