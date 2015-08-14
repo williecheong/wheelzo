@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="<% isActive() ? '/lookup' : '/sign' %>">
+                            <a href="/lookup">
                                 <i class="fa fa-group fa-lg"></i> User Lookup
                             </a>
                         </li>
