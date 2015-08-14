@@ -277,7 +277,7 @@ class Facebook_import extends API_Controller {
         $comment_text = '<em>Ride imported from <a href="//facebook.com/' . $posting->id . '" target="_blank">' . shorten_string($posting->to->data[0]->name, 38) . '</a></em>';
         if (is_null($driver->email) || $driver->email == '') {
             $comment_text = $comment_text . 
-            '<br><em><a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">'.$driver->name.'</a> may not be aware of comments posted here.</em>';
+            '<br><em><a href="//facebook.com/' . $driver->facebook_id . '" target="_blank">'.$driver->name.'</a> is not yet registered with Wheelzo.<br>Contact this driver by sending a Facebook message.</em>';
         }
 
         $comment_id = $this->comment->create(  
