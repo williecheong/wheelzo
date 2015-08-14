@@ -33,10 +33,15 @@
                 <h3 class="mTop10">
                     <span ng-bind="user.score" class="label label-success">0.00</span>
                 </h3>
-                <br>
                 <a ng-click="submitPoint()" ng-disabled="loading||session.user_id==0||session.user_id==user.id" class="btn btn-success btn-sm">
                     <i class="fa fa-child fa-lg"></i> Vouch
                 </a>
+                <br>
+                <span class="lead">
+                    <a tooltip="Share reviews about <% user.name %>" clip-copy="'{{base_url()}}?user='+user.id" clip-click="copyShowMessage()" clip-click-fallback="copyFallback('{{base_url()}}?user='+user.id)" class="btn btn-xs btn-wheelzo hoverable8">
+                        <i class="fa fa-share-alt-square"></i> Share
+                    </a>
+                </span>
             </div>
             <br>
         </div>

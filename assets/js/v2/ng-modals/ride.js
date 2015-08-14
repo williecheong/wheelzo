@@ -217,6 +217,14 @@ angular.module('myApp').controller('rideModalController', function ($scope, $mod
         });
     };
 
+    $scope.copyShowMessage = function() {
+        toaster.pop('success', 'Success', "Successfully copied this ride");
+    };
+
+    $scope.copyFallback = function(copy) {
+        window.prompt('Copy the link below to share', copy);
+    };
+
     $scope.templateListDropOffsForPopover = function(dropOffs) {
         var html = "<div>";
         for (var i=0; i<dropOffs.length; i++) {

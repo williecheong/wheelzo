@@ -73,12 +73,12 @@
                             <a ng-if="isActive()" ng-click="openModal('drive', 'lg')" href="">
                                 <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
-                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                            <a ng-if="!isActive()" href="/sign">
                                 <i class="fa fa-tachometer fa-lg"></i> Post a Ride
                             </a>
                         </li>
                         <li class="">
-                            <a href="<% isActive() ? '/lookup' : session.facebook_url %>">
+                            <a href="/lookup">
                                 <i class="fa fa-group fa-lg"></i> User Lookup
                             </a>
                         </li>
@@ -86,7 +86,7 @@
                             <a ng-if="isActive()" ng-click="openModal('rrequest')" href="">
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
-                            <a ng-if="!isActive()" href="<% session.facebook_url %>">
+                            <a ng-if="!isActive()" href="/sign">
                                 <i class="fa fa-bullhorn"></i> Request a Ride
                             </a>
                         </li>
@@ -104,20 +104,18 @@
                             </a>
                         </li>                    
                         <li class="">
-                            <a href="<% isActive() ? '/me' : session.facebook_url %>">
+                            <a href="<% isActive() ? '/me' : '/sign' %>">
                                 <i class="fa fa-car fa-lg"></i> My Rides
                             </a>
                         </li>
                         <li class="">
-                            <a href="<% session.facebook_url %>">
-                                <span ng-if="isActive()">
-                                    <i class="fa fa-sign-out fa-lg"></i> 
-                                    Sign out
-                                </span>
-                                <span ng-if="!isActive()">
-                                    <i class="fa fa-facebook-square fa-lg"></i> 
-                                    Sign in
-                                </span>
+                            <a ng-if="isActive()" href="<% session.facebook_url %>">
+                                <i class="fa fa-sign-out fa-lg"></i> 
+                                Sign out
+                            </a>
+                            <a ng-if="!isActive()" href="/sign">
+                                <i class="fa fa-facebook-square fa-lg"></i> 
+                                Sign in
                             </a>
                         </li>
                     </ul><!-- sidebar menu end-->
@@ -154,11 +152,13 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.min.js"></script>  
         <script src="//js.stripe.com/v2/" type="text/javascript"></script>
         <script src="//checkout.stripe.com/checkout.js"></script>
         <script src="/assets/vendor/v2/ng-quick-date/ng-quick-date.min.js"></script>
         <script src="/assets/vendor/v2/ng-linkify/angular-linkify.min.js"></script>
+        <script src="/assets/vendor/v2/ng-clipboard/ZeroClipboard.min.js"></script>
+        <script src="/assets/vendor/v2/ng-clipboard/ngClip.js"></script>
         <script src="/assets/vendor/v2/ng-sweet-alert/sweet-alert.js"></script>
         <script src="/assets/vendor/v2/ng-timeago/ng-timeago.js"></script>
         <script src="/assets/vendor/v2/ng-toaster/toaster.js"></script>

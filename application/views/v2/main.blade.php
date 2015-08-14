@@ -47,7 +47,7 @@
     <div class="row mTop20">
         @foreach($day_filters as $key => $day)
             <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
-                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9">
+                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9" style="overflow:hidden;text-overflow:clip;">
                     <i class="fa fa-calendar hidden-xs"></i>
                     @if ($key == 0)
                         Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
@@ -64,19 +64,20 @@
         <div ng-repeat="ride in displayRides" class="col-md-4">
             <div class="panel panel-default" ng-init="menuVisible=false">
                 <div class="panel-heading">
-                    <strong ng-if="!ride.is_personal" ng-bind="ride.price | currency:'$':'0'" class="pull-right"></strong>
-                    <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="left" href="" class="pull-right">
+                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'" class="pull-right"></strong>
+                    
+                    <span ng-if="!ride.is_personal" tooltip="Price: <%ride.price|currency:'$':'0'%>" tooltip-placement="right" class="clickable hoverable8">
+                        <i class="fa fa-car fa-lg"></i>
+                    </span>
+                    <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="right" href="" class="">
                         <i class="fa fa-user fa-lg"></i>
                     </a>
-                    <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="left" href="" class="pull-right">
+                    <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="right" href="" class="">
                         <i class="fa fa-users fa-lg"></i>
                     </a>
-                    <a tooltip="<% ride.start | mysqlDateToIso | date : 'fullDate' %>" tooltip-placement="right">
-                        <i class="fa fa-calendar"></i>
-                    </a>
+
                     <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE, '"></strong>
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'"></strong>
+                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE'"></strong>
                 </div>
                 <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
                     <div class="mBottom10">    
@@ -84,18 +85,18 @@
                             <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
                         </a>
                         <div class="mBottom10" style="white-space:nowrap;">
-                            <strong>Origin</strong><br>
+                            <span>Origin</span><br>
                             <a tooltip="<% ride.origin %>" tooltip-placement="right" href="">
                                 <i class="fa fa-flag fa-border"></i>
                             </a>
-                            <span ng-bind="ride.origin | shortenString:28"></span>
+                            <strong ng-bind="ride.origin | shortenString:28"></strong>
                         </div>
                         <div class="mTop10" style="white-space:nowrap;">
-                            <strong>Destination</strong><br>
+                            <span>Destination</span><br>
                             <a tooltip="<% ride.destination %>" tooltip-placement="right" href="">
                                 <i class="fa fa-flag-checkered fa-border"></i>
                             </a>
-                            <span ng-bind="ride.destination | shortenString:28"></span>
+                            <strong ng-bind="ride.destination | shortenString:28"></strong>
                         </div>
                     </div>
                     <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">

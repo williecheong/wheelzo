@@ -46,6 +46,14 @@ class V1 extends CI_Controller {
             );
         }
     }
+
+    public function sign() {
+        if ( $this->wheelzo_user_id ) {
+            redirect( base_url() );
+        }
+
+        $this->blade->render('tools/sign');
+    }
     
 	public function index( $load_personal = false ) {
         // Is active user id available when user is requesting the personal page?
