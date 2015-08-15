@@ -2,7 +2,7 @@ var $core = { } ;
 
 var app = angular.module(
     'myApp', 
-    ['ui.bootstrap', 'ngQuickDate', 'ngtimeago', 'linkify', 'ngClipboard', 'toaster'], 
+    ['ui.bootstrap', 'ngQuickDate', 'ngAnimate', 'ngtimeago', 'linkify', 'ngClipboard', 'toaster'], 
     function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');

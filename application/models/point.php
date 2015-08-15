@@ -40,7 +40,18 @@ class point extends CI_Model{
         $this->db->where($data);
         $this->db->order_by('last_updated', 'asc');
         $query = $this->db->get('point');
-        return $query->result();
+        
+        $points = $query->result();
+        if (count($points) > 0) {
+           foreach ($points as $key => $point) {
+                $user = $this->user->retrieve_by_id($point->giver_id);
+                if ($user) {
+                    $points[$key]->giver_name = $user->name;
+                    $points[$key]->giver_facebook_id = $user->facebook_id;
+                }
+            } 
+        }
+        return $points;
     }
     
     function update( $criteria = array(), $new_data = array() ){
