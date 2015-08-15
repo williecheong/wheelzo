@@ -16,7 +16,7 @@
 @endsection
 
 @section('main_body')
-    <div class="well mTop20 pBottom10">
+    <div class="well well-sm mTop10 pBottom10">
         <div class="row">
             <div class="col-md-6">
                 <h3 class="mTop10">
