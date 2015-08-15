@@ -161,8 +161,12 @@ div#main-content {
 
 .btn-facebook {
     border: 1px solid #3B5998;
-    color: #D3D6D4;
+    color: whitesmoke;
     background-color: #3B5998;
+}
+
+.btn-facebook:hover {
+    color: #D3D6D4;
 }
 
 .btn-default:hover,

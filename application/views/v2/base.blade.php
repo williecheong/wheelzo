@@ -104,7 +104,7 @@
                             </a>
                         </li>                    
                         <li class="">
-                            <a href="<% isActive() ? '/me' : '/sign' %>">
+                            <a href="<% isActive() ? '/profile' : '/sign' %>">
                                 <i class="fa fa-car fa-lg"></i> My Rides
                             </a>
                         </li>
@@ -176,6 +176,7 @@
         @include('v2/ng-modals/drive')
         @include('v2/ng-modals/review')
         @include('v2/ng-modals/rrequest')
+        @yield('custom_modals')
 
         @if ( ENVIRONMENT == 'production' ) <!-- Google Analytics -->
             <script>

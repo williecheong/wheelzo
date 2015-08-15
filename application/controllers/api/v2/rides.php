@@ -29,6 +29,36 @@ class Rides extends API_Controller {
         return;
     }
 
+    public function isdriver_get() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $rides = $this->ride->retrieve_where_user_is_driver();
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rides);
+        return;
+    }
+
+    public function ispassenger_get() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $rides = $this->ride->retrieve_where_user_is_passenger();
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rides);
+        return;
+    }
+
     public function search_get() {
         $rides = array();
         if ( $this->get('id') ) {

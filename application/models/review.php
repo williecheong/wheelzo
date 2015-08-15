@@ -27,7 +27,18 @@ class review extends CI_Model{
         $this->db->where($data);
         $this->db->order_by('last_updated', 'desc');
         $query = $this->db->get('review');
-        return $query->result();
+        
+        $reviews = $query->result();
+        if (count($reviews) > 0) {
+           foreach ($reviews as $key => $review) {
+                $user = $this->user->retrieve_by_id($review->giver_id);
+                if ($user) {
+                    $reviews[$key]->giver_name = $user->name;
+                    $reviews[$key]->giver_facebook_id = $user->facebook_id;
+                }
+            } 
+        }
+        return $reviews;
     }
     
     function update( $criteria = array(), $new_data = array() ){

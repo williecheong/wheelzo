@@ -70,6 +70,54 @@ class ride extends CI_Model{
         }
     }
 
+    function retrieve_where_user_is_driver() {
+        $user_id = $this->wheelzo_user_id;
+        if ( $user_id ) {
+            $conditions = '`driver_id` = '.$user_id;
+            $rides = $this->ride->retrieve($conditions);
+            foreach( $rides as $key => $ride ) { 
+                $rides[$key]->is_personal = true;
+            }
+            
+            return $rides;        
+        
+        } else {
+            return array();
+        }
+    }
+
+    function retrieve_where_user_is_passenger() {
+        $user_id = $this->wheelzo_user_id;
+        if ( $user_id ) {
+            $conditions = array();
+            $passenger_of_rides = $this->user_ride->retrieve_ride_id(
+                array(
+                    'user_id' => $user_id
+                )
+            );
+
+            if (count($passenger_of_rides) == 0) {
+                return array();
+            }
+
+            foreach ( $passenger_of_rides as $mapping ) {
+                $conditions[] = "`id` = ".$mapping->ride_id;
+            }
+
+            $conditions = implode(" OR ", $conditions);
+            $rides = $this->ride->retrieve($conditions);
+            
+            foreach( $rides as $key => $ride ) { 
+                $rides[$key]->is_personal = true;
+            }
+            
+            return $rides;        
+        
+        } else {
+            return array();
+        }
+    }
+
     function retrieve_active_by_user( $user_id = 0 ) {
         $objects = $this->ride->retrieve(
             array(

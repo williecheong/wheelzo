@@ -15,6 +15,38 @@ class Rrequests extends API_Controller {
         return;
     }
 
+    public function personal_get() {
+        if ( !$this->wheelzo_user_id ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User is not logged in");
+            return;
+        }
+
+        $rrequests = $this->rrequest->retrieve(
+            array(
+                'user_id' => $this->wheelzo_user_id
+            )
+        );
+
+        foreach ($rrequests as $key => $rrequest) {
+            $invitations = explode( WHEELZO_DELIMITER, $rrequest->invitations);
+            $temp_invitations = array();
+            foreach ($invitations as $invitation) {
+                $temp_ride = $this->ride->retrieve_by_id($invitation);
+                if ( $temp_ride ) {
+                    $temp_invitations[] = $temp_ride; 
+                }
+            }
+            $rrequests[$key]->invitations = $temp_invitations;
+        }
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($rrequests);
+        return;
+    }
+
     public function search_get() {
         $origin = $this->get('origin');
         $destination = $this->get('destination');

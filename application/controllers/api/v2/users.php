@@ -32,6 +32,76 @@ class Users extends API_Controller {
         return;
     }
 
+    public function statistics_get() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $user = $this->user->retrieve_by_id($this->wheelzo_user_id);
+        $driven_rides = $this->ride->retrieve(
+            array(
+                'driver_id' => $this->wheelzo_user_id
+            )
+        );
+
+        $output = array(
+            'balance' => $user->balance,
+            'total_comments' => count(
+                $this->comment->retrieve(
+                    array(
+                        'user_id' => $this->wheelzo_user_id
+                    )
+                )
+            ),
+            'total_reviews_written' => count(
+                $this->review->retrieve(
+                    array(
+                        'giver_id' => $this->wheelzo_user_id
+                    )
+                )
+            ),
+            'total_carpools_taken' => count(
+                $this->user_ride->retrieve(
+                    array(
+                        'user_id' => $this->wheelzo_user_id
+                    )
+                )
+            ),
+            'total_rides' => count($driven_rides),
+            'total_passengers' => 0 
+        );
+
+        foreach ( $driven_rides as $ride ) {
+            $output['total_passengers'] += count(
+                $this->user_ride->retrieve(
+                    array(
+                        'ride_id' => $ride->id
+                    )
+                )
+            );
+        }
+
+        $output['reviews'] = $this->review->retrieve(
+            array(
+                'receiver_id' => $this->wheelzo_user_id
+            )
+        );
+
+        $output['points'] = $this->point->retrieve(
+            array(
+                'receiver_id' => $this->wheelzo_user_id
+            )
+        );
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($output);
+        return;
+    }
+
     public function index_get( $current = false ) {
         $users = array();
         if ( $current ) { // request is coming in from a route

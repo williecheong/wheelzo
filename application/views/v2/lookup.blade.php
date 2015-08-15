@@ -1,7 +1,7 @@
 @layout('v2/base')
 
 @section('title')
-    Wheelzo
+    Community Lookup
     @if ( ENVIRONMENT != 'production' )
         :: {{ ucfirst(ENVIRONMENT) }}
     @endif 
