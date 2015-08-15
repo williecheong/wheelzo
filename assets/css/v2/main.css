@@ -115,8 +115,12 @@ div.faq-box p {
 
 
 /**************************** 
-    RE-STYLING FOR ANGULAR UI
+    RE-STYLING FOR BOOTSTRAP AND ANGULAR UI
 ****************************/
+
+div.table-responsive {
+    border: none;
+}
 
 #toast-container div {
     opacity: 0.98;
