@@ -81,8 +81,8 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
     };
 
     $scope.initialize = function() {        
-        $scope.statistics = { };
         $scope.supporters = [ ];
+        $scope.statistics = false;
         $scope.driverRides = false;
         $scope.passengerRides = false;
         $scope.rideRequests = false;
