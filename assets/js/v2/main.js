@@ -45,7 +45,7 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         var ridesByDate = [ ];
         for (var key in ridesToDisplay) {
             var startParts = ridesToDisplay[key].start.split(' ');
-            var rideDate = startParts[0];
+            var rideDate = startParts[0] + " 12:00:00";
             
             var dateGroupIndex = null;
             var dateGroupExists = false;
@@ -60,7 +60,7 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
             if (dateGroupExists == false) {
                 dateGroupIndex = ridesByDate.length;
                 ridesByDate.push({
-                    "start" : rideDate + " 12:00:00",
+                    "start" : rideDate,
                     "rides" : [ ]
                 }); 
             }
