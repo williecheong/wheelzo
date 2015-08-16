@@ -100,11 +100,11 @@
                         </a>
                         <span class="hidden-xs">
                             <i class="fa fa-calendar"></i>
-                            <% group.start | mysqlDateToIso | date:'fullDate' %>                       
+                            <% group.start | mysqlDateToIso | date:'MMMM-d, EEEE' %>                       
                         </span>
                         <span class="visible-xs">
                             <i class="fa fa-calendar"></i>
-                            <% group.start | mysqlDateToIso | date:'EEEE, MMM-d' %>
+                            <% group.start | mysqlDateToIso | date:'MMM-d, EEEE' %>
                         </span>
                     </accordion-heading>
                     <div class="row">
