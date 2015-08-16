@@ -1,7 +1,8 @@
 $core.extensionController = function($scope, $sce, $http, $filter, $modal, toaster) {
 
     $scope.rides = [ ];
-    $scope.displayRides = [ ];
+    $scope.ridesByDate = [ ];
+    $scope.ridesToDisplay = [ ];
     $scope.disableEntirePage = true;
 
     $scope.loadRides = function() {
@@ -19,24 +20,7 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
         });
     };
 
-    $scope.filterDate = function(day) {
-        if (day!='Monday' && day!='Tuesday' && day!='Wednesday' && day!='Thursday' && day!='Friday' && day!='Saturday' && day!='Sunday') {
-            toaster.pop('error', 'Error', 'Invalid day selection for filtering rides');
-            return;
-        }
-
-        if ($scope.activeDateFilter == day) {
-            $scope.activeDateFilter = "";
-            $scope.filterRides();
-            return;
-        }
-
-        $scope.activeDateFilter = day;
-        $scope.filterRides();
-    };
-
-    $scope.filterRides = function() {        
-        var activeDateFilter = $scope.activeDateFilter;
+    $scope.filterRides = function() {
         var searchOrigin = $scope.inputSearchOrigin.toLowerCase();
         var searchDestination = $scope.inputSearchDestination.toLowerCase();
         var ridesToDisplay = JSON.parse(JSON.stringify($scope.rides)); // copy rides
@@ -54,24 +38,45 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
                     continue;
                 }
             }
-
-            if (activeDateFilter != "") {
-                var ONE_WEEK = 7 * 24 * 60 * 60 * 1000; /* ms */
-                var thisRideStart = $filter('mysqlDateToIso')(ridesToDisplay[i].start);
-                if (((thisRideStart.getTime()) - (new Date().getTime())) > ONE_WEEK) {
-                    ridesToDisplay[i] = null;
-                    continue;
-                }
-
-                if ($filter('date')(thisRideStart, 'EEEE') != activeDateFilter) {
-                    ridesToDisplay[i] = null;
-                    continue;
-                }
-            }
         };
         ridesToDisplay = ridesToDisplay.filter(function(n){ return n != null });
         ridesToDisplay.sort(compareByStart);
-        $scope.displayRides = ridesToDisplay;
+        
+        var ridesByDate = [ ];
+        for (var key in ridesToDisplay) {
+            var startParts = ridesToDisplay[key].start.split(' ');
+            var rideDate = startParts[0];
+            
+            var dateGroupIndex = null;
+            var dateGroupExists = false;
+            for (var i in ridesByDate) {
+                if (rideDate == ridesByDate[i].start) {
+                    dateGroupIndex = i;
+                    dateGroupExists = true;
+                    break;
+                } 
+            }
+
+            if (dateGroupExists == false) {
+                dateGroupIndex = ridesByDate.length;
+                ridesByDate.push({
+                    "start" : rideDate + " 12:00:00",
+                    "rides" : [ ]
+                }); 
+            }
+
+            ridesByDate[dateGroupIndex].rides.push(ridesToDisplay[key]);
+        }
+        ridesByDate.sort(compareByStart);
+        $scope.ridesToDisplay = ridesToDisplay;
+        $scope.ridesByDate = ridesByDate;
+    };
+
+    $scope.pluralize = function(amount, singular, plural) {
+        if ( amount == 1 )
+            return singular;
+        else
+            return plural;
     };
 
     $scope.initialize = function() {        

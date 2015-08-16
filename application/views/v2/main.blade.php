@@ -45,82 +45,133 @@
 
 @section('main_body')
     <div class="row mTop20">
-        @foreach($day_filters as $key => $day)
-            <div ng-click="filterDate('{{ $day }}')" class="col-xs-3">
-                <button ng-disabled="activeDateFilter=='{{ $day }}'" class="btn btn-block btn-wheelzo hoverable9" style="overflow:hidden;text-overflow:clip;">
-                    <i class="fa fa-calendar hidden-xs"></i>
-                    @if ($key == 0)
-                        Today<span class="hidden-xs">, {{ date('M j', strtotime('now')) }}</span>
-                    @elseif($key==1)
-                        Tomorrow<span class="hidden-xs">, {{ date('M j', strtotime('+1 day')) }}</span>
-                    @else
-                        {{ $day }}<span class="hidden-xs">, {{ date('M j', strtotime('next '.$day)) }}</span>
-                    @endif
-                </button>
-            </div>  
-        @endforeach
-    </div>
-    <div class="row mTop20">
-        <div ng-repeat="ride in displayRides" class="col-md-4">
-            <div class="panel panel-default" ng-init="menuVisible=false">
-                <div class="panel-heading">
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'" class="pull-right"></strong>
-                    
-                    <span ng-if="!ride.is_personal" tooltip="Price: <%ride.price|currency:'$':'0'%>" tooltip-placement="right" class="clickable hoverable8">
-                        <i class="fa fa-car fa-lg"></i>
-                    </span>
-                    <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="right" href="" class="">
-                        <i class="fa fa-user fa-lg"></i>
-                    </a>
-                    <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="right" href="" class="">
-                        <i class="fa fa-users fa-lg"></i>
-                    </a>
-
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
-                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE'"></strong>
+        <div ng-if="ridesByDate.length==0" class="col-md-12">
+            <div class="well well-sm text-center">
+                <div ng-if="session.user_id==0">
+                    <h3 class="mBottom20">
+                        No rides to display
+                        <br> ¯\_(ツ)_/¯
+                    </h3>
                 </div>
-                <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
-                    <div class="mBottom10">    
-                        <a ng-click="openReviewModal(ride.driver_id)" href="">
-                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
-                        </a>
-                        <div class="mBottom10" style="white-space:nowrap;">
-                            <span>Origin</span><br>
-                            <a tooltip="<% ride.origin %>" tooltip-placement="right" href="">
-                                <i class="fa fa-flag fa-border"></i>
-                            </a>
-                            <strong ng-bind="ride.origin | shortenString:28"></strong>
+                <div ng-if="session.user_id>0" class="row">
+                    <div class="col-md-offset-4 col-md-4">
+                       <div ng-click="openModal('drive', 'lg')" class="well well-lg mTop20 text-center clickable hoverable7" style="color:#333;border:dashed 8px;height:150px;">
+                            <div class="mTop15">
+                                <i class="fa fa-car fa-2x"></i>
+                                <p class="lead">
+                                    POST A RIDE
+                                </p>
+                            </div>
                         </div>
-                        <div class="mTop10" style="white-space:nowrap;">
-                            <span>Destination</span><br>
-                            <a tooltip="<% ride.destination %>" tooltip-placement="right" href="">
-                                <i class="fa fa-flag-checkered fa-border"></i>
-                            </a>
-                            <strong ng-bind="ride.destination | shortenString:28"></strong>
-                        </div>
-                    </div>
-                    <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
-                        <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-block btn-info hoverable9" style="background:#3B5998;border:none;">
-                            <i class="fa fa-facebook-square fa-lg"></i> Message
-                        </a>
-                    </div>
-                    <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;right:0%;">
-                        <a ng-click="openRideModal(ride.id)" class="btn btn-xs btn-block btn-wheelzo hoverable9">
-                            <i class="fa fa-car"></i> More
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div ng-if="session.user_id>0" ng-class="{'col-md-4':displayRides.length>0, 'col-md-offset-3 col-md-6':displayRides.length==0}" class="col-md-4">
-           <div ng-click="openModal('drive', 'lg')" class="well well-lg text-center clickable hoverable7" style="color:#333;border:dashed 8px;height:150px;">
-                <div class="mTop15">
-                    <i class="fa fa-car fa-2x"></i>
-                    <p class="lead">
-                        POST A RIDE
-                    </p>
-                </div>
-            </div>
+        <div ng-if="ridesByDate.length>0" class="col-md-12">
+            <h3 class="text-center mTop10 mBottom10">
+                <span ng-if="ridesToDisplay.length==rides.length">
+                    <span class="hidden-xs">
+                        <i class="fa fa-star"></i>
+                        Showing all active rides
+                    </span>
+                    <span class="visible-xs">
+                        <i class="fa fa-star"></i>
+                        All active rides
+                    </span>
+                </span> 
+                <span ng-if="ridesToDisplay.length<rides.length">
+                    Rides
+                    <span ng-if="inputSearchOrigin.length>0">
+                        from <% inputSearchOrigin | ucfirst %>
+                    </span>
+                    <span ng-if="inputSearchDestination.length>0">
+                        to <% inputSearchDestination | ucfirst %>
+                    </span>
+                </span>
+            </h3>
+            <accordion>
+                <accordion-group ng-repeat="(key, group) in ridesByDate" ng-init="isOpen=(key==0)" is-open="isOpen">
+                    <accordion-heading>
+                        <a class="pull-right" href="">
+                            <% group.rides.length %>
+                            <% pluralize(group.rides.length, 'ride', 'rides') %>
+                            <span class="hidden-xs">found</span>
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                        <span class="hidden-xs">
+                            <i class="fa fa-calendar"></i>
+                            <% group.start | mysqlDateToIso | date:'fullDate' %>                       
+                        </span>
+                        <span class="visible-xs">
+                            <i class="fa fa-calendar"></i>
+                            <% group.start | mysqlDateToIso | date:'EEEE, MMM-d' %>
+                        </span>
+                    </accordion-heading>
+                    <div class="row">
+                        <div ng-repeat="ride in group.rides" class="col-md-4 mBottom10">
+                            <div class="panel panel-default" ng-init="menuVisible=false">
+                                <div class="panel-heading">
+                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'" class="pull-right"></strong>
+                                    
+                                    <span ng-if="!ride.is_personal" tooltip="Price: <%ride.price|currency:'$':'0'%>" tooltip-placement="right" class="clickable hoverable8">
+                                        <i class="fa fa-car fa-lg"></i>
+                                    </span>
+                                    <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="right" href="" class="">
+                                        <i class="fa fa-user fa-lg"></i>
+                                    </a>
+                                    <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="right" href="" class="">
+                                        <i class="fa fa-users fa-lg"></i>
+                                    </a>
+
+                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
+                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE'"></strong>
+                                </div>
+                                <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
+                                    <div class="mBottom10">    
+                                        <a ng-click="openReviewModal(ride.driver_id)" href="">
+                                            <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
+                                        </a>
+                                        <div class="mBottom10" style="white-space:nowrap;">
+                                            <span>Origin</span><br>
+                                            <a tooltip="<% ride.origin %>" tooltip-placement="right" href="">
+                                                <i class="fa fa-flag fa-border"></i>
+                                            </a>
+                                            <strong ng-bind="ride.origin | shortenString:28"></strong>
+                                        </div>
+                                        <div class="mTop10" style="white-space:nowrap;">
+                                            <span>Destination</span><br>
+                                            <a tooltip="<% ride.destination %>" tooltip-placement="right" href="">
+                                                <i class="fa fa-flag-checkered fa-border"></i>
+                                            </a>
+                                            <strong ng-bind="ride.destination | shortenString:28"></strong>
+                                        </div>
+                                    </div>
+                                    <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
+                                        <a href="<% ride.driver_facebook_id | fbProfile %>" target="_blank" class="btn btn-xs btn-block btn-info hoverable9" style="background:#3B5998;border:none;">
+                                            <i class="fa fa-facebook-square fa-lg"></i> Message
+                                        </a>
+                                    </div>
+                                    <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;right:0%;">
+                                        <a ng-click="openRideModal(ride.id)" class="btn btn-xs btn-block btn-wheelzo hoverable9">
+                                            <i class="fa fa-car"></i> More
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="session.user_id>0" class="col-md-4">
+                           <div ng-click="openModal('drive', 'lg')" class="well well-lg text-center clickable hoverable7" style="color:#333;border:dashed 8px;height:150px;">
+                                <div class="mTop15">
+                                    <i class="fa fa-car fa-2x"></i>
+                                    <p class="lead">
+                                        POST A RIDE
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
+            </accordion>
         </div>
     </div>
 @endsection
