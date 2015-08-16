@@ -151,7 +151,11 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
     return function(facebookId) {
         return '//graph.facebook.com/'+facebookId+'/picture?type=square';        
     };
-}).filter('shortenString', function() {
+}).filter('ucfirst', function(){
+    return function(string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+    };
+ }).filter('shortenString', function() {
     return function(subject, size) {
         if ( subject.length > size ) {
             return subject.substring(0, size-3) + '...';
