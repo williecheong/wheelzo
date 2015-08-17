@@ -79,6 +79,56 @@ $core.extensionController = function($scope, $sce, $http, $filter, $modal, toast
             return plural;
     };
 
+    $scope.isToday = function(mysqlDate) {
+        var dateComponents = mysqlDate.split(" ");
+        var date = dateComponents[0];
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd = '0' + dd;
+        } 
+
+        if(mm<10) {
+            mm = '0' + mm;
+        } 
+
+        today = yyyy +'-'+ mm +'-'+ dd;
+    
+        if (date == today) {
+            return true;
+        }
+        return false;
+    };
+
+    $scope.isTomorrow = function(mysqlDate) {
+    var dateComponents = mysqlDate.split(" ");
+        var date = dateComponents[0];
+
+        var today = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if(dd<10) {
+            dd = '0' + dd;
+        } 
+
+        if(mm<10) {
+            mm = '0' + mm;
+        } 
+
+        today = yyyy +'-'+ mm +'-'+ dd;
+    
+        if (date == today) {
+            return true;
+        }
+        return false;
+    };
+
     $scope.initialize = function() {        
         $scope.inputSearchOrigin = "";
         $scope.inputSearchDestination = "";
