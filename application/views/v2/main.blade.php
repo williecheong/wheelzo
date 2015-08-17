@@ -101,12 +101,15 @@
                             </a>
                             <span class="hidden-xs">
                                 <i class="fa fa-calendar"></i>
-                                <% group.start | mysqlDateToIso | date:'MMMM-d, EEEE' %>                       
+                                <% group.start | mysqlDateToIso | date:'MMMM-d,' %>                       
                             </span>
                             <span class="visible-xs">
                                 <i class="fa fa-calendar"></i>
-                                <% group.start | mysqlDateToIso | date:'MMM-d, EEEE' %>
+                                <% group.start | mysqlDateToIso | date:'MMM-d,' %>
                             </span>
+                            <span ng-if="isToday(group.start)" ng-bind="'Today'"></span>
+                            <span ng-if="isTomorrow(group.start)" ng-bind="'Tomorrow'"></span>
+                            <span ng-if="!isToday(group.start) && !isTomorrow(group.start)" ng-bind="group.start|mysqlDateToIso|date:'EEEE'"></span>
                         </div>
                     </accordion-heading>
                     <div class="row">
