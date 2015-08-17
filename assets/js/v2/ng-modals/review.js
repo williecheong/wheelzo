@@ -98,20 +98,31 @@ angular.module('myApp').controller('reviewModalController', function ($scope, $m
     };
 
     $scope.submitPoint = function() {
-        $scope.loading = true;
-        $http({
-            'method': 'POST',
-            'url': '/api/v2/points',
-            'data': {
-                receiver_id : $scope.user.id
-            }
-        }).success(function(data, status, headers, config) {
-            toaster.pop('success', 'Success: ' + status, data.message);
-            $scope.initializeModal();
-            $scope.loading = false;            
-        }).error(function(data, status, headers, config) {
-            toaster.pop('error', 'Error: ' + status, data.message);
-            $scope.loading = false;
+        swal({
+            title: "Vouch for "+$scope.user.name+"?",
+            imageUrl: "/assets/img/upvote.png",
+            confirmButtonColor: "#5CB85C",
+            allowOutsideClick: true,
+            showCancelButton: true,
+            closeOnConfirm: false,
+            closeOnCancel: true,
+            allowHtml: true
+        }, function(isConfirm){
+            $scope.loading = true;
+            $http({
+                'method': 'POST',
+                'url': '/api/v2/points',
+                'data': {
+                    receiver_id : $scope.user.id
+                }
+            }).success(function(data, status, headers, config) {
+                toaster.pop('success', 'Success: ' + status, data.message);
+                $scope.initializeModal();
+                $scope.loading = false;            
+            }).error(function(data, status, headers, config) {
+                toaster.pop('error', 'Error: ' + status, data.message);
+                $scope.loading = false;
+            });
         });
     };
 
