@@ -114,7 +114,6 @@
                             <div class="panel panel-default" ng-init="menuVisible=false">
                                 <div class="panel-heading">
                                     <strong class="pull-right">
-                                        <i class="fa fa-clock-o"></i>
                                         <% ride.start | mysqlDateToIso | date:'h:mm a' %>
                                     </strong>
                                     <span ng-if="!ride.is_personal">
