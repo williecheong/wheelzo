@@ -127,10 +127,10 @@ class Rides extends API_Controller {
             return;
         }
 
-        if ($price < 1 || $price > 40) {
+        if ($price < 1 || $price > 60) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("Price must be between 1 and 40");
+            echo $this->message("Price must be between 1 and 60");
             return;
         }
 
