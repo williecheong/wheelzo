@@ -146,19 +146,19 @@
                                         <a ng-click="openReviewModal(ride.driver_id)" href="">
                                             <img src="<% ride.driver_facebook_id | fbImage %>" class="img-circle mTop5 pull-right hoverable8" width="78">
                                         </a>
-                                        <div class="mBottom10" style="white-space:nowrap;">
+                                        <div class="mBottom10 text-ellipsis">
                                             <span>Origin</span><br>
                                             <a tooltip="<% ride.origin %>" tooltip-placement="right" href="">
                                                 <i class="fa fa-flag fa-border"></i>
                                             </a>
-                                            <strong ng-bind="ride.origin | shortenString:28"></strong>
+                                            <strong ng-bind="ride.origin"></strong>
                                         </div>
-                                        <div class="mTop10" style="white-space:nowrap;">
+                                        <div class="mTop10 text-ellipsis">
                                             <span>Destination</span><br>
                                             <a tooltip="<% ride.destination %>" tooltip-placement="right" href="">
                                                 <i class="fa fa-flag-checkered fa-border"></i>
                                             </a>
-                                            <strong ng-bind="ride.destination | shortenString:28"></strong>
+                                            <strong ng-bind="ride.destination"></strong>
                                         </div>
                                     </div>
                                     <div ng-show="menuVisible" style="width:50%;position:absolute;bottom:0%;left:0%;">
