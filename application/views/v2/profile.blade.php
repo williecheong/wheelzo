@@ -76,17 +76,17 @@
                                 </span>
                             </div>
                             <div ng-if="statistics">
-                                <em ng-if="statistics.points.length==0">Nobody has vouched for you yet.</em>
+                                <span ng-if="statistics.points.length==0">Nobody has vouched for you yet.</span>
                                 <span ng-if="statistics.points.length>0">
                                     <span ng-repeat="($index, supporter) in supporters">
-                                        <span ng-if="supporters.length!=0 && $index==supporters.length-1">and</span>
+                                        <span ng-if="supporters.length>1 && $index==supporters.length-1">and</span>
                                         <a ng-bind="supporter.name" ng-click="openReviewModal(supporter.id)" href=""></a><span ng-if="supporters.length!=0 && $index<supporters.length-2">,</span>
                                     </span>
                                     <span ng-bind="pluralize(supporters.length, 'has', 'have')"></span> 
                                     vouched for you.
                                 </span>
                                 <br class="visible-lg">
-                                <em ng-if="statistics.reviews.length==0">You have not received any reviews from the Wheelzo community.</em>
+                                <span ng-if="statistics.reviews.length==0">You have not received any reviews from the Wheelzo community.</span>
                                 <span ng-if="statistics.reviews.length>0">
                                     You have received 
                                     <a ng-click="openReviewModal(session.user_id)" href=""><% statistics.reviews.length || 0 %> <% pluralize(statistics.reviews.length, 'review', 'reviews') %></a>
