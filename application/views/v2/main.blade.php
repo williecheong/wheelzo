@@ -111,20 +111,31 @@
                         <div ng-repeat="ride in group.rides" class="col-md-4 mBottom10">
                             <div class="panel panel-default" ng-init="menuVisible=false">
                                 <div class="panel-heading">
-                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'h:mm a'" class="pull-right"></strong>
-                                    
-                                    <span ng-if="!ride.is_personal" tooltip="Price: <%ride.price|currency:'$':'0'%>" tooltip-placement="right" class="clickable hoverable8">
-                                        <i class="fa fa-car fa-lg"></i>
+                                    <strong class="pull-right">
+                                        <i class="fa fa-clock-o"></i>
+                                        <% ride.start | mysqlDateToIso | date:'h:mm a' %>
+                                    </strong>
+                                    <span ng-if="!ride.is_personal">
+                                        <strong>
+                                            Asking: <% ride.price | currency:'$':0 %> 
+                                        </strong>
+                                        <a ng-if="ride.allow_payments==1" tooltip="Online transactions enabled" tooltip-placement="right" href="">
+                                            <i class="fa fa-credit-card"></i>
+                                        </a>
+                                        <a ng-if="ride.allow_payments==0" tooltip="Bring cash for the ride" tooltip-placement="right" href="">
+                                            <i class="fa fa-money"></i>
+                                        </a>
                                     </span>
-                                    <a ng-if="ride.is_personal && ride.driver_id==session.user_id" tooltip="You are the driver" tooltip-placement="right" href="" class="">
-                                        <i class="fa fa-user fa-lg"></i>
-                                    </a>
-                                    <a ng-if="ride.is_personal && ride.driver_id!=session.user_id" tooltip="You are a passenger" tooltip-placement="right" href="" class="">
-                                        <i class="fa fa-users fa-lg"></i>
-                                    </a>
-
-                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'MMM d &mdash; '" class="hidden-md"></strong>
-                                    <strong ng-bind="ride.start | mysqlDateToIso | date:'EEEE'"></strong>
+                                    <strong ng-if="ride.is_personal && ride.driver_id==session.user_id">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span class="hidden-xs">You are the</span>
+                                        Driver
+                                    </strong>
+                                    <strong ng-if="ride.is_personal && ride.driver_id!=session.user_id">
+                                        <i class="fa fa-user"></i>
+                                        <span class="hidden-xs">You are a</span>
+                                        Passenger
+                                    </strong>
                                 </div>
                                 <div ng-mouseover="menuVisible=true" ng-mouseleave="menuVisible=false" class="panel-body" style="position:relative;">
                                     <div class="mBottom10">    
