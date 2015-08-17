@@ -31,7 +31,7 @@
                     <i class="fa fa-paw"></i>
                 </strong>
                 <h3 class="mTop10">
-                    <span ng-bind="user.score" class="label label-success">0.00</span>
+                    <span ng-bind="user.score || '0.00'" class="label label-success"></span>
                 </h3>
                 <a ng-click="submitPoint()" ng-disabled="loading||session.user_id==0||session.user_id==user.id" class="btn btn-success btn-sm">
                     <i class="fa fa-child fa-lg"></i> Vouch

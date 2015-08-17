@@ -46,7 +46,7 @@
         <div ng-if="session.user_id==0" class="well well-sm payment-message">
             <i class="fa fa-facebook-square fa-lg"></i> 
             Sign in to 
-            <a href="<% session.facebook_url %>">reserve a seat</a> 
+            <a href="/sign">reserve a seat</a> 
             on this ride.
         </div>
         <div ng-if="session.user_id!=0 && session.user_id!=ride.driver_id && ride.allow_payments==1" class="well well-sm payment-message">
