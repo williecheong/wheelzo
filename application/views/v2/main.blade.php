@@ -91,21 +91,23 @@
             </h3>
             <accordion>
                 <accordion-group ng-repeat="(key, group) in ridesByDate" ng-init="isOpen=(key==0)" is-open="isOpen">
-                    <accordion-heading>
-                        <a class="pull-right" href="">
-                            <% group.rides.length %>
-                            <% pluralize(group.rides.length, 'ride', 'rides') %>
-                            <span class="hidden-xs">found</span>
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <span class="hidden-xs">
-                            <i class="fa fa-calendar"></i>
-                            <% group.start | mysqlDateToIso | date:'MMMM-d, EEEE' %>                       
-                        </span>
-                        <span class="visible-xs">
-                            <i class="fa fa-calendar"></i>
-                            <% group.start | mysqlDateToIso | date:'MMM-d, EEEE' %>
-                        </span>
+                    <accordion-heading ng-click="isOpen=!isOpen">
+                        <div>
+                            <a class="pull-right" href="">
+                                <% group.rides.length %>
+                                <% pluralize(group.rides.length, 'ride', 'rides') %>
+                                <span class="hidden-xs">found</span>
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+                            <span class="hidden-xs">
+                                <i class="fa fa-calendar"></i>
+                                <% group.start | mysqlDateToIso | date:'MMMM-d, EEEE' %>                       
+                            </span>
+                            <span class="visible-xs">
+                                <i class="fa fa-calendar"></i>
+                                <% group.start | mysqlDateToIso | date:'MMM-d, EEEE' %>
+                            </span>
+                        </div>
                     </accordion-heading>
                     <div class="row">
                         <div ng-repeat="ride in group.rides" class="col-md-4 mBottom10">
