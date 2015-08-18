@@ -32,6 +32,41 @@ class Users extends API_Controller {
         return;
     }
 
+    public function groups_get() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $groups = $this->facebook->api('/me/groups');;
+
+        $output = array();
+        if (isset($groups['data'])) {
+            foreach ($groups['data'] as $group) {
+                $group_name = "";                
+                if (!isset($group['name'])) {
+                    continue;
+                }
+
+                $group_name = strtolower($group['name']);
+                $keywords = array("rideshare", "carpool", "covoiturage");
+                foreach ($keywords as $keyword) {
+                    if (string_contains($keyword, $group_name)) {
+                        $output[] = $group;
+                        break;
+                    }
+                }
+            }
+        }
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($output);
+        return;
+    }
+
     public function statistics_get() {
         if ($this->wheelzo_user_id == false) {
             http_response_code("400");

@@ -54,6 +54,12 @@ if ( ! function_exists('extract_city') ) {
     }
 }
 
+if ( ! function_exists('string_contains') ) {
+    function string_contains($needle, $haystack) {
+        return strpos($haystack, $needle) !== false;
+    }
+}
+
 if ( ! function_exists('shorten_string') ) {
     function shorten_string( $string, $size ) {
         if (strlen($string) > $size) {
