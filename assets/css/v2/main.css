@@ -139,6 +139,10 @@ ul[datepicker-popup-wrap] {
     min-width: 250px;
 }
 
+.tooltip.in {
+    opacity: 1.0;
+}
+
 .tooltip-inner {
     max-width: none;
 }

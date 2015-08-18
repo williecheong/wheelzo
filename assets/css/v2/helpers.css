@@ -43,6 +43,7 @@
 .opaque7 { opacity: 0.7; }
 .opaque8 { opacity: 0.8; }
 .opaque9 { opacity: 0.9; }
+.opaque10 { opacity: 1.0; }
 
 .clickable { cursor: pointer; }
 .hoverable5 { opacity: 0.5; }
