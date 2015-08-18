@@ -148,16 +148,6 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             return;
         }
 
-        if ( inputData.price < 1 || inputData.price > 40 ) {
-            toaster.pop('error', 'Error', 'Ride price must be between 1 and 40'); 
-            return;
-        }
-
-        if ( inputData.capacity < 1 || inputData.capacity > 7 ) {
-            toaster.pop('error', 'Error', 'Ride capacity must be between 1 and 7'); 
-            return;
-        }
-
         $scope.loading = true;
         $http({
             'method': 'POST',
