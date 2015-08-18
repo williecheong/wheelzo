@@ -120,14 +120,14 @@ class Rides extends API_Controller {
             return;
         }
 
-        if ($capacity < 1 || $capacity > 7) {
+        if ($capacity < WHEELZO_RIDE_CAPACITY_LOWER || $capacity > WHEELZO_RIDE_CAPACITY_UPPER) {
             http_response_code("400");
             header('Content-Type: application/json');
             echo $this->message("Capacity must be between 1 and 7");
             return;
         }
 
-        if ($price < 1 || $price > 60) {
+        if ($price < WHEELZO_RIDE_PRICE_LOWER || $price > WHEELZO_RIDE_PRICE_UPPER) {
             http_response_code("400");
             header('Content-Type: application/json');
             echo $this->message("Price must be between 1 and 60");

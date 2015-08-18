@@ -359,7 +359,7 @@ class Facebook_import extends API_Controller {
     private function _validate_processedRide( $ride = array() ) {
         if ( $ride->origin && $ride->destination ) {
             if ( is_numeric($ride->capacity) && is_numeric($ride->price) ) {
-                if ( $ride->capacity <= 7 && $ride->price <= 35 ) {
+                if ( $ride->capacity <= WHEELZO_RIDE_CAPACITY_UPPER && $ride->price <= WHEELZO_RIDE_PRICE_UPPER ) {
                     $stamp = strtotime( $ride->departure );
                     $month = date( 'm', $stamp );
                     $day   = date( 'd', $stamp );
