@@ -139,14 +139,14 @@
             <div class="col-sm-12">
                 <div class="well well-sm">
                     <span class="lead visible-xs">
-                        <a tooltip-html-unsafe="Permissions for Wheelzo must be configured to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:1.5px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
+                        <a tooltip-html-unsafe="Permissions for Wheelzo must be configured to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
                             <i class="fa fa-share-alt-square"></i>
                         </a>
                         Publish on Facebook
                         <i ng-show="loadingFacebookGroups" class="fa fa-spinner fa-spin"></i>
                     </span>
                     <span class="lead hidden-xs">
-                        <a tooltip-html-unsafe="Permissions for Wheelzo must be configured to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:1.5px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
+                        <a tooltip-html-unsafe="Permissions for Wheelzo must be configured to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
                             <i class="fa fa-share-alt-square"></i>
                         </a>
                         Publish ride on Facebook
