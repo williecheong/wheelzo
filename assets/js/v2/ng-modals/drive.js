@@ -28,6 +28,7 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'allowPayments': false
         };
 
+        $scope.loadingFacebookGroups = true;
         $scope.loadFacebookGroups();
     };
 
@@ -36,9 +37,11 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'method': 'GET',
             'url': '/api/v2/users/groups'
         }).success(function(data, status, headers, config) {
+            $scope.loadingFacebookGroups = false;
             $scope.groups = data;
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loadingFacebookGroups = false;
             console.log(data);
         });
     };

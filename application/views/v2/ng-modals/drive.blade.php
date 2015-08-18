@@ -141,12 +141,17 @@
                     <span class="lead visible-xs">
                         <i class="fa fa-share-alt-square"></i>
                         Publish on Facebook
+                        <i ng-show="loadingFacebookGroups" class="fa fa-spinner fa-spin"></i>
                     </span>
                     <span class="lead hidden-xs">
                         <i class="fa fa-share-alt-square"></i>
                         Publish ride on Facebook
+                        <i ng-show="loadingFacebookGroups" class="fa fa-spinner fa-spin"></i>
                     </span>
                     <div class="row">
+                        <div ng-if="!loadingFacebookGroups && groups.length==0" class="text-center">
+                            <span class="lead">No relevant groups found</span>
+                        </div>
                         <div ng-repeat="group in groups" class="col-sm-4">
                             <label class="text-ellipsis clickable">
                                 <input ng-model="input.shareToGroups[group.id]" ng-disabled="loading" type="checkbox">
