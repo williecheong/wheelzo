@@ -98,7 +98,9 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
         var modalParams = { } ;
 
         if (typeof $scope.initialize == 'function') {
-            modalParams.initialize = function() { return $scope.initialize; }
+            modalParams.initialize = function() { return $scope.initialize; };
+        } else {
+            modalParams.initialize = function() { return function() { return; } };
         }
         
         if (typeof params == 'object') {
