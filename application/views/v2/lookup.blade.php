@@ -49,7 +49,7 @@
                     </a>
                 </div>
                 <div class="text-center mTop10">
-                    <a tooltip="<% user.name %>" tooltip-placement="right" tooltip-trigger="click" href="">
+                    <a tooltip="<% user.name %>" tooltip-placement="right" href="">
                         <i class="fa fa-caret-square-o-right"></i>
                     </a>
                     <strong ng-bind="user.name | shortenString:12"></strong>
