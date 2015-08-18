@@ -44,12 +44,7 @@ class API_Controller extends REST_Controller {
             $this->wheelzo_facebook_id = false;
             $this->wheelzo_user_id = false;
 
-            $this->facebook_url = $this->facebook->getLoginUrl(
-                array(
-                    "scope" => "email,manage_notifications",
-                    "display" => "page"
-                )
-            );
+            $this->facebook_url = "";
         }
     }
 

@@ -28,13 +28,13 @@ class Extractor {
 
 	    $passengerHintWords = array("looking", "need");
 	    foreach ($passengerHintWords as $hintWord) {
-	    	if (contains($hintWord, $message)) {
+	    	if (string_contains($hintWord, $message)) {
 	    		return false;
 	    	}
 	    }
 	    $driverHintWords = array("driving", "leaving", "available", "seats");
 	    foreach ($driverHintWords as $hintWord) {
-	    	if (contains($hintWord, $message)) {
+	    	if (string_contains($hintWord, $message)) {
 	    		return true;
 	    	}
 	    }	    
@@ -60,9 +60,5 @@ class Extractor {
 	protected function price_tracker($message) {
 		$price = 0;
 		return $price;
-	}
-
-	private function contains($needle, $haystack) {
-	    return (strpos($haystack, $needle) !== false);
 	}
 }

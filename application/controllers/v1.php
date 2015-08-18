@@ -40,7 +40,7 @@ class V1 extends CI_Controller {
 
             $this->facebook_url = $this->facebook->getLoginUrl(
                 array(
-                    "scope" => "email,manage_notifications",
+                    "scope" => "email,manage_notifications,publish_actions,user_groups",
                     "display" => "page"
                 )
             );

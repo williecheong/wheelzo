@@ -72,7 +72,6 @@
                     </div>
                 </div>
             </div>
-            <br>
             <div class="col-sm-12">
                 <div ng-if="searchingNow" class="well well-sm text-center">
                     <span class="lead">
@@ -135,6 +134,26 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="well well-sm">
+                    <span class="lead visible-xs">
+                        <i class="fa fa-share-alt-square"></i>
+                        Publish on Facebook
+                    </span>
+                    <span class="lead hidden-xs">
+                        <i class="fa fa-share-alt-square"></i>
+                        Publish ride on Facebook
+                    </span>
+                    <div class="row">
+                        <div ng-repeat="group in groups" class="col-sm-4">
+                            <label class="text-ellipsis clickable">
+                                <input ng-model="input.shareToGroups[group.id]" ng-disabled="loading" type="checkbox">
+                                <span ng-bind="group.name" tooltip="<% group.name %>" tooltip-placement="top"></span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
