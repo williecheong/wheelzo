@@ -4,6 +4,7 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
 
     $scope.suggestedPlaces = defaultSuggestedPlaces;
     $scope.rrequests = [ ];
+    $scope.groups = [ ];
     $scope.dateOptions = { 
         'show-weeks' : false
     };
@@ -26,6 +27,20 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'capacity' : '2',
             'allowPayments': false
         };
+
+        $scope.loadFacebookGroups();
+    };
+
+    $scope.loadFacebookGroups = function() {
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/users/groups'
+        }).success(function(data, status, headers, config) {
+            $scope.groups = data;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            console.log(data);
+        });
     };
 
     $scope.addDropoff = function() {
@@ -100,11 +115,18 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'capacity' : input.capacity,
             'allowPayments' : input.allowPayments ? 1 : 0,
             'invitees' : [ ],
+            'shareToGroups' : [ ],
         };
 
         for (var key in input.invitees) {
             if (input.invitees[key]) {
                 inputData.invitees.push(key);
+            }
+        }
+
+        for (var key in input.shareToGroups) {
+            if (input.shareToGroups[key]) {
+                inputData.shareToGroups.push(key);
             }
         }
 

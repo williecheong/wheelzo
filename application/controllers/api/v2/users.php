@@ -40,13 +40,20 @@ class Users extends API_Controller {
             return;
         }
 
-        $groups = $this->facebook->api('/me/groups');;
+        try {
+            $groups = $this->facebook->api('/me/groups');;
+        } catch (Exception $e) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Could not retrieve facebook groups");
+            return;
+        }
 
         $output = array();
         if (isset($groups['data'])) {
             foreach ($groups['data'] as $group) {
                 $group_name = "";                
-                if (!isset($group['name'])) {
+                if (!isset($group['id']) || !isset($group['name'])) {
                     continue;
                 }
 
@@ -54,7 +61,10 @@ class Users extends API_Controller {
                 $keywords = array("rideshare", "carpool", "covoiturage");
                 foreach ($keywords as $keyword) {
                     if (string_contains($keyword, $group_name)) {
-                        $output[] = $group;
+                        $output[] = array(
+                            'id' => $group['id'],
+                            'name' => $group['name']
+                        );
                         break;
                     }
                 }
