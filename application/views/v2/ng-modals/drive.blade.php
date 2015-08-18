@@ -2,7 +2,7 @@
     <div class="modal-header">
         <button ng-click="cancel()" type="button" class="close">&times;</button>
         <h4 class="modal-title" id="myModalLabel">
-            <i class="fa fa-car"></i>
+            <i class="fa fa-dashboard"></i>
             Create Ride
         </h4>
     </div>
