@@ -49,7 +49,7 @@ class V1 extends CI_Controller {
 
     public function sign() {
         if ( $this->wheelzo_user_id ) {
-            redirect( base_url() );
+            redirect( base_url().'v2' );
         }
 
         $this->blade->render('tools/sign');
