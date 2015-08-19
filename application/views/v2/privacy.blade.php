@@ -9,10 +9,6 @@
 
 @section('description')
     <meta name="description" content="Privacy policies at Wheelzo">
-    <link rel="image_src"  href="/assets/img/screenshot-main_200x200.png">
-    <meta property="og:image" content="{{ base_url() }}assets/img/screenshot-main_200x200.png"/>
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
 @endsection
 
 @section('custom_css')
