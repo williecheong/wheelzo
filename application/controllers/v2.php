@@ -45,4 +45,8 @@ class V2 extends CI_Controller {
         }
         $this->blade->render('v2/profile');
     }
+    
+    public function privacy() {
+        $this->blade->render('v2/privacy');
+    }
 }

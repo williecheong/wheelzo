@@ -17,6 +17,7 @@ $route['404_override'] = 'lost';
 $route['sign'] = "v1/sign";
 $route['lookup'] = "v2/lookup";
 $route['profile'] = "v2/profile";
+$route['privacy'] = "v2/privacy";
 
 $route['me'] = "v1/index/true";
 $route['api/v1/rides/me'] = "api/v1/rides/index/true";

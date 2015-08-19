@@ -125,30 +125,24 @@ class Facebook_import extends API_Controller {
                         continue;
                     }
 
-                    $url = "http://ec2-54-148-33-40.us-west-2.compute.amazonaws.com:3000/nlpApi";
-                    $type = "POST";
-                    $params = (object) array(
-                        "message"   => $posting->message,
-                        "timestamp" => $posting->updated_time
-                    );
-
-                    $processed_ride = json_decode( rest_curl($url, $type, $params) );
+                    $processed_ride = $this->extractor->getRideFromMessage($posting->message, $posting->updated_time);
                     
-                    $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id);
+                    $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id); // potential duplicates
                     
-                    if ( !isset($processed_ride) ) { // NLP did not return a valid ride. Not too sure what happened there. Send posting to front for judging
-                        $postings[] = $posting; 
+                    if ( is_null($processed_ride) ) { // NLP determined this to be a non-driving ride
                         continue;
                     }
                     
-                    if ( !$this->_validate_processedRide_exists($processed_ride) ) { // This must be a passenger posting
-                        continue;
-                    }
-                    
-                    if ( $processed_ride->origin || $processed_ride->destination || $processed_ride->departure || $processed_ride->capacity || $processed_ride->price ) {
-                        $posting->processedRide = $processed_ride;
-                        $postings[] = $posting;
-                        continue;
+                    if ( isset($processed_ride['origin']) 
+                    && isset($processed_ride['destination'])
+                    && isset($processed_ride['departure'])
+                    && isset($processed_ride['capacity'])
+                    && isset($processed_ride['price']) ) {
+                        if (strtotime($processed_ride['departure']) > strtotime('now')) { // want ride only if estimated departure hasn't passed
+                            $posting->processedRide = $processed_ride;
+                            $postings[] = $posting;
+                            continue;
+                        }
                     }
                 }
             } catch (Exception $e) {

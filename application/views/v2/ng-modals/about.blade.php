@@ -116,17 +116,20 @@
                 </div>
             </div>
         </div>
-        <div class="text-center" style="padding:20px;">
-            More questions? Let us <a href="mailto:info@wheelzo.com">know</a>
+        <div class="text-center pTop10 pBottom5">
+            Read about our <a href="/privacy">privacy terms</a>
             <br>
-            <a class="btn btn-xs" href="https://facebook.com/wheelzo" style="background-color:#354C8C;color:whitesmoke;" target="_blank">
-                <i class="fa fa-facebook-square fa-lg"></i> 
-                Like Us
-            </a>
-            <a class="btn btn-default btn-xs" href="https://twitter.com/gowheelzo" style="color:#333;" target="_blank">
-                <i class="fa fa-twitter fa-lg" style="color:#4099FF;"></i> 
-                Follow
-            </a>
+            More <a href="mailto:info@wheelzo.com">questions</a>? Let us know
+            <div class="mTop5">
+                <a class="btn btn-xs" href="https://facebook.com/wheelzo" style="background-color:#354C8C;color:whitesmoke;" target="_blank">
+                    <i class="fa fa-facebook-square fa-lg"></i> 
+                    Like Us
+                </a>
+                <a class="btn btn-default btn-xs" href="https://twitter.com/gowheelzo" style="color:#333;" target="_blank">
+                    <i class="fa fa-twitter fa-lg" style="color:#4099FF;"></i> 
+                    Follow
+                </a>
+            </div>
         </div>
     </div>
 </script>
