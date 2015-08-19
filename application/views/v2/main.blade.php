@@ -19,7 +19,7 @@
 
 @section('facebook_meta')
     @if ($requested_ride) 
-        <link rel="image_src"  href="/assets/img/banner_square.png">
+        <link rel="image_src" href="/assets/img/banner_square.png">
         <meta property="og:image" content="{{ base_url() }}assets/img/banner_square.png"/>
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
