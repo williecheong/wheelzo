@@ -7,7 +7,6 @@
         @yield('description')
         
         @yield('facebook_meta')
-        <meta property="og:url" content="{{ base_url() }}" />
         
         <meta name="keyword" content="Toronto, Kitchener, Waterloo, Rideshare, Carpool, Transportation, Commuting, Community, Environment">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
