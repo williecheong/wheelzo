@@ -57,7 +57,6 @@ class Facebook_import extends API_Controller {
 
         $postings = array();                     
         $response_data = array();
-        $this->load->library('extractor');
         foreach ( $facebook_groups as $facebook_group ) {
             try {
                 $url = "https://graph.facebook.com/" . $facebook_group . "/feed" 

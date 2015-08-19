@@ -1,5 +1,9 @@
 <?php
 
+require_once "extractor_time.php";
+require_once "extractor_price.php";
+require_once "extractor_location.php";
+
 class Extractor {
 
 	public function getRideFromMessage($message, $posting_date) {
@@ -7,25 +11,25 @@ class Extractor {
 			return null;
 		}
 
-		$location_result = $this->location_tracker($message);
+		$this->extractor_time = new ExtractorTime();
+		$this->extractor_price = new ExtractorPrice();
+		$this->extractor_location = new ExtractorLocation();
+
+		$location_result = $this->extractor_location->getLocations($message);
+		$price_result = $this->extractor_price->getPrice($message);
 
 		return array(
 			"origin" => ucfirst($location_result['origin']),
 	 		"destination" => ucfirst($location_result['destination']),
-	 		"departure" => $this->time_tracker($message, $posting_date),
-	 		"price" => $this->price_tracker($message),
+	 		"departure" => $this->extractor_time->getTime($message, $posting_date),
+	 		"price" => intval($price_result['price']),
 	 		"capacity" => null
  		);
 	}
 
 	protected function is_driving($message) {
-	    /*
-	    $message = $message.replace(/(\r\n|\n|\r)/gm," ");
-	    $message = $message.replace(/(\(|\)|\:|\;|\#|\.|\/|\,|\!|\-)/gm," ");
-	    $message = $message.replace(/\s+/g," ");
-	    $message = $message.toLowerCase();
-		*/
-
+	    $message = strtolower($message);
+		
 	    $passengerHintWords = array("looking", "need");
 	    foreach ($passengerHintWords as $hintWord) {
 	    	if (string_contains($hintWord, $message)) {
@@ -38,27 +42,6 @@ class Extractor {
 	    		return true;
 	    	}
 	    }	    
-	    // we are now unsure...
-	    return true;
-	}
-
-	protected function location_tracker($message) {
-		$locations = array(
-			"origin" => "",
-			"destination" => ""
-		);
-
-		return $locations;
-	}
-
-	protected function time_tracker($message, $posting_date) {
-		$departure = "";
-		return $departure;
-	}
-
-
-	protected function price_tracker($message) {
-		$price = 0;
-		return $price;
+	    return true; // we are now unsure
 	}
 }
