@@ -14,11 +14,6 @@
 @section('facebook_meta')
     <link rel="image_src"  href="/assets/img/logo_200x200.png">
     <meta property="og:image" content="{{ base_url() }}assets/img/logo_200x200.png"/>
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
-
-    <meta property="og:title" content="Community Lookup" />
-    <meta property="og:description" content="{{ WHEELZO_DESCRIPTION }}" />
 @endsection
 
 @section('custom_css')

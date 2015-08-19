@@ -21,23 +21,9 @@
     @if ($requested_ride) 
         <link rel="image_src" href="/assets/img/banner_square.png">
         <meta property="og:image" content="{{ base_url() }}assets/img/banner_square.png"/>
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
-
-        <meta property="og:title" content="Ride Offer" />
-        <meta property="og:description" content="{{$requested_ride->driver_name}} is driving from {{$requested_ride->origin}} to {{$requested_ride->destination}} on {{date('M j, l', strtotime($requested_ride->start))}} @ {{date('g.ia', strtotime($requested_ride->start))}}" />
     @else
         <link rel="image_src"  href="/assets/img/logo_200x200.png">
         <meta property="og:image" content="{{ base_url() }}assets/img/logo_200x200.png"/>
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
-        @if ($requested_user) 
-            <meta property="og:title" content="Community Feedback" />
-            <meta property="og:description" content="Reviews about {{$requested_user->name}} from the rideshare community at Wheelzo" />
-        @else
-            <meta property="og:title" content="Wheelzo" />
-            <meta property="og:description" content="{{ WHEELZO_DESCRIPTION }}" />
-        @endif
     @endif
 @endsection
 
