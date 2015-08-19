@@ -10,10 +10,25 @@
 @section('description')
     @if ($requested_ride) 
         <meta name="description" content="{{$requested_ride->driver_name}} is driving from {{$requested_ride->origin}} to {{$requested_ride->destination}} on {{date('M j, l', strtotime($requested_ride->start))}} @ {{date('g.ia', strtotime($requested_ride->start))}}">        
+        <link rel="image_src"  href="/assets/img/banner_square.png">
+        <meta property="og:image" content="{{ base_url() }}assets/img/banner_square.png"/>
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+
     @elseif ($requested_user) 
         <meta name="description" content="Reviews about {{$requested_user->name}} from the rideshare community @ Wheelzo">
+        <link rel="image_src"  href="/assets/img/logo_200x200.png">
+        <meta property="og:image" content="{{ base_url() }}assets/img/logo_200x200.png"/>
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+
     @else
         <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
+        <link rel="image_src"  href="/assets/img/logo_200x200.png">
+        <meta property="og:image" content="{{ base_url() }}assets/img/logo_200x200.png"/>
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+
     @endif
 @endsection
 
