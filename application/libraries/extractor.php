@@ -1,10 +1,11 @@
 <?php
 
+require_once "extractor_base.php";
 require_once "extractor_time.php";
 require_once "extractor_price.php";
 require_once "extractor_location.php";
 
-class Extractor {
+class Extractor extends ExtractorBase {
 
 	public function getRideFromMessage($message, $posting_date) {
 		if (!$this->is_driving($message)) {
@@ -32,13 +33,15 @@ class Extractor {
 		
 	    $passengerHintWords = array("looking", "need");
 	    foreach ($passengerHintWords as $hintWord) {
-	    	if (string_contains($hintWord, $message)) {
-	    		return false;
+	    	if ($this->stringContains($message, $hintWord)) {
+	    		if (strpos($message, $hintWord) < strlen($message)*0.6) {
+		    		return false;
+	    		}
 	    	}
 	    }
 	    $driverHintWords = array("driving", "leaving", "available", "seats");
 	    foreach ($driverHintWords as $hintWord) {
-	    	if (string_contains($hintWord, $message)) {
+	    	if ($this->stringContains($message, $hintWord)) {
 	    		return true;
 	    	}
 	    }	    

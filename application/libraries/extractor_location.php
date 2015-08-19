@@ -1,6 +1,6 @@
 <?php
 
-class ExtractorLocation {
+class ExtractorLocation extends ExtractorBase {
 
 	public function getLocations($message) {
 		$message = $this->cleanUpMessage($message);
@@ -60,7 +60,7 @@ class ExtractorLocation {
 				//What if they are saying from DateTime to DateTime?
 				$result['numOfTo']++;
 				$result['indexOfTo'][] = $index;
-			} else if (strpos($element, '>') !== false) {
+			} else if ($this->stringContains($element, '>')) {
 				$result['numOfArrow']++;
 				$result['indexOfArrow'][] = $index;
 			}
@@ -148,7 +148,7 @@ class ExtractorLocation {
 				$secondLocation = $message[$pointerEnd + 1];
 				break;
 			case 3:
-				if ( strpos($message[$pointerStart+1], '(') !== false || strpos($message[$pointerStart+2], '(') !== false ){
+				if ( $this->stringContains($message[$pointerStart+1], '(') || $this->stringContains($message[$pointerStart+2], '(') ){
 					$firstLocation = $message[$pointerStart] . " " . $message[$pointerStart+1] . " " . $message[$pointerStart+2];
 				} else {
 					$firstLocation = $message[$pointerStart];
@@ -156,9 +156,9 @@ class ExtractorLocation {
 				$secondLocation = $message[$pointerEnd + 1];
 				break;
 			default:
-				if ( strpos($message[$pointerStart+1], '(') > -1 && strpos($message[$pointerStart+2], ')') !== false ){
+				if ( $this->stringContains($message[$pointerStart+1], '(') && $this->stringContains($message[$pointerStart+2], ')') ){
 					$firstLocation = $message[$pointerStart] . " " . $message[$pointerStart+1] . " " . $message[$pointerStart+2];
-				} else if ( strpos($message[$pointerStart+1], '(') !== false && !(strpos($message[$pointerStart+2], ')') !== false) ){
+				} else if ( $this->stringContains($message[$pointerStart+1], '(') && !$this->stringContains($message[$pointerStart+2], ')') ){
 					$firstLocation = $message[$pointerStart] . " " . $message[$pointerStart+1];
 				} else {
 					$firstLocation = $message[$pointerStart];
@@ -199,19 +199,19 @@ class ExtractorLocation {
 		$dictionary = [ "drive", "driving", "leave", "leaving" ];
 		$isOriginInContext = true;
 		for ($i = 0; $i < count($dictionary); $i++){
-			if ( strpos($message[$pointer-1], $dictionary[$i]) !== false ) {
+			if ( $this->stringContains($message[$pointer-1], $dictionary[$i]) ) {
 				$isOriginInContext = false;
 			}
 		}
 
 		if ( $isOriginInContext  ){
-			if ( strpos($message[$pointer-1], ')') !== false ){
+			if ( $this->stringContains($message[$pointer-1], ')') ){
 				$result['origin'] = $message[$pointer-2] . " " . $message[$pointer-1];
 			} else {
 				$result['origin'] = $message[$pointer-1];
 			}
 
-			if ( strpos($message[$pointer+2], '(') !== false ) {
+			if ( $this->stringContains($message[$pointer+2], '(') ) {
 				$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
 			} else{
 				$result['destination'] = $message[$pointer+1];
@@ -239,26 +239,17 @@ class ExtractorLocation {
 	protected function primaryIndicatorResultGamma_Case1( $message, $result ) {
 
 		$pointer = $result['indexOfArrow'][0];
-		if ( strpos($message[$pointer-1], ')') !== false ){
+		if ( $this->stringContains($message[$pointer-1], ')') ){
 			$result['origin'] = $message[$pointer-2] . " " . $message[$pointer-1];
 		} else {
 			$result['origin'] = $message[$pointer-1];
 		}
 
-		if ( strpos($message[$pointer+2], '(') !== false ) {
+		if ( $this->stringContains($message[$pointer+2], '(') ) {
 			$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
 		} else {
 			$result['destination'] = $message[$pointer+1];
 		}
 		return $result;
-	}
-
-	protected function indexOf($array, $word) {
-	    foreach($array as $key => $value) {
-	        if($value == $word) {
-	            return $key;
-	        }
-	    }
-	    return -1;
 	}
 }

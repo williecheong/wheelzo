@@ -1,6 +1,6 @@
 <?php
 
-class ExtractorPrice {
+class ExtractorPrice extends ExtractorBase {
 	
 	public function getPrice($message) {
 		$message = $this->cleanUpMessage_price($message);
@@ -34,7 +34,7 @@ class ExtractorPrice {
 	protected function findPrimaryIndicators_price( $message ){
 		$result = $this->findPrimaryIndicatorsResult_price();
 		foreach ($message as $index => $element) {
-			if (strpos($element, "$") !== false){
+			if ($this->stringContains($element, "$")){
 				$result['numOfDollarSign']++;
 				$result['indexOfDollarSign'][] = $index;
 			}
@@ -72,15 +72,6 @@ class ExtractorPrice {
 			$result['price'] = $dollarSignLeft;
 		}
 		return $result;
-	}
-
-	protected function indexOf($array, $word) {
-	    foreach($array as $key => $value) {
-	        if($value == $word) {
-	            return $key;
-	        }
-	    }
-	    return -1;
 	}
 }
 
