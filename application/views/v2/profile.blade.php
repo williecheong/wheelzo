@@ -8,8 +8,7 @@
 @endsection
 
 @section('description')
-    <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
-    <link rel="image_src"  href="/assets/img/screenshot-profile.png">    
+    <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">  
 @endsection
 
 @section('custom_css')

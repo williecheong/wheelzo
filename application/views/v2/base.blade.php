@@ -4,6 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         @yield('description')
+
+        <link rel="image_src"  href="/assets/img/banner_square.png">
+        <meta property="og:image" content="{{ base_url() }}assets/img/banner_square.png"/>
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+
         <meta name="keyword" content="Toronto, Kitchener, Waterloo, Rideshare, Carpool, Transportation, Commuting, Community, Environment">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">    
