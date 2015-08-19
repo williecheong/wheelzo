@@ -9,10 +9,10 @@
 
 @section('description')
     <meta name="description" content="Better rideshare and carpooling for people around Kitchener, Waterloo and the Greater Toronto Area">
-    <link rel="image_src"  href="/assets/img/screenshot-profile_478x250.jpg">  
-    <meta property="og:image" content="{{ base_url() }}assets/img/screenshot-profile_478x250.jpg"/>
-    <meta property="og:image:width" content="478" />
-    <meta property="og:image:height" content="250" />
+    <link rel="image_src"  href="/assets/img/screenshot-profile_200x200.png">  
+    <meta property="og:image" content="{{ base_url() }}assets/img/screenshot-profile_200x200.png"/>
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
   
 @endsection
 
