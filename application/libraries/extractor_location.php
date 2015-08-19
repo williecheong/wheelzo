@@ -211,14 +211,20 @@ class ExtractorLocation extends ExtractorBase {
 				$result['origin'] = $message[$pointer-1];
 			}
 
-			if ( $this->stringContains($message[$pointer+2], '(') ) {
-				$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
-			} else{
+			if (isset($message[$pointer+2])) {
+				if ( $this->stringContains($message[$pointer+2], '(') ) {
+					$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
+				} else{
+					$result['destination'] = $message[$pointer+1];
+				}
+			} else if (isset($message[$pointer+1])) {
 				$result['destination'] = $message[$pointer+1];
 			}
 		} else{
 			$result['origin'] = "UWaterloo";
-			$result['destination'] = $message[$pointer+1];
+			if (isset($message[$pointer+1])) {
+				$result['destination'] = $message[$pointer+1];
+			}
 		}
 		return $result;
 	}

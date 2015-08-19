@@ -24,7 +24,7 @@ class Extractor extends ExtractorBase {
 	 		"destination" => ucfirst($location_result['destination']),
 	 		"departure" => $this->extractor_time->getTime($message, $posting_date),
 	 		"price" => intval($price_result['price']),
-	 		"capacity" => null
+	 		"capacity" => 2
  		);
 	}
 

@@ -63,7 +63,7 @@ class ExtractorTime extends ExtractorBase {
 	        } else {
 	            $timestampIdentifier = $this->indexOf($words, "pm@catchTime");
 	        }
-	        
+
 	        $hourLocation = $timestampIdentifier;
 	        while ( is_numeric($words[$hourLocation-1]) ) {
 	            $hourLocation = $hourLocation - 1;
@@ -72,13 +72,13 @@ class ExtractorTime extends ExtractorBase {
 	            }
 	        }
 
-	        if ( $hourLocation >= 0) {
+	        if ( isset($words[$hourLocation]) ) {
 	          $hour = $hour + intval($words[$hourLocation]);
 	        } else {
 	          $hour = 0;
 	        }
 
-	        if ( $words[$hourLocation+1] ) {
+	        if ( isset($words[$hourLocation+1]) ) {
 	            if ( is_numeric($words[$hourLocation+1]) ) {
 	                $minute = $minute + intval( $words[$hourLocation+1] );
 	            }
@@ -128,12 +128,12 @@ class ExtractorTime extends ExtractorBase {
 		$message = preg_replace("/saturday/", "next saturday", $message);
 		$message = preg_replace("/sunday/", "next sunday", $message);
 
-		$message = preg_replace("/(\dam)/", "$1@catchTime", $message);
-		$message = preg_replace("/(\dpm)/", "$1@catchTime", $message);
-		$message = preg_replace("/(\sam)/", "$1@catchTime", $message);
-		$message = preg_replace("/(\spm)/", "$1@catchTime", $message);
-		$message = preg_replace("/am@catchTime/", " am@catchTime", $message);
-		$message = preg_replace("/pm@catchTime/", " pm@catchTime", $message);
+		$message = preg_replace("/(\dam)/", "$1@catchTime ", $message);
+		$message = preg_replace("/(\dpm)/", "$1@catchTime ", $message);
+		$message = preg_replace("/(\sam)/", "$1@catchTime ", $message);
+		$message = preg_replace("/(\spm)/", "$1@catchTime ", $message);
+		$message = preg_replace("/am@catchTime/", " am@catchTime ", $message);
+		$message = preg_replace("/pm@catchTime/", " pm@catchTime ", $message);
 
 		$message = preg_replace("/\s+/", " ", $message);
 
