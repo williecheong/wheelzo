@@ -5,7 +5,7 @@
 | -------------------------------------------------------------------------
 */
 
-$route['default_controller'] = "v2";
+$route['default_controller'] = "v1";
 $route['404_override'] = 'lost';
 
 /*
