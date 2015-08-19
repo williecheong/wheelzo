@@ -9,6 +9,7 @@
 
 require(APPPATH.'/config/secrets.php');
 define('CURRENT_VERSION',       '9.001');
+define('WHEELZO_DESCRIPTION', 	"Better rideshare and carpooling for people around Ottawa, Montreal, Ontario and the Greater Toronto Area");
 
 define('WHEELZO_DELIMITER',     '{?}');
 define('NOTIFY_ASSIGNED',       'A');
