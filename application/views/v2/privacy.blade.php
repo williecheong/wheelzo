@@ -9,7 +9,7 @@
 
 @section('description')
     <meta name="description" content="Privacy policies at Wheelzo">
-    <link rel="image_src"  href="/assets/img/screenshot-main_610x295.jpg">
+    <link rel="image_src"  href="/assets/img/screenshot-main_478x250.jpg">
 @endsection
 
 @section('custom_css')
