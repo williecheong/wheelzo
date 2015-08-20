@@ -100,7 +100,7 @@
                 </span>
             </h3>
             <accordion>
-                <accordion-group ng-repeat="(key, group) in ridesByDate" ng-init="isOpen=(key==0)" is-open="isOpen">
+                <accordion-group ng-repeat="(key, group) in ridesByDate" ng-init="isOpen=(isTomorrow(group.start))" is-open="isOpen">
                     <accordion-heading ng-click="isOpen=!isOpen">
                         <div>
                             <a class="pull-right" href="">
