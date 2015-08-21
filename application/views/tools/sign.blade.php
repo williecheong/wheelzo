@@ -13,7 +13,7 @@
         <link rel="icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="shortcut icon" href="/assets/img/{{ENVIRONMENT}}.ico" type="image/x-icon">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/assets/css/v2/helpers.css">
         <link rel="stylesheet" href="/assets/css/sign/main.css">
     </head>
@@ -25,7 +25,7 @@
         <header class="intro">
             <div class="intro-body">
                 <div class="row text-center" id="main-content">
-                    <div class="col-md-8 col-md-offset-2">
+                    <div class="col-md-10 col-md-offset-1">
                         <div class="row">
                         	<div class="col-sm-offset-4 col-sm-4">
 		                        <a href="/">
@@ -38,14 +38,15 @@
 	                        	<em>Keeping the rideshare community accountable</em>
 	                        </strong>
                         </div>
-                        <div class="hidden-xs" style="color:#D3D6D4;">
-                            Rides on Wheelzo can be shared directly to your Facebook groups<br>
-                            We promise to never post without your prior consent
+                        <div class="" style="color:#D3D6D4;">
+                            <i class="fa fa-hand-spock-o fa-lg"></i>
+                            Wheelzo will never post anything to Facebook without your permission
                         </div>
                         <a class="btn btn-facebook btn-lg btn-wide hoverable9" href="{{ $this->facebook_url }}">
                             <i class="fa fa-facebook-square fa-lg"></i>
 							Sign in with Facebook
                         </a>
+
                     </div>
                 </div>
             </div>
