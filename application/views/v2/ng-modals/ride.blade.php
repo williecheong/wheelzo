@@ -34,13 +34,14 @@
                                 <span ng-if="$index>=ride.passengers.length">
                                     <img ng-if="ride.driver_id==session.user_id || ride.allow_payments==0" class="img-circle opaque5" id="passenger-picture" src="/assets/img/empty_user.png">
                                     
-                                    <a ng-if="session.user_id==0 && ride.driver_id!=session.user_id && ride.allow_payments==1" href="/sign">
-                                        <img class="img-circle hoverable5" id="passenger-picture" src="/assets/img/payment.png">
-                                    </a>
-
-                                    <a ng-if="session.user_id!=0 && ride.driver_id!=session.user_id && ride.allow_payments==1" ng-click="handlePayment($event)" href="">
-                                        <img class="img-circle hoverable5" id="passenger-picture" src="/assets/img/payment.png">
-                                    </a>
+                                    <span ng-if="ride.driver_id!=session.user_id && ride.allow_payments==1">
+                                        <a ng-if="session.user_id==0" href="/sign">
+                                            <img class="img-circle hoverable5" id="passenger-picture" src="/assets/img/payment.png">
+                                        </a>
+                                        <a ng-if="session.user_id!=0" ng-click="handlePayment($event)" href="">
+                                            <img class="img-circle hoverable5" id="passenger-picture" src="/assets/img/payment.png">
+                                        </a>
+                                    </span>
                                 </span>
                             </div>
                         </div>
