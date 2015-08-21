@@ -52,6 +52,7 @@ class Facebook_import extends API_Controller {
             '453970331348083', // Montreal-Toronto rideshare
             '231943393631223', // Rideshare Wilfred Laurier               
             '30961982319', // RIDESHARE Queen's University
+            '407883332557790', // Boston-Montreal rideshare
             '227191854109597' // Carpool Toronto-Ottawa-Montreal-Sherbrooke-Quebec-covoiturage            
         );
 
@@ -125,7 +126,11 @@ class Facebook_import extends API_Controller {
                         continue;
                     }
 
-                    $processed_ride = $this->extractor->getRideFromMessage($posting->message, $posting->updated_time);
+                    try {
+                        $processed_ride = $this->extractor->getRideFromMessage($posting->message, $posting->updated_time);
+                    } catch (Exception $e) {
+                        continue;
+                    }
                     
                     $posting->activeRides = $this->ride->retrieve_active_by_user($driver->id); // potential duplicates
                     
@@ -154,6 +159,13 @@ class Facebook_import extends API_Controller {
         }
         
         if ( count($postings) != 0 ) { // We have work to do
+            usort($postings, function($a, $b) {
+                return strcmp( // sort by estimated departures in descending order
+                    $b->processedRide['departure'],
+                    $a->processedRide['departure']
+                );
+            });
+
             http_response_code("200");
             header('Content-Type: application/json');
             echo json_encode($postings);
