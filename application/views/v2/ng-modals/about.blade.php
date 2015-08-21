@@ -119,7 +119,7 @@
         <div class="text-center pTop10 pBottom5">
             Read about our <a href="/privacy">privacy terms</a>
             <br>
-            More <a href="mailto:info@wheelzo.com">questions</a>? Let us know
+            Contact us at <a href="mailto:info@wheelzo.com">info@wheelzo.com</a>
             <div class="mTop5">
                 <a class="btn btn-xs" href="https://facebook.com/wheelzo" style="background-color:#354C8C;color:whitesmoke;" target="_blank">
                     <i class="fa fa-facebook-square fa-lg"></i> 
