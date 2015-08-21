@@ -38,6 +38,10 @@
 	                        	<em>Keeping the rideshare community accountable</em>
 	                        </strong>
                         </div>
+                        <div class="hidden-xs" style="color:#D3D6D4;">
+                            Rides on Wheelzo can be shared directly to your Facebook groups<br>
+                            We promise to never post without your prior consent
+                        </div>
                         <a class="btn btn-facebook btn-lg btn-wide hoverable9" href="{{ $this->facebook_url }}">
                             <i class="fa fa-facebook-square fa-lg"></i>
 							Sign in with Facebook
