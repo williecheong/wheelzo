@@ -49,7 +49,7 @@
             <footer>
                 <hr>
                 <p class="text-center">
-                    Made by <a href="#" title="<i class='fa fa-coffee fa-lg'></i> Contact us" data-toggle="modal" data-target="#write-feedback">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo" target="uw_window">uWaterloo</a>
+                    Made by <a href="mailto:info@wheelzo.com" title="<i class='fa fa-coffee fa-lg'></i> Contact us">nerds</a> from <a href="//uwaterloo.ca" title="University of Waterloo" target="uw_window">uWaterloo</a>
                     <br>
                     &copy; Wheelzo v{{ CURRENT_VERSION }}
                 </p>
