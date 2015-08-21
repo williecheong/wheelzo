@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-3">
-                                    <input ng-model="posting.processedRide.departure" datepicker-popup="dd-MMM-yyyy" is-open="showCalendar" ng-focus="showCalendar=!showCalendar" datepicker-options="dateOptions" min="<?=time()*1000?>" ng-init="showCalendar=false" ng-disabled="loading" class="form-control" placeholder="ex. 23-Sep-2015" close-text="Close" />
+                                    <input ng-model="posting.processedRide.departure" datepicker-popup="EEE, dd-MMM-yy" is-open="showCalendar" ng-focus="showCalendar=!showCalendar" datepicker-options="dateOptions" min="<?=time()*1000?>" ng-init="showCalendar=false" ng-disabled="loading" class="form-control" placeholder="ex. 23-Sep-2015" close-text="Close" />
                                 </div>
                                 <div class="col-xs-3">
                                     <timepicker ng-model="posting.processedRide.departure" minute-step="15" show-meridian="true"></timepicker>
