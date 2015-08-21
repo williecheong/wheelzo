@@ -78,7 +78,7 @@
                                         </a>
                                     </div>
                                     <div class="text-muted">
-                                        {{ posting.updated_time | date:'EEEE MMMM d, h:mm a' }}
+                                        {{ posting.created_time | date:'EEEE MMMM d, h:mm a' }}
                                         <a href="" tooltip="{{ posting.to.data[0].name }}">
                                             <i class="fa fa-university"></i>
                                         </a>

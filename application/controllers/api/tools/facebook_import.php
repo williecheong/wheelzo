@@ -122,12 +122,12 @@ class Facebook_import extends API_Controller {
                         continue;
                     }
 
-                    if (!isset($posting->message) || !isset($posting->updated_time)) {
+                    if (!isset($posting->message) || !isset($posting->created_time)) {
                         continue;
                     }
 
                     try {
-                        $processed_ride = $this->extractor->getRideFromMessage($posting->message, $posting->updated_time);
+                        $processed_ride = $this->extractor->getRideFromMessage($posting->message, $posting->created_time);
                     } catch (Exception $e) {
                         continue;
                     }
