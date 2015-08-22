@@ -32,7 +32,7 @@ class Users extends API_Controller {
         return;
     }
 
-    public function groups_get() {
+    public function permissions_get() {
         if ($this->wheelzo_user_id == false) {
             http_response_code("400");
             header('Content-Type: application/json');
@@ -41,33 +41,21 @@ class Users extends API_Controller {
         }
 
         try {
-            $groups = $this->facebook->api('/me/groups');;
+            $permissions = $this->facebook->api('/me/permissions');
         } catch (Exception $e) {
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("Could not retrieve facebook groups");
+            echo $this->message("Could not retrieve facebook permissions");
             return;
         }
 
         $output = array();
-        if (isset($groups['data'])) {
-            foreach ($groups['data'] as $group) {
-                $group_name = "";                
-                if (!isset($group['id']) || !isset($group['name'])) {
+        if (isset($permissions['data'])) {
+            foreach ($permissions['data'] as $permission) {
+                if (!isset($permission['permission']) || !isset($permission['status'])) {
                     continue;
                 }
-
-                $group_name = strtolower($group['name']);
-                $keywords = array("rideshare", "carpool", "covoiturage");
-                foreach ($keywords as $keyword) {
-                    if (string_contains($keyword, $group_name)) {
-                        $output[] = array(
-                            'id' => $group['id'],
-                            'name' => $group['name']
-                        );
-                        break;
-                    }
-                }
+                $output[$permission['permission']] = ($permission['status'] == 'granted'); 
             }
         }
 

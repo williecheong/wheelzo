@@ -3,6 +3,7 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
     $core.extensionModal($scope, $modalInstance, $http, toaster);
 
     $scope.suggestedPlaces = defaultSuggestedPlaces;
+    $scope.permissions = { };
     $scope.rrequests = [ ];
     $scope.dateOptions = { 
         'show-weeks' : false
@@ -30,6 +31,21 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'shareToFacebookGroups' : { 'me' : true },
             'shareToFacebookMessage' : ""
         };
+
+        $scope.loadPermissions();
+    };
+
+    $scope.loadPermissions = function() {
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/users/permissions'
+        }).success(function(data, status, headers, config) {
+            $scope.permissions = data;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
+            $scope.loadingFacebookGroups = false;
+            console.log(data);
+        });
     };
 
     $scope.addDropoff = function() {

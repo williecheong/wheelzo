@@ -136,7 +136,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div ng-if="permissions.publish_actions" class="col-sm-12">
                 <div class="well well-sm">
                     <span class="lead">
                         <a tooltip-html-unsafe="Permissions must be configured<br class='visible-xs'> to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
