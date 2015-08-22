@@ -83,26 +83,52 @@ class PostRideViewController: UIViewController {
         let priceString = priceText.text;
         let capacityString = capacityText.text;
         
-        let priceInt = priceString.toInt()!;
-        let capacityInt = capacityString.toInt()!;
-        
-        // todo conver date to date+time components
-        
-        // date formatting
-        var dateFormatter = NSDateFormatter();
-        
-        // date output
-        var formatString = "yyyy'-'MM'-'dd";
-        dateFormatter.dateFormat = formatString;
-        let dateString = dateFormatter.stringFromDate(dateTimePicker.date);
-        
-        // time output
-        //      Jun-26 @ 8:00pm
-        formatString = "HH':'mm':'ss";
-        dateFormatter.dateFormat = formatString;
-        let timeString = dateFormatter.stringFromDate(dateTimePicker.date);
+        // check if any are empty
+        if (originString.isEmpty ||
+            destinationString.isEmpty ||
+            priceString.isEmpty ||
+            capacityString.isEmpty ) {
+                
+                println("empty fields")
+                
+                var alert = UIAlertController(title: "There is an empty field!", message: "Please make sure to fill out origin, destination, price, and capacity.", preferredStyle: UIAlertControllerStyle.Alert)
+                
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+                    println("Handle Cancel Logic here")
+                    
+                    // do nothing
+                    
+                }))
+                
+                presentViewController(alert, animated: true, completion: nil)
 
-        api.postRide(originString, destination: destinationString, capacity: capacityInt, price: priceInt, departureDate: dateString, departureTime: timeString);
+        } else {
+            // otherwise carry on
+            
+            let priceInt = priceString.toInt()!;
+            let capacityInt = capacityString.toInt()!;
+            
+            // todo conver date to date+time components
+            
+            // date formatting
+            var dateFormatter = NSDateFormatter();
+            
+            // date output
+            var formatString = "yyyy'-'MM'-'dd";
+            dateFormatter.dateFormat = formatString;
+            let dateString = dateFormatter.stringFromDate(dateTimePicker.date);
+            
+            // time output
+            //      Jun-26 @ 8:00pm
+            formatString = "HH':'mm':'ss";
+            dateFormatter.dateFormat = formatString;
+            let timeString = dateFormatter.stringFromDate(dateTimePicker.date);
+
+            api.postRide(originString, destination: destinationString, capacity: capacityInt, price: priceInt, departureDate: dateString, departureTime: timeString);
+            
+        }
+        
     }
     
 }
