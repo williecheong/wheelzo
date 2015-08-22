@@ -138,29 +138,33 @@
             </div>
             <div class="col-sm-12">
                 <div class="well well-sm">
-                    <span class="lead visible-xs">
-                        <a href="https://www.facebook.com/bookmarks/apps" target="_blank">
+                    <span class="lead">
+                        <a tooltip-html-unsafe="Permissions must be configured<br class='visible-xs'> to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
                             <i class="fa fa-cog"></i>
                         </a>
-                        <span tooltip-html-unsafe="Permissions must be configured<br> to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" class="clickable">
-                            Publish on Facebook
-                        </span>
-                    </span>
-                    <span class="lead hidden-xs">
-                        <a tooltip-html-unsafe="Permissions for Wheelzo must be configured to allow posting to your <img src='/assets/img/friends.png' style='margin-bottom:2px;max-height:15px;'>" tooltip-placement="right" href="https://www.facebook.com/bookmarks/apps" target="_blank">
-                            <i class="fa fa-cog"></i>
-                        </a>
-                        Publish ride on Facebook
+                        Publish to Facebook
                     </span>
                     <div class="row">
-                        <div ng-if="!loadingFacebookGroups && groups.length==0" class="text-center">
-                            <span class="lead">No relevant groups found</span>
+                        <div ng-if="input.shareToFacebook" class="col-md-7 visible-xs">
+                            <textarea ng-model="input.shareToFacebookMessage" placeholder="e.g. space in the trunk for baggage..." class="form-control"></textarea>
                         </div>
-                        <div ng-repeat="group in groups" class="col-sm-4">
-                            <label class="text-ellipsis clickable">
-                                <input ng-model="input.shareToGroups[group.id]" ng-disabled="loading" type="checkbox">
-                                <span ng-bind="group.name" tooltip="<% group.name %>" tooltip-placement="top"></span>
-                            </label>
+                        <div class="col-md-<% (input.shareToFacebook) ? 5 : 9 %>">
+                            <div class="well well-sm mBottom5">
+                                <p ng-if="input.shareToFacebook">
+                                    <i class="fa fa-info-circle"></i>
+                                    A direct link to this ride will be posted on Facebook. 
+                                    You may also include more information about this ride and it will be attached to the posting.
+                                    <button ng-click="input.shareToFacebook=false" class="btn btn-danger btn-xs">OFF</button>
+                                </p>
+                                <p ng-if="!input.shareToFacebook">
+                                    <i class="fa fa-facebook-square"></i>
+                                    Reach a wider audience by allowing Wheelzo to publish this ride to Facebook.
+                                    <button ng-click="input.shareToFacebook=true" class="btn btn-success btn-xs">ON</button>
+                                </p>
+                            </div>
+                        </div>
+                        <div ng-if="input.shareToFacebook" class="col-md-7 hidden-xs">
+                            <textarea ng-model="input.shareToFacebookMessage" placeholder="e.g. space in the trunk for baggage..." rows="3" class="form-control resize-none"></textarea>
                         </div>
                     </div>
                 </div>

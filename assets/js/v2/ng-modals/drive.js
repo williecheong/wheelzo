@@ -4,7 +4,6 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
 
     $scope.suggestedPlaces = defaultSuggestedPlaces;
     $scope.rrequests = [ ];
-    $scope.groups = [ ];
     $scope.dateOptions = { 
         'show-weeks' : false
     };
@@ -25,25 +24,12 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'startTime' : defaultTime,
             'price' : '10',
             'capacity' : '2',
-            'allowPayments': false
+            'allowPayments': false,
+            'invitees' : [ ],
+            'shareToFacebook' : true,
+            'shareToFacebookGroups' : { 'me' : true },
+            'shareToFacebookMessage' : ""
         };
-
-        $scope.loadingFacebookGroups = true;
-        $scope.loadFacebookGroups();
-    };
-
-    $scope.loadFacebookGroups = function() {
-        $http({
-            'method': 'GET',
-            'url': '/api/v2/users/groups'
-        }).success(function(data, status, headers, config) {
-            $scope.loadingFacebookGroups = false;
-            $scope.groups = data;
-        }).error(function(data, status, headers, config) {
-            toaster.pop('error', 'Error: ' + status, data.message);
-            $scope.loadingFacebookGroups = false;
-            console.log(data);
-        });
     };
 
     $scope.addDropoff = function() {
@@ -118,7 +104,9 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'capacity' : input.capacity,
             'allowPayments' : input.allowPayments ? 1 : 0,
             'invitees' : [ ],
-            'shareToGroups' : [ ],
+            'shareToFacebook' : input.shareToFacebook ? 1 : 0,
+            'shareToFacebookGroups' : [ ],
+            'shareToFacebookMessage' : input.shareToFacebookMessage,
         };
 
         for (var key in input.invitees) {
@@ -127,9 +115,9 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             }
         }
 
-        for (var key in input.shareToGroups) {
-            if (input.shareToGroups[key]) {
-                inputData.shareToGroups.push(key);
+        for (var key in input.shareToFacebookGroups) {
+            if (input.shareToFacebookGroups[key]) {
+                inputData.shareToFacebookGroups.push(key);
             }
         }
 
