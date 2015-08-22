@@ -57,6 +57,9 @@
 .hoverable8:hover { opacity: 0.95; }
 .hoverable9:hover { opacity: 1.00; }
 
+textarea.resize-none { resize: none; }
+textarea.resize-vertical { resize: vertical; }
+
 .text-ellipsis { 
 	overflow: hidden; 
 	white-space: nowrap;

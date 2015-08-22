@@ -209,43 +209,59 @@ class Rides extends API_Controller {
             $success = $this->rrequest->add_invitation( $invitee, $ride->id );
         }
 
-        $share_to_groups = isset($data['shareToGroups']) ? $data['shareToGroups'] : array();
-        $share_to_groups_successes = array();
-        foreach( $share_to_groups as $group_id ) {
-            $fb_response = false;
-            if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
-                try {
-                    $fb_response = $this->facebook->api(
-                        '/' . $group_id . '/feed', 
-                        'POST', 
-                        array(
-                            /* 
-                            'message' => "Driving from ".$ride->origin." to ".$ride->destination." on ".date('l (M-j)', strtotime($ride->start))." at ".date('g.ia', strtotime($ride->start)).". "
-                                        ."$".$ride->price."/person, ".$ride->capacity." seats available.", */
-                            'message' => "",
-                            'link' => base_url() . 'v2?ride=' . $ride->id
+        $share_enabled = isset($data['shareToFacebook']) ? $data['shareToFacebook'] : 0 ;
+        if ($share_enabled == 1) {
+            $share_to_groups = isset($data['shareToFacebookGroups']) ? $data['shareToFacebookGroups'] : array();
+            $share_message = isset($data['shareToFacebookMessage']) ? $data['shareToFacebookMessage'] : "";
+            $share_to_groups_successes = array();
+            foreach( $share_to_groups as $group_id ) {
+                $fb_response = false;
+                if ( ENVIRONMENT == 'production' || in_array($driver->facebook_id, $GLOBALS['WHEELZO_TECH']) ) {
+                    try {
+                        $fb_response = $this->facebook->api(
+                            '/' . $group_id . '/feed', 
+                            'POST', 
+                            array(
+                                /* 
+                                'message' => "Driving from ".$ride->origin." to ".$ride->destination." on ".date('l (M-j)', strtotime($ride->start))." at ".date('g.ia', strtotime($ride->start)).". "
+                                            ."$".$ride->price."/person, ".$ride->capacity." seats available.", */
+                                'message' => $share_message,
+                                'link' => base_url() . 'v2?ride=' . $ride->id
+                            )
+                        );
+                    } catch ( Exception $e ) {
+                        log_message('error', $e->getMessage() );
+                    }
+                }
+
+                if ( !$fb_response ) {
+                    continue;
+                }
+
+                $share_to_groups_successes[] = $group_id;
+            }
+
+            if (count($share_to_groups_successes) > 0) { // also update ride with this meta
+                $this->ride->update(
+                    array('id' => $ride->id),
+                    array('shared_groups' => implode(',', $share_to_groups_successes))
+                );
+
+                if (strlen($share_message) > 0) {
+                    $this->comment->create(  
+                        array(  
+                            'user_id' => $ride->driver_id,
+                            'ride_id' => $ride->id,
+                            'comment' => $share_message,
+                            'last_updated' => date( 'Y-m-d H:i:s' )
                         )
                     );
-                } catch ( Exception $e ) {
-                    log_message('error', $e->getMessage() );
                 }
+
+                $output_message .= " Ride was successfully published onto Facebook.";
             }
-
-            if ( !$fb_response ) {
-                continue;
-            }
-
-            $share_to_groups_successes[] = $group_id;
         }
-
-        if (count($share_to_groups_successes) > 0) { // also update ride with this meta
-            $this->ride->update(
-                array('id' => $ride->id),
-                array('shared_groups' => implode(',', $share_to_groups_successes))
-            );
-            $output_message .= " Ride was successfully published onto Facebook.";
-        }
-
+     
         http_response_code("200");
         header('Content-Type: application/json');
         echo $this->message($output_message);        
