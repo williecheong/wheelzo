@@ -222,9 +222,6 @@ class Rides extends API_Controller {
                             '/' . $group_id . '/feed', 
                             'POST', 
                             array(
-                                /* 
-                                'message' => "Driving from ".$ride->origin." to ".$ride->destination." on ".date('l (M-j)', strtotime($ride->start))." at ".date('g.ia', strtotime($ride->start)).". "
-                                            ."$".$ride->price."/person, ".$ride->capacity." seats available.", */
                                 'message' => $share_message,
                                 'link' => base_url() . 'v2?ride=' . $ride->id
                             )

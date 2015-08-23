@@ -141,6 +141,10 @@ app.controller('myController', function ($scope, $sce, $http, $filter, $modal, t
         );
         return goodDate;
     };
+}).filter('fbGroup', function() {
+    return function(facebookId) {
+        return '//facebook.com/groups/' + facebookId ;
+    };
 }).filter('fbProfile', function() {
     return function(facebookId) {
         return '//facebook.com/' + facebookId ;
