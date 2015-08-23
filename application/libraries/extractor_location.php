@@ -243,19 +243,23 @@ class ExtractorLocation extends ExtractorBase {
 	}
 
 	protected function primaryIndicatorResultGamma_Case1( $message, $result ) {
-
 		$pointer = $result['indexOfArrow'][0];
-		if ( $this->stringContains($message[$pointer-1], ')') ){
-			$result['origin'] = $message[$pointer-2] . " " . $message[$pointer-1];
-		} else {
-			$result['origin'] = $message[$pointer-1];
+		if (isset($message[$pointer-2]) && isset($message[$pointer-1])) {
+			if ( $this->stringContains($message[$pointer-1], ')') ){
+				$result['origin'] = $message[$pointer-2] . " " . $message[$pointer-1];
+			} else {
+				$result['origin'] = $message[$pointer-1];
+			}
 		}
 
-		if ( $this->stringContains($message[$pointer+2], '(') ) {
-			$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
-		} else {
-			$result['destination'] = $message[$pointer+1];
+		if (isset($message[$pointer+2]) && isset($message[$pointer+1])) {
+			if ( $this->stringContains($message[$pointer+2], '(') ) {
+				$result['destination'] = $message[$pointer+1] . " " . $message[$pointer+2];
+			} else {
+				$result['destination'] = $message[$pointer+1];
+			}
 		}
+
 		return $result;
 	}
 }
