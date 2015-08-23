@@ -9,9 +9,9 @@
                 My Groups
             </span>
         </div>
-        <div style="max-height:200px;overflow:scroll;">
+        <div style="max-height:150px;overflow:scroll;">
             <table class="table table-condensed">
-                <tbody style="max-height:200px;">
+                <tbody>
                     <tr ng-if="personalFbgroups.length==0">
                         <td class="text-center">
                             <strong>No groups to show...</strong>
@@ -34,7 +34,7 @@
             </table>
         </div>
 
-        <div class="well well-sm">
+        <div class="well well-sm mBottom15">
             <i class="fa fa-exclamation-triangle"></i>
             To publish a ride to any Facebook group, you must already be registered as a member.
             Facebook policies do not allow outsiders and non-members to make posts inside a group.
@@ -46,7 +46,7 @@
                 Known Groups
             </span>
         </div>
-        <div style="max-height:200px;overflow:scroll;">
+        <div style="max-height:160px;overflow:scroll;">
             <table class="table table-condensed">
                 <tbody>
                     <tr ng-if="unpersonalFbgroups.length==0">
@@ -85,7 +85,7 @@
             </div>
             <p class="text-muted mLeft5 mRight20">
                 <i class="fa fa-facebook-square"></i>
-                Introduce an unknown rideshare group from Facebook and help grow the community
+                Introduce an undiscovered rideshare group from Facebook and help grow the community
             </p>
         </form>
     </div>

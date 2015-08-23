@@ -85,6 +85,19 @@ class Users extends API_Controller {
             return;
         }
 
+        $user_fbgroups = $this->user_fbgroup->retrieve(
+            array(
+                'user_id' => $this->wheelzo_user_id
+            )
+        );
+
+        if (count($user_fbgroups) >= WHEELZO_USER_FBGROUPS_LIMIT) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Maximum of ".WHEELZO_USER_FBGROUPS_LIMIT." groups allowed at a time");
+            return;            
+        }
+
         $this->user_fbgroup->create(
             array(
                 'user_id' => $this->wheelzo_user_id,

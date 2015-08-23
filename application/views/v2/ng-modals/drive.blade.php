@@ -191,7 +191,7 @@
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <textarea ng-model="input.shareToFacebookMessage" ng-disabled="loading" placeholder="e.g. space in the trunk for baggage..." rows="3" class="form-control resize-none"></textarea>
+                            <textarea ng-model="input.shareToFacebookMessage" ng-disabled="loading" placeholder="e.g. space in the trunk for baggage..." rows="5" class="form-control resize-none"></textarea>
                             <small class="text-muted">
                                 <i class="fa fa-thumb-tack"></i>
                                 Optional: Include more information about this ride.<br class="hidden-xs">
