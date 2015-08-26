@@ -32,6 +32,114 @@ class Users extends API_Controller {
         return;
     }
 
+    public function fbgroups_get() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $user_fbgroups = $this->user_fbgroup->retrieve(
+            array(
+                'user_id' => $this->wheelzo_user_id
+            )
+        );
+
+        $output = array();
+        foreach ($user_fbgroups as $user_fbgroup) {
+            $fbgroup = $this->fbgroup->retrieve_by_id($user_fbgroup->fbgroup_id);
+            $output[] = array(
+                'name' => $fbgroup->name,
+                'facebook_id' => $fbgroup->facebook_id
+            );
+        }
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo json_encode($output);
+        return;
+    }
+
+    public function fbgroups_post() {
+        if ($this->wheelzo_user_id == false) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User not logged in");
+            return;
+        }
+
+        $data = clean_input( $this->post() );
+        if ( !isset($data['facebookId']) ){
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Required information is missing");
+            return;
+        }
+
+        $fbgroup = $this->fbgroup->retrieve_by_fb($data['facebookId']);
+        if ( !$fbgroup ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Invalid facebook group specified");
+            return;
+        }
+
+        $user_fbgroups = $this->user_fbgroup->retrieve(
+            array(
+                'user_id' => $this->wheelzo_user_id
+            )
+        );
+
+        if (count($user_fbgroups) >= WHEELZO_USER_FBGROUPS_LIMIT) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Maximum of ".WHEELZO_USER_FBGROUPS_LIMIT." groups allowed at a time");
+            return;            
+        }
+
+        $this->user_fbgroup->create(
+            array(
+                'user_id' => $this->wheelzo_user_id,
+                'fbgroup_id' => $fbgroup->id,
+            )
+        );
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo $this->message("Successfully added facebook group.");
+        return;
+    }
+
+    public function fbgroups_delete( $facebook_id = '' ) {
+        if ( !$this->wheelzo_user_id ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("User is not logged in");
+            return;
+        }           
+        
+        $fbgroup = $this->fbgroup->retrieve_by_fb($facebook_id);
+        if ( !$fbgroup ) {
+            http_response_code("400");
+            header('Content-Type: application/json');
+            echo $this->message("Invalid facebook group specified");
+            return;
+        }
+
+        $this->user_fbgroup->delete(
+            array(
+                'user_id' => $this->wheelzo_user_id,
+                'fbgroup_id' => $fbgroup->id
+            )
+        );
+
+        http_response_code("200");
+        header('Content-Type: application/json');
+        echo $this->message("Successfully dropped facebook group");
+        return;
+    }
+
     public function permissions_get() {
         if ($this->wheelzo_user_id == false) {
             http_response_code("400");

@@ -86,7 +86,7 @@ angular.module('myApp').controller('reviewModalController', function ($scope, $m
         $scope.loading = true;
         $http({
             'method': 'DELETE',
-            'url': '/api/v1/reviews/index/' + reviewId
+            'url': '/api/v2/reviews/index/' + reviewId
         }).success(function(data, status, headers, config) {
             toaster.pop('success', 'Success: ' + status, data.message);
             $scope.initializeModal();

@@ -179,6 +179,7 @@
         @include('v2/ng-modals/ride')
         @include('v2/ng-modals/drive')
         @include('v2/ng-modals/review')
+        @include('v2/ng-modals/fbgroup')
         @include('v2/ng-modals/rrequest')
         @yield('custom_modals')
 

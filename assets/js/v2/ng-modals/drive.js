@@ -4,6 +4,7 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
 
     $scope.suggestedPlaces = defaultSuggestedPlaces;
     $scope.permissions = { };
+    $scope.fbgroups = [ ];
     $scope.rrequests = [ ];
     $scope.dateOptions = { 
         'show-weeks' : false
@@ -28,11 +29,12 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             'allowPayments': false,
             'invitees' : [ ],
             'shareToFacebook' : true,
-            'shareToFacebookGroups' : { 'me' : true },
+            'shareToFacebookGroups' : { },
             'shareToFacebookMessage' : ""
         };
 
         $scope.loadPermissions();
+        $scope.loadFbgroups();
     };
 
     $scope.loadPermissions = function() {
@@ -43,7 +45,19 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
             $scope.permissions = data;
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, data.message);
-            $scope.loadingFacebookGroups = false;
+            console.log(data);
+        });
+    };
+
+    $scope.loadFbgroups = function() {
+        $scope.input['shareToFacebookGroups'] = { };
+        $http({
+            'method': 'GET',
+            'url': '/api/v2/users/fbgroups'
+        }).success(function(data, status, headers, config) {
+            $scope.fbgroups = data;
+        }).error(function(data, status, headers, config) {
+            toaster.pop('error', 'Error: ' + status, data.message);
             console.log(data);
         });
     };
@@ -148,8 +162,15 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
         } 
 
         if ( inputData.departureDate.length == 0 || inputData.departureTime == 0 ) {
-            toaster.pop('error', 'Error', 'Departure date and time must be specified.'); 
+            toaster.pop('error', 'Error', 'Departure date and time must be specified'); 
             return;
+        }
+
+        if (inputData.shareToFacebook == 1) {
+            if (inputData.shareToFacebookGroups.length == 0) {
+                toaster.pop('error', 'Error', 'At least 1 Facebook group must be selected for publishing'); 
+                return;
+            }
         }
 
         $scope.loading = true;
@@ -166,6 +187,17 @@ angular.module('myApp').controller('driveModalController', function ($scope, $mo
         }).error(function(data, status, headers, config) {
             toaster.pop('error', 'Error: ' + status, data.message);
             $scope.loading = false;
+        });
+    };
+
+    $scope.openFbgroupModal = function() {
+        var modalInstance = $modal.open({
+            templateUrl: 'fbgroup.html',
+            controller: 'fbgroupModalController',
+            size: 'md',
+            resolve: {
+                'initialize' : function() { return $scope.loadFbgroups; }
+            }
         });
     };
 
