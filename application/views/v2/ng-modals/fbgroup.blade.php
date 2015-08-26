@@ -75,7 +75,7 @@
 
         <form>
             <div class="input-group">
-                <input ng-model="inputFacebookId" ng-disabled="loading" type="text" class="form-control" placeholder="e.g. 372772186164295">
+                <input ng-model="inputFacebookId" ng-disabled="loading" type="text" class="form-control" placeholder="e.g. 372772186164295" valid-number>
                 <span class="input-group-btn">
                     <button ng-click="introduceFbgroup(inputFacebookId)" ng-disabled="loading" class="btn btn-info">
                         <i class="fa fa-globe fa-lg"></i>
