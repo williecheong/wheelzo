@@ -130,7 +130,7 @@
                                     </a>
                                     <span ng-bind="rrequest.destination | shortenString:28"></span>
                                 </td>
-                                <td ng-bind="rrequest.start | mysqlDateToIso | date:'MMM-d @ hh:mm a'">{{ date( 'M-d @ g:ia', strtotime($rrequest->start) ) }}</td>
+                                <td ng-bind="rrequest.start | mysqlDateToIso | date:'MMM-d @ hh:mm a'"></td>
                                 <td class="">
                                     <i ng-if="!input.invitees[rrequest.id]" ng-click="input.invitees[rrequest.id]=true" class="fa fa-toggle-off fa-lg hoverable6 clickable"></i>
                                     <i ng-if="input.invitees[rrequest.id]" ng-click="input.invitees[rrequest.id]=false" class="fa fa-toggle-on fa-lg hoverable8 clickable"></i>
