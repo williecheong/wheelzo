@@ -53,7 +53,7 @@ class Fbgroups extends API_Controller {
         if ( !ctype_digit($facebook_id) || strlen($facebook_id) < 10 ){
             http_response_code("400");
             header('Content-Type: application/json');
-            echo $this->message("Facebook ID is invalid");
+            echo $this->message("Facebook group id is invalid");
             return;
         }
 
